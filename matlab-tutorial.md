@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Setup Instructions
-permalink: /setup-instructions/
+title: MATLAB Tutorial
+permalink: /matlab-tutorial/
 ---
 
 ## Setup
