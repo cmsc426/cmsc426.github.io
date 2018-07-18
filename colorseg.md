@@ -9,6 +9,7 @@ The Table of Contents:
 - [Sample Vision Pipeline](#visionpipeline)
 - [Color Imaging](#colimaging)
 - [RGB and other Color Spaces](#colorspace)
+- [Color Classification](#colorclassification)
 
 <a name='intro'></a>
 
@@ -137,7 +138,7 @@ $$
 Cr = 0.500R + -0.419G + -0.081B + 128 
 $$
 
-Keen readers might have observed that HSV was a non-linear transformation and YCbCr is a linear transformation of the RGB color space. As you expect the RGB color cube looks like a rotated cuboid in YCbCr space. Look at ``rgb2hsv, hsv2rgb, rgb2ycbcr, ycbcr2rgb`` functions in MATLAB and play around. Fun exercise would be to try to plot the RGB color cube in different color spaces. 
+Keen readers might have observed that HSV was a non-linear transformation and YCbCr is a linear transformation of the RGB color space. As you expect the RGB color cube looks like a rotated cuboid in YCbCr space. Look at ``rgb2hsv, hsv2rgb, rgb2ycbcr, ycbcr2rgb`` functions in MATLAB and play around. **Fun exercise would be to try to plot the RGB color cube in different color spaces.** 
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/classify.png">
