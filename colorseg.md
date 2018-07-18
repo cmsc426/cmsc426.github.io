@@ -7,7 +7,7 @@ The Table of Contents:
 
 - [Introduction to perception in an intelligent system](#intro)
 - [Sample Vision Pipeline](#visionpipeline)
-- [Validation sets, Cross-validation, hyperparameter tuning](#val)
+- [Color Imaging](#colimaging)
 - [Pros/Cons of Nearest Neighbor](#procon)
 - [Summary](#summary)
 - [Summary: Applying kNN in practice](#summaryapply)
@@ -31,7 +31,7 @@ The sensors and the movements of a robot are noisy. The robot has a sense of whe
 <a name='visionpipeline'></a>
 
 ## A sample Vision Pipeline in an intelligent agent
-Consider the example of a Nao robot to play soccer. The Nao is a 58cm high humanoid robot which can walk, pick-up things, talk. It has 2 cameras, 1 front and 1 facing down at an angle, some sonar sensors and an Intel Atom processor on-board. It is used in the robocup soccer competiion where a 5 on 5 autonomous soccer match takes place between nao robots with all processing done on-board. This necessitates the algorithms to be robust, fast and cheap. The competition takes place on a green-colored soccer field with an orange ball and yellow goal-posts. The aim of the project 1 is to give a flavor of what goes behind the scenes in this compeition's vision pipeline. Your aim in this project would be to detect the red soccer ball and estimate the distance to it. Doesn't it sound cool?
+Consider the example of a Nao robot playing soccer. The Nao is a 58cm high humanoid robot which can walk, pick-up things, talk. It has 2 cameras, 1 front and 1 facing down at an angle, some sonar sensors and an Intel Atom processor on-board. It is used in the robocup soccer competiion where a 5 on 5 autonomous soccer match takes place between nao robots with all processing done on-board. This necessitates the algorithms to be robust, fast and cheap. The competition takes place on a green-colored soccer field with an orange ball and yellow goal-posts. The aim of the project 1 is to give a flavor of what goes behind the scenes in this compeition's vision pipeline. Your aim in this project would be to detect the red soccer ball and estimate the distance to it. Doesn't it sound cool?
 
 Let's talk about the key concepts first. A sample vision pipeline in a robot is as follows. The robot gets an input image (say RGB color), then the robot has to identify certain important colors in the scene (like green, orange and yellow in this case) where the colors are labelled as discrete color classes, i.e., each pixel can only be either yellow or green or orange. These labelled pixels are then grouped and finally object classification is done to give way to higher level knowledge like kick the ball.
 
@@ -47,6 +47,10 @@ Let's talk about the key concepts first. A sample vision pipeline in a robot is 
   <div class="figcaption">Sample Vision pipeline in a robocup robot.</div>
 </div>
 
+<a name='colimaging'></a>
+
+## Color Imaging
+A simple black-and-white/grayscale sensor works by measuring number of photons per second. 
 
 **Motivation**. In this section we will introduce the Image Classification problem, which is the task of assigning an input image one label from a fixed set of categories. This is one of the core problems in Computer Vision that, despite its simplicity, has a large variety of practical applications. Moreover, as we will see later in the course, many other seemingly distinct Computer Vision tasks (such as object detection, segmentation) can be reduced to image classification.
 
