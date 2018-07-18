@@ -1,32 +1,58 @@
 ---
 layout: page
 mathjax: true
-permalink: /classification/
+permalink: /colorseg/
 ---
+The Table of Contents:
 
-This is an introductory lecture designed to introduce people from outside of Computer Vision to the Image Classification problem, and the data-driven approach. The Table of Contents:
-
-- [Intro to Image Classification, data-driven approach, pipeline](#intro)
-- [Nearest Neighbor Classifier](#nn)
-  - [k-Nearest Neighbor](#knn)
+- [Introduction to perception in an intelligent system](#intro)
+- [Sample Vision Pipeline](#visionpipeline)
 - [Validation sets, Cross-validation, hyperparameter tuning](#val)
 - [Pros/Cons of Nearest Neighbor](#procon)
 - [Summary](#summary)
 - [Summary: Applying kNN in practice](#summaryapply)
 - [Further Reading](#reading)
 
+
 <a name='intro'></a>
 
-## Image Classification
+## Introduction
+This lecture is designed to introduce students from various backgrounds to how the camera captures the image and how one can manipulate color-spaces to identify specific colored objects in the image.
+
+Any intelligent system (robotic system/robot/robot agent) senses the world through it's sensors and interacts with the environment based on some actuators. This can be shown in the figure below:
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/classify.png">
+  <div class="figcaption">Robot interactive with the environment and sensing the world.</div>
+</div>
+
+The sensors and the movements of a robot are noisy. The robot has a sense of where it is in the world with respect to other objects to a certain degree of uncertainity or noise, for eg. an autonomous car might know that it is about 5ft away from the pedestrian with a certain degree of accuracy. The goal of any robot is to combine the information from multiple sensors to increase it's accuracy. Also, whenever a robot moves, because the motors are not perfect, the movements are noisy. To counteract this non-perfect movement the robots need to continuously monitor it's sensor values and re-evaluate the world. 
+
+<a name='visionpipeline'></a>
+
+## A sample Vision Pipeline in an intelligent agent
+Consider the example of a Nao robot to play soccer. The Nao is a 58cm high humanoid robot which can walk, pick-up things, talk. It has 2 cameras, 1 front and 1 facing down at an angle, some sonar sensors and an Intel Atom processor on-board. It is used in the robocup soccer competiion where a 5 on 5 autonomous soccer match takes place between nao robots with all processing done on-board. This necessitates the algorithms to be robust, fast and cheap. The competition takes place on a green-colored soccer field with an orange ball and yellow goal-posts. The aim of the project 1 is to give a flavor of what goes behind the scenes in this compeition's vision pipeline. Your aim in this project would be to detect the red soccer ball and estimate the distance to it. Doesn't it sound cool?
+
+Let's talk about the key concepts first. A sample vision pipeline in a robot is as follows. The robot gets an input image (say RGB color), then the robot has to identify certain important colors in the scene (like green, orange and yellow in this case) where the colors are labelled as discrete color classes, i.e., each pixel can only be either yellow or green or orange. These labelled pixels are then grouped and finally object classification is done to give way to higher level knowledge like kick the ball.
+
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/classify.png">
+  <div class="figcaption">Nao robot.</div>
+</div>
+
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/classify.png">
+  <div class="figcaption">Sample Vision pipeline in a robocup robot.</div>
+</div>
+
 
 **Motivation**. In this section we will introduce the Image Classification problem, which is the task of assigning an input image one label from a fixed set of categories. This is one of the core problems in Computer Vision that, despite its simplicity, has a large variety of practical applications. Moreover, as we will see later in the course, many other seemingly distinct Computer Vision tasks (such as object detection, segmentation) can be reduced to image classification.
 
 **Example**. For example, in the image below an image classification model takes a single image and assigns probabilities to 4 labels, *{cat, dog, hat, mug}*. As shown in the image, keep in mind that to a computer an image is represented as one large 3-dimensional array of numbers. In this example, the cat image is 248 pixels wide, 400 pixels tall, and has three color channels Red,Green,Blue (or RGB for short). Therefore, the image consists of 248 x 400 x 3 numbers, or a total of 297,600 numbers. Each number is an integer that ranges from 0 (black) to 255 (white). Our task is to turn this quarter of a million numbers into a single label, such as *"cat"*.
 
-<div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
-  <div class="figcaption">The task in Image Classification is to predict a single label (or a distribution over labels as shown here to indicate our confidence) for a given image. Images are 3-dimensional arrays of integers from 0 to 255, of size Width x Height x 3. The 3 represents the three color channels Red, Green, Blue.</div>
-</div>
+
 
 **Challenges**. Since this task of recognizing a visual concept (e.g. cat) is relatively trivial for a human to perform, it is worth considering the challenges involved from the perspective of a Computer Vision algorithm. As we present (an inexhaustive) list of challenges below, keep in mind the raw representation of images as a 3-D array of brightness values:
 
