@@ -8,6 +8,7 @@ The Table of Contents:
 - [Introduction to perception in an intelligent system](#intro)
 - [Sample Vision Pipeline](#visionpipeline)
 - [Color Imaging](#colimaging)
+- [RGB Color Space](#rgbspace)
 
 <a name='intro'></a>
 
@@ -61,10 +62,17 @@ You might be wondering how does one collect color/RGB (Red Green Blue) images. A
 A simple question one might ask, why use RGB for the color image and why not something else? The answer is human retina has 3 types of cone cells which are selective to see RGB colors. One can think of the the amount of activation/response/sensitivity of a cone cell be modelled as some unimodal distribution function. A unimodal distribution means the distribution has only one peak. The three kinds of cone cells are sensitive to Small ($$S(\lambda)$$), Medium ($$M(\lambda)$$) and Long ($$L(\lambda)$$) wavelengths of visible light which coincides with red, green and blue colored light. Think of these cone cells as very sensitive to red, green or blue light. Any scene reflects a arbitrary spectrum of light (or signal represnted as $$f(\lambda)$$). One might wonder what the response of red sensitive cone cells will look like on this input light spectrum. One can represent the response of the S, M and L detectors/cone cells by a super simplified model given by:
 
 $$ S_{res}=\int S(\lambda)f(\lambda) d\lambda$$
+
 $$ M_{res}=\int M(\lambda)f(\lambda) d\lambda$$
+
 $$ L_{res}=\int L(\lambda)f(\lambda) d\lambda$$
 
-Note that one can have a completely different scene which reflects a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, one could have the **exact** same value for $$ S_{res}, M_{res}, L_{res}$$. This means that one cannot distringuish both the scenes in terms of colors. This happens because the eyes are "seeing" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\matbb{R}^\infty \rightarrow \mathbb{R}^3$$.
+Note that one can have a completely different scene which reflects a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, one could have the **exact** same value for $$ S_{res}, M_{res}, L_{res}$$. This means that one cannot distringuish both the scenes in terms of colors. This happens because the eyes are "seeing" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\mathbb{R}^\infty \rightarrow \mathbb{R}^3$$. Color blindess is missing one of the receptors or the S, M, L receptors become too similar to each other. This in-turn reduces the dimentionality from 3 to 2 or 1. This is in some sense taking PCA of the infiinte dimentional spectrum in your eyes. 
+
+
+<a name='rgbspace'></a>
+## RGB Color Space
+The colors (RGB) can be represented as a 3D vector space. Think of this as X, Y and Z co-ordinate of a vector space. In most generic cameras, 8-bits are used to represent each color channel (the values range from 0-255). This means that an RGB pixel has 24bits of data represented as a triplet of \[Red, Green, Blue\]. A value of \[0,0,0\] represents pure black, \[255,255,255\] represents pure white, \[255,0,0\] represents pure red and so on. Gray is any color which equal values of all the three channels. 
 
 
 
