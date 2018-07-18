@@ -52,6 +52,22 @@ A simple black-and-white/grayscale sensor works by measuring number of photons p
 You might be wondering how does one collect color/RGB (Red Green Blue) images. A simple way of doing this is having a camera sensor where each pixel has 3 sub-pixels (or 3 pixels inside each pixel) each of which measures a color out of red, green and blue respectively. One can select a color by using the dye of the same color on the pixel (grayscale has a transparent dye). This becomes very expensive and is generally only used in very high end cameras which cost thousands of dollars. The cheaper sensors use something called a bayer pattern. Where each pixel has one colored dye and they alternatively are Red, Green and Blue. The missing colors are interpolated using a simple interpolation algorithm. The RGB image is represented as a three dimentional array (width x height x 3) on the computer. 
 
 
+<div class="fig figcenter fighighlight">
+  <img src="/assets/classify.png">
+  <div class="figcaption">Bayer Pattern.</div>
+</div>
+
+
+A simple question one might ask, why use RGB for the color image and why not something else? The answer is human retina has 3 types of cone cells which are selective to see RGB colors. One can think of the the amount of activation/response/sensitivity of a cone cell be modelled as some unimodal distribution function. A unimodal distribution means the distribution has only one peak. The three kinds of cone cells are sensitive to Small ($$S(\lambda)$$), Medium ($$M(\lambda)$$) and Long ($$L(\lambda)$$) wavelengths of visible light which coincides with red, green and blue colored light. Think of these cone cells as very sensitive to red, green or blue light. Any scene reflects a arbitrary spectrum of light (or signal represnted as $$f(\lambda)$$). One might wonder what the response of red sensitive cone cells will look like on this input light spectrum. One can represent the response of the S, M and L detectors/cone cells by a super simplified model given by:
+
+$$ S_{res}=\int S(\lambda)f(\lambda) d\lambda$$
+$$ M_{res}=\int M(\lambda)f(\lambda) d\lambda$$
+$$ L_{res}=\int L(\lambda)f(\lambda) d\lambda$$
+
+Note that one can have a completely different scene which reflects a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, one could have the **exact** same value for $$ S_{res}, M_{res}, L_{res}$$. This means that one cannot distringuish both the scenes in terms of colors. This happens because the eyes are "seeing" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\matbb{R}^\infty \rightarrow \mathbb{R}^3$$.
+
+
+
 
 
 
