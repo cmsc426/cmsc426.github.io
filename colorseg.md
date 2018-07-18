@@ -8,7 +8,7 @@ The Table of Contents:
 - [Introduction to perception in an intelligent system](#intro)
 - [Sample Vision Pipeline](#visionpipeline)
 - [Color Imaging](#colimaging)
-- [RGB Color Space](#rgbspace)
+- [RGB and other Color Spaces](#colorspace)
 
 <a name='intro'></a>
 
@@ -46,7 +46,15 @@ Let's talk about the key concepts first. A sample vision pipeline in a robot is 
 <a name='colimaging'></a>
 
 ## Color Imaging
-A simple black-and-white/grayscale sensor works by measuring number of photons per second on each pixel. Think of a grayscale image as a 2D array of pixels where each pixel is one array unit. The array location is the pixel index in the image and the array holds a value representing the amount of light (number of photons) that hit that particular pixel in some unit of time (this is generally the shutter speed of the camera). If you open the PRO mode on your phone's camera or have a fancy DSLR camera you'll see the following four most important things: Focal Length, Aperture, ISO, Shutter Speed. A combination of the last 3 aforementioned factors control the average brightness of the picture taken and are generally called the exposure triangle in photography. Focal Length tells you how wide the Field Of View (FOV) of the lens is, i.e., the smaller the focal length, the more angle you see and vice-versa. For eg. an 8mm lens can have an FOV of 110$$^\circ$$ and a 50mm lens can have an FOV of 32$$^\circ$$. The Aperture is the amount of opnening of the lens, i.e., the lens can have a diameter of 70mm but only 5mm might be collecting light. You might wonder why would I use only 5mm if I have a 70mm diameter lens? The answer to that is the depth of field. The depth of field controls how far on both sides (towards the camera and away from it) is "acceptably in focus". A wide opening in the lens lets in a lot of light but has a shallower depth of field which means that only a very small amount of deviation (towards the camera and away from it) from the focus point makes the image not in focus/blurred. This method is used by photographers to capture beautiful portraits of people. This is not very good for shooting landscapes/robotics perception because everything is not in focus. On the other hand one can set a very small aperture so that we have a large depth of field. This is good for focus but bad as it let's in very little light, i.e., doesn't work well at night or low-light. There is no silver bullet to solve this problem. But a general approximation people in vision/robotics do is that they say we don't really care about focus very close to the camera (say 1m from the camera) and they chose an aperture small enough to let in enough light and that depth of field allows everything from 1m onwards to $$\infty$$ to be in-focus. Also, a very small aperture leads to an effect called difraction which leads to a "softer" image. The next factor controlling the brightness of the image is the ISO. To understand what this factor does, you'll need to understand how the camera/imager captures an image. Each pixel is generally a capacitor/transistor which converts photos/light into some voltage which can be measured by a circuit in the camera. Think of this as light truning a dial/volume knob telling you how much light hits a particular pixel. The volatge level measured per pixel can be amplifed by a number (this is like amplifying your volume on your headphones). ISO controls this amplification factor. As you might have expected a higher ISO means a brighter image and vice-versa. Then one might ask why not just set a small aperture and increase your ISO to the maximum value? Increasing ISO comes at a cost, a lot of noise. So generally one has to be mindful of the parameters chosen. A balance of these parameters have to be chosen. The last factor in the exposure triangle is the shutter speed. This is the time the camera/imager is collecting light. The voltage measured will be a sum of all the photons collected during the shutter is active/open. A longer shutter speed gives you more light but wil blur any motion. The camera's auto mode generally selects the best balance of all the exposure triangle parameters based on some heuristic. 
+A simple black-and-white/grayscale sensor works by measuring number of photons per second on each pixel. Think of a grayscale image as a 2D array of pixels where each pixel is one array unit. The array location is the pixel index in the image and the array holds a value representing the amount of light (number of photons) that hit that particular pixel in some unit of time (this is generally the shutter speed of the camera). If you open the PRO mode on your phone's camera or have a fancy DSLR camera you'll see the following four most important things: Focal Length, Aperture, ISO, Shutter Speed. A combination of the last 3 aforementioned factors control the average brightness of the picture taken and are generally called the exposure triangle in photography.
+RGB and other Color Spaces
+Focal Length tells you how wide the Field Of View (FOV) of the lens is, i.e., the smaller the focal length, the more angle you see and vice-versa. For eg. an 8mm lens can have an FOV of 110$$^\circ$$ and a 50mm lens can have an FOV of 32$$^\circ$$.
+
+The Aperture is the amount of opnening of the lens, i.e., the lens can have a diameter of 70mm but only 5mm might be collecting light. You might wonder why would I use only 5mm if I have a 70mm diameter lens? The answer to that is the depth of field. The depth of field controls how far on both sides (towards the camera and away from it) is "acceptably in focus". A wide opening in the lens lets in a lot of light but has a shallower depth of field which means that only a very small amount of deviation (towards the camera and away from it) from the focus point makes the image not in focus/blurred. This method is used by photographers to capture beautiful portraits of people. This is not very good for shooting landscapes/robotics perception because everything is not in focus. On the other hand one can set a very small aperture so that we have a large depth of field. This is good for focus but bad as it let's in very little light, i.e., doesn't work well at night or low-light. There is no silver bullet to solve this problem. But a general approximation people in vision/robotics do is that they say we don't really care about focus very close to the camera (say 1m from the camera) and they chose an aperture small enough to let in enough light and that depth of field allows everything from 1m onwards to $$\infty$$ to be in-focus. Also, a very small aperture leads to an effect called difraction which leads to a "softer" image.
+
+The next factor controlling the brightness of the image is the ISO. To understand what this factor does, you'll need to understand how the camera/imager captures an image. Each pixel is generally a capacitor/transistor which converts photos/light into some voltage which can be measured by a circuit in the camera. Think of this as light truning a dial/volume knob telling you how much light hits a particular pixel. The volatge level measured per pixel can be amplifed by a number (this is like amplifying your volume on your headphones). ISO controls this amplification factor. As you might have expected a higher ISO means a brighter image and vice-versa. Then one might ask why not just set a small aperture and increase your ISO to the maximum value? Increasing ISO comes at a cost, a lot of noise. So generally one has to be mindful of the parameters chosen. A balance of these parameters have to be chosen.
+
+The last factor in the exposure triangle is the shutter speed. This is the time the camera/imager is collecting light. The voltage measured will be a sum of all the photons collected during the shutter is active/open. A longer shutter speed gives you more light but wil blur any motion. The camera's auto mode generally selects the best balance of all the exposure triangle parameters based on some heuristic. 
 
 - Link the paper to make long exposure from shot photos!
 
@@ -70,12 +78,44 @@ $$ L_{res}=\int L(\lambda)f(\lambda) d\lambda$$
 Note that one can have a completely different scene which reflects a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, one could have the **exact** same value for $$ S_{res}, M_{res}, L_{res}$$. This means that one cannot distringuish both the scenes in terms of colors. This happens because the eyes are "seeing" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\mathbb{R}^\infty \rightarrow \mathbb{R}^3$$. Color blindess is missing one of the receptors or the S, M, L receptors become too similar to each other. This in-turn reduces the dimentionality from 3 to 2 or 1. This is in some sense taking PCA of the infiinte dimentional spectrum in your eyes. 
 
 
-<a name='rgbspace'></a>
-## RGB Color Space
-The colors (RGB) can be represented as a 3D vector space. Think of this as X, Y and Z co-ordinate of a vector space. In most generic cameras, 8-bits are used to represent each color channel (the values range from 0-255). This means that an RGB pixel has 24bits of data represented as a triplet of \[Red, Green, Blue\]. A value of \[0,0,0\] represents pure black, \[255,255,255\] represents pure white, \[255,0,0\] represents pure red and so on. Gray is any color which equal values of all the three channels. 
+<a name='colorspace'></a>
+## RGB and other Color Spaces
+The colors (RGB) can be represented in a 3D vector space. Think of this as X, Y and Z co-ordinate of a vector space representing colors. In most generic cameras, 8-bits are used to represent each color channel (the values range from 0-255). This means that an RGB pixel has 24-bits of data represented as a triplet of **\[Red, Green, Blue\]**. A value of \[0,0,0\] represents pure black, \[255,255,255\] represents pure white, \[255,0,0\] represents pure red and so on. Gray is any color which equal values of all the three channels. When RGB space is represented in the 3D vector space/cartesian space one can think of all normalized colors (divide each value by 255 for 8-bit) to be present in a unit-cube. One might think if colors are just a vector space then why cannot one transform them to make a different space. Indeed, this is what gives rise to other color spaces. Two such examples are Hue Saturation Value (HSV) and Luminance and chroma (YCbCr) color spaces. If $$[R, G, B]$$ represents a sample color in the RGB color space, then the equivalent HSV color space value is given by,
 
+$$ R' = \frac{R}{255} $$
 
+$$ G' = \frac{G}{255} $$
 
+$$ B' = \frac{B}{255} $$
+
+$$ C_{max} = \max{\left(R', G', B'\right)}  $$
+
+$$ C_{min} = \min{\left(R', G', B'\right)}  $$
+
+$$ \Delta = C_{max} - C_{min} $$
+
+Hue is calculated as follows:
+$$ 
+\begin{cases} 
+0^\circ &\quad \text{if }\Delta=0\\
+60^\circ \times \frac{G'-B'}{\Delta} % 6 &\quad \text{if } C_{max}=R'\\
+60^\circ \times \frac{B'-R'}{\Delta} + 2 &\quad \text{if } C_{max}=G'\\
+60^\circ \times \frac{R'-G'}{\Delta} + 4 &\quad \text{if } C_{max}=B'\\ 
+\end{cases}
+$$
+
+Saturation is calculated as follows:
+$$ 
+\begin{cases} 
+0 &\quad \text{if }C_{max}=0\\
+\frac{\Delta}{C_{max}} &\quad \text{if } C_{max}\neq 0\\
+\end{cases}
+$$
+
+Value is calulated as follows:
+$$
+V = C_{max}
+$$
 
 
 
