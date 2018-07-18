@@ -95,6 +95,7 @@ $$ C_{min} = \min{\left(R', G', B'\right)}  $$
 $$ \Delta = C_{max} - C_{min} $$
 
 Hue is calculated as follows:
+
 $$ 
 \begin{cases} 
 0^\circ &\quad \text{if }\Delta=0\\
@@ -105,6 +106,7 @@ $$
 $$
 
 Saturation is calculated as follows:
+
 $$ 
 \begin{cases} 
 0 &\quad \text{if }C_{max}=0\\
@@ -113,10 +115,34 @@ $$
 $$
 
 Value is calulated as follows:
+
 $$
 V = C_{max}
 $$
 
+You might be wondering what this wierd transformation space looks like when the RGB space was a pretty unit cube? The unit RGB cube in HSV space looks like a cone (cool eh?). HSV is very popular and is used in NTSC, PAL, SECAM and other television broadcast systems. 
+
+
+If $$[R, G, B]$$ represents a sample color in the RGB color space, then the equivalent YCbCr color space value is given by,
+
+$$
+Y = 0.299R + 0.587G + 0.114B 
+$$
+
+$$
+Cb = -0.169R + -0.331G + 0.500B + 128 
+$$
+
+$$
+Cr = 0.500R + -0.419G + -0.081B + 128 
+$$
+
+Keen readers might have observed that HSV was a non-linear transformation and YCbCr is a linear transformation of the RGB color space. As you expect the RGB color cube looks like a rotated cuboid in YCbCr space. Look at ``rgb2hsv, hsv2rgb, rgb2ycbcr, ycbcr2rgb`` functions in MATLAB and play around. Fun exercise would be to try to plot the RGB color cube in different color spaces. 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/classify.png">
+  <div class="figcaption">RGB, HSV and YCbCr color spaces.</div>
+</div>
 
 
 
