@@ -195,8 +195,19 @@ Here, $$\vert \Sigma \vert$$ denotes the determinant of the matrix $$\Sigma$$. T
 
 You might be asking why we used a Gaussian distribution to model the likelihood. The answer is simple, when you average a lot of (theoretically $$\infty$$) independently identically distributed random samples, their distribution tends to become a gaussian. This is formally called the [**Central Limit Theorem**](https://www.khanacademy.org/math/ap-statistics/sampling-distribution-ap/sampling-distribution-mean/v/central-limit-theorem). 
 
-All the math explanation is cool but how do we implement this? It's simpler than you think. All you have to do is 
+All the math explanation is cool but how do we implement this? It's simpler than you think. All you have to do is find the mean ($$\mu$$) and covariance ($$\Sigma$$) of the likelihood gaussian distribution. Let us assume that we have $$N$$ samples for the class 'Orange' where each sample is of size $$\mathbb{R}^{3 \times 1}$$ representing the red, green and blue channel information at a particular pixel. The mean $$\mu$$ is computed as follows:
 
+$$
+\mu = \frac{1}{N}\sum_{i=1}^N x_i
+$$
+
+here $$i$$ denotes the sample number. The co-variance $$\Sigma$$ is compted as follows:
+
+$$
+\Sigma = \frac{1}{N}\sum_{i=1}^N (x_i-\mu)(x_i-\mu)^T
+$$
+
+Clearly, $$\mu \in \mathbb{3 \times 1}$$ and $$\Sigma \in \mathbb{R}^{3 \times 3}$$. 
 
 
 
