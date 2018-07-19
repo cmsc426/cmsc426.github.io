@@ -218,7 +218,7 @@ $$
 Because we just want to find the colors by some thresholding later, we can drop the denominator in the above expression if we don't care about the absolute scale of the probability summing to 1. For most thresholding purposes, we can do the following approximation:
 
 $$
-p(C_l \vert x) \alpha p(x \vert C_l)p(C_l)}
+p(C_l \vert x) \alpha p(x \vert C_l)p(C_l)
 $$
 
 
