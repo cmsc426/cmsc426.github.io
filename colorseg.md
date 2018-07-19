@@ -157,8 +157,7 @@ If you make the assumption/approximation that each pixel only belongs to one col
 
 <!-- https://stackoverflow.com/questions/36174987/how-to-typeset-argmin-and-argmax-in-markdown -->
 $$ 
-C_l^*(x) = 
-\underset{C_k}{\operatorname{argmax}} p(C_k\vert x) 
+C_l^*(x) = \underset{C_k}{\operatorname{argmax}} p(C_k\vert x) 
 $$
 
 Here, $$C_l^*(x)$$ represents the most probable color class that pixel belongs to. For eg. if the color is closer to orange than red then the pixel will be called orange. This can be done using the [Color Thresholder app](https://www.mathworks.com/help/images/ref/colorthresholder-app.html) in MATLAB. In RGB space, thresholding can be thought of selecting pixels in a cube defined by some minimum and maximum value in each channel (RGB), i.e., you are selecting all the pixels in a cube whose faces are defined by the minimum and maxmimum value in each channel. This can be mathematically formulated as:
@@ -184,7 +183,15 @@ $$
 p(C_l \vert x) = \frac{p(x \vert C_l)p(C_l)}{\sum_{i=1}^l p(x\vert C_i)p(C_i)}
 $$
 
-$$p(C_l \vert x)$$ is the conditional probability of a color label given the color observation. $$p(x \vert C_l)$$ is the conditional probability of color observation given the color label and is generally called the **Likelihood**. $$p(C_l)$$ is the probability of that color class occuring and is called the **prior**. The prior is used to increase/decrease the probability of certain colors. For eg., one would generally see more green in the robocup because the field is green in color and the robot mostly looks at the ground. If nothing about the prior is known, a common choice is to use a uniform distribution, i.e., all the colors are equally likely. 
+$$p(C_l \vert x)$$ is the conditional probability of a color label given the color observation and is called the **Posterior**. $$p(x \vert C_l)$$ is the conditional probability of color observation given the color label and is generally called the **Likelihood**. $$p(C_l)$$ is the probability of that color class occuring and is called the **Prior**. The prior is used to increase/decrease the probability of certain colors. For eg., one would generally see more green in the robocup because the field is green in color and the robot mostly looks at the ground. If nothing about the prior is known, a common choice is to use a uniform distribution, i.e., all the colors are equally likely. Let us consider the problem of color classification as a supervised learning problem now. Supervised means that we have some number of "training" examples from which we can understand the color we are looking for. 
+
+For the purpose of easy discussion, let us say we want to classify a pixel as orange. To do this we need to make the computer know how orange color looks like. Say we have a number of training samples of the color orange. You might ask why do we need so many samples? The answer is lighting and sensor noise changes the way orange looks in the image every so slightly and the computer has to learn all these different shades of orange. The next question one might ask, how many samples do we need? This is a hard question to answer. It depends on the variety more than quantity of samples. It is better to have samples with more variation you want to cater to than a lot of very similar looking samples of data. Let us mathematically model the right hand side of $$p('Orange' \vert x)$$. As we discussed earlier, Prior can be modelled as a uniform distribution, i.e., $$p('Orange')=0.5$$ and $$p('Not Orange')=0.5$$. The Likelihood is generally modelled as a normal/gaussian distribution given by the following equation:
+
+$$
+p(x \vert 'Orange') = \frac{1}{\sqrt{(2 \pi)^3 \abs{\Sigma}}}\exp{\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)}
+$$
+
+Here, $$\abs{\Sigma}$$ denotes the determinant of the matrix $$\Sigma$$. The dimensions of the above terms are as follows: $$\Sigma \in \mathbb{R}^{3 \times 3}, x,\mu \in \mathbb{3 \times 1}, p(x \vert 'Orange') \in \mathbb{R}^1$$.
 
 
 
