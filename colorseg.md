@@ -23,8 +23,8 @@ This lecture is designed to introduce students from various backgrounds to how t
 Any intelligent system (robotic system/robot/robot agent) senses the world through it's sensors and interacts with the environment based on some actuators. This can be shown in the figure below:
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
-  <div class="figcaption">Robot interactive with the environment and sensing the world.</div>
+  <img src="/assets/coloseg/IntelligentAgent.png">
+  <div class="figcaption">Intelligent Agent (Robot) interacting with the environment and sensing the world.</div>
 </div>
 
 The sensors and the movements of a robot are noisy. The robot has a sense of where it is in the world with respect to other objects to a certain degree of uncertainity or noise, for eg. an autonomous car might know that it is about 5ft away from the pedestrian with a certain degree of accuracy. The goal of any robot is to combine the information from multiple sensors to increase it's accuracy. Also, whenever a robot moves, because the motors are not perfect, the movements are noisy. To counteract this non-perfect movement the robots need to continuously monitor it's sensor values and re-evaluate the world. 
@@ -38,15 +38,10 @@ Let's talk about the key concepts first. A sample vision pipeline in a robot is 
 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
+  <img src="/assets/colorseg/nao.jpg">
   <div class="figcaption">Nao robot.</div>
 </div>
 
-
-<div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
-  <div class="figcaption">Sample Vision pipeline in a robocup robot.</div>
-</div>
 
 <a name='colimaging'></a>
 
@@ -67,8 +62,14 @@ You might be wondering how does one collect color/RGB (Red Green Blue) images. A
 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
-  <div class="figcaption">Bayer Pattern.</div>
+  <img src="/assets/colorseg/bayer.png">
+  <div class="figcaption">Left: The Bayer arrangement of color filters on the pixel array of an image sensor. Right: Profile/cross-section of sensor
+.</div>
+</div>
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/bayer2.png">
+  <div class="figcaption">1. Original scene. 2. Output of a 120×80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at $$120 \times 80$$-pixels for comparison (e.g. as a film scan might appear)</div>
 </div>
 
 
@@ -145,8 +146,13 @@ $$
 Keen readers might have observed that HSV was a non-linear transformation and YCbCr is a linear transformation of the RGB color space. As you expect the RGB color cube looks like a rotated cuboid in YCbCr space. Look at ``rgb2hsv, hsv2rgb, rgb2ycbcr, ycbcr2rgb`` functions in MATLAB and play around. **Fun exercise would be to try to plot the RGB color cube in different color spaces.** 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
-  <div class="figcaption">RGB, HSV and YCbCr color spaces.</div>
+  <img src="/assets/colorseg/colorspaces.png">
+  <div class="figcaption">Left to right: Represenation of RGB color cube in RGB, HSV and YCbCr color spaces.</div>
+</div>
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/colorspacesnaoimg.png">
+  <div class="figcaption">Nao robot view in RGB, HSV and YCbCr colorspaces.</div>
 </div>
 
 <a name='colorclassification'></a>
@@ -171,8 +177,8 @@ $$
 where $$x^r, x^g, x^b$$ represent the red, green and blue channel values of a particular pixel. 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
-  <div class="figcaption">Color Thresholder app.</div>
+  <img src="/assets/colorseg/colorthresholderapp.png">
+  <div class="figcaption">Color Thresholder app in MATLAB with a sample input image from a nao's camera.</div>
 </div>
 
 <a name='gaussian'></a>
@@ -238,8 +244,8 @@ Modelling the likelihood as a gaussian is beneficial because a little light vari
 However, if you are trying to find a color in different lighting conditions a simple gaussian model will not suffice because the colors may not be bounded well by an ellipsoid. 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/classify.png">
-  <div class="figcaption">How wierd color looks like.</div>
+  <img src="/assets/colorseg/ballindiffcolorspaces.png">
+  <div class="figcaption">Datapoints for the ball plotted in RGB and YCbCr colorspaces. Observe how the enclosing shape is of a wierd shape. It would be ideal to create a custom color-space which converts this wierd shape into some simple shape which can be enclosed like a cube or a cuboid or a sphere or an ellipsoid. Designing a space like that is generally not trivial hence we emply a method of fitting this wierd shape as a sum of simple shapes like an ellipsoid.</div>
 </div>
 
 In this case, one has to come up with a wierd looking fancy function to bound the color which is generally mathematically very difficult and computationally very expensive. An easy trick mathematicians like to do in such cases (which is generally a very good approximation with less compuational cost) is to represent the fancy function as a sum of known simple functions. We love gaussians so let us use a sum of gaussians to model our fancy function. Let us write our formulation down mathematically. Let the posterior be defined by a sum of $$K$$ scaled gaussians given by:
