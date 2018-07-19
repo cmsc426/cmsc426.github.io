@@ -10,6 +10,8 @@ The Table of Contents:
 - [Color Imaging](#colimaging)
 - [RGB and other Color Spaces](#colorspace)
 - [Color Classification](#colorclassification)
+	- [Color Thresholding](#colorthresh)
+	- [Color Classification using a Single Gaussian](#gaussian)
 
 <a name='intro'></a>
 
@@ -145,9 +147,13 @@ Keen readers might have observed that HSV was a non-linear transformation and YC
   <div class="figcaption">RGB, HSV and YCbCr color spaces.</div>
 </div>
 
+<a name='colorclassification'></a>
+## Color Classification
+In the project 1, the nao robot wants to classify each pixel as a set of discrete colors, i.e., green of the grass field, orange of the soccer ball and yellow of the goal post. Particularly we are interested in finding the orange pixels because this represents the ball. As we talked about before, in RGB color space each pixel is represented as a vector in $$ \mathbb{R}^3$$. Let us define the problem mathematically. Say each pixel is represented by $$x=[r,g,b]^T \in \mathbb{R}^3$$. There exist $$l$$ color classes. We want to model the probability of a pixel belonging to a color class $$C_l$$ given the pixel value $$x$$ and this is denoted by $$p(C_l \vert x)$$.
 
-- [Color Classification](#colorclassification)
-In the project 1, the nao robot wants to classify each pixel as a set of discrete colors, i.e., green of the grass field, orange of the soccer ball and yellow of the goal post. Particularly we are interested in finding the orange pixels because this represents the ball. As we talked about before, in RGB color space each pixel is represented as a vector in $$ \mathbb{R}^3$$. Let us define the problem mathematically. Say each pixel is represented by $$x=[r,g,b]^T \in \mathbb{R}^3$$. There exist $$l$$ color classes. We want to model the probability of a pixel belonging to a color class $$C_l$$ given the pixel value $$x$$ and this is denoted by $$p(C_l \vert x)$$. If you make the assumption/approximation that each pixel only belongs to one color class, i.e., color classes are mutually exlusive. (This is like saying if a pixel is classified as orange it cannot be classified as red, though in reality a red pixel could have some amount of orange and vice-versa. This comes from that fact that the camera sensor percieves a 3-dimensinal projection of the $$\infty$$-dimensional hilbert space projection of the light spectrum). The hard classification problem can be mathematically defined as follows:
+<a name='colorthresh'></a>
+### Color Thresholding
+If you make the assumption/approximation that each pixel only belongs to one color class, i.e., color classes are mutually exlusive. (This is like saying if a pixel is classified as orange it cannot be classified as red, though in reality a red pixel could have some amount of orange and vice-versa. This comes from that fact that the camera sensor percieves a 3-dimensinal projection of the $$\infty$$-dimensional hilbert space projection of the light spectrum). The hard classification problem can be mathematically defined as follows:
 
 <!-- https://stackoverflow.com/questions/36174987/how-to-typeset-argmin-and-argmax-in-markdown -->
 $$ 
@@ -168,7 +174,17 @@ where $$x^r, x^g, x^b$$ represent the red, green and blue channel values of a pa
   <div class="figcaption">Color Thresholder app.</div>
 </div>
 
+<a name='gaussian'></a>
+### Color Classification using a Single Gaussian
+This is good for most basic cases but is bad for robotics because we said that everything (sensors and actuators) is noisy and we want to model the world in a probabilistic manner. This means that instead of saying a pixel is orange/red we want to say that the pixel is orange with 70% probability and red with 30% probability. This is denoted as $$p(C_l\vert x)$$ as mentioned before. Because we are in 2018 and everything is machine learning driven, let us treat the problem in hand as a machine learning problem. Let us say each pixel is being classified by a binary classifier per class (i.e., we have one classifier per color we want to classify). If we want to classify a pixel as red, orange or green we have a total of three classifiers one for each color. Let us formulate the problem mathematically. In each classifier, we want to find $$p(C_l \vert x)$$. Here $$C_l$$ denotes the color label, in our case they will be green or orange or yellow. So as you expect the green classifier will give you the following $$p('Green' \vert x)$$, i.e., probability that the pixel is green. Note that $$1 - p('Green' \vert x)$$ gives the probability that the pixel is not green which includes both orange and yellow pixels. 
 
-This is good for most basic cases but is bad for robotics because we said that everything (sensors and actuators) is noisy and we want to model the world in a probabilistic manner. This means that instead of saying a pixel is orange/red we want to say that the pixel is orange with 70% probability and red with 30% probability. This is denoted as $$p(C_l\vert x)$$ as mentioned before. Because we are in 2019 and everything is machine learning driven, let us treat the problem in hand as  a machine learning problem. 
+Estimating $$p(C_l \vert x)$$ directly is too difficult. Luckily, we have Bayes rule to rescue us! Bayes rule applied onto $$p(C_l \vert x)$$ gives us the following:
+
+$$
+p(C_l \vert x) = \frac{p(x \vert C_l)p(C_l)}{\sum_{i=1}^l p(x\vert C_i)p(C_i)}
+$$
+
+$$p(C_l \vert x)$$ is the conditional probability of a color label given the color observation. $$p(x \vert C_l)$$ is the conditional probability of color observation given the color label and is generally called the **Likelihood**. $$p(C_l)$$ is the probability of that color class occuring and is called the **prior**. The prior is used to increase/decrease the probability of certain colors. For eg., one would generally see more green in the robocup because the field is green in color and the robot mostly looks at the ground. If nothing about the prior is known, a common choice is to use a uniform distribution, i.e., all the colors are equally likely. 
+
 
 
