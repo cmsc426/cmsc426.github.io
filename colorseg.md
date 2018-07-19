@@ -149,6 +149,12 @@ Keen readers might have observed that HSV was a non-linear transformation and YC
 - [Color Classification](#colorclassification)
 In the project 1, the nao robot wants to classify each pixel as a set of discrete colors, i.e., green of the grass field, orange of the soccer ball and yellow of the goal post. Particularly we are interested in finding the orange pixels because this represents the ball. As we talked about before, in RGB color space each pixel is represented as a vector in $$ \mathbb{R}^3$$. Let us define the problem mathematically. Say each pixel is represented by $$x=[r,g,b]^T \in \mathbb{R}^3$$. There exist $$l$$ color classes. We want to model the probability of a pixel belonging to a color class $$C_l$$ given the pixel value $$x$$ and this is denoted by $$p(C_l \vert x)$$. If you make the assumption/approximation that each pixel only belongs to one color class, i.e., color classes are mutually exlusive. (This is like saying if a pixel is classified as orange it cannot be classified as red, though in reality a red pixel could have some amount of orange and vice-versa. This comes from that fact that the camera sensor percieves a 3-dimensinal projection of the $$\infty$$-dimensional hilbert space projection of the light spectrum). The hard classification problem can be mathematically defined as follows:
 
+\underset{<constraints>}{\operatorname{<argmax or argmin>}}
+
+$$
+\underset{c\in C}{\operatorname{argmax}}
+$$
+
 $$ 
 C_l^*(x) = 
 \arg\!\max_C_k p(C_k\vert x) 
