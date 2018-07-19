@@ -188,10 +188,12 @@ $$p(C_l \vert x)$$ is the conditional probability of a color label given the col
 For the purpose of easy discussion, let us say we want to classify a pixel as orange. To do this we need to make the computer know how orange color looks like. Say we have a number of training samples of the color orange. You might ask why do we need so many samples? The answer is lighting and sensor noise changes the way orange looks in the image every so slightly and the computer has to learn all these different shades of orange. The next question one might ask, how many samples do we need? This is a hard question to answer. It depends on the variety more than quantity of samples. It is better to have samples with more variation you want to cater to than a lot of very similar looking samples of data. Let us mathematically model the right hand side of $$p('Orange' \vert x)$$. As we discussed earlier, Prior can be modelled as a uniform distribution, i.e., $$p('Orange')=0.5$$ and $$p(~'Orange')=0.5$$ (probability of not orange). The Likelihood is generally modelled as a normal/gaussian distribution given by the following equation:
 
 $$
-p(x \vert 'Orange') = \frac{1}{\sqrt{(2 \pi)^3 \norm{\Sigma}}}\exp{(\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))}
+p(x \vert 'Orange') = \frac{1}{\sqrt{(2 \pi)^3 \vert \Sigma \vert}}\exp{(\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu))} = \mathcal{N(x \vert \mu, \Sigma)}
 $$
 
-Here, $$\norm{\Sigma}$$ denotes the determinant of the matrix $$\Sigma$$. The dimensions of the above terms are as follows: $$\Sigma \in \mathbb{R}^{3 \times 3}, x,\mu \in \mathbb{3 \times 1}, p(x \vert 'Orange') \in \mathbb{R}^1$$.
+Here, $$\vert \Sigma \vert$$ denotes the determinant of the matrix $$\Sigma$$. The dimensions of the above terms are as follows: $$\Sigma \in \mathbb{R}^{3 \times 3}, x,\mu \in \mathbb{3 \times 1}, p(x \vert 'Orange') \in \mathbb{R}^1$$. 
+
+You might be asking why we used a Gaussian distribution to model the likelihood. The answer is simple, when you average a lot of (theoretically $$\infty$$) independently identically distributed random samples, their distribution tends to become a gaussian. This is formally called the [**Central Limit Theorem**](https://www.khanacademy.org/math/ap-statistics/sampling-distribution-ap/sampling-distribution-mean/v/central-limit-theorem). 
 
 
 
