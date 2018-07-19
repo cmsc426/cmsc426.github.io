@@ -247,6 +247,11 @@ $$
 p(C_l \vert x) = \pi_k \mathcal{N}(x, \mu_k, \Sigma_k)
 $$
 
-Here, $$\pi_k$$, $$\mu_k$$ and $$\Sigma_k$$ respectively define the scaling factor, mean and co-variance of the $$k$$<sup>th</sup> gaussian.
+Here, $$\pi_k$$, $$\mu_k$$ and $$\Sigma_k$$ respectively define the scaling factor, mean and co-variance of the $$k$$<sup>th</sup> gaussian. The optimization problem in hand is to maximize the probability that the above model is correct, i.e., to find the parameters $$\pi_k, \mu_k, \Sigma_k$$ such that one would maximize the corectness of $$p(C_l \vert x)$$. Just a simple probability function doesnt have very pretty mathematical properties. So a general trick mathematicians/machine learning people follow is to take the logarithm of the probability function and maximize that. This works well because of the [monotonicity](http://mathworld.wolfram.com/MonotonicFunction.html) of the logarithm function. This setup is formally called **Maximum Likelihood Estimation (MLE)** and can be mathematically written as:
 
+$$
+\underset{\{ \mu_1, \mu_2, \cdot, \mu_k, \Sigma_1, \Sigma_2, \cdot, \Sigma_k, \pi_1, \pi_2, \cdot, \pi_k\}}{\operatorname{argmax}} \sum_{i=1}^N ln p(x_i)
+$$
+
+where $$N$$ is the number of training samples. The above is not a simple function and generally has no closed form solution. 
 
