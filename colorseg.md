@@ -253,9 +253,7 @@ $$
 \underset{\{ \mu_1, \mu_2, \cdots, \mu_k, \Sigma_1, \Sigma_2, \cdots, \Sigma_k, \pi_1, \pi_2, \cdots, \pi_k\}}{\operatorname{argmax}} \sum_{i=1}^N \log p(x_i)
 $$
 
-where $$N$$ is the number of training samples. The above is not a simple function and generally has no closed form solution. To solve for the parameters $$\Theta = \{ \mu_1, \mu_2, \cdot, \mu_k, \Sigma_1, \Sigma_2, \cdot, \Sigma_k, \pi_1, \pi_2, \cdot, \pi_k\}$$ of the above problem, we have to use an iterative procedure. 
+where $$N$$ is the number of training samples. The above is not a simple function and generally has no closed form solution. To solve for the parameters $$\Theta = \{ \mu_1, \mu_2, \cdots, \mu_k, \Sigma_1, \Sigma_2, \cdots, \Sigma_k, \pi_1, \pi_2, \cdots, \pi_k\}$$ of the above problem, we have to use an iterative procedure. 
 
-```
-# Initialization:
+Initialization:
 Randomly choose $\pi_i, \mu_i, \Sigma_i \forall i \in [1, k]$
-```
