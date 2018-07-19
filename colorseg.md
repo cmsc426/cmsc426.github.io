@@ -208,7 +208,7 @@ $$
 \Sigma = \frac{1}{N}\sum_{i=1}^N (x_i-\mu)(x_i-\mu)^T
 $$
 
-Clearly, $$\mu \in \mathbb{3 \times 1}$$ and $$\Sigma \in \mathbb{R}^{3 \times 3}$$. 
+Clearly, $$\mu \in \mathbb{3 \times 1}$$ and $$\Sigma \in \mathbb{R}^{3 \times 3}$$. An important property to know about $$\Sigma$$ is that it is a Positive Semi-Definite (PSD) Matrix and is denoted mathematically as $$\Sigma \succeq 0$$. This means that the [eigenvalues](http://mathworld.wolfram.com/Eigenvalue.html) are non-negative (either positive or zero). This physically means that you cannot have a negative semi-axes for the ellipse which makes sense. 
 
 Now that we have both the prior and likelihood defined we can find the posterior easily:
 
@@ -241,6 +241,12 @@ However, if you are trying to find a color in different lighting conditions a si
   <div class="figcaption">How wierd color looks like.</div>
 </div>
 
-In this case, one has to come up with a wierd looking fancy function to bound the color which is generally mathematically very difficult and computationally very expensive. An easy trick mathematicians like to do in such cases (which is generally a very good approximation with less compuational cost) is to represent the fancy function as a sum of known simple functions. We love gaussians so let us use a sum of gaussians to model our fancy function. 
+In this case, one has to come up with a wierd looking fancy function to bound the color which is generally mathematically very difficult and computationally very expensive. An easy trick mathematicians like to do in such cases (which is generally a very good approximation with less compuational cost) is to represent the fancy function as a sum of known simple functions. We love gaussians so let us use a sum of gaussians to model our fancy function. Let us write our formulation down mathematically. Let the posterior be defined by a sum of $$K$$ scaled gaussians given by:
+
+$$
+p(C_l \vert x) = \pi_k \mathcal{N}(x, \mu_k, \Sigma_k)
+$$
+
+Here, $$\pi_k$$, $$\mu_k$$ and $$\Sigma_k$$ respectively define the scaling factor, mean and co-variance of the $$k$$<sup>th</sup> gaussian.
 
 
