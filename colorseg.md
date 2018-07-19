@@ -209,5 +209,17 @@ $$
 
 Clearly, $$\mu \in \mathbb{3 \times 1}$$ and $$\Sigma \in \mathbb{R}^{3 \times 3}$$. 
 
+Now that we have both the prior and likelihood defined we can find the posterior easily:
+
+$$
+p(C_l \vert x) = \frac{p(x \vert C_l)p(C_l)}{\sum_{i=1}^l p(x\vert C_i)p(C_i)}
+$$
+
+Because we just want to find the colors by some thresholding later, we can drop the denominator in the above expression if we don't care about the absolute scale of the probability summing to 1. For most thresholding purposes, we can do the following approximation:
+
+$$
+p(C_l \vert x) \alpha p(x \vert C_l)p(C_l)}
+$$
+
 
 
