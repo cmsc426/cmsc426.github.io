@@ -97,9 +97,7 @@ $$ \Delta = C_{max} - C_{min} $$
 
 Hue is calculated as follows:
 
-$$ (The blue
-and green highlights represent the tracked foreground and background regions
-respectively. All the images in this letter are best viewed in color.)
+$$ 
 \begin{cases} 
 0^\circ &\quad \text{if }\Delta=0\\
 60^\circ \times \frac{G'-B'}{\Delta} % 6 &\quad \text{if } C_{max}=R'\\
