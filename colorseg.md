@@ -13,6 +13,7 @@ The Table of Contents:
 	- [Color Thresholding](#colorthresh)
 	- [Color Classification using a Single Gaussian](#gaussian)
 	- [Color Classification using a Gaussian Mixture Model (GMM)](#gmm)
+- [Estimation of distance to the orange ball](#distest)
 
 <a name='intro'></a>
 
@@ -244,9 +245,55 @@ However, if you are trying to find a color in different lighting conditions a si
 In this case, one has to come up with a wierd looking fancy function to bound the color which is generally mathematically very difficult and computationally very expensive. An easy trick mathematicians like to do in such cases (which is generally a very good approximation with less compuational cost) is to represent the fancy function as a sum of known simple functions. We love gaussians so let us use a sum of gaussians to model our fancy function. Let us write our formulation down mathematically. Let the posterior be defined by a sum of $$K$$ scaled gaussians given by:
 
 $$
-p(C_l \vert x) = \pi_k \mathcal{N}(x, \mu_k, \Sigma_k)
+p(C_l \vert x) = \sum_{i=1}^k \pi_i \mathcal{N}(x, \mu_i, \Sigma_i)
 $$
 
-Here, $$\pi_k$$, $$\mu_k$$ and $$\Sigma_k$$ respectively define the scaling factor, mean and co-variance of the $$k$$<sup>th</sup> gaussian.
+Here, $$\pi_i$$, $$\mu_i$$ and $$\Sigma_i$$ respectively define the scaling factor, mean and co-variance of the $$k$$<sup>th</sup> gaussian. The optimization problem in hand is to maximize the probability that the above model is correct, i.e., to find the parameters $$\pi_k, \mu_k, \Sigma_k$$ such that one would maximize the corectness of $$p(C_l \vert x)$$. Just a simple probability function doesnt have very pretty mathematical properties. So a general trick mathematicians/machine learning people follow is to take the logarithm of the probability function and maximize that. This works well because of the [monotonicity](http://mathworld.wolfram.com/MonotonicFunction.html) of the logarithm function. This setup is formally called **Maximum Likelihood Estimation (MLE)** and can be mathematically written as:
 
+$$
+\underset{\{ \mu_1, \mu_2, \cdots, \mu_k, \Sigma_1, \Sigma_2, \cdots, \Sigma_k, \pi_1, \pi_2, \cdots, \pi_k\}}{\operatorname{argmax}} \sum_{i=1}^N \log p(x_i)
+$$
+
+where $$N$$ is the number of training samples. The above is not a simple function and generally has no closed form solution. To solve for the parameters $$\Theta = \{ \mu_1, \mu_2, \cdots, \mu_k, \Sigma_1, \Sigma_2, \cdots, \Sigma_k, \pi_1, \pi_2, \cdots, \pi_k\}$$ of the above problem, we have to use an iterative procedure. 
+
+- Initialization:
+Randomly choose $$\pi_i, \mu_i, \Sigma_i \qquad \forall i \in [1, k]$$
+- Alternate until convergence:
+	- Expectation Step or E-step: Evaluate the model/Assign points to clusters
+		$$ p(C_l \vert x) = \sum_{i=1}^k \pi_i \mathcal{N}(x, \mu_i, \Sigma_i) $$
+	- Maximization Step or M-step: Evaluate best parameters $$ \Theta $$ to best fit the points
+	
+	$$ 
+	\mu_k = \frac{\sum_i p(C_l \vert x_i)x_i}{\sum_i p(C_l \vert x_i)}
+	$$
+	
+	$$ 
+	\pi_k = \frac{1}{N}\sum_i p(C_l \vert x_i)
+	$$
+
+	$$ 
+	\Sigma_k = \frac{\sum_i p(C_l \vert x_i)(x_i-\mu_i)(x_i-\mu_i)^T}{\sum_i p(C_l \vert x_i)}
+	$$
+
+Convergence is defined as $$\sum_i\vert \vert \mu_i^{t+1} -  \mu_i^{t}\vert \vert \ge \tau$$ where $$i$$ denotes the cluster number, $$t$$ denotes the iteration number and $$\tau$$ is some user defiened threshold. To understand more about the mathematical derivation which is fairly involved go to [this link](https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.EM).
+
+Now that we have estimated/learnt all the parameters in our model, i.e., $$\Theta = \{ \mu_1, \mu_2, \cdots, \mu_k, \Sigma_1, \Sigma_2, \cdots, \Sigma_k, \pi_1, \pi_2, \cdots, \pi_k\}$$ we can estimate the posterior probability using the following equation:
+
+$$
+p(C_l \vert x) = \sum_{i=1}^k \pi_i \mathcal{N}(x, \mu_i, \Sigma_i)
+$$ 
+
+Finally, one can use the following expression to identify pixels which are 'Orange' (or confidently Orange). 
+
+$$
+p(C_l \vert x) \ge \tau
+$$
+
+here $$\tau$$ is some user defined threshold. 
+
+<a name='distest'></a>
+## Estimation of distance to the orange ball
+Now that we have robustly estimated the pixels which are 'Orange', we want to identify the pixels which belong to the orange ball and eventually find the distance to the ball. First step, let us identify the pixels which belong to the orange ball. This is relatively easy, one can use simple morphological operations available in MATLAB to do it. Look at ```bwmorph, regionprops``` functions in MATLAB. For the second step, one could just fit a simple parametric model (choose a model of your choice) to estimate distance from different parameters based on the image. For eg. area of the ball on the image decreases with distance (generally follows a inverse square curve). Use the data provided and any freature you like (```regionprops``` from MATLAB is very handy) and the MATLAB function ```fit``` to obtain a model to estimate distance. For a more fancy method look at [this paper](http://www.cis.upenn.edu/~kostas/mypub.dir/thomas17ral.pdf).
+
+Congrats! You have now built a robust vision system to identify an orange ball, estimate distance to it on a nao robot for robocup soccer. 
 
