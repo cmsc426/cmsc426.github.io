@@ -261,6 +261,7 @@ Randomly choose $$\pi_i, \mu_i, \Sigma_i \qquad \forall i \in [1, k]$$
 	- Expectation Step or E-step: Evaluate the model/Assign points to clusters
 		$$ p(C_l \vert x) = \sum_{i=1}^k \pi_i \mathcal{N}(x, \mu_i, \Sigma_i) $$
 	- Maximization Step or M-step: Evaluate best parameters $$ \Theta $$ to best fit the points
+	
 	$$ 
 	\mu_k = \frac{\sum_i p(C_l \vert x_i)x_i}{\sum_i p(C_l \vert x_i)}
 	$$
@@ -273,7 +274,7 @@ Randomly choose $$\pi_i, \mu_i, \Sigma_i \qquad \forall i \in [1, k]$$
 	\Sigma_k = \frac{\sum_i p(C_l \vert x_i)(x_i-\mu_i)(x_i-\mu_i)^T}{\sum_i p(C_l \vert x_i)}
 	$$
 
-Convergence is defined as $$\sum_i\vert \vert \mu_i^{t+1} -  \mu_i^{t}\vert \vert \ge \tau$$ where $$i$$ denotes the cluster number, $$t$$ denotes the iteration number and $$\tau$$ is some user defiened threshold. 
+Convergence is defined as $$\sum_i\vert \vert \mu_i^{t+1} -  \mu_i^{t}\vert \vert \ge \tau$$ where $$i$$ denotes the cluster number, $$t$$ denotes the iteration number and $$\tau$$ is some user defiened threshold. To understand more about the mathematical derivation which is fairly involved go to [this link](https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.EM).
 
 Now that we have estimated/learnt all the parameters in our model, i.e., $$\Theta = \{ \mu_1, \mu_2, \cdots, \mu_k, \Sigma_1, \Sigma_2, \cdots, \Sigma_k, \pi_1, \pi_2, \cdots, \pi_k\}$$ we can estimate the posterior probability using the following equation:
 
