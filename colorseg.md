@@ -158,7 +158,7 @@ $$
 Here, $$C_l^*(x)$$ represents the most probable color class that pixel belongs to. For eg. if the color is closer to orange than red then the pixel will be called orange. This can be done using the [Color Thresholder app](https://www.mathworks.com/help/images/ref/colorthresholder-app.html) in MATLAB. In RGB space, thresholding can be thought of selecting pixels in a cube defined by some minimum and maximum value in each channel (RGB), i.e., you are selecting all the pixels in a cube whose faces are defined by the minimum and maxmimum value in each channel. This can be mathematically formulated as:
 
 $$
-x_{sel} = {x \vert x^r \in [R_{min}, R_{max}], x^g \in [G_{min}, G_{max}], x^b \in [B_{min}, B_{max}]}
+x_{sel} = \{x \vert x^r \in [R_{min}, R_{max}], x^g \in [G_{min}, G_{max}], x^b \in [B_{min}, B_{max}]\}
 $$
 
 where $$x^r, x^g, x^b$$ represent the red, green and blue channel values of a particular pixel. 
