@@ -12,6 +12,7 @@ The Table of Contents:
 - [Color Classification](#colorclassification)
 	- [Color Thresholding](#colorthresh)
 	- [Color Classification using a Single Gaussian](#gaussian)
+	- [Color Classification using a Gaussian Mixture Model (GMM)](#gmm)
 
 <a name='intro'></a>
 
@@ -227,7 +228,19 @@ $$
 p(C_l \vert x) \ge \tau
 $$
 
-Here, $$\tau$$ is a user chosen threshold which signifies the confidence score. 
+Here, $$\tau$$ is a user chosen threshold which signifies the confidence score. This method definitely works much better than the [simpler color thresholding method](#colorthresh). All your data is being thresholded by an ellipsoid (3D ellipse) instead of a cube as before. You might be wondering why a gaussian looks like an ellipsoid? The covariance matrix represents the semi-axes of the ellipsoid. In fact the inverse of square root of diagonal values of $$\Sigma$$ gives the semi-axes of the ellipsoid. As you would expect if $$x \in \mathbb{R}^{2 \times 1}$$, the gaussian would look like an ellipse. Learn more about these cool gaussians [here](https://en.wikipedia.org/wiki/Multivariate_normal_distribution).
 
+Modelling the likelihood as a gaussian is beneficial because a little light variation generally makes the colors spread out in an ellipsoid form, i.e., the actual color is in the middle and color deviates from the center in all directions resembling an ellipse. This is one of the major reasons why a simple gaussian model works so well for color segmentation. 
+
+<a name='gmm'></a>
+### Color Classification using a Gaussian Mixture Model (GMM)
+However, if you are trying to find a color in different lighting conditions a simple gaussian model will not suffice because the colors may not be bounded well by an ellipsoid. 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/classify.png">
+  <div class="figcaption">How wierd color looks like.</div>
+</div>
+
+In this case, one has to come up with a wierd looking fancy function to bound the color which is generally mathematically very difficult and computationally very expensive. An easy trick mathematicians like to do in such cases (which is generally a very good approximation with less compuational cost) is to represent the fancy function as a sum of known simple functions. We love gaussians so let us use a sum of gaussians to model our fancy function. 
 
 
