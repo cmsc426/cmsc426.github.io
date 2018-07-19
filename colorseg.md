@@ -257,5 +257,5 @@ where $$N$$ is the number of training samples. The above is not a simple functio
 
 ```
 # Initialization:
-Randomly choose $$\pi_i, \mu_i, \Sigma_i \forall i \in [1, k]$$
+Randomly choose $\pi_i, \mu_i, \Sigma_i \forall i \in [1, k]$
 ```
