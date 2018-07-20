@@ -38,7 +38,7 @@ Let's talk about the key concepts first. A sample vision pipeline in a robot is 
 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/colorseg/nao2.jpg" width="50%"> 
+  <img src="/assets/colorseg/nao2.jpg" width="80%"> 
   <div class="figcaption">Nao robot.</div>
 </div>
 
