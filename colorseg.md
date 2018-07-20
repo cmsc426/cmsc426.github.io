@@ -38,7 +38,7 @@ Let's talk about the key concepts first. A sample vision pipeline in a robot is 
 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/colorseg/nao.jpg" width="25%"> 
+  <img src="/assets/colorseg/nao2.jpg" width="50%"> 
   <div class="figcaption">Nao robot.</div>
 </div>
 
@@ -54,9 +54,8 @@ The Aperture is the amount of opnening of the lens, i.e., the lens can have a di
 
 The next factor controlling the brightness of the image is the ISO. To understand what this factor does, you'll need to understand how the camera/imager captures an image. Each pixel is generally a capacitor/transistor which converts photos/light into some voltage which can be measured by a circuit in the camera. Think of this as light truning a dial/volume knob telling you how much light hits a particular pixel. The volatge level measured per pixel can be amplifed by a number (this is like amplifying your volume on your headphones). ISO controls this amplification factor. As you might have expected a higher ISO means a brighter image and vice-versa. Then one might ask why not just set a small aperture and increase your ISO to the maximum value? Increasing ISO comes at a cost, a lot of noise. So generally one has to be mindful of the parameters chosen. A balance of these parameters have to be chosen.
 
-The last factor in the exposure triangle is the shutter speed. This is the time the camera/imager is collecting light. The voltage measured will be a sum of all the photons collected during the shutter is active/open. A longer shutter speed gives you more light but wil blur any motion. The camera's auto mode generally selects the best balance of all the exposure triangle parameters based on some heuristic. 
+The last factor in the exposure triangle is the shutter speed. This is the time the camera/imager is collecting light. The voltage measured will be a sum of all the photons collected during the shutter is active/open. A longer shutter speed gives you more light but wil blur any motion. The camera's auto mode generally selects the best balance of all the exposure triangle parameters based on some heuristic. Look at [this cool paper](https://github.com/cchen156/Learning-to-See-in-the-Dark) which cheats the exposure traingle with Deep Learning. This paper can predict the noiseless detail which would be obtained from a long exposure given a super short noisy exposure. What a time to be alive! A version of this is used in the Google Pixel phones for the night mode.
 
-- Link the paper to make long exposure from shot photos!
 
 You might be wondering how does one collect color/RGB (Red Green Blue) images. A simple way of doing this is having a camera sensor where each pixel has 3 sub-pixels (or 3 pixels inside each pixel) each of which measures a color out of red, green and blue respectively. One can select a color by using the dye of the same color on the pixel (grayscale has a transparent dye). This becomes very expensive and is generally only used in very high end cameras which cost thousands of dollars. The cheaper sensors use something called a bayer pattern. Where each pixel has one colored dye and they alternatively are Red, Green and Blue. The missing colors are interpolated using a simple interpolation algorithm. The RGB image is represented as a three dimentional array (width x height x 3) on the computer. 
 
@@ -295,6 +294,18 @@ here $$\tau$$ is some user defined threshold.
 
 <a name='distest'></a>
 ## Estimation of distance to the orange ball
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/naokicking.png" width="70%">
+  <div class="figcaption">Nao robot looking at the ball from it's bottom camera.</div>
+  <br>
+  <img src="/assets/colorseg/naokickingimg.png">
+  <div class="figcaption">Orange ball candidates after thresholding using GMM. One can remove the noise using morphological operations.</div>
+  <br>
+  <img src="/assets/colorseg/naokickingimg2.png">
+  <div class="figcaption">Orange ball looks different from different distances (d) and different head tilt angles <script type="math/tex"> ($\theta$) <\script>. See how the ellipse's shape and size changes with repsect to distance and angle. It is not very easy to separate the effects of distance and angle on the shape and size of the ball on the image.</div>
+</div>
+
 Now that we have robustly estimated the pixels which are 'Orange', we want to identify the pixels which belong to the orange ball and eventually find the distance to the ball. First step, let us identify the pixels which belong to the orange ball. This is relatively easy, one can use simple morphological operations available in MATLAB to do it. Look at ```bwmorph, regionprops``` functions in MATLAB. For the second step, one could just fit a simple parametric model (choose a model of your choice) to estimate distance from different parameters based on the image. For eg. area of the ball on the image decreases with distance (generally follows a inverse square curve). Use the data provided and any freature you like (```regionprops``` from MATLAB is very handy) and the MATLAB function ```fit``` to obtain a model to estimate distance. For a more fancy method look at [this paper](http://www.cis.upenn.edu/~kostas/mypub.dir/thomas17ral.pdf).
 
 Congrats! You have now built a robust vision system to identify an orange ball, estimate distance to it on a nao robot for robocup soccer. 
