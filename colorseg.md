@@ -65,9 +65,6 @@ You might be wondering how does one collect color/RGB (Red Green Blue) images. A
   <img src="/assets/colorseg/bayer.png">
   <div class="figcaption">Left: The Bayer arrangement of color filters on the pixel array of an image sensor. Right: Profile/cross-section of sensor
 .</div>
-</div>
-
-<div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/bayer2.png">
   <div class="figcaption">1. Original scene. 2. Output of a 120×80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at 120x80-pixels for comparison (e.g. as a film scan might appear)</div>
 </div>
@@ -148,9 +145,6 @@ Keen readers might have observed that HSV was a non-linear transformation and YC
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/colorspaces.png">
   <div class="figcaption">Left to right: Represenation of RGB color cube in RGB, HSV and YCbCr color spaces.</div>
-</div>
-
-<div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/colorspacesnaoimg.png">
   <div class="figcaption">Nao robot view in RGB, HSV and YCbCr colorspaces.</div>
 </div>
