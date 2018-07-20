@@ -69,7 +69,7 @@ You might be wondering how does one collect color/RGB (Red Green Blue) images. A
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/bayer2.png">
-  <div class="figcaption">1. Original scene. 2. Output of a 120×80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at $$120 \times 80$$-pixels for comparison (e.g. as a film scan might appear)</div>
+  <div class="figcaption">1. Original scene. 2. Output of a 120×80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at 120x80-pixels for comparison (e.g. as a film scan might appear)</div>
 </div>
 
 
