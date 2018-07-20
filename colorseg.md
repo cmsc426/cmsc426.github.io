@@ -23,7 +23,7 @@ This lecture is designed to introduce students from various backgrounds to how t
 Any intelligent system (robotic system/robot/robot agent) senses the world through it's sensors and interacts with the environment based on some actuators. This can be shown in the figure below:
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/colorseg/IntelligentAgent.png" width="80%">
+  <img src="/assets/colorseg/IntelligentAgent.png" width="60%">
   <div class="figcaption">Intelligent Agent (Robot) interacting with the environment and sensing the world.</div>
 </div>
 
