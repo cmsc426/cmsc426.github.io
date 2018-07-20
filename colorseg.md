@@ -303,10 +303,11 @@ here $$\tau$$ is some user defined threshold.
   <div class="figcaption">Orange ball candidates after thresholding using GMM. One can remove the noise using morphological operations.</div>
   <br>
   <img src="/assets/colorseg/naokickingimg2.png" width="25%">
-  <div class="figcaption">Orange ball looks different from different distances (d) and different head tilt angles ($$\theta$$). See how the ellipse's shape and size changes with repsect to distance and angle. It is not very easy to separate the effects of distance and angle on the shape and size of the ball on the</div>
+  <div class="figcaption">Orange ball looks different from different distances (d) and different head tilt angles (\$$\theta$$). See how the ellipse's shape and size changes with repsect to distance and angle. It is not very easy to separate the effects of distance and angle on the shape and size of the ball on the</div>
 </div>
 
 Now that we have robustly estimated the pixels which are 'Orange', we want to identify the pixels which belong to the orange ball and eventually find the distance to the ball. First step, let us identify the pixels which belong to the orange ball. This is relatively easy, one can use simple morphological operations available in MATLAB to do it. Look at ```bwmorph, regionprops``` functions in MATLAB. For the second step, one could just fit a simple parametric model (choose a model of your choice) to estimate distance from different parameters based on the image. For eg. area of the ball on the image decreases with distance (generally follows a inverse square curve). Use the data provided and any freature you like (```regionprops``` from MATLAB is very handy) and the MATLAB function ```fit``` to obtain a model to estimate distance. For a more fancy method look at [this paper](http://www.cis.upenn.edu/~kostas/mypub.dir/thomas17ral.pdf).
 
 Congrats! You have now built a robust vision system to identify an orange ball, estimate distance to it on a nao robot for robocup soccer. 
 
+<!-- When git doesn't push do this: git config --global core.askpass "git-gui--askpass" -->
