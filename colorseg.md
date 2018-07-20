@@ -305,11 +305,11 @@ here $$\tau$$ is some user defined threshold.
   <img src="/assets/colorseg/naokicking.png" width="35%">
   <div class="figcaption">Nao robot looking at the ball from it's bottom camera.</div>
   <br>
-  <img src="/assets/colorseg/naokickingimg.png" width="25%">
+  <img src="/assets/colorseg/naokickingimg.png" width="35%">
   <div class="figcaption">Orange ball candidates after thresholding using GMM. One can remove the noise using morphological operations.</div>
   <br>
-  <img src="/assets/colorseg/naokickingimg2.png" width="25%">
-  <div class="figcaption">Orange ball looks different from different distances (d) and different head tilt angles (\$\$\theta$$). See how the ellipse's shape and size changes with repsect to distance and angle. It is not very easy to separate the effects of distance and angle on the shape and size of the ball on the</div>
+  <img src="/assets/colorseg/naokickingimg2.png" width="35%">
+  <div class="figcaption">Orange ball looks different from different distances (d) and different head tilt angles (\(theta\)). See how the ellipse's shape and size changes with repsect to distance and angle. It is not very easy to separate the effects of distance and angle on the shape and size of the ball on the</div>
 </div>
 
 Now that we have robustly estimated the pixels which are 'Orange', we want to identify the pixels which belong to the orange ball and eventually find the distance to the ball. First step, let us identify the pixels which belong to the orange ball. This is relatively easy, one can use simple morphological operations available in MATLAB to do it. Look at ```bwmorph, regionprops``` functions in MATLAB. For the second step, one could just fit a simple parametric model (choose a model of your choice) to estimate distance from different parameters based on the image. For eg. area of the ball on the image decreases with distance (generally follows a inverse square curve). Use the data provided and any freature you like (```regionprops``` from MATLAB is very handy) and the MATLAB function ```fit``` to obtain a model to estimate distance. For a more fancy method look at [this paper](http://www.cis.upenn.edu/~kostas/mypub.dir/thomas17ral.pdf).
