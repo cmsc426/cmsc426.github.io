@@ -54,6 +54,12 @@ The Aperture is the amount of opnening of the lens, i.e., the lens can have a di
 
 The next factor controlling the brightness of the image is the ISO. To understand what this factor does, you'll need to understand how the camera/imager captures an image. Each pixel is generally a capacitor/transistor which converts photos/light into some voltage which can be measured by a circuit in the camera. Think of this as light truning a dial/volume knob telling you how much light hits a particular pixel. The volatge level measured per pixel can be amplifed by a number (this is like amplifying your volume on your headphones). ISO controls this amplification factor. As you might have expected a higher ISO means a brighter image and vice-versa. Then one might ask why not just set a small aperture and increase your ISO to the maximum value? Increasing ISO comes at a cost, a lot of noise. So generally one has to be mindful of the parameters chosen. A balance of these parameters have to be chosen.
 
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/exposuretriangle.jpg">
+  <div class="figcaption">Effects of ISO, Aperture, Shutter speed on the image.</div>
+</div>
+
+
 The last factor in the exposure triangle is the shutter speed. This is the time the camera/imager is collecting light. The voltage measured will be a sum of all the photons collected during the shutter is active/open. A longer shutter speed gives you more light but wil blur any motion. The camera's auto mode generally selects the best balance of all the exposure triangle parameters based on some heuristic. Look at [this cool paper](https://github.com/cchen156/Learning-to-See-in-the-Dark) which cheats the exposure traingle with Deep Learning. This paper can predict the noiseless detail which would be obtained from a long exposure given a super short noisy exposure. What a time to be alive! A version of this is used in the Google Pixel phones for the night mode.
 
 
