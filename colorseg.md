@@ -84,7 +84,18 @@ $$ M_{res}=\int M(\lambda)f(\lambda) d\lambda$$
 
 $$ L_{res}=\int L(\lambda)f(\lambda) d\lambda$$
 
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/LightSpectrum.png">
+  <div class="figcaption">The characteristic function of the S, M and L detectors.</div>
+</div>
+
+
 Note that one can have a completely different scene which reflects a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, one could have the **exact** same value for $$ S_{res}, M_{res}, L_{res}$$. This means that one cannot distringuish both the scenes in terms of colors. This happens because the eyes are "seeing" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\mathbb{R}^\infty \rightarrow \mathbb{R}^3$$. Color blindess is missing one of the receptors or the S, M, L receptors become too similar to each other. This in-turn reduces the dimentionality from 3 to 2 or 1. This is in some sense taking PCA of the infiinte dimentional spectrum in your eyes. 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/LightSpectrum2.png">
+  <div class="figcaption">The response of S, M and L detectors to \(f(\lambda)\) and  \(f'(\lambda)\) might look exactly the same. This is because both \(f(\lambda)\) and  \(f'(\lambda)\) are \(\infty\)-dimensional functions and only 3-dimensions of it are measured by the RGB (S, M and L) cone cells.</div>
+</div>
 
 
 <a name='colorspace'></a>
