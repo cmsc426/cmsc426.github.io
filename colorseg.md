@@ -325,7 +325,7 @@ $$
 here $$\tau$$ is some user defined threshold. 
 
 <a name='gmmcases'></a>
-### Different cases for \(\Sigma\) in GMM
+### Different cases for $$\Sigma$$ in GMM
 We said that we were modelling our fancy functions as a sum of simple functions like a gaussian. One might wonder why cant we make further asumptions about the gaussian. Yes we can! The gaussian we described before uses an ellipsoid, i.e., all the diagonal elements of $$\Sigma$$ are different. One can say that all our diagonal elements are the same and non-diagonal elements are zero, i.e., $$\Sigma$$ has the following form:
 
 $$
