@@ -13,7 +13,7 @@ The Table of Contents:
 	- [Color Thresholding](#colorthresh)
 	- [Color Classification using a Single Gaussian](#gaussian)
 	- [Color Classification using a Gaussian Mixture Model (GMM)](#gmm)
-  - [Different cases for \(Sigma\) in GMM](#gmmcases)
+  - [Different cases for \(\Sigma\) in GMM](#gmmcases)
 - [Estimation of distance to the orange ball](#distest)
 
 <a name='intro'></a>
@@ -237,13 +237,12 @@ $$
 \sigma_R^2 & \sigma_R \sigma_G & \sigma_R \sigma_B \\
 \sigma_R \sigma_G & \sigma_G^2 & \sigma_G \sigma_B \\
 \sigma_R \sigma_B & \sigma_G \sigma_B & \sigma_B^2 \\
-
 \end{bmatrix}
 $$
 
 Observe that the above matrix is a **square** matrix and is a **symmetric** matrix. Here, $$\sigma_R, \sigma_G, \sigma_B$$ denote the variance in each of the individual channels. $$\sigma_R^2, \sigma_G^2, \sigma_B^2$$ are the variance in each of the R, G and B channels. $$\sigma_R \sigma_G, \sigma_G \sigma_B, \sigma_R \sigma_B$$ are the correlation terms and show the co-occurence of one channel over other. Mathematically, it signifies the vector projection of one channel over the other.  
 
-An important property to know about $$\Sigma$$ is that it is a Positive Semi-Definite (PSD) Matrix and is denoted mathematically as $$\Sigma \succeq 0$$. This means that the [eigenvalues](http://mathworld.wolfram.com/Eigenvalue.html) are non-negative (either positive or zero). This physically means that you cannot have a negative semi-axes for the ellipse/elliposoid which makes sense. The [eigenvectors ](http://mathworld.wolfram.com/Eigenvector.html) of $$\Sigma$$ tell you the orientation of the elliposoid in 3D. A function [like this](https://www.mathworks.com/matlabcentral/fileexchange/4705-error_ellipse?focused=3890020&tab=function) can help you plot the covariance ellipsoids. 
+An important property to know about $$\Sigma$$ is that it is a **Positive Semi-Definite (PSD)** Matrix and is denoted mathematically as $$\Sigma \succeq 0$$. This means that the [eigenvalues](http://mathworld.wolfram.com/Eigenvalue.html) are non-negative (either positive or zero). This physically means that you cannot have a negative semi-axes for the ellipse/elliposoid which makes sense. The [eigenvectors ](http://mathworld.wolfram.com/Eigenvector.html) of $$\Sigma$$ tell you the orientation of the elliposoid in 3D. A function [like this](https://www.mathworks.com/matlabcentral/fileexchange/4705-error_ellipse?focused=3890020&tab=function) can help you plot the covariance ellipsoids. 
 
 Now that we have both the prior and likelihood defined we can find the posterior easily:
 
@@ -326,7 +325,32 @@ $$
 here $$\tau$$ is some user defined threshold. 
 
 <a name='gmmcases'></a>
-### Different cases for \(Sigma\) in GMM
+### Different cases for \(\Sigma\) in GMM
+We said that we were modelling our fancy functions as a sum of simple functions like a gaussian. One might wonder why cant we make further asumptions about the gaussian. Yes we can! The gaussian we described before uses an ellipsoid, i.e., all the diagonal elements of $$\Sigma$$ are different. One can say that all our diagonal elements are the same and non-diagonal elements are zero, i.e., $$\Sigma$$ has the following form:
+
+$$
+\Sigma = \sigma^2\begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{bmatrix}
+$$
+
+
+here $$\sigma$$ is a parameter to be estimated. You might be wondering what shape a $$\Sigma$$ like the one described above represents. It's simple, a sphere! This gives lesser flexibility in fitting the model as the shape is simpler but has lesser number of parameters. A comparison of GMM fit on the data using spherical $$\Sigma$$ and elliposoidal $$\Sigma$$ is shown below:
+
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/rgbgmm.png">
+  <div class="figcaption">Left: Datapoints of the orange ball and GMM fit using spherical $$\Sigma$$. Right: GMM fit using ellipsoidal $$\Sigma$$. Notice that the ellipsoidal variant has less non-orange pixels which will be classified as orange, i.e., lesser false positives and false negatives and is more accurate.</div>
+</div>
+
+One might think, what if I design a custom transformation to create a new colorspace from RGB where the data points are enclosed in a simple shape like an ellipsoid? That would work wonderfully well. I designed a custom colorspace to do exactly that (which is my secret recipe). You will have to figure out your own secret recipe to do it. The datapoints and the GMM fit for this colorspace is shown below:
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/colorseg/customcolorspace3.png">
+  <div class="figcaption">Left: Datapoints of the orange ball in the custom colorspace. Look at how the datapoint space looks like an ellipsoid Right: GMM fit using ellipsoidal $$\Sigma$$. Notice that the GMM fit looks exactly like one single gaussian which shows that the performance of GMM over this colorspace would exactly be the same as a single gaussian fit. This is very beneficial because we can reduce the computation cost of training and testing significantly.</div>
+</div>
 
 <a name='distest'></a>
 ## Estimation of distance to the orange ball
