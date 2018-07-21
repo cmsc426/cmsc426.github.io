@@ -13,7 +13,7 @@ The Table of Contents:
 	- [Color Thresholding](#colorthresh)
 	- [Color Classification using a Single Gaussian](#gaussian)
 	- [Color Classification using a Gaussian Mixture Model (GMM)](#gmm)
-  - [Different cases for \(\Sigma\) in GMM](#gmmcases)
+  - [Different cases for $$\Sigma$$ in GMM](#gmmcases)
 - [Estimation of distance to the orange ball](#distest)
 
 <a name='intro'></a>
