@@ -13,6 +13,7 @@ The Table of Contents:
 	- [Color Thresholding](#colorthresh)
 	- [Color Classification using a Single Gaussian](#gaussian)
 	- [Color Classification using a Gaussian Mixture Model (GMM)](#gmm)
+  - [Different cases for \(Sigma\) in GMM](#gmmcases)
 - [Estimation of distance to the orange ball](#distest)
 
 <a name='intro'></a>
@@ -85,7 +86,7 @@ $$ M_{res}=\int M(\lambda)f(\lambda) d\lambda$$
 $$ L_{res}=\int L(\lambda)f(\lambda) d\lambda$$
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/colorseg/LightSpectrum.png" width="70%">
+  <img src="/assets/colorseg/LightSpectrum.png" width="50%">
   <div class="figcaption">The characteristic function of the S, M and L detectors.</div>
 </div>
 
@@ -93,7 +94,7 @@ $$ L_{res}=\int L(\lambda)f(\lambda) d\lambda$$
 Note that one can have a completely different scene which reflects a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, one could have the **exact** same value for $$ S_{res}, M_{res}, L_{res}$$. This means that one cannot distringuish both the scenes in terms of colors. This happens because the eyes are "seeing" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\mathbb{R}^\infty \rightarrow \mathbb{R}^3$$. Color blindess is missing one of the receptors or the S, M, L receptors become too similar to each other. This in-turn reduces the dimentionality from 3 to 2 or 1. This is in some sense taking PCA of the infiinte dimentional spectrum in your eyes. 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/colorseg/LightSpectrum2.png" width="70%">
+  <img src="/assets/colorseg/LightSpectrum2.png" width="50%">
   <div class="figcaption">The response of S, M and L detectors to \(f(\lambda)\) and  \(f'(\lambda)\) might look exactly the same. This is because both \(f(\lambda)\) and  \(f'(\lambda)\) are \(\infty\)-dimensional functions and only 3-dimensions of it are measured by the RGB (S, M and L) cone cells.</div>
 </div>
 
@@ -227,7 +228,22 @@ $$
 \Sigma = \frac{1}{N}\sum_{i=1}^N (x_i-\mu)(x_i-\mu)^T
 $$
 
-Clearly, $$\mu \in \mathbb{3 \times 1}$$ and $$\Sigma \in \mathbb{R}^{3 \times 3}$$. An important property to know about $$\Sigma$$ is that it is a Positive Semi-Definite (PSD) Matrix and is denoted mathematically as $$\Sigma \succeq 0$$. This means that the [eigenvalues](http://mathworld.wolfram.com/Eigenvalue.html) are non-negative (either positive or zero). This physically means that you cannot have a negative semi-axes for the ellipse which makes sense. 
+Clearly, $$\mu \in \mathbb{3 \times 1}$$ and $$\Sigma \in \mathbb{R}^{3 \times 3}$$. $$\Sigma$$ is an awesome matrix and has some cool properties. Let us discuss a few of them.  
+
+The co-variance matrix $$\Sigma$$ is a square matrix of size $$d \times d$$ where $$d$$ is the length of the vector $$x$$, i.e., $$\Sigma \in \mathbb{R}^{d \times d}$$ if $$x \in \mathbb{R}^{d \times 1}$$. For the RGB case, $$d=3$$. $$\Sigma$$'s diagonal terms denote the variance and the off-diagonal terms denote the correlation. Let us take the example of the RGB case. If $$x = [R, G, B]^T$$, then 
+
+$$
+\Sigma = \begin{bmatrix}
+\sigma_R^2 & \sigma_R \sigma_G & \sigma_R \sigma_B \\
+\sigma_R \sigma_G & \sigma_G^2 & \sigma_G \sigma_B \\
+\sigma_R \sigma_B & \sigma_G \sigma_B & \sigma_B^2 \\
+
+\end{bmatrix}
+$$
+
+Observe that the above matrix is a **square** matrix and is a **symmetric** matrix. Here, $$\sigma_R, \sigma_G, \sigma_B$$ denote the variance in each of the individual channels. $$\sigma_R^2, \sigma_G^2, \sigma_B^2$$ are the variance in each of the R, G and B channels. $$\sigma_R \sigma_G, \sigma_G \sigma_B, \sigma_R \sigma_B$$ are the correlation terms and show the co-occurence of one channel over other. Mathematically, it signifies the vector projection of one channel over the other.  
+
+An important property to know about $$\Sigma$$ is that it is a Positive Semi-Definite (PSD) Matrix and is denoted mathematically as $$\Sigma \succeq 0$$. This means that the [eigenvalues](http://mathworld.wolfram.com/Eigenvalue.html) are non-negative (either positive or zero). This physically means that you cannot have a negative semi-axes for the ellipse/elliposoid which makes sense. The [eigenvectors ](http://mathworld.wolfram.com/Eigenvector.html) of $$\Sigma$$ tell you the orientation of the elliposoid in 3D. A function [like this](https://www.mathworks.com/matlabcentral/fileexchange/4705-error_ellipse?focused=3890020&tab=function) can help you plot the covariance ellipsoids. 
 
 Now that we have both the prior and likelihood defined we can find the posterior easily:
 
@@ -308,6 +324,9 @@ p(C_l \vert x) \ge \tau
 $$
 
 here $$\tau$$ is some user defined threshold. 
+
+<a name='gmmcases'></a>
+### Different cases for \(Sigma\) in GMM
 
 <a name='distest'></a>
 ## Estimation of distance to the orange ball
