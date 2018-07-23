@@ -110,11 +110,11 @@ You might be wondering what the inuition to Eigen-decomposition is. The eigenval
 For a detailed explanation of the visualization look at [this link](http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/). In computer vision, eigenspaces have been used for ages. Consider the problem of face recognition. Here we have a dataset of a lot of faces and we need to identify the person given a photo of the face. This is similar to what TSA does when they check your ID at the airport, they are manually trying to see if the photo in the ID looks like the person in front of them. One of the ealiest face recognition methods used eigenspaces and the algorithm is aptly called **Eigenfaces**. The idea of the algorithm is to represent any face as a linear combination of **eigenfaces**. These **eigenfaces** are supposed to represent the most common features of a face and that any face can be reconstructed as their linear combination. This means that each face is represented as a vector of weights which multiply these eigenfaces and are added up to make the original face. Think of this as representing each face as an encoded vector. This idea is also used extensively in compression. During the face identification, the test face is also converted to a vector and the label (person ID) of closest vector in the training set (database of face images on the computer) is chosen as the predicted label (person ID). A visual representation of this is shown below. For more details look at [this link](http://www.vision.jhu.edu/teaching/vision08/Handouts/case_study_pca1.pdf).
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/math/eigenface1.png" width="35%">
+  <img src="/assets/math/eigenface1.PNG" width="35%">
   <div class="figcaption">
    Sample images in the database/training set.
   </div>
-  <img src="/assets/math/eigenface2.png" width="35%">
+  <img src="/assets/math/eigenface2.PNG" width="35%">
   <div class="figcaption">
    Top row: Eigenfaces. Bottom row: How any face can be represented as a linear combination of eigenfaces.
   </div>
