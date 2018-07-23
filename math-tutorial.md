@@ -113,7 +113,9 @@ For a detailed explanation of the visualization look at [this link](http://www.v
 <div class="fig figcenter fighighlight">
   <img src="/assets/math/eigenface1.PNG" width="35%">
   <div class="figcaption">Sample images in the database/training set.</div>
-  <img src="/assets/math/eigenface2.PNG" width="35%">
+  <img src="/assets/math/eigenface2.PNG" width="70%">
   <div class="figcaption">
    Top row: Eigenfaces. Bottom row: How any face can be represented as a linear combination of eigenfaces.</div>
 </div>
+
+Note that Eigendecomposition only works on **square matrices**.
