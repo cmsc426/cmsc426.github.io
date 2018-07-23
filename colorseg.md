@@ -3,7 +3,7 @@ layout: page
 mathjax: true
 permalink: /colorseg/
 ---
-The Table of Contents:
+Table of Contents:
 
 - [Introduction to perception in an intelligent system](#intro)
 - [Sample Vision Pipeline](#visionpipeline)
@@ -19,65 +19,76 @@ The Table of Contents:
 <a name='intro'></a>
 
 ## Introduction
-This lecture is designed to introduce students from various backgrounds to how the camera captures the image and how one can manipulate color-spaces to identify specific colored objects in the image.
+In this lecture, we'll introduce how a camera forms an image, and how we can identify objects of a known color by manipulating color-spaces.
 
-Any intelligent system (robotic system/robot/robot agent) senses the world through it's sensors and interacts with the environment based on some actuators. This can be shown in the figure below:
+But first, a bit of motivation.  An intelligent system senses the world and responds in some way.  For a robot, this means interacting with the environment via its actuators:
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/IntelligentAgent.png" width="60%">
   <div class="figcaption">Intelligent Agent (Robot) interacting with the environment and sensing the world.</div>
 </div>
 
-The sensors and the movements of a robot are noisy. The robot has a sense of where it is in the world with respect to other objects to a certain degree of uncertainity or noise, for eg. an autonomous car might know that it is about 5ft away from the pedestrian with a certain degree of accuracy. The goal of any robot is to combine the information from multiple sensors to increase it's accuracy. Also, whenever a robot moves, because the motors are not perfect, the movements are noisy. To counteract this non-perfect movement the robots need to continuously monitor it's sensor values and re-evaluate the world. 
+The robot's sensors and movements are noisy.  For example, an autonomous car might know that it is about 5ft. away from a pedestrian, give or take a few inches.  The robot can improve its estimate by combining information from multiple sensors.  A good estimate of the world also helps the robot interact with its environment more accurately:  whenever a robot moves, because its motors are not perfect, its movements are noisy.  To counteract this, the robot can continuously monitor the state of the world to make sure it has accomplished what it intended to.
 
 <a name='visionpipeline'></a>
 
 ## A sample Vision Pipeline in an intelligent agent
-Consider the example of a Nao robot playing soccer. The Nao is a 58cm high humanoid robot which can walk, pick-up things, talk. It has 2 cameras, 1 front and 1 facing down at an angle, some sonar sensors and an Intel Atom processor on-board. It is used in the robocup soccer competiion where a 5 on 5 autonomous soccer match takes place between nao robots with all processing done on-board. This necessitates the algorithms to be robust, fast and cheap. The competition takes place on a green-colored soccer field with an orange ball and yellow goal-posts. The aim of the project 1 is to give a flavor of what goes behind the scenes in this compeition's vision pipeline. Your aim in this project would be to detect the red soccer ball and estimate the distance to it. Doesn't it sound cool?
-
-Let's talk about the key concepts first. A sample vision pipeline in a robot is as follows. The robot gets an input image (say RGB color), then the robot has to identify certain important colors in the scene (like green, orange and yellow in this case) where the colors are labelled as discrete color classes, i.e., each pixel can only be either yellow or green or orange. These labelled pixels are then grouped and finally object classification is done to give way to higher level knowledge like kick the ball.
+As an introduction to robotic visual perception, you'll be implementing a simplified vision system for a soccer playing robot.  
+Meet Nao, a 58cm high humanoid robot which can walk, pick-up things, and even talk.  Its sensors include two cameras (one front and one facing down at an angle), some sonar distance sensors, and contact sensors (essentially just buttons).  Its onboard CPU is an Intel Atom.  Notably, Nao is used in the <a href="http://spl.robocup.org/">Robocup Standard Platform League</a>, where two teams of five robots square off in a soccer match.  The teams are completely autonomous, and all computation must be done on the robots themselves.  To succeed, the robots' algorithms must be robust, fast, and lightweight.    
+In project 1, you'll get a flavor of what goes behind the scenes in a typical vision system for a Robocup player.  Your objective is to detect the soccer ball and estimate the distance to it. Doesn't it sound cool?
 
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/nao2.jpg" width="80%"> 
-  <div class="figcaption">Nao robot.</div>
+  <div class="figcaption">Nao robot.<a
+  href="http://www.zeitgeistlab.ca/fr/images/TactileInternetlab.jpg">(Source)</a></div>
 </div>
+
+In Robocup, the soccer field is bright green, the ball is bright orange, and the goal-posts are bright yellow.  If we separate the image into these three color classes, we can identify if/where these objects are in the image.  A sample pipeline is: 1) the robot acquires an image, 2) classifies each pixel as belonging to one of the color classes ("soccer-field-green", "ball-orange", or "goal-post-yellow"), and 3) groups the labled pixels and classifies the objects.  This information is then passed on to a higher-level planning algorithm, which makes high-level decisions like "kick the ball".
 
 
 <a name='colimaging'></a>
 
 ## Color Imaging
-A simple black-and-white/grayscale sensor works by measuring number of photons per second on each pixel. Think of a grayscale image as a 2D array of pixels where each pixel is one array unit. The array location is the pixel index in the image and the array holds a value representing the amount of light (number of photons) that hit that particular pixel in some unit of time (this is generally the shutter speed of the camera). If you open the PRO mode on your phone's camera or have a fancy DSLR camera you'll see the following four most important things: Focal Length, Aperture, ISO, Shutter Speed. A combination of the last 3 aforementioned factors control the average brightness of the picture taken and are generally called the exposure triangle in photography.
-RGB and other Color Spaces
-Focal Length tells you how wide the Field Of View (FOV) of the lens is, i.e., the smaller the focal length, the more angle you see and vice-versa. For eg. an 8mm lens can have an FOV of 110$$^\circ$$ and a 50mm lens can have an FOV of 32$$^\circ$$.
+To build our vision pipeline, we need to understand how digital images are formed.
+A simple black-and-white/grayscale sensor works by measuring the number of photons per second hitting each pixel. Think of a grayscale image as a 2D array of pixels where each pixel is one element of the array. The values of the array correspond to the amount of light (number of photons) that hit each pixel in some amount of time (generally the shutter speed of the camera). If you open the PRO mode on your phone's camera (or have a fancy DSLR) you'll see the four most important factors in image formation: focal length, aperture, ISO, and shutter speed. A combination of the last three controls the average brightness of the image (and is called the "exposure triangle" in photography lingo).
 
-The Aperture is the amount of opnening of the lens, i.e., the lens can have a diameter of 70mm but only 5mm might be collecting light. You might wonder why would I use only 5mm if I have a 70mm diameter lens? The answer to that is the depth of field. The depth of field controls how far on both sides (towards the camera and away from it) is "acceptably in focus". A wide opening in the lens lets in a lot of light but has a shallower depth of field which means that only a very small amount of deviation (towards the camera and away from it) from the focus point makes the image not in focus/blurred. This method is used by photographers to capture beautiful portraits of people. This is not very good for shooting landscapes/robotics perception because everything is not in focus. On the other hand one can set a very small aperture so that we have a large depth of field. This is good for focus but bad as it let's in very little light, i.e., doesn't work well at night or low-light. There is no silver bullet to solve this problem. But a general approximation people in vision/robotics do is that they say we don't really care about focus very close to the camera (say 1m from the camera) and they chose an aperture small enough to let in enough light and that depth of field allows everything from 1m onwards to $$\infty$$ to be in-focus. Also, a very small aperture leads to an effect called difraction which leads to a "softer" image.
+The <b>focal Length</b> tells you how wide the field Of view (FOV) of the lens is.  The smaller the focal length, the more angle you see and vice-versa. For example, an 8mm lens can have an FOV of 110$$^\circ$$ and a 50mm lens can have an FOV of 32$$^\circ$$.
 
-The next factor controlling the brightness of the image is the ISO. To understand what this factor does, you'll need to understand how the camera/imager captures an image. Each pixel is generally a capacitor/transistor which converts photos/light into some voltage which can be measured by a circuit in the camera. Think of this as light truning a dial/volume knob telling you how much light hits a particular pixel. The volatge level measured per pixel can be amplifed by a number (this is like amplifying your volume on your headphones). ISO controls this amplification factor. As you might have expected a higher ISO means a brighter image and vice-versa. Then one might ask why not just set a small aperture and increase your ISO to the maximum value? Increasing ISO comes at a cost, a lot of noise. So generally one has to be mindful of the parameters chosen. A balance of these parameters have to be chosen.
+The <b>aperture</b> is the amount of opening of the lens.   For example, the lens can have a diameter of 70mm but only 5mm might be collecting light.  Why use only 5mm of a 70mm diameter lens?  The answer lies in the <b>depth of field</b>. The depth of field controls how the range of distances from the camera in which an object appears in focus.  A wide opening in the lens lets in a lot of light but has a shallower depth of field; thus, which means that only a small range of distances will appear in focus.  A shallow depth of field can be used for artistic effect, for example shooting a portrait where the subject is in focus and the background blurry.  A large depth of field -- a small aperture -- is more desirable for robotic perception, as we want to capture as much detail in the scene as possible.
+However, aperture size is a trade-off:  a smaller aperture also means less light is let into the
+lens, reducing performance at night or low-light. There is no silver bullet to solve this problem. But a rule of thumb in vision/robotics is to disregard focus very close to the camera (say, within 1m), and set the aperture large enough to let in enough light, but small enough that objects further than 1m are in focus.  (Note, a very small aperture also leads to an effect called "diffraction" which leads to a "softer" image.)
+
+The next factor controlling the brightness of the image is the <b>ISO</b>. To understand what this factor does, you'll need to understand some of the electronics behind a digital image sensor.  Each pixel is generally a capacitor/transistor which converts photos/light into some voltage, which can be measured by a circuit in the camera. Think of this as light turning a dial/volume knob, telling you how much light hits a particular pixel. The volatge level measured per pixel can be amplifed by a number, much as you can amplifying the volume on your headphones. ISO controls this amplification factor. As you might expect, a higher ISO means a brighter image and vice-versa. Why not just set a small aperture and increase your ISO to the maximum value?  Increasing ISO comes at a cost: a lot of noise. So, one must find a balance between amplification and noise.
+
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/exposuretriangle.jpg">
-  <div class="figcaption">Effects of ISO, Aperture, Shutter speed on the image.</div>
+  <div class="figcaption">Effects of ISO, Aperture, Shutter speed on the image. <a
+  href="http://blog.hamburger-fotospots.de/genialer-spickzettel-fuer-fotografen-als-kostenloser-download/">(Source)</a></div>
 </div>
 
 
-The last factor in the exposure triangle is the shutter speed. This is the time the camera/imager is collecting light. The voltage measured will be a sum of all the photons collected during the shutter is active/open. A longer shutter speed gives you more light but wil blur any motion. The camera's auto mode generally selects the best balance of all the exposure triangle parameters based on some heuristic. Look at [this cool paper](https://github.com/cchen156/Learning-to-See-in-the-Dark) which cheats the exposure traingle with Deep Learning. This paper can predict the noiseless detail which would be obtained from a long exposure given a super short noisy exposure. What a time to be alive! A version of this is used in the Google Pixel phones for the night mode.
+The last factor in the exposure triangle is the <b>shutter speed</b>. This is the amount of time the camera/imager collects light. The voltage measured will be a sum of all the photons collected while the shutter is active/open. A longer shutter speed lets in more light, but will blur any motion. 
+
+The camera's auto mode generally selects the best balance of all the exposure triangle parameters based on some heuristic. Look at [this cool paper](https://github.com/cchen156/Learning-to-See-in-the-Dark) which cheats the exposure traingle with Deep Learning. This paper can predict the noiseless detail which would be obtained from a long exposure given a super short noisy exposure. What a time to be alive! A version of this is used in the Google Pixel phones for the night mode.
 
 
-You might be wondering how does one collect color/RGB (Red Green Blue) images. A simple way of doing this is having a camera sensor where each pixel has 3 sub-pixels (or 3 pixels inside each pixel) each of which measures a color out of red, green and blue respectively. One can select a color by using the dye of the same color on the pixel (grayscale has a transparent dye). This becomes very expensive and is generally only used in very high end cameras which cost thousands of dollars. The cheaper sensors use something called a bayer pattern. Where each pixel has one colored dye and they alternatively are Red, Green and Blue. The missing colors are interpolated using a simple interpolation algorithm. The RGB image is represented as a three dimentional array (width x height x 3) on the computer. 
+To sense color, rather than grayscale, the image sensor must be able to differentiate between different wavelengths of light.  A simple way of doing this is to split each pixel into three "sub-pixels" of red, green, and blue.  One can select a color by using the dye of the same color on the sub-pixel (grayscale has a transparent dye). But having three sub-pixels for each pixel is very expensive, and is generally only used in high end cameras costing thousands of dollars.  More commonly, the sub-pixels are tiled in a pattern caled the "Bayer pattern", shown below.  The missing colors are interpolated using a simple interpolation algorithm. The RGB image is represented as a three dimentional array (width x height x 3) on the computer. 
+
 
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/bayer.png">
-  <div class="figcaption">Left: The Bayer arrangement of color filters on the pixel array of an image sensor. Right: Profile/cross-section of sensor
-.</div>
+  <div class="figcaption">Left: The Bayer arrangement of color filters on the pixel array of an image sensor. Right: Profile/cross-section of sensor.  <a href="https://en.wikipedia.org/wiki/Bayer_filter"> (Source) </a>
+</div>
   <br>
   <img src="/assets/colorseg/bayer2.png">
-  <div class="figcaption">1. Original scene. 2. Output of a 120\(\times\)80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at 120\(\times\)80-pixels for comparison (e.g. as a film scan might appear)</div>
+  <div class="figcaption">1. Original scene. 2. Output of a 120\(\times\)80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at 120\(\times\)80-pixels for comparison (e.g. as a film scan might appear) <a href="https://en.wikipedia.org/wiki/Bayer_filter#/media/File:Colorful_spring_garden_Bayer_%2B_RGB.png"> (Source) </a></div>
 </div>
 
 
-A simple question one might ask, why use RGB for the color image and why not something else? The answer is human retina has 3 types of cone cells which are selective to see RGB colors. One can think of the the amount of activation/response/sensitivity of a cone cell be modelled as some unimodal distribution function. A unimodal distribution means the distribution has only one peak. The three kinds of cone cells are sensitive to Small ($$S(\lambda)$$), Medium ($$M(\lambda)$$) and Long ($$L(\lambda)$$) wavelengths of visible light which coincides with red, green and blue colored light. Think of these cone cells as very sensitive to red, green or blue light. Any scene reflects a arbitrary spectrum of light (or signal represnted as $$f(\lambda)$$). One might wonder what the response of red sensitive cone cells will look like on this input light spectrum. One can represent the response of the S, M and L detectors/cone cells by a super simplified model given by:
+Why use RGB for the color image and not something else? The answer lies in the human retina, which has 3 types of cone cells: red, green, and blue.  We can model the activation/response/sensitivity of a cone cell as some unimodal distribution function (a distriution with only one peak).  The three kinds of cone cells are sensitive to Small ($$S(\lambda)$$), Medium ($$M(\lambda)$$) and Long ($$L(\lambda)$$) wavelengths of visible light which coincide with red, green and blue colored light. Think of these cone cells as very sensitive to red, green or blue light. Any scene reflects a arbitrary spectrum of light (or signal represnted as $$f(\lambda)$$). One might wonder what the response of red sensitive cone cells will look like on this input light spectrum. One can represent the response of the S, M and L detectors/cone cells by a super simplified model given by:
 
 $$ S_{res}=\int S(\lambda)f(\lambda) d\lambda$$
 
@@ -85,14 +96,7 @@ $$ M_{res}=\int M(\lambda)f(\lambda) d\lambda$$
 
 $$ L_{res}=\int L(\lambda)f(\lambda) d\lambda$$
 
-<div class="fig figcenter fighighlight">
-  <img src="/assets/colorseg/LightSpectrum.png" width="50%">
-  <div class="figcaption">The characteristic function of the S, M and L detectors.</div>
-</div>
-
-
-Note that one can have a completely different scene which reflects a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, one could have the **exact** same value for $$ S_{res}, M_{res}, L_{res}$$. This means that one cannot distringuish both the scenes in terms of colors. This happens because the eyes are "seeing" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\mathbb{R}^\infty \rightarrow \mathbb{R}^3$$. Color blindess is missing one of the receptors or the S, M, L receptors become too similar to each other. This in-turn reduces the dimentionality from 3 to 2 or 1. This is in some sense taking PCA of the infiinte dimentional spectrum in your eyes. 
-
+Note that a completely different scene can reflect a different spectrum of light ($$f'(\lambda)$$). Because of the way the detectors work, $$ S_{res}, M_{res}, L_{res}$$ could have the **exact** same value. This means that one cannot distinguish the two scenes by color. This is because the eyes "see" a 3D projection of the $$\infty$$-dimensional hilbert space of the spectrum. This is mathematically represented as $$\mathbb{R}^\infty \rightarrow \mathbb{R}^3$$. Color blindess is the result of missing one of the receptors or the S, M, L receptors become too similar to each other. This in-turn reduces the dimentionality from three to two or one.  This is in a sense taking the PCA of the infinite dimensional spectrum in your eyes. 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/LightSpectrum2.png" width="50%">
   <div class="figcaption">The response of S, M and L detectors to \(f(\lambda)\) and  \(f'(\lambda)\) might look exactly the same. This is because both \(f(\lambda)\) and  \(f'(\lambda)\) are \(\infty\)-dimensional functions and only 3-dimensions of it are measured by the RGB (S, M and L) cone cells.</div>
@@ -101,7 +105,7 @@ Note that one can have a completely different scene which reflects a different s
 
 <a name='colorspace'></a>
 ## RGB and other Color Spaces
-The colors (RGB) can be represented in a 3D vector space. Think of this as X, Y and Z co-ordinate of a vector space representing colors. In most generic cameras, 8-bits are used to represent each color channel (the values range from 0-255). This means that an RGB pixel has 24-bits of data represented as a triplet of **\[Red, Green, Blue\]**. A value of \[0,0,0\] represents pure black, \[255,255,255\] represents pure white, \[255,0,0\] represents pure red and so on. Gray is any color which equal values of all the three channels. When RGB space is represented in the 3D vector space/cartesian space one can think of all normalized colors (divide each value by 255 for 8-bit) to be present in a unit-cube. One might think if colors are just a vector space then why cannot one transform them to make a different space. Indeed, this is what gives rise to other color spaces. Two such examples are Hue Saturation Value (HSV) and Luminance and chroma (YCbCr) color spaces. If $$[R, G, B]$$ represents a sample color in the RGB color space, then the equivalent HSV color space value is given by,
+The colors RGB can be represented in a 3D vector space. Think of this as X, Y and Z co-ordinate of a vector space representing colors. In most generic cameras, 8-bits are used to represent each color channel (the values range from 0-255). This means that an RGB pixel has 24-bits of data represented as a triplet of **\[Red, Green, Blue\]**. A value of \[0,0,0\] represents pure black, \[255,255,255\] represents pure white, \[255,0,0\] represents pure red and so on. Gray is any color with equal values for all the three channels. We can visualize RGB space in three dimensions as a unit cube (for an 8-bit color space, we'd divide by 255 to make it unit length). But if colors are just a vector space, can't we transform them to make a different space? Indeed, we can; this gives rise to color spaces like Hue Saturation Value (HSV) and Luminance and chroma (YCbCr). If $$[R, G, B]$$ represents a sample color in the RGB color space, then the equivalent HSV color space value is given by,
 
 $$ R' = \frac{R}{255} $$
 
@@ -141,7 +145,7 @@ $$
 V = C_{max}
 $$
 
-You might be wondering what this wierd transformation space looks like when the RGB space was a pretty unit cube? The unit RGB cube in HSV space looks like a cone (cool eh?). HSV is very popular and is used in NTSC, PAL, SECAM and other television broadcast systems. 
+If RGB space was a pretty unit cube, then what do these wierd transformation spaces look like?  The unit RGB cube in HSV space looks like a cone (cool eh?). HSV is very popular and is used in NTSC, PAL, SECAM and other television broadcast systems. 
 
 
 If $$[R, G, B]$$ represents a sample color in the RGB color space, then the equivalent YCbCr color space value is given by,
@@ -158,11 +162,11 @@ $$
 Cr = 0.500R + -0.419G + -0.081B + 128 
 $$
 
-Keen readers might have observed that HSV was a non-linear transformation and YCbCr is a linear transformation of the RGB color space. As you expect the RGB color cube looks like a rotated cuboid in YCbCr space. Look at ``rgb2hsv, hsv2rgb, rgb2ycbcr, ycbcr2rgb`` functions in MATLAB and play around. **Fun exercise would be to try to plot the RGB color cube in different color spaces.** 
+Keen readers might observe that HSV is a non-linear transformation of the RGB color space, and YCbCr is a linear transformation.  The RGB color cube looks like a rotated cuboid in YCbCr space. (Look at ``rgb2hsv, hsv2rgb, rgb2ycbcr, ycbcr2rgb`` functions in MATLAB and play around. **A fun exercise would be to try to plot the RGB color cube in different color spaces!** )
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/colorspaces.png">
-  <div class="figcaption">Left to right: Represenation of RGB color cube in RGB, HSV and YCbCr color spaces.</div>
+  <div class="figcaption">Left to right: Represenation of RGB color cube in RGB, HSV and YCbCr color spaces. (Source <a href="https://commons.wikimedia.org/wiki/File:RGB_color_solid_cube.png">1</a>, <a href="https://commons.wikimedia.org/wiki/File:HSV_color_solid_cone_chroma_gray.png">2</a>,  <a href="https://en.wikipedia.org/wiki/Talk%3AYCbCr#/media/File:YCbCrColorSpace_Perspective.png">3</a>) </div>
   <br>
   <img src="/assets/colorseg/colorspacesnaoimg.png">
   <div class="figcaption">Nao robot view in RGB, HSV and YCbCr colorspaces.</div>
@@ -170,11 +174,12 @@ Keen readers might have observed that HSV was a non-linear transformation and YC
 
 <a name='colorclassification'></a>
 ## Color Classification
-In the project 1, the nao robot wants to classify each pixel as a set of discrete colors, i.e., green of the grass field, orange of the soccer ball and yellow of the goal post. Particularly we are interested in finding the orange pixels because this represents the ball. As we talked about before, in RGB color space each pixel is represented as a vector in $$ \mathbb{R}^3$$. Let us define the problem mathematically. Say each pixel is represented by $$x=[r,g,b]^T \in \mathbb{R}^3$$. There exist $$l$$ color classes. We want to model the probability of a pixel belonging to a color class $$C_l$$ given the pixel value $$x$$ and this is denoted by $$p(C_l \vert x)$$.
+Back to project 1: the Nao robot wants to classify each pixel as a set of discrete colors (i.e., green of the grass field, orange of the soccer ball, and yellow of the goal post). Particularly, we are interested in finding the orange pixels because this represents the ball. As mentioned before, in RGB color space each pixel is represented as a vector in $$ \mathbb{R}^3$$. Let us define the problem mathematically. Say each pixel is represented by $$x=[r,g,b]^T \in \mathbb{R}^3$$. There exist $$l$$ color classes. We want to model the probability of a pixel belonging to a color class $$C_l$$ given the pixel value $$x$$, denoted by $$p(C_l \vert x)$$.
+
 
 <a name='colorthresh'></a>
 ### Color Thresholding
-If you make the assumption/approximation that each pixel only belongs to one color class, i.e., color classes are mutually exlusive. (This is like saying if a pixel is classified as orange it cannot be classified as red, though in reality a red pixel could have some amount of orange and vice-versa. This comes from that fact that the camera sensor percieves a 3-dimensinal projection of the $$\infty$$-dimensional hilbert space projection of the light spectrum). The hard classification problem can be mathematically defined as follows:
+If we assume each pixel belongs to only one color class, i.e., color classes are mutually exlusive \[1\], the hard classification problem can be mathematically defined as follows:
 
 <!-- https://stackoverflow.com/questions/36174987/how-to-typeset-argmin-and-argmax-in-markdown -->
 $$ 
@@ -193,6 +198,8 @@ where $$x^r, x^g, x^b$$ represent the red, green and blue channel values of a pa
   <img src="/assets/colorseg/colorthresholderapp.png">
   <div class="figcaption">Color Thresholder app in MATLAB with a sample input image from a nao's camera.</div>
 </div>
+
+\[1\] This is like saying "if a pixel is classified as orange it cannot be classified as red" though in reality a red pixel could have some amount of orange and vice-versa.  This comes from that fact that the camera sensor percieves a 3-dimensional projection of the $$\infty$$-dimensional hilbert space projection of the light spectrum.
 
 <a name='gaussian'></a>
 ### Color Classification using a Single Gaussian
