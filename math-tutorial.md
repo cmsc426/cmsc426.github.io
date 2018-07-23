@@ -7,7 +7,7 @@ The Table of Contents:
 
 - [Hilbert Space, Vectors, Dot and Cross Products](#hilbert)
 - [Eigenvalues and Eigenvectors](#eigen)
-
+- [Singular Value Decomposition (SVD)](#svd)
 
 <a name='hilbert'></a>
 ## Hilbert Space, Vectors, Dot and Cross Products
@@ -119,3 +119,24 @@ For a detailed explanation of the visualization look at [this link](http://www.v
 </div>
 
 Note that Eigendecomposition only works on **square matrices**.
+
+<a name='svd'></a>
+## Singular Value Decomposition (SVD)
+One can think of SVD as the generalized version of the Eigen-decomposition. Let \\( A\\) be a matrix of size \\(m \times n\\). The SVD of \\(A\\) is given by:
+
+$$
+A = U\Sigma V^T
+$$
+
+Note that \\(\Sigma\\) here does not refer to the covariance matrix. Here, \\(U\\) is a \\(m \times m\\) square orthonormal basis function. The columns of \\(U\\) form a set of orthonormal (unit normal) vectors which can be regarded as basis vectors. \\(V^T\\) is a \\(n \times n\\) square orthonormal basis function as well. The columns of \\(V\\) also form a set of orthonormal (unit normal) vectors which can be regarded as basis vectors. Think of \\(U, V^T\\) as matrices which rotate the data. \\(\Sigma\\) is a \\(m \times n \\) diagonal rectangular matrix which acts as a scaling matrix. Note that for SVD to be valid \\(A \\) has to be a Positive Semi-Definite matrix (PSD), i.e., \\( A \succew 0\\) or all the eigenvalues have to be non-negative (either zero or positive). You might be wondering this looks very similar to the eigendecomposition we studied earlier. What is the relation between the two?
+
+The matrix \\(U\\) (left singular values) of \\(A\\) gives us the eigenvectors of \\(AA^T\\). Similarly, as you expect, the matrix \\(V\\) (right singular values) of \\(A\\) gives us the eigenvectors of \\(A^TA\\).  The non-zero singular values of \\(A\\) (found on diagonal entries of \\(\Sigma\\)) are the square roots of non-zero eigenvalues of both \\(AA^T\\) and \\(A^TA\\). 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/math/svd.png" width="35%">
+  <div class="figcaption">Visualization of the matrix multiplications in singular value decomposition.</div>
+  <img src="/assets/math/svdanimation.gif" width="35%">
+  <div class="figcaption">
+  Visualization of how different components of SVD make up the matrix \(A\).</div>
+</div>
+ 
