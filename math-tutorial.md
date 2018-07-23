@@ -33,7 +33,7 @@ The dot product between 2 vectors \\( \vec{AB}, \vec{BC} \\) is defined as \\( \
 
 It is incovinent to write the vector superscript everytime, so a boldface text is commonly used to represent vectors, for eg., \\( \vec{AB}\\) and \\( \mathbf{AB}\\) reperesent the same thing. 
 
-The cross product between 2 vectors \\(\mathbf{a}, \mathbf{b}\\) is defined as \\( \mathbf{a} \times \mathbf{b} = \vert \vert \mathbf{a} \vert \vert \vert \vert \mathbf{b} \vert \vert \sin \theta \mathbf{n}\\). Here \\( n\\) is the vector perpendicular/normal to the plane containing the two vectors \\( \mathbf{a}, \mathbf{b} \\) and \\(\theta\\) is the angle between the two vectors. The direction of cross product is found using the right hand rule in a right handed coordinate system. 
+The cross product between 2 vectors \\(\mathbf{a}, \mathbf{b}\\) is defined as \\( \mathbf{a} \times \mathbf{b} = \vert \vert \mathbf{a} \vert \vert \vert \vert \mathbf{b} \vert \vert \sin \theta \mathbf{n}\\). Here \\( \mathbf{n}\\) is the vector perpendicular/normal to the plane containing the two vectors \\( \mathbf{a}, \mathbf{b} \\) and \\(\theta\\) is the angle between the two vectors. The direction of cross product is found using the right hand rule in a right handed coordinate system. 
 
 <div class="fig figleft fighighlight">
   <img src="/assets/math/crossproduct.png" width="35%">
@@ -72,4 +72,31 @@ $$
 \left(A - \lambda I \right)\mathbf{v} =  0
 $$
 
-Here \\( I\\) is an identity matrix of size \\( n \times n\\) and has all the diagonal elements as 1 and non-diagonal elements as 0. Once the above equation is solved, one would find \\(n\\) pairs of \\(\lambda_i\\) and \\(\mathbf{v}_i\\) such that the above equation is satisfied.  
+Here \\( I\\) is an identity matrix of size \\( n \times n\\) and has all the diagonal elements as 1 and non-diagonal elements as 0. Once the above equation is solved, one would find \\(n\\) pairs of \\(\lambda_i\\) and \\(\mathbf{v}_i\\) such that the above equation is satisfied (\\(i\\) varies from 1 to \\(N\\)). These set of \\(\lambda_i\\) values are called **eigenvalues** and these set of \\(\mathbf{v}_i\\) vectors are called **eigenvectors**. Note that the eigenvectors are linearly independent, i.e., dot product between any of them is zero. However, eigenvalues need not be distinct. If we have a matrix \\(Q\\) whose columns are made up of the eigenvectors, i.e., 
+
+$$
+Q = \begin{bmatrix} \mathbf{v_1} & \mathbf{v_2} & \cdots & \mathbf{v_n} \end{bmatrix}
+$$
+
+Now, consider \\( AQ\\) and the fact that \\( A \mathbf{v} = \lambda \mathbf{v}\\).
+
+$$
+AQ = \begin{bmatrix} \lambda_1\mathbf{v_1} & \lambda_2\mathbf{v_2} & \cdots & \lambda_n\mathbf{v_n} \end{bmatrix}
+$$
+
+This can be re-written as:
+
+$$
+AQ = \begin{bmatrix} \mathbf{v_1} & \mathbf{v_2} & \cdots & \mathbf{v_n} \end{bmatrix} \Lambda
+$$ 
+
+Here \\(\Lambda\\) is a diagonal matrix with \\(\Lambda_{ii} = \lambda_i\\). We also know that columns of \\(Q\\) are linearly independent, this means that 
+\\(Q\\) is invertible. 
+
+$$
+A = Q\Lambda Q^{-1}
+$$
+
+The above is called **Eigen-decomposition** in literature. 
+
+{\displaystyle Q^{-1}AQ=\Lambda .} {\displaystyle Q^{-1}AQ=\Lambda .}
