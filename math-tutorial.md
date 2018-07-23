@@ -135,7 +135,7 @@ The matrix \\(U\\) (left singular values) of \\(A\\) gives us the eigenvectors o
 <div class="fig figcenter fighighlight">
   <img src="/assets/math/svd.png" width="35%">
   <div class="figcaption">Visualization of the matrix multiplications in singular value decomposition.</div>
-  <img src="/assets/math/svdanimation.gif" width="35%">
+  <img src="/assets/math/svdanimation.gif" width="50%">
   <div class="figcaption">
   Visualization of how different components of SVD make up the matrix \(A\).</div>
 </div>
