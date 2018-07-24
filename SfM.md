@@ -62,7 +62,8 @@ Let a point $$\mathbf{X}$$ in the 3D-space is captured as $$\mathbf{x}$$ in the 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/epipole1.png"  width="120%">
+  <img src="/assets/sfm/epipole1.png"  width="80%">
+  <img src="/assets/colorseg/nao2.jpg" width="80%">
   <div class="figcaption">
  	Caption goes here.
   </div>
