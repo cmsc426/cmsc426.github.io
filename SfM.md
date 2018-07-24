@@ -43,7 +43,7 @@ Let's learn how to recreate such algorithm. There are a few steps that collectiv
 We have already learned about keypoint matching using SIFT keypoints and descriptors (Recall Project 2: Panorama Stitching). It is important to refine the matches by rejecting outline correspondence.
 Before rejecting the correspondences, let us first understand 
 
-<div class="fig figleft fighighlight">
+<div class="fig fighighlight">
   <img src="/assets/sfm/featmatch.png" width="100%">
   <img src="/assets/sfm/featmatch.png" width="200%">
   <img src="/assets/sfm/featmatch.png" width="300%">
