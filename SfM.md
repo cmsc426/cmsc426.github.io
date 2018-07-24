@@ -1,5 +1,11 @@
-# Recreate your own Neighborhood: Structure from Motion
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+---
+layout: page
+mathjax: true
+permalink: /SfM/
+---
+Table of Contents:
+
+# Structure from Motion
 
 We have been playing with images for so long, mostly in 2D scene. Recall project 2 where we stitched multiple photos with about 30-50% common features between them. Now let's learn how to reconstruct a 3D scene and simultaneously obtain the camera poses of a monocular camera w.r.t. the given scene. This procedure is known as Structure from Motion (SfM). As the name suggests, you are creating the entire **rigid** structure from the different camera poses (or camera motion). A few years ago, Agarwal et. al published [_Building Rome in a Day_](http://grail.cs.washington.edu/rome/rome_paper.pdf) in which they reconstructed the entire city just by using a large collection of photos from the Internet. Ever heard of [Photosynth?](https://en.wikipedia.org/wiki/Photosynth) _Facinating? isn't it!?_ There are a few open source SfM algorithm available online like [VisualSFM](http://ccwu.me/vsfm/). _Try them!_ 
 
