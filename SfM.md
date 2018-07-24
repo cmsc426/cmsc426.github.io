@@ -4,6 +4,7 @@ layout: page
 mathjax: true
 permalink: /SfM/
 ---
+
 Table of Contents:
 - [Structure from Motion](#SfM)
 - [Feature Matching](#featmatch)
