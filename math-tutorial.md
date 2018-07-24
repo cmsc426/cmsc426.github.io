@@ -315,3 +315,11 @@ $$
 \kappa = \frac{\sigma_{max}}{\sigma_{max}} = \lvert\frac{\lambda_{max}}{\lambda_{min}} \rvert
 $$
 
+$$
+\textrm{RBE}=\left.\frac{D_{\textrm{photon}}}{D_{\textrm{test}}}\right\rvert_{\textrm{iso-effect}}
+$$
+
+
+
+Here \\(\sigma_{max}\\) and \\(\sigma_{min}\\) represent 
+
