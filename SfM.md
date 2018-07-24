@@ -44,7 +44,9 @@ We have already learned about keypoint matching using SIFT keypoints and descrip
 Before rejecting the correspondences, let us first understand 
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/featmatch.png" width="120px">
+  <img src="/assets/sfm/featmatch.png" width="100%">
+  <img src="/assets/sfm/featmatch.png" width="200%">
+  <img src="/assets/sfm/featmatch.png" width="300%">
   <div class="figcaption">
     Projection of \(a\) on \(b\) (\(a1\)), and rejection of \(a\) from \(b\) (\(a2\)).
   </div>
