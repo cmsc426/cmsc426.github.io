@@ -30,18 +30,18 @@ We have been playing with images for so long, mostly in 2D scene. Recall project
 
 Let's learn how to recreate such algorithm. There are a few steps that collectively form SfM:
 *(If you haven't heard of the following before, don't worry! If you knew the following already, you wouldn't be taking the class right now!)*
-1. **Feature Matching** and Outlier rejection using **RANSAC**
-2. Estimating **Fundamental Matrix**
-3. Estimating **Essential Matrix** from Fundamental Matrix
-4. Estimate **Camera Pose** from Essential Matrix
-5. Check for **Cheirality Condition** using **Triangulation** 
-6. **Perspective-n-Point**
-7. **Bundle Adjustment**
+- **Feature Matching** and Outlier rejection using **RANSAC**
+- Estimating **Fundamental Matrix**
+- Estimating **Essential Matrix** from Fundamental Matrix
+- Estimate **Camera Pose** from Essential Matrix
+- Check for **Cheirality Condition** using **Triangulation** 
+- **Perspective-n-Point**
+- **Bundle Adjustment**
 
 <a name='featmatch'></a>
 ### 1. Feature Matching, Fundamental Matrix and RANSAC:
 We have already learned about keypoint matching using SIFT keypoints and descriptors (Recall Project 2: Panorama Stitching). It is important to refine the matches by rejecting outline correspondence.
-Before rejecting the correspondences, let us first understand 
+Before rejecting the correspondences, let us first understand what Fundamental matrix is!
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/featmatch.png" width="100%">
@@ -66,7 +66,7 @@ and the plane formed can be denoted by $$\pi$$. Since these points are coplanar,
   <div class="figcaption">
  	Figure 2(a): Caption goes here.
   </div>
-<br>
+<br><br>
   <img src="/assets/sfm/epipole2.png"  width="120%">
   <div class="figcaption">
   	Figure 2(b): Caption goes here.
@@ -95,7 +95,7 @@ $$\begin{bmatrix} x'_i & y'_i & 1 \end{bmatrix}
 
 
 $$x_i x'_i f_{11} + x_i y'_i f_{21} + x_i f_{31} + y_i x'_i f_{12} + y_i y'_i f_{22} + y_i f_{32} +  x'_i f_{13} + y'_i f_{23} + f_{33}=0$$
-<br>
+<br><br>
 
 Simplifying for $$m$$ correspondences,
 
