@@ -319,7 +319,7 @@ $$
 Here \\(\sigma_{max}\\) and \\(\sigma_{min}\\) refers to the maximum and minimum singular values respectively. Similarly,  \\(\lambda_{max}\\) and \\(\lambda_{min}\\) refers to the maximum and minimum eigenvalues respectively. If the noiseless version of the problem is \\(\mathbf{\hat{x}} = A^\dagger \mathbf{\hat{b}}\\) and the noisy version is \\(\mathbf{x} = A^\dagger \mathbf{b}\\), the relation between the estimates and condition number is given below:
 
 $$
-\frac{\vert \vert \mathbf{x} - \mathbf{\hat{x}}}{\mathbf{\hat{x}}} \le  \kappa \frac{\vert \vert \mathbf{\hat{b}} - \mathbf{b}}{\mathbf{\hat{b}}}
+\frac{\vert \vert \mathbf{x} - \mathbf{\hat{x}}\vert \vert}{\vert \vert\mathbf{\hat{x}}\vert \vert} \le  \kappa \frac{\vert \vert \mathbf{\hat{b}} - \mathbf{b}\vert \vert}{\vert \vert\mathbf{\hat{b}}\vert \vert}
 $$
 
 Clearly, one can observe that the noise is amplified by a factor of \\(\kappa\\). A high \\(\kappa\\) can lead to optimization problems to fail and is a huge research topic. 
