@@ -42,7 +42,7 @@ Let's learn how to recreate such algorithm. There are a few steps that collectiv
 We have already learned about keypoint matching using SIFT keypoints and descriptors (Recall Project 2: Panorama Stitching). It is important to refine the matches by rejecting outline correspondence.
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/featmatch.png" width="35%">
+  <img src="/assets/sfm/featmatch.png" width="80%">
   <div class="figcaption">
     Projection of \(a\) on \(b\) (\(a1\)), and rejection of \(a\) from \(b\) (\(a2\)).
   </div>
@@ -60,20 +60,17 @@ Let a point $$\mathbf{X}$$ in the 3D-space is captured as $$\mathbf{x}$$ in the 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/epipole1.png" width="35%">
+  <img src="/assets/sfm/epipole1.png">
   <div class="figcaption">
  	Caption goes here.
   </div>
-  <div style="clear:both;"></div>
-</div>
 
-<div class="fig figleft fighighlight">
-  <img src="/assets/sfm/epipole2.png" width="35%">
+  <img src="/assets/sfm/epipole2.png">
   <div class="figcaption">
   	Caption goes here.
   </div>
-  <div style="clear:both;"></div>
 </div>
+
 
 
 Now, let us say that only $$\mathbf{x}$$ is known, not $$\mathbf{x'}$$. We know that the point $$\mathbf{x'}$$ lies in the plane $$\pi$$ which is governed by the camera baseline $$\mathbf{CC'}$$ and $$\mathbf{\overrightarrow{Cx}}$$.  Hence the point $$\mathbf{x'}$$ lies on the line of intersetion of $$\mathbf{l'}$$ of $$\pi$$ with the second image plane. The line $$\mathbf{l'}$$ is the image in the second view of the ray back-projected from $$\mathbf{x}$$. This line $$\mathbf{l'}$$ is called the _epipolar line_ corresponding to $$\mathbf{x}$$. The benifit is that you don't need to search for the point corresponding to $$\mathbf{x}$$ in the entire image plane as it can be restricted to the $$\mathbf{l'}$$.
@@ -106,7 +103,7 @@ $$Ax=0$$ is obtained.
 	This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the **Math Modules [Link]**. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero. If $$F$$ has a full rank then it will have an empty null-space _i.e._ it won't have any point that is on entire set of lines. Thus, there wouldn't be any epipoles. See fig [NUMBER] for full rank comparisons for $$F$$ matrices.
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/FMatrixRank.png" width="35%">
+  <img src="/assets/sfm/FMatrixRank.png">
   <div class="figcaption">
  	Algorithm 1: Get Inliers RANSAC
   </div>
@@ -130,7 +127,7 @@ Since the point correspondences are computed using SIFT or some other feature de
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/ransac.png" width="35%">
+  <img src="/assets/sfm/ransac.png">
   <div class="figcaption">
  	Algorithm 1: Get Inliers RANSAC
   </div>
@@ -179,7 +176,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 ### 6. Perspective-$$n$$-Points:
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/pnpransac.png" width="35%">
+  <img src="/assets/sfm/pnpransac.png">
   <div class="figcaption">
  	Algorithm 2: PnP RANSAC
   </div>
@@ -198,7 +195,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 ### 8. Summary:
 Here is the following summary of the entire _traditional SfM_ pipeline:
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/summary.png" width="35%">
+  <img src="/assets/sfm/summary.png">
   <div class="figcaption">
  	Algorithm 3: Structure from Motion pipeline
   </div>
