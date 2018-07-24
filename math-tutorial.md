@@ -156,10 +156,10 @@ Let us model the problem mathematically, we have \\(N\\) points in \\(\mathbb{R}
 Let the equation of the line be \\(ax+by+c=0\\) where we want to find the parameters \\(\Theta=\begin{bmatrix} a & b & c \end{bmatrix}^T\\) such that:
 
 $$
-\underset{\Theta}{\operatorname{argmax}}\sum_{i=1}^N R(x_i,y_i \vert \Theta)^2
+\underset{\Theta}{\operatorname{argmin}}\sum_{i=1}^N R(x_i,y_i \vert \Theta)^2
 $$
 
-\\(\underset{\Theta}{\operatorname{argmax}}\\) means that we want to minimize and find the parameters \\(\Theta\\) which gives us the minimum value. The function \\(R\\) defines the best-fit here which is what the user has chosen. Let us **choose** \\(R\\) to be a function which computes the distance (offsets) from any point \\([x,y]^T\\) to the line \\(ax+by+c=0\\). This can be of two variants, i.e., vertical distances/ offsets and/or perpendicular distance/offsets. 
+\\(\underset{\Theta}{\operatorname{argmin}}\\) means that we want to minimize and find the parameters \\(\Theta\\) which gives us the minimum value. The function \\(R\\) defines the best-fit here which is what the user has chosen. Let us **choose** \\(R\\) to be a function which computes the distance (offsets) from any point \\([x,y]^T\\) to the line \\(ax+by+c=0\\). This can be of two variants, i.e., vertical distances/ offsets and/or perpendicular distance/offsets. 
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/math/offsets.gif" width="70%">
@@ -175,7 +175,7 @@ $$
 So our optimization/minimization problem becomes:
 
 $$
-\underset{\Theta}{\operatorname{argmax}}\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}
+\underset{\Theta}{\operatorname{argmin}}\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}
 $$
 
 The function \\(\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}\\) depicts the sum of distances (this is just a scaled version of the average) from each point to the line. Because we are minimizing the square of \\(R\\), the minimum value the optimization function can take is 0. This happens when all the points like exactly on the line. Like we said before, this rarely happens and in these cases there is **no-exact solution** (only some/no points pass through the line). This solution is called the **Least-squares solution** and the optimization problem is referred to as Ordinary Least Squares (OLS) or Linear Least Squares or Linear Regression in the machine learning community. To find the solution, let us write down the constraints we have. We **ideally** want all points to lie on the best-fit line. This can mathematically be written as:
@@ -193,16 +193,33 @@ $$
 \begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix} \begin{bmatrix} a \\ b \\c \end{bmatrix} = \mathbf{0}
 $$
 
-The trivial solution to the above problem is obtained when \\(\begin{bmatrix} a \\ b \\c \end{bmatrix} = 0\\). This is the case where the constraint mathematically satisfies the solution but physically doesn't make much sense as we get back the origin. To avoid this we modify the optimization problem as follows:
+The trivial solution to the above problem is obtained when \\(\begin{bmatrix} a \\ b \\ c \end{bmatrix}^T = 0\\). This is the case where the constraint mathematically satisfies the solution but physically doesn't make much sense as we get back the origin. To avoid this we modify the optimization problem as follows:
 
 $$
 \begin{equation*}
 \begin{aligned}
-& \underset{X}{\text{minimize}}
-& & \mathrm{trace}(X) \\
+& \underset{\Theta}{\text{argmin}}
+& & \sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2} \\
 & \text{subject to}
-& & X_{ij} = M_{ij}, \; (i,j) \in \Omega, \\
-&&& X \succeq 0.
+& & \vert \vert \Theta \vert \vert = 1
 \end{aligned}
 \end{equation*}
+$$
+
+Note that, we haven't changed anything but just added a constraint saying that the norm of the line equation coefficients should be unity. Thi avoides the trivial solution gracefully. This optimization problem can be written in matrix form as follows:
+
+$$
+\begin{equation*}
+\begin{aligned}
+& & A\Theta = \mathbf{0}
+& \text{subject to}
+& & \vert \vert \Theta \vert \vert = 1
+\end{aligned}
+\end{equation*}
+$$
+
+Where:
+
+$$
+A = \begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix}
 $$
