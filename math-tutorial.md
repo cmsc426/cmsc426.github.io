@@ -10,6 +10,8 @@ The Table of Contents:
 - [Singular Value Decomposition (SVD)](#svd)
 - [Line fitting using Linear Least Squares](#linefit)
 	- [Null-space](#nullspace)
+- [\\(A\mathbf{x}=b\\)](#axeqb)
+
 
 <a name='hilbert'></a>
 ## Hilbert Space, Vectors, Dot and Cross Products
@@ -245,10 +247,16 @@ Let us find the nullspace using SVD. Let the SVD of \\(A = U\Sigma V^T\\). Now, 
 
 **The best-fit solution is therefore given by the last column of \\(V\\) (last row of \\(V^T\\)**. 
 
-Note that, a simple assumption made about the noise in the previous line fitting example is that, the noise is white gaussian with a mean of zero and some standard deviation. Inuitively, it means that the probability of data points away from the line is decreases as the distance between the point and the line increases.  Mathematically the noise is derived from the following distribution:
+Note that, a simple assumption made about the noise in the previous line fitting example is that, the noise is white gaussian with a mean of zero and some standard deviation. Inuitively, it means that the probability of data points away from the line is decreases as the distance between the point and the line increases. Mathematically the noise is derived from the following distribution:
 
 $$
-
+p(\mathbf{x}) = \frac{1}{\sqrt{(2 \pi)^3 \vert \Sigma \vert}}\exp{(\frac{1}{2}(\mathbf{x}-\mu)^T\Sigma^{-1}(x-\mu))} = \mathcal{N(\mathbf{x} \vert \mu, \Sigma)}
 $$
 
+Here, \\(\mathbf{x}\\) represents the vector in a space \\(\mathbb{R}^n\\). In our line-fitting example, \\(n=2\\). Sample datapoints with their linear least-suares line solution is shown below:
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/math/linearregression.png" width="70%">
+  <div class="figcaption">Random data points and their inear least-suares line solution.</div>
+</div>
 
