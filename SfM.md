@@ -4,8 +4,22 @@ mathjax: true
 permalink: /SfM/
 ---
 Table of Contents:
+- [Structure from Motion](#SfM)
+- [Feature Matching](#featmatch)
+- [Estimating Fundamental Matrix](#estfundmatrix)
+      - [Epipolar Geometry](#epipole)
+      - [Fundamental Matrix](#fundmatrix)
+      - [Match Outlier Rejection using RANSAC](#ransac)
+- [Estimate Camera Pose from Essential Matrix](#essential)
+- [Check for Cheirality Condition using Triangulation](#tri)
+      - [Non-Linear Triangulation](#nonlintri)
+- [Perspective-$$n$$-points](#pnp)
+      - [Non-Linear PnP](#nonlinpnp)
+- [Bundle Adjustment](#ba)
+- [Summary](#summary)
 
-# Structure from Motion
+<a name='SfM'></a>
+## Structure from Motion
 
 We have been playing with images for so long, mostly in 2D scene. Recall project 2 where we stitched multiple photos with about 30-50% common features between them. Now let's learn how to reconstruct a 3D scene and simultaneously obtain the camera poses of a monocular camera w.r.t. the given scene. This procedure is known as Structure from Motion (SfM). As the name suggests, you are creating the entire **rigid** structure from the different camera poses (or camera motion). A few years ago, Agarwal et. al published [_Building Rome in a Day_](http://grail.cs.washington.edu/rome/rome_paper.pdf) in which they reconstructed the entire city just by using a large collection of photos from the Internet. Ever heard of [Photosynth?](https://en.wikipedia.org/wiki/Photosynth) _Facinating? isn't it!?_ There are a few open source SfM algorithm available online like [VisualSFM](http://ccwu.me/vsfm/). _Try them!_ 
 
@@ -19,12 +33,15 @@ Let's learn how to recreate such algorithm. There are a few steps that collectiv
 6. **Perspective-n-Point**
 7. **Bundle Adjustment**
 
+<a name='featmatch'></a>
 ### 1. Feature Matching:
 We have already learned about keypoint matching using SIFT keypoints and descriptors (Recall Project 2: Panorama Stitching). It is important to refine the matches by rejecting outline correspondence.
 
+<a name='estfundmatrix'></a>
 ### 2. Estimating Fundamental Matrix: 
 The fundamental matrix, denoted by $$F$$, is a $$3\times 3$$ _rank 2_ matrix that relates the corresponding set of points in two images from different views (or stereo images). But in order to understand what fundamental matrix actually is, we need to understand what _epipolar geometry_ is! The epipolar geometry is the intrinsic projective geometry between two views. It only depends on the cameras' internal parameters ($$K$$ matrix) and the relative pose _i.e._ it is **independent of the scene structure**. 
 
+<a name='epipole'></a>
 ##### 2.1 Epipolar Geometry:
 Let a point $$\mathbf{X}$$ in the 3D-space is captured as $$\mathbf{x}$$ in the first image and $$\mathbf{x'}$$ in the second. _Can you think how to formulate the relation between the corresponding image points $$\mathbf{x}$$ and $$\mathbf{x'}$$?_ Consider figure **(ref epipolar geometry fig)**. Let $$\mathbf{C}$$ and $$\mathbf{C'}$$ be the respective camera centers which forms the baseline for the stereo system. Clearly, the points $$\mathbf{x}$$, $$\mathbf{x'}$$ and $$\mathbf{X}$$ (or $$\mathbf{C}$$, $$\mathbf{C'}$$ and $$\mathbf{X}$$) are coplanar _i.e._  $$\mathbf{\overrightarrow{Cx}}\cdot \left(\mathbf{\overrightarrow{CC'}}\times\mathbf{\overrightarrow{C'x'}}\right)=0$$ 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
@@ -35,6 +52,7 @@ Now, let us say that only $$\mathbf{x}$$ is known, not $$\mathbf{x'}$$. We know 
 - **Epipolar plane** is the plane containing the baseline.
 - **Epipolar line** is the intersection of an epipolar plane with the image plane. *All the epipolar lines intersect at the epipole.* 
 
+<a name='estfundmatrix'></a>
 ##### 2.2 The Fundamental Matrix $$\mathbf{F}$$:
 The $$\mathbf{F}$$ matrix is only an algebraic representation of epipolar geometry and can both geometrically _(contructing the epipolar line)_ and arithematically. ([See derivation](http://cvrs.whu.edu.cn/downloads/ebooks/Multiple%20View%20Geometry%20in%20Computer%20Vision%20\(Second%20Edition\).pdf)) ([Fundamental Matrix Song](https://www.youtube.com/watch?v=DgGV3l82NTk))
 As a result, we obtain:
@@ -62,6 +80,7 @@ In MATLAB, you can use `svd` to solve $$\mathbf{x}$$ from $$\mathbf{Ax}=0$$
 x = V(:, end);
 F = reshape(x, [3,3])';
 ```
+<a name='ransac'></a>
 ##### 2.3 Match Outlier Rejection via RANSAC:
 Since the point correspondences are computed using SIFT or some other feature descriptors, the data is bound to be noisy and (in general) contains several outliers. Thus, to remove these outliers, we use RANSAC algorithm _(Yes! The same as used in Panorama stitching!)_ to obtain a better estimate of the fundamental matrix. So, out of all possibilities, the $$\mathbf{F}$$ matrix with maximum number of inliers is chosen.
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
@@ -74,6 +93,7 @@ $$\mathbf{E}=U\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}V^
 
 _It is important to note that the $$\mathbf{F}$$ is defined in the original image space (i.e. pixel coordinates) whereas $$\mathbf{E}$$ is in the normalized image coordinates. Normalized image coordinates have the origin at the optical center of the image. Also, relative camera poses between two views can be computed using $$\mathbf{E}$$ matrix. Moreover, $$\mathbf{F}$$ has 8 degrees of freedom while $$\mathbf{E}$$ has 5 as it takes camera parameters in account. ([5-Point Motion Estimation Made Easy](http://users.cecs.anu.edu.au/~hongdong/new5pt_cameraREady_ver_1.pdf))_
 
+<a name='essential'></a>
 ### 4. Estimate **Camera Pose** from Essential Matrix
 Since the $$\mathbf{E}$$ matrix is identified, the four camera pose configurations: $$(C_1, R_1), (C_2, R_2), (C_3, R_3)$$ and $$(C_4, R4)$$ where $$\ C\in\mathbb{R}^3$$ is the camera center and $$R\in SO(3)$$ is the rotation matrix, can be computed. Thus, the camera pose can be written as:
 $$P = KR\begin{bmatrix}I_{3\times3} & -C\end{bmatrix}$$
@@ -87,25 +107,32 @@ These four pose configurations can be computed from $$\mathbf{E}$$ matrix. Let $
 - $$C=-C$$ 
 - $$R=-R$$.
 
+<a name='tri'></a>
 ### 5. Check for **Cheirality Condition** using **Triangulation**:
 In the previous section, we computed four different possible camera poses for a pair of images using essential matrix. Though, in order to find the _correct_ unique camera pose, we need to remove the disambiguity. This can be accomplish by checking the **cheirality condition** _i.e._ *the reconstructed points must be in front of the cameras*. 
 To check the cheirality condition, triangulate the 3D points (given two camera poses) using **linear least squares** to check the sign of the depth $$Z$$ in the camera coordinate system w.r.t. camera center. A 3D point $$X$$ is in front of the camera iff:
 $$r_3\mathbf{(X-C)} > 0$$
 where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). Not all triangulated points satisfy this coniditon due of the presence of correspondence noise. The best camera configuration, $$(C, R, X)$$ is the one that produces the maximum number of points satisfying the cheirality condition. 
 
+<a name='nonlintri'></a>
 ##### 5.1 Non-Linear Triangulation [Extra]:
 Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error can be refined (EXPLAIN THIS LINE). The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point:
 <WRITE THE EQUATION>
 Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. <EXPLAIN PROPERLY>
 
+<a name='pnp'></a>
 ### 6. Perspective-$$n$$-Points:
 
 
 
+<a name='nonlinpnp'></a>
 
-
+<a name='ba'></a>
 ### 7. Bundle Adjustment:
 
+
+<a name='summary'></a>
+### 8. Summary:
 
 The above sequence forms the traditional way of solving the problem of SfM. *But we have something much better in mind for you!*
 
