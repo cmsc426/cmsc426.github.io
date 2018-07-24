@@ -40,8 +40,9 @@ Let's learn how to recreate such algorithm. There are a few steps that collectiv
 7. **Bundle Adjustment**
 
 <a name='featmatch'></a>
-### 1. Feature Matching:
+### 1. Feature Matching, Fundamental Matrix and RANSAC:
 We have already learned about keypoint matching using SIFT keypoints and descriptors (Recall Project 2: Panorama Stitching). It is important to refine the matches by rejecting outline correspondence.
+Before rejecting the correspondences, let us first understand 
 
 <div class="fig figleft fighighlight">
   <img src="/assets/sfm/featmatch.png" width="80%">
@@ -53,11 +54,11 @@ We have already learned about keypoint matching using SIFT keypoints and descrip
 
 
 <a name='estfundmatrix'></a>
-### 2. Estimating Fundamental Matrix: 
+### 1.1. Estimating Fundamental Matrix: 
 The fundamental matrix, denoted by $$F$$, is a $$3\times 3$$ _rank 2_ matrix that relates the corresponding set of points in two images from different views (or stereo images). But in order to understand what fundamental matrix actually is, we need to understand what _epipolar geometry_ is! The epipolar geometry is the intrinsic projective geometry between two views. It only depends on the cameras' internal parameters ($$K$$ matrix) and the relative pose _i.e._ it is **independent of the scene structure**. 
 
 <a name='epipole'></a>
-### 2.1 Epipolar Geometry:
+### 1.2. Epipolar Geometry:
 Let a point $$\mathbf{X}$$ in the 3D-space is captured as $$\mathbf{x}$$ in the first image and $$\mathbf{x'}$$ in the second. _Can you think how to formulate the relation between the corresponding image points $$\mathbf{x}$$ and $$\mathbf{x'}$$?_ Consider figure **(ref epipolar geometry fig)**. Let $$\mathbf{C}$$ and $$\mathbf{C'}$$ be the respective camera centers which forms the baseline for the stereo system. Clearly, the points $$\mathbf{x}$$, $$\mathbf{x'}$$ and $$\mathbf{X}$$ (or $$\mathbf{C}$$, $$\mathbf{C'}$$ and $$\mathbf{X}$$) are coplanar _i.e._  $$\mathbf{\overrightarrow{Cx}}\cdot \left(\mathbf{\overrightarrow{CC'}}\times\mathbf{\overrightarrow{C'x'}}\right)=0$$ 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
 
@@ -82,7 +83,7 @@ Now, let us say that only $$\mathbf{x}$$ is known, not $$\mathbf{x'}$$. We know 
 - **Epipolar line** is the intersection of an epipolar plane with the image plane. *All the epipolar lines intersect at the epipole.* 
 
 <a name='estfundmatrix'></a>
-### 2.2 The Fundamental Matrix $$\mathbf{F}$$:
+### 1.3 The Fundamental Matrix $$\mathbf{F}$$:
 The $$\mathbf{F}$$ matrix is only an algebraic representation of epipolar geometry and can both geometrically _(contructing the epipolar line)_ and arithematically. ([See derivation](http://cvrs.whu.edu.cn/downloads/ebooks/Multiple%20View%20Geometry%20in%20Computer%20Vision%20\(Second%20Edition\).pdf)) ([Fundamental Matrix Song](https://www.youtube.com/watch?v=DgGV3l82NTk))
 As a result, we obtain:
 $$\mathbf{x}_i'^{\ \mathbf{T}}\mathbf{F} \mathbf{x}_i = 0$$
@@ -124,7 +125,7 @@ F = reshape(x, [3,3])';
 
 
 <a name='ransac'></a>
-### 2.3 Match Outlier Rejection via RANSAC:
+### 1.4. Match Outlier Rejection via RANSAC:
 Since the point correspondences are computed using SIFT or some other feature descriptors, the data is bound to be noisy and (in general) contains several outliers. Thus, to remove these outliers, we use RANSAC algorithm _(Yes! The same as used in Panorama stitching!)_ to obtain a better estimate of the fundamental matrix. So, out of all possibilities, the $$\mathbf{F}$$ matrix with maximum number of inliers is chosen.
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
 
@@ -139,7 +140,7 @@ Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of mat
 
       
       
-### 3. Estimate *Essential Matrix* from Fundamental Matrix: 
+### 2. Estimate *Essential Matrix* from Fundamental Matrix: 
 Since we have computed the $$\mathbf{F}$$ using epipolar constrains, we can find the relative camera poses between the two images. This can be computed using the *Essential Matrix*, $$\mathbf{E}$$. Essential matrix is another $$3\times3$$ matrix, but with some additional properties that relates the corresponding points assuming that the cameras obeys the pinhole model (unlike $$\mathbf{F}$$). More specifically, 
 $$\mathbf{E}$$ = $$\mathbf{K^TFK}$$
 where $$\mathbf{K}$$ is the camera calibration matrix or camera intrinsic matrix. Clearly, the essential matrix can be extracted from $$\mathbf{F}$$ and $$\mathbf{K}$$. As in the case of $$\mathbf{F}$$ matrix computation, the singular values of $$\mathbf{E}$$ are not necessarily $$(1,1,0)$$ due to the noise in $$\mathbf{K}$$. This can be corrected by reconstructing it with $$(1,1,0)$$ singular values, _i.e._
@@ -148,7 +149,7 @@ $$\mathbf{E}=U\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}V^
 _It is important to note that the $$\mathbf{F}$$ is defined in the original image space (i.e. pixel coordinates) whereas $$\mathbf{E}$$ is in the normalized image coordinates. Normalized image coordinates have the origin at the optical center of the image. Also, relative camera poses between two views can be computed using $$\mathbf{E}$$ matrix. Moreover, $$\mathbf{F}$$ has 8 degrees of freedom while $$\mathbf{E}$$ has 5 as it takes camera parameters in account. ([5-Point Motion Estimation Made Easy](http://users.cecs.anu.edu.au/~hongdong/new5pt_cameraREady_ver_1.pdf))_
 
 <a name='essential'></a>
-### 4. Estimate **Camera Pose** from Essential Matrix
+### 3. Estimate **Camera Pose** from Essential Matrix
 Since the $$\mathbf{E}$$ matrix is identified, the four camera pose configurations: $$(C_1, R_1), (C_2, R_2), (C_3, R_3)$$ and $$(C_4, R4)$$ where $$\ C\in\mathbb{R}^3$$ is the camera center and $$R\in SO(3)$$ is the rotation matrix, can be computed. Thus, the camera pose can be written as:
 $$P = KR\begin{bmatrix}I_{3\times3} & -C\end{bmatrix}$$
 These four pose configurations can be computed from $$\mathbf{E}$$ matrix. Let $$\mathbf{E}=UDV^T$$ and $$W=\begin{bmatrix}0 & -1 & 0\\ 1 & 0 & 0\\ 0 & 0 & 1\end{bmatrix}$$. The four configurations can be written as: 
@@ -162,20 +163,20 @@ These four pose configurations can be computed from $$\mathbf{E}$$ matrix. Let $
 - $$R=-R$$.
 
 <a name='tri'></a>
-### 5. Check for **Cheirality Condition** using **Triangulation**:
+### 4. Check for **Cheirality Condition** using **Triangulation**:
 In the previous section, we computed four different possible camera poses for a pair of images using essential matrix. Though, in order to find the _correct_ unique camera pose, we need to remove the disambiguity. This can be accomplish by checking the **cheirality condition** _i.e._ *the reconstructed points must be in front of the cameras*. 
 To check the cheirality condition, triangulate the 3D points (given two camera poses) using **linear least squares** to check the sign of the depth $$Z$$ in the camera coordinate system w.r.t. camera center. A 3D point $$X$$ is in front of the camera iff:
 $$r_3\mathbf{(X-C)} > 0$$
 where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). Not all triangulated points satisfy this coniditon due of the presence of correspondence noise. The best camera configuration, $$(C, R, X)$$ is the one that produces the maximum number of points satisfying the cheirality condition. 
 
 <a name='nonlintri'></a>
-### 5.1 Non-Linear Triangulation [Extra]:
+### 4.1 Non-Linear Triangulation [Extra]:
 Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error can be refined (EXPLAIN THIS LINE). The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point:
 [WRITE THE EQUATION]
 Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [EXPLAIN PROPERLY]
 
 <a name='pnp'></a>
-### 6. Perspective-$$n$$-Points:
+### 5. Perspective-$$n$$-Points:
 
 <div class="fig figleft fighighlight">
   <img src="/assets/sfm/pnpransac.png">
@@ -190,11 +191,11 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 <a name='nonlinpnp'></a>
 
 <a name='ba'></a>
-### 7. Bundle Adjustment:
+### 6. Bundle Adjustment:
 
 
 <a name='summary'></a>
-### 8. Summary:
+### 7. Summary:
 Here is the following summary of the entire _traditional SfM_ pipeline:
 <div class="fig figleft fighighlight">
   <img src="/assets/sfm/summary.png">
