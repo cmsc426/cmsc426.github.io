@@ -233,10 +233,22 @@ $$
 \ker(L) = \text{null}{L} = \left\{\mathbf {v} \in V \vert L(\mathbf {v} )=\mathbf {0} \right\}
 $$
 
-To understand how this will help in solving \\(A\matbf{x}=0\\), we need to understand the concept of **rank of a matrix** first. The rank of a matrix \\(A\\) is defined as the number of linearly independent columns of \\(A\\), this is mathematically defined as the dimension of the vector space spanned by the columns of \\(A\\). The easiest way to find the rank of a matrix is to take the Eigen-decomposition (for square matrices) or the SVD (for any shaped matrix). The number of non-zero eigenvalues or the number of non-zero singularvalues gives the rank of a matrix. The rank can be atmost the smallest dimension of the matrix \\(A\\), i.e., if \\(A \in \mathbb{R}^{m \times n}\\) and \\(n < m \\) , then \\(\text{rank}(A)\le n\\). Now that we know what rank means, we can state the **Rank-nullity** theorem as follows:
+To understand how this will help in solving \\(A\mathbf{x}=0\\), we need to understand the concept of **rank of a matrix** first. The rank of a matrix \\(A\\) is defined as the number of linearly independent columns of \\(A\\), this is mathematically defined as the dimension of the vector space spanned by the columns of \\(A\\). The easiest way to find the rank of a matrix is to take the Eigen-decomposition (for square matrices) or the SVD (for any shaped matrix). The number of non-zero eigenvalues or the number of non-zero singularvalues gives the rank of a matrix. The rank can be atmost the smallest dimension of the matrix \\(A\\), i.e., if \\(A \in \mathbb{R}^{m \times n}\\) and \\(n < m \\) , then \\(\text{rank}(A)\le n\\). Now that we know what rank means, we can state the **Rank-nullity** theorem as follows:
 
 $$
 \text{rank}(A) + \text{nullity}(A) = n
 $$
 
-**This means that a solution of the form \\(A\mathbf{x}=0\\) lies in the null-space of \\(A\\).**
+**This means that a solution of the form \\(A\mathbf{x}=0\\) lies in the null-space of \\(A\\).** 
+
+Let us find the nullspace using SVD. Let the SVD of \\(A = U\Sigma V^T\\). Now, \\(\Sigma\\) is ideally supposed to be of rank 3 (as we know that we have 3 unknowns). This means that the 4:N rows of \\(\Sigma\\) have to be all zeros. But due to noise, the rank will be more than 3. A good solution to the optimization problem is obtained when we set any of the columns of \\(V^T\\) corresponding to nullspace to zero (4:N rows of \\(\Sigma\\)). The singular values are sorted in descending order and hence a minimum deviation from the ideal line would give us the best-fit solution. This is the solution corresponding to the smallest singular-value. 
+
+**The best-fit solution is therefore given by the last column of \\(V\\) (last row of \\(V^T\\)**. 
+
+Note that, a simple assumption made about the noise in the previous line fitting example is that, the noise is white gaussian with a mean of zero and some standard deviation. Inuitively, it means that the probability of data points away from the line is decreases as the distance between the point and the line increases.  Mathematically the noise is derived from the following distribution:
+
+$$
+
+$$
+
+
