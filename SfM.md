@@ -89,13 +89,18 @@ As a result, we obtain:
 $$\mathbf{x}_i'^{\ \mathbf{T}}\mathbf{F} \mathbf{x}_i = 0$$
 where $$i=1,2,....,m.$$ 
 This is known as epipolar constraint or correspondance condition (or _Longuet-Higgins_ equation). Since, $$\mathbf{F}$$ is a $$3\times3$$ matrix, we can set up a homogenrous linear system with 9 unknowns:
+
 $$\begin{bmatrix} x'_i & y'_i & 1 \end{bmatrix}
 \begin{bmatrix}f_{11} & f_{12} & f_{13} \\ f_{21} & f_{22} & f_{23} \\ f_{31} & f_{32} & f_{33} \end{bmatrix}
 \begin{bmatrix} x_i \\ y_i \\ 1 \end{bmatrix} = 0$$ 
 _i.e._
+
 $$x_i x'_i f_{11} + x_i y'_i f_{21} + x_i f_{31} + y_i x'_i f_{12} + y_i y'_i f_{22} + y_i f_{32} +  x'_i f_{13} + y'_i f_{23} + f_{33}=0$$
+
 Simplifying for $$m$$ correspondences,
+
 $$\begin{bmatrix} x_1 x'_1 & x_1 y'_1 & x_1 & y_1 x'_1 & y_1 y'_1 & y_1 &  x'_1 & y'_1 & 1 \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ x_m x'_m & x_m y'_m & x_m & y_m x'_m & y_m y'_m & y_m &  x'_m & y'_m & 1 \end{bmatrix}\begin{bmatrix} f_{11} \\ f_{21} \\ f_{31} \\ f_{12} \\ f_{22} \\ f_{32} \\ f_{13} \\f_{23} \\ f_{33}\end{bmatrix} = 0$$
+
 **_How many points do we need to solve the above equation? Think! Twice!_** 
 Remember _homography_, where each point correspondence contributes two constraints? Unlike homography, in $$\mathbf{F}$$ matrix estimation, each point only contributes one constraints as the epipolar constraint is a scalar equation.
 Thus, we require at least 8 points to solve the above homogenous system. That is why it is known as [Eight-point algorithm](https://en.wikipedia.org/wiki/Eight-point_algorithm).
@@ -159,6 +164,7 @@ These four pose configurations can be computed from $$\mathbf{E}$$ matrix. Let $
 4. $$C_4=-U(:, 3)$$ and $$R_4=UW^TV^T$$
 
 **It is important to note that the $$\ det(R)=1$$. If $$det(R)=-1$$, the camera pose must be corrected _i.e._**
+
 - $$C=-C$$ 
 - $$R=-R$$.
 
