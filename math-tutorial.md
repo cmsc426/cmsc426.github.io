@@ -9,6 +9,7 @@ The Table of Contents:
 - [Eigenvalues and Eigenvectors](#eigen)
 - [Singular Value Decomposition (SVD)](#svd)
 - [Line fitting using Linear Least Squares](#linefit)
+	- [Null-space](#nullspace)
 
 <a name='hilbert'></a>
 ## Hilbert Space, Vectors, Dot and Cross Products
@@ -211,15 +212,31 @@ Note that, we haven't changed anything but just added a constraint saying that t
 $$
 \begin{equation*}
 \begin{aligned}
-& & A\Theta = \mathbf{0}
+& & A\Theta = \mathbf{0}\\
 & \text{subject to}
 & & \vert \vert \Theta \vert \vert = 1
 \end{aligned}
 \end{equation*}
 $$
 
-Where:
+Where, $$
+A = \begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix}
+$$ and $$ \Theta = \begin{bmatrix} a \\ b \\c \end{bmatrix}$$.
+
+To solve the above optimization problem which is of the form \\(Ax=0\\), we need to understand the concept of **Null-space**. 
+
+<a name='nullspace'></a>
+## Null-space
+Null-space or kernel of a linear map \\(L: V \rightarrow W \\) between two vector spaces \\(V, W\\) is the set of all elements such that \\(L(\mathbf{v})=0\\). In set notation,
 
 $$
-A = \begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix}
+\ker(L) = \text{null}{L} = \left\{\mathbf {v} \in V \vert L(\mathbf {v} )=\mathbf {0} \right\}
 $$
+
+To understand how this will help in solving \\(A\matbf{x}=0\\), we need to understand the concept of **rank of a matrix** first. The rank of a matrix \\(A\\) is defined as the number of linearly independent columns of \\(A\\), this is mathematically defined as the dimension of the vector space spanned by the columns of \\(A\\). The easiest way to find the rank of a matrix is to take the Eigen-decomposition (for square matrices) or the SVD (for any shaped matrix). The number of non-zero eigenvalues or the number of non-zero singularvalues gives the rank of a matrix. The rank can be atmost the smallest dimension of the matrix \\(A\\), i.e., if \\(A \in \mathbb{R}^{m \times n}\\) and \\(n < m \\) , then \\(\text{rank}(A)\le n\\). Now that we know what rank means, we can state the **Rank-nullity** theorem as follows:
+
+$$
+\text{rank}(A) + \text{nullity}(A) = n
+$$
+
+**This means that a solution of the form \\(A\mathbf{x}=0\\) lies in the null-space of \\(A\\).**
