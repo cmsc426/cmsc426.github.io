@@ -267,7 +267,7 @@ Here, \\(\mathbf{x}\\) represents the vector in a space \\(\mathbb{R}^n\\). In o
 ## \\(A\mathbf{x}=\mathbf{b}\\)
 You might be wondering what the title means. The last method (\\(A\mathbf{x}=\mathbf{0}\\)) we solved is called Linear Homogeneous set of equations and \\(A\mathbf{x}=\mathbf{b}\\) is called Linear Inhomogeneous set of equations. The problem formulation is slightly different from the earlier case as one would except. 
 
-We have \\(N\\) observations of \\([\mathbf{x_i}, \mathbf{y_i}]^T\\) where \\(x_i \mathbb{R}^{n \times 1}\\) and \\(y_i \mathbb{R}^1). We want to fit a model such that 
+We have \\(N\\) observations of \\([\mathbf{x_i}, \mathbf{y_i}]^T\\) where \\(x_i \in \mathbb{R}^{n \times 1}\\) and \\(y_i \in \mathbb{R}^1\\). We want to fit a model such that 
 
 $$
 y_i = \mathbf{x_i}^T \beta 
@@ -307,3 +307,4 @@ The matrix \\(\mathbf{X}^T \mathbf{X} \\) is called the **Gram matrix** and is *
 
 <a name='reg'></a>
 ## Effect of outliers on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them
+In the previous section, we only talked about how one could obtain the least squares solution but did not analyze what the effect of noise would be. Let \\(A \\) be a \\(m \times n\\) matrix. Consider the solution to \\( A\mathbf{x}=\mathbf{b}\\). The solution to this problem would be \\( \mathbf{b} = A^\dagger \mathbf{x}\\) where \\(A^\dagger\\) denotes the pseudo-inverse of \\(A\\). 
