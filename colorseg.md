@@ -40,8 +40,7 @@ In project 1, you'll get a flavor of what goes behind the scenes in a typical vi
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/nao2.jpg" width="80%"> 
-  <div class="figcaption">Nao robot.<a
-  href="http://www.zeitgeistlab.ca/fr/images/TactileInternetlab.jpg">(Source)</a></div>
+  <div class="figcaption">Nao robot.</div>
 </div>
 
 In Robocup, the soccer field is bright green, the ball is bright orange, and the goal-posts are bright yellow.  If we separate the image into these three color classes, we can identify if/where these objects are in the image.  A sample pipeline is: 1) the robot acquires an image, 2) classifies each pixel as belonging to one of the color classes ("soccer-field-green", "ball-orange", or "goal-post-yellow"), and 3) groups the labled pixels and classifies the objects.  This information is then passed on to a higher-level planning algorithm, which makes high-level decisions like "kick the ball".
@@ -64,8 +63,7 @@ The next factor controlling the brightness of the image is the <b>ISO</b>. To un
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/exposuretriangle.jpg">
-  <div class="figcaption">Effects of ISO, Aperture, Shutter speed on the image. <a
-  href="http://blog.hamburger-fotospots.de/genialer-spickzettel-fuer-fotografen-als-kostenloser-download/">(Source)</a></div>
+  <div class="figcaption">Effects of ISO, Aperture, Shutter speed on the image. </div>
 </div>
 
 
@@ -80,11 +78,11 @@ To sense color, rather than grayscale, the image sensor must be able to differen
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/bayer.png">
-  <div class="figcaption">Left: The Bayer arrangement of color filters on the pixel array of an image sensor. Right: Profile/cross-section of sensor.  <a href="https://en.wikipedia.org/wiki/Bayer_filter"> (Source) </a>
+  <div class="figcaption">Left: The Bayer arrangement of color filters on the pixel array of an image sensor. Right: Profile/cross-section of sensor. </a>
 </div>
   <br>
   <img src="/assets/colorseg/bayer2.png">
-  <div class="figcaption">1. Original scene. 2. Output of a 120\(\times\)80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at 120\(\times\)80-pixels for comparison (e.g. as a film scan might appear) <a href="https://en.wikipedia.org/wiki/Bayer_filter#/media/File:Colorful_spring_garden_Bayer_%2B_RGB.png"> (Source) </a></div>
+  <div class="figcaption">1. Original scene. 2. Output of a 120\(\times\)80-pixel sensor with a Bayer filter. 3. Output color-coded with Bayer filter colors. 4. Reconstructed image after interpolating missing color information. 5. Full RGB version at 120\(\times\)80-pixels for comparison (e.g. as a film scan might appear).</div>
 </div>
 
 
@@ -166,7 +164,7 @@ Keen readers might observe that HSV is a non-linear transformation of the RGB co
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/colorseg/colorspaces.png">
-  <div class="figcaption">Left to right: Represenation of RGB color cube in RGB, HSV and YCbCr color spaces. (Source <a href="https://commons.wikimedia.org/wiki/File:RGB_color_solid_cube.png">1</a>, <a href="https://commons.wikimedia.org/wiki/File:HSV_color_solid_cone_chroma_gray.png">2</a>,  <a href="https://en.wikipedia.org/wiki/Talk%3AYCbCr#/media/File:YCbCrColorSpace_Perspective.png">3</a>) </div>
+  <div class="figcaption">Left to right: Represenation of RGB color cube in RGB, HSV and YCbCr color spaces. </div>
   <br>
   <img src="/assets/colorseg/colorspacesnaoimg.png">
   <div class="figcaption">Nao robot view in RGB, HSV and YCbCr colorspaces.</div>

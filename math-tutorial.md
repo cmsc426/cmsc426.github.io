@@ -8,6 +8,7 @@ The Table of Contents:
 - [Hilbert Space, Vectors, Dot and Cross Products](#hilbert)
 - [Eigenvalues and Eigenvectors](#eigen)
 - [Singular Value Decomposition (SVD)](#svd)
+- [Line fitting using Linear Least Squares](#linefit)
 
 <a name='hilbert'></a>
 ## Hilbert Space, Vectors, Dot and Cross Products
@@ -140,3 +141,20 @@ The matrix \\(U\\) (left singular values) of \\(A\\) gives us the eigenvectors o
   Visualization of how different components of SVD make up the matrix \(A\).</div>
 </div>
  
+
+<a name='linefit'></a>
+## Line fitting using Linear Least Squares
+Let us define the problem in hand first. Assume that we have \\(N\\) points in \\(\mathbb{R}^n\\), for purposes of simplicity without loss in any generality let \\(n=2\\). We want to fit a line (the equivalent is a plane in \\(\mathbb{R}^n\\) and a hyperplane in \\(\mathbb{R}^n\\)). When \\(N = 1\\), one can fit \\(\infty\\) number of lines which satisfy the constraint of passing though the point and hence has no unique exact (the line passes through the point) solution. Now, when \\(N = 2\\), one can fit a unique and exact solution because we have exactly the same number of parameters (number of unknowns in the line equation) as the number of constraints (equations). However, things get tricky when \\(N > 2\\). One might wonder when we would encouter such a situtation, this is more common than you think. Assume that we want to fit a line to a number of pixels in an image, possible to detect a lane on an self driving car.
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/math/lane1.png" width="70%">
+  <div class="figcaption">Left: Input image to a self driving car for lane detection. Right: Pixel candidates where one would fit a line to find the lane, notice that there are multiple lines possible, for the purposes of the example assume that we want to fit a line to the pixels inside the red ellipse.</div>
+</div>
+
+Let us model the problem mathematically, we have \\(N\\) points in \\(\mathbb{R}^2\\) to which we want to fit the **best-fit** line. The best-line has to be defined before we proceed. One could argue that I can pick any random two points and fit a line and call that the best-fit. However, this solution is the best for those two points and not for all points. If all the points lie on a line one could say that we have an **exact** and **unique** solution, but this rarely happens. The more common version of this problem is that, the best-fit line generally would not pass thorugh any of the points. You might be wondering how is that the best line then? Well it depends on how we are going to define best-fit. Let us do that right now.
+
+Let the equation of the line be \\(ax+by+c=0\\) where we want to find the parameters \\(\Theta=\begin{bmatrix} a & b & c \end{bmatrix}^T\\) such that,
+
+$$
+\underset{\Theta}{\operatorname{argmax}}\sum_{i=1}^N R(x_i,y_i)^2
+$$
