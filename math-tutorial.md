@@ -11,7 +11,7 @@ The Table of Contents:
 - [Line fitting using Linear Least Squares](#linefit)
 	- [Null-space](#nullspace)
 - [\\(A\mathbf{x}=\mathbf{b}\\)](#axeqb)
-- [Outliers effects on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them](#reg)
+- [Effect of outliers on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them](#reg)
 - [Random Sample Conesnus for outlier rejection](#ransac)
 - [Hough Transform](#hough)
 - [Summary]
@@ -302,4 +302,8 @@ $$
 \hat{\beta} = \left( \mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T\mathbf{y}
 $$
 
-The matrix \\(\mathbf{X}^T \mathbf{X} \\) is called the **Gram matrix** and is **Positive Semi Definite (PSD)** (all eigenvalues \\(\ge 0\\)). The matrix \\( \mathbf{X}^T\mathbf{y}\\) is called the **moment matrix**. For a detailed derivation look at [this blog post](https://economictheoryblog.com/2015/02/19/ols_estimator/). If you don't remember matrix properties, have a look at [The Matrix cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf).
+The matrix \\(\mathbf{X}^T \mathbf{X} \\) is called the **Gram matrix** and is **Positive Semi Definite (PSD)** (all eigenvalues \\(\ge 0\\)). The matrix \\( \mathbf{X}^T\mathbf{y}\\) is called the **moment matrix**. For a detailed derivation look at [this blog post](https://economictheoryblog.com/2015/02/19/ols_estimator/). If you don't remember matrix properties, have a look at [The Matrix cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf). 
+
+
+<a name='reg'></a>
+## Effect of outliers on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them
