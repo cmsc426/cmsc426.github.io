@@ -11,7 +11,10 @@ The Table of Contents:
 - [Line fitting using Linear Least Squares](#linefit)
 	- [Null-space](#nullspace)
 - [\\(A\mathbf{x}=\mathbf{b}\\)](#axeqb)
-
+- [Outliers effects on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them](#reg)
+- [Random Sample Conesnus for outlier rejection](#ransac)
+- [Hough Transform](#hough)
+- [Summary]
 
 <a name='hilbert'></a>
 ## Hilbert Space, Vectors, Dot and Cross Products
@@ -299,4 +302,4 @@ $$
 \hat{\beta} = \left( \mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T\mathbf{y}
 $$
 
-The matrix \\(\mathbf{X}^T \mathbf{X}\right \\) is called the **Gram matrix** and is Positive Semi Definite (all eigenvalues \\(\ge 0\\)). The matrix \\( \mathbf{X}^T\mathbf{y}\\) is called the **moment matrix**.
+The matrix \\(\mathbf{X}^T \mathbf{X} \\) is called the **Gram matrix** and is Positive Semi Definite (all eigenvalues \\(\ge 0\\)). The matrix \\( \mathbf{X}^T\mathbf{y}\\) is called the **moment matrix**.
