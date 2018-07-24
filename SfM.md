@@ -1,7 +1,7 @@
 ---
 layout: page
 mathjax: true
-title: Structure for Motion
+title: Structure from Motion
 permalink: /SfM/
 ---
 Table of Contents:
