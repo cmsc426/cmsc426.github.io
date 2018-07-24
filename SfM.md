@@ -59,6 +59,23 @@ The fundamental matrix, denoted by $$F$$, is a $$3\times 3$$ _rank 2_ matrix tha
 Let a point $$\mathbf{X}$$ in the 3D-space is captured as $$\mathbf{x}$$ in the first image and $$\mathbf{x'}$$ in the second. _Can you think how to formulate the relation between the corresponding image points $$\mathbf{x}$$ and $$\mathbf{x'}$$?_ Consider figure **(ref epipolar geometry fig)**. Let $$\mathbf{C}$$ and $$\mathbf{C'}$$ be the respective camera centers which forms the baseline for the stereo system. Clearly, the points $$\mathbf{x}$$, $$\mathbf{x'}$$ and $$\mathbf{X}$$ (or $$\mathbf{C}$$, $$\mathbf{C'}$$ and $$\mathbf{X}$$) are coplanar _i.e._  $$\mathbf{\overrightarrow{Cx}}\cdot \left(\mathbf{\overrightarrow{CC'}}\times\mathbf{\overrightarrow{C'x'}}\right)=0$$ 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
 
+<div class="fig figleft fighighlight">
+  <img src="/assets/sfm/epipole1.png" width="35%">
+  <div class="figcaption">
+ 	Caption goes here.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+<div class="fig figleft fighighlight">
+  <img src="/assets/sfm/epipole2.png" width="35%">
+  <div class="figcaption">
+  	Caption goes here.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
 Now, let us say that only $$\mathbf{x}$$ is known, not $$\mathbf{x'}$$. We know that the point $$\mathbf{x'}$$ lies in the plane $$\pi$$ which is governed by the camera baseline $$\mathbf{CC'}$$ and $$\mathbf{\overrightarrow{Cx}}$$.  Hence the point $$\mathbf{x'}$$ lies on the line of intersetion of $$\mathbf{l'}$$ of $$\pi$$ with the second image plane. The line $$\mathbf{l'}$$ is the image in the second view of the ray back-projected from $$\mathbf{x}$$. This line $$\mathbf{l'}$$ is called the _epipolar line_ corresponding to $$\mathbf{x}$$. The benifit is that you don't need to search for the point corresponding to $$\mathbf{x}$$ in the entire image plane as it can be restricted to the $$\mathbf{l'}$$.
 
 - **Epipole** is the point of intersection of the line joining the camera centers with the image plane. (see $$\mathbf{e}$$ and $$\mathbf{e'}$$ in the figure <refer here>) 
@@ -86,7 +103,18 @@ Thus, we require at least 8 points to solve the above homogenous system. That is
 With $$N \geq 8$$ correspondences between two images, the fundamental matrix, $$F$$ can be obtained as:
 By stacking the above equation in a matrix $$A$$, the equation
 $$Ax=0$$ is obtained.
-This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the **Math Modules [Link]**. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero.
+	This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the **Math Modules [Link]**. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero. If $$F$$ has a full rank then it will have an empty null-space _i.e._ it won't have any point that is on entire set of lines. Thus, there wouldn't be any epipoles. See fig [NUMBER] for full rank comparisons for $$F$$ matrices.
+
+<div class="fig figleft fighighlight">
+  <img src="/assets/sfm/FMatrixRank.png" width="35%">
+  <div class="figcaption">
+ 	Algorithm 1: Get Inliers RANSAC
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
+
 In MATLAB, you can use `svd` to solve $$\mathbf{x}$$ from $$\mathbf{Ax}=0$$
 ```
 [U, S, V] = svd(A);
@@ -100,7 +128,16 @@ F = reshape(x, [3,3])';
 ### 2.3 Match Outlier Rejection via RANSAC:
 Since the point correspondences are computed using SIFT or some other feature descriptors, the data is bound to be noisy and (in general) contains several outliers. Thus, to remove these outliers, we use RANSAC algorithm _(Yes! The same as used in Panorama stitching!)_ to obtain a better estimate of the fundamental matrix. So, out of all possibilities, the $$\mathbf{F}$$ matrix with maximum number of inliers is chosen.
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
-[ADD THE FIGURE HERE]
+
+<div class="fig figleft fighighlight">
+  <img src="/assets/sfm/ransac.png" width="35%">
+  <div class="figcaption">
+ 	Algorithm 1: Get Inliers RANSAC
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
       
       
 ### 3. Estimate *Essential Matrix* from Fundamental Matrix: 
@@ -141,6 +178,14 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 <a name='pnp'></a>
 ### 6. Perspective-$$n$$-Points:
 
+<div class="fig figleft fighighlight">
+  <img src="/assets/sfm/pnpransac.png" width="35%">
+  <div class="figcaption">
+ 	Algorithm 2: PnP RANSAC
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
 
 
 <a name='nonlinpnp'></a>
@@ -151,6 +196,18 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 
 <a name='summary'></a>
 ### 8. Summary:
+Here is the following summary of the entire _traditional SfM_ pipeline:
+<div class="fig figleft fighighlight">
+  <img src="/assets/sfm/summary.png" width="35%">
+  <div class="figcaption">
+ 	Algorithm 3: Structure from Motion pipeline
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
+
+
 
 The above sequence forms the traditional way of solving the problem of SfM. *But we have something much better in mind for you!*
 
