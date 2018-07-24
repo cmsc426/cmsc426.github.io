@@ -151,10 +151,45 @@ Let us define the problem in hand first. Assume that we have \\(N\\) points in \
   <div class="figcaption">Left: Input image to a self driving car for lane detection. Right: Pixel candidates where one would fit a line to find the lane, notice that there are multiple lines possible, for the purposes of the example assume that we want to fit a line to the pixels inside the red ellipse.</div>
 </div>
 
-Let us model the problem mathematically, we have \\(N\\) points in \\(\mathbb{R}^2\\) to which we want to fit the **best-fit** line. The best-line has to be defined before we proceed. One could argue that I can pick any random two points and fit a line and call that the best-fit. However, this solution is the best for those two points and not for all points. If all the points lie on a line one could say that we have an **exact** and **unique** solution, but this rarely happens. The more common version of this problem is that, the best-fit line generally would not pass thorugh any of the points. You might be wondering how is that the best line then? Well it depends on how we are going to define best-fit. Let us do that right now.
+Let us model the problem mathematically, we have \\(N\\) points in \\(\mathbb{R}^2\\) to which we want to fit the **best-fit** line. The best-line has to be defined before we proceed. One could argue that I can pick any random two points and fit a line and call that the best-fit. However, this solution is the best for those two points and not for all points. If all the points lie on a line one could say that we have an **exact** and **unique** solution, but this rarely happens. The more common version of this problem is that, the best-fit line generally would not pass thorugh any of the points. You might be wondering how is that the best line then? Well it depends on how we are going to define best-fit and that the points are **noisy**. Let us define best-fit right now.
 
-Let the equation of the line be \\(ax+by+c=0\\) where we want to find the parameters \\(\Theta=\begin{bmatrix} a & b & c \end{bmatrix}^T\\) such that,
+Let the equation of the line be \\(ax+by+c=0\\) where we want to find the parameters \\(\Theta=\begin{bmatrix} a & b & c \end{bmatrix}^T\\) such that:
 
 $$
-\underset{\Theta}{\operatorname{argmax}}\sum_{i=1}^N R(x_i,y_i)^2
+\underset{\Theta}{\operatorname{argmax}}\sum_{i=1}^N R(x_i,y_i \vert \Theta)^2
 $$
+
+\\(\underset{\Theta}{\operatorname{argmax}}\\) means that we want to minimize and find the parameters \\(\Theta\\) which gives us the minimum value. The function \\(R\\) defines the best-fit here which is what the user has chosen. Let us **choose** \\(R\\) to be a function which computes the distance (offsets) from any point \\([x,y]^T\\) to the line \\(ax+by+c=0\\). This can be of two variants, i.e., vertical distances/ offsets and/or perpendicular distance/offsets. 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/math/offsets.gif" width="70%">
+  <div class="figcaption">Left: Vertical distances/offsets. Right: Perpendicular distances/offsets.</div>
+</div>
+
+Because it is more inuitive, let us choose the **perpendicular distance/offsets** for \\(R\\). The perpendicular distance of any point \\([x,y]^T\\) to the line \\(ax+by+c=0\\) is given by:
+
+$$
+R(x,y \vert \Theta) = \frac{ax+by+c}{\sqrt{a^2+b^2}}
+$$
+
+So our optimization/minimization problem becomes:
+
+$$
+\underset{\Theta}{\operatorname{argmax}}\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}
+$$
+The function \\(\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}\\) depicts the sum of distances (this is just a scaled version of the average) from each point to the line. Because we are minimizing the square of \\(R\\), the minimum value the optimization function can take is 0. This happens when all the points like exactly on the line. Like we said before, this rarely happens and in these cases there is **no-exact solution** (only some/no points pass through the line). This solution is called the **Least-squares solution** and the optimization problem is referred to as Ordinary Least Squares (OLS) or Linear Least Squares or Linear Regression in the machine learning community. To find the solution, let us write down the constraints we have. We **ideally** want all points to lie on the best-fit line. This can mathematically be written as:
+
+$$
+ax_1 + by_1 + c = 0\\
+ax_2 + by_2 + c = 0\\
+\vdots
+ax_N + by_N + c = 0\\
+$$
+
+Now let us write this down in matrix form:
+
+$$
+\begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix} \begin{bmaxtrix} a \\ b \\c \end{bmatrix} = \mathbf{0}
+$$
+
+
