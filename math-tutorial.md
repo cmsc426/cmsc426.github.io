@@ -12,7 +12,7 @@ The Table of Contents:
 	- [Null-space](#nullspace)
 - [\\(A\mathbf{x}=\mathbf{b}\\)](#axeqb)
 - [Effect of outliers on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them](#reg)
-- [Random Sample Conesnus for outlier rejection](#ransac)
+- [Random Sample Consensus (RANSAC) for outlier rejection](#ransac)
 - [Hough Transform](#hough)
 - [Summary]
 
@@ -341,4 +341,8 @@ $$
 \hat{\beta} = \left( \mathbf{X}^T \mathbf{X} + \lambda I \right)^{-1} \mathbf{X}^T\mathbf{y}
 $$
 
-Here, \\(I\\) is the identity matrix. Think of the above as improving the condition number of \\(\mathbf{X}^T \mathbf{X}  \\). The new condition number becomes \\( \frac{\sigma_{max}^2 + \lambda}{\sigma_{min}^2 + \lambda}\\). This value is lower than the original conition number we had which means that the solution is less sensitive to noise. This is similar to adding prior information to the optimization problem which acts as a noise removal filter. In Bayesian terms, this is finding the Maximum a-posteriori (MAP) estimate for gaussian noise assumption. 
+Here, \\(I\\) is the identity matrix. The reason why Ridge regression can handle noise better than linear regression is because it improves the condition number of \\( \mathbf{X}^T \mathbf{X} \\). The new condition number becomes \\( \frac{\sigma_{max}^2 + \lambda}{\sigma_{min}^2 + \lambda}\\). This value is lower than the original conition number we had which means that the solution is less sensitive to noise. This is similar to adding prior information to the optimization problem which acts as a noise removal filter. In Bayesian terms, this is finding the Maximum a-posteriori (MAP) estimate for gaussian noise assumption. 
+
+<a name='ransac'></a>
+## Random Sample Consensus (RANSAC) for outlier rejection
+All the above methods work well for noise but not for outliers. The outliers shift the result in the direction of the outliers. 
