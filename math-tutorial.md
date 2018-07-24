@@ -219,7 +219,7 @@ $$
 \begin{aligned}
 & & A\Theta = \mathbf{0}\\
 & \text{subject to}
-& & \vert \vert \Theta \vert \vert = 1
+& \vert \vert \Theta \vert \vert = 1
 \end{aligned}
 \end{equation*}
 $$
@@ -323,3 +323,22 @@ $$
 $$
 
 Clearly, one can observe that the noise is amplified by a factor of \\(\kappa\\). A high \\(\kappa\\) can lead to optimization problems to fail and is a huge research topic. 
+
+However, years of research has given good insight into the above problem and one of the simplest methods to combat the effect of noise is to modify the optimization problem as follows:
+
+$$
+\begin{equation*}
+\begin{aligned}
+& \underset{\beta}{\text{argmin}}
+& & \vert \vert \mathbf{y} - \mathbf{X}\beta \vert \vert + \lambda \vert \vert \beta \vert \vert^2\\
+\end{aligned}
+\end{equation*}
+$$
+
+In the above problem, \\(\lambda\\) is a user chosen value which determines the amount of penalization/penalty (prior) on the norm of \\(\beta\\). This new optimization problem is called the **Ridge Regression** or (Tikhonov regularization). As you would expect, this also has a closed form solution given by:
+
+$$
+\hat{\beta} = \left( \mathbf{X}^T \mathbf{X} + \lambda I \right)^{-1} \mathbf{X}^T\mathbf{y}
+$$
+
+Here, \\(I\\) is the identity matrix. Think of the above as improving the condition number of \\(\mathbf{X}^T \mathbf{X}  \\). The new condition number becomes \\( \frac{\sigma_{max}^2 + \lambda}{\sigma_{min}^2 + \lambda}\\). This value is lower than the original conition number we had which means that the solution is less sensitive to noise. This is similar to adding prior information to the optimization problem which acts as a noise removal filter. In Bayesian terms, this is finding the Maximum a-posteriori (MAP) estimate for gaussian noise assumption. 
