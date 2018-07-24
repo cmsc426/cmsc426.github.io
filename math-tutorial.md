@@ -292,3 +292,11 @@ $$
 \end{aligned}
 \end{equation*}
 $$
+
+The **Ordinary least squares** solution is given by:
+
+$$
+\hat{\beta} = \left( \mathbf{X}^T \mathbf{X}\right)^{-1} \mathbf{X}^T\mathbf{y}
+$$
+
+The matrix \\(\mathbf{X}^T \mathbf{X}\right \\) is called the **Gram matrix** and is Positive Semi Definite (all eigenvalues \\(\ge 0\\)). The matrix \\( \mathbf{X}^T\mathbf{y}\\) is called the **moment matrix**.
