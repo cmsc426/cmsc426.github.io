@@ -1,4 +1,3 @@
-## Structure from Motion
 
 ---
 layout: page
