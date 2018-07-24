@@ -182,14 +182,14 @@ The function \\(\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}\\) depicts t
 $$
 ax_1 + by_1 + c = 0\\
 ax_2 + by_2 + c = 0\\
-\vdots
+\vdots \\
 ax_N + by_N + c = 0\\
 $$
 
 Now let us write this down in matrix form:
 
 $$
-\begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix} \begin{bmaxtrix} a \\ b \\c \end{bmatrix} = \mathbf{0}
+\begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix} \begin{bmatrix} a \\ b \\c \end{bmatrix} = \mathbf{0}
 $$
 
 
