@@ -42,7 +42,7 @@ Let's learn how to recreate such algorithm. There are a few steps that collectiv
 We have already learned about keypoint matching using SIFT keypoints and descriptors (Recall Project 2: Panorama Stitching). It is important to refine the matches by rejecting outline correspondence.
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/math/proj.png" width="35%">
+  <img src="/assets/sfm/featmatch.png" width="35%">
   <div class="figcaption">
     Projection of \(a\) on \(b\) (\(a1\)), and rejection of \(a\) from \(b\) (\(a2\)).
   </div>
