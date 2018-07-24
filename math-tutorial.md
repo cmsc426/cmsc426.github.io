@@ -267,7 +267,7 @@ Here, \\(\mathbf{x}\\) represents the vector in a space \\(\mathbb{R}^n\\). In o
 ## \\(A\mathbf{x}=\mathbf{b}\\)
 You might be wondering what the title means. The last method (\\(A\mathbf{x}=\mathbf{0}\\)) we solved is called Linear Homogeneous set of equations and \\(A\mathbf{x}=\mathbf{b}\\) is called Linear Inhomogeneous set of equations. The problem formulation is slightly different from the earlier case as one would except. 
 
-We have \\(N\\) observations of \\([\mathbf{x_i}\mathbf{, y_i]^T\\) where \\(x_i \mathbb{R}^{n \times 1}\\) and \\(y_i \mathbb{R}^1). We want to fit a model such that 
+We have \\(N\\) observations of \\([\mathbf{x_i}, \mathbf{y_i}]^T\\) where \\(x_i \mathbb{R}^{n \times 1}\\) and \\(y_i \mathbb{R}^1). We want to fit a model such that 
 
 $$
 y_i = \mathbf{x_i}^T \beta 
