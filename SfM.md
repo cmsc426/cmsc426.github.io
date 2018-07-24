@@ -42,7 +42,7 @@ We have already learned about keypoint matching using SIFT keypoints and descrip
 The fundamental matrix, denoted by $$F$$, is a $$3\times 3$$ _rank 2_ matrix that relates the corresponding set of points in two images from different views (or stereo images). But in order to understand what fundamental matrix actually is, we need to understand what _epipolar geometry_ is! The epipolar geometry is the intrinsic projective geometry between two views. It only depends on the cameras' internal parameters ($$K$$ matrix) and the relative pose _i.e._ it is **independent of the scene structure**. 
 
 <a name='epipole'></a>
-##### 2.1 Epipolar Geometry:
+#### 2.1 Epipolar Geometry:
 Let a point $$\mathbf{X}$$ in the 3D-space is captured as $$\mathbf{x}$$ in the first image and $$\mathbf{x'}$$ in the second. _Can you think how to formulate the relation between the corresponding image points $$\mathbf{x}$$ and $$\mathbf{x'}$$?_ Consider figure **(ref epipolar geometry fig)**. Let $$\mathbf{C}$$ and $$\mathbf{C'}$$ be the respective camera centers which forms the baseline for the stereo system. Clearly, the points $$\mathbf{x}$$, $$\mathbf{x'}$$ and $$\mathbf{X}$$ (or $$\mathbf{C}$$, $$\mathbf{C'}$$ and $$\mathbf{X}$$) are coplanar _i.e._  $$\mathbf{\overrightarrow{Cx}}\cdot \left(\mathbf{\overrightarrow{CC'}}\times\mathbf{\overrightarrow{C'x'}}\right)=0$$ 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
 
@@ -53,7 +53,7 @@ Now, let us say that only $$\mathbf{x}$$ is known, not $$\mathbf{x'}$$. We know 
 - **Epipolar line** is the intersection of an epipolar plane with the image plane. *All the epipolar lines intersect at the epipole.* 
 
 <a name='estfundmatrix'></a>
-##### 2.2 The Fundamental Matrix $$\mathbf{F}$$:
+#### 2.2 The Fundamental Matrix $$\mathbf{F}$$:
 The $$\mathbf{F}$$ matrix is only an algebraic representation of epipolar geometry and can both geometrically _(contructing the epipolar line)_ and arithematically. ([See derivation](http://cvrs.whu.edu.cn/downloads/ebooks/Multiple%20View%20Geometry%20in%20Computer%20Vision%20\(Second%20Edition\).pdf)) ([Fundamental Matrix Song](https://www.youtube.com/watch?v=DgGV3l82NTk))
 As a result, we obtain:
 $$\mathbf{x}_i'^{\ \mathbf{T}}\mathbf{F} \mathbf{x}_i = 0$$
@@ -81,7 +81,7 @@ x = V(:, end);
 F = reshape(x, [3,3])';
 ```
 <a name='ransac'></a>
-##### 2.3 Match Outlier Rejection via RANSAC:
+#### 2.3 Match Outlier Rejection via RANSAC:
 Since the point correspondences are computed using SIFT or some other feature descriptors, the data is bound to be noisy and (in general) contains several outliers. Thus, to remove these outliers, we use RANSAC algorithm _(Yes! The same as used in Panorama stitching!)_ to obtain a better estimate of the fundamental matrix. So, out of all possibilities, the $$\mathbf{F}$$ matrix with maximum number of inliers is chosen.
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
 <ADD THE FIGURE HERE>
