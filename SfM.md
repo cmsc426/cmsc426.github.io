@@ -1,3 +1,5 @@
+## Structure from Motion
+
 ---
 layout: page
 mathjax: true
