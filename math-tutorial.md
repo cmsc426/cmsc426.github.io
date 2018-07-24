@@ -312,6 +312,6 @@ In the previous section, we only talked about how one could obtain the least squ
 If SVD of \\(A\\) is given as \\(A=U\Sigma V^T\\), then \\(A^\dagger = V\Sigma^{-1}U^T\\). Here \\(\Sigma^{-1}\\) is defined such that all the non-zero elements are inverted and zeros are maintained as is. If \\(\mathbf{b}\\) is noisy, we have \\(b = \hat{b} + \mathcal{N(\mathbf{x} \vert 0, \sigma)}\\) where \\( \hat{\mathbf{b}} \\) is the value without noise. If one tries the reconstruct with a noisy \\(\mathbf{b}\\) the solution \\(\mathbf{x}\\) obtained would be complete junk (or super noisy depending on \\(A\\)). Don't worry you'll do this in your homework. Why did this happen? All the singular values are affected equally by noise, so the smallest singular value gets affected by a relatively large noise which makes the estimated \\(\mathbf{x}\\) super noisy, i.e., much more noisier than \\(\mathbf{b}\\). In fact, the noise gets amplified by \\(\Lambda){ii}^{-1}\\) (the inverse of the singular value), this number is huge when the singular value is small. In fact, there is a term which signifies the noise sensitivity of the matrix \\(A\\) and is given by:
 
 $$
-\kappa = \frac{\sigma_{max}}{\sigma_{max}} = \vert{\frac{1}{2}}
+\kappa = \frac{\sigma_{max}}{\sigma_{max}} = \lvert\frac{\lambda_{max}}{\lambda_{min}} \rvert
 $$
 
