@@ -45,7 +45,7 @@ We have already learned about keypoint matching using SIFT keypoints and descrip
 Before rejecting the correspondences, let us first understand 
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/featmatch.png" width="80%">
+  <img src="/assets/sfm/featmatch.png" width="120%">
   <div class="figcaption">
     Projection of \(a\) on \(b\) (\(a1\)), and rejection of \(a\) from \(b\) (\(a2\)).
   </div>
@@ -63,12 +63,12 @@ Let a point $$\mathbf{X}$$ in the 3D-space is captured as $$\mathbf{x}$$ in the 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/epipole1.png">
+  <img src="/assets/sfm/epipole1.png"  width="120%">
   <div class="figcaption">
  	Caption goes here.
   </div>
 
-  <img src="/assets/sfm/epipole2.png">
+  <img src="/assets/sfm/epipole2.png"  width="120%">
   <div class="figcaption">
   	Caption goes here.
   </div>
@@ -93,7 +93,7 @@ This is known as epipolar constraint or correspondance condition (or _Longuet-Hi
 $$\begin{bmatrix} x'_i & y'_i & 1 \end{bmatrix}
 \begin{bmatrix}f_{11} & f_{12} & f_{13} \\ f_{21} & f_{22} & f_{23} \\ f_{31} & f_{32} & f_{33} \end{bmatrix}
 \begin{bmatrix} x_i \\ y_i \\ 1 \end{bmatrix} = 0$$ 
-_i.e._
+
 
 $$x_i x'_i f_{11} + x_i y'_i f_{21} + x_i f_{31} + y_i x'_i f_{12} + y_i y'_i f_{22} + y_i f_{32} +  x'_i f_{13} + y'_i f_{23} + f_{33}=0$$
 
@@ -111,7 +111,7 @@ $$Ax=0$$ is obtained.
 	This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the **Math Modules [Link]**. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero. If $$F$$ has a full rank then it will have an empty null-space _i.e._ it won't have any point that is on entire set of lines. Thus, there wouldn't be any epipoles. See fig [NUMBER] for full rank comparisons for $$F$$ matrices.
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/FMatrixRank.png">
+  <img src="/assets/sfm/FMatrixRank.png"  width="120%">
   <div class="figcaption">
  	Algorithm 1: Get Inliers RANSAC
   </div>
@@ -135,7 +135,7 @@ Since the point correspondences are computed using SIFT or some other feature de
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/ransac.png">
+  <img src="/assets/sfm/ransac.png"  width="120%">
   <div class="figcaption">
  	Algorithm 1: Get Inliers RANSAC
   </div>
@@ -163,10 +163,7 @@ These four pose configurations can be computed from $$\mathbf{E}$$ matrix. Let $
 3. $$C_3=U(:, 3)$$ and $$R_3=UW^TV^T$$
 4. $$C_4=-U(:, 3)$$ and $$R_4=UW^TV^T$$
 
-**It is important to note that the $$\ det(R)=1$$. If $$det(R)=-1$$, the camera pose must be corrected _i.e._**
-
-- $$C=-C$$ 
-- $$R=-R$$.
+**It is important to note that the $$\ det(R)=1$$. If $$det(R)=-1$$, the camera pose must be corrected _i.e._ $$C=-C$$ and $$R=-R$$.**
 
 <a name='tri'></a>
 ### 4. Check for **Cheirality Condition** using **Triangulation**:
@@ -185,7 +182,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 ### 5. Perspective-$$n$$-Points:
 
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/pnpransac.png">
+  <img src="/assets/sfm/pnpransac.png"  width="120%">
   <div class="figcaption">
  	Algorithm 2: PnP RANSAC
   </div>
@@ -204,7 +201,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 ### 7. Summary:
 Here is the following summary of the entire _traditional SfM_ pipeline:
 <div class="fig figleft fighighlight">
-  <img src="/assets/sfm/summary.png">
+  <img src="/assets/sfm/summary.png"  width="120%">
   <div class="figcaption">
  	Algorithm 3: Structure from Motion pipeline
   </div>
