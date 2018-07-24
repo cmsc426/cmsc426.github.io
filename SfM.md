@@ -41,6 +41,15 @@ Let's learn how to recreate such algorithm. There are a few steps that collectiv
 ### 1. Feature Matching:
 We have already learned about keypoint matching using SIFT keypoints and descriptors (Recall Project 2: Panorama Stitching). It is important to refine the matches by rejecting outline correspondence.
 
+<div class="fig figleft fighighlight">
+  <img src="/assets/math/proj.png" width="35%">
+  <div class="figcaption">
+    Projection of \(a\) on \(b\) (\(a1\)), and rejection of \(a\) from \(b\) (\(a2\)).
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
 <a name='estfundmatrix'></a>
 ### 2. Estimating Fundamental Matrix: 
 The fundamental matrix, denoted by $$F$$, is a $$3\times 3$$ _rank 2_ matrix that relates the corresponding set of points in two images from different views (or stereo images). But in order to understand what fundamental matrix actually is, we need to understand what _epipolar geometry_ is! The epipolar geometry is the intrinsic projective geometry between two views. It only depends on the cameras' internal parameters ($$K$$ matrix) and the relative pose _i.e._ it is **independent of the scene structure**. 
@@ -126,8 +135,8 @@ where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). No
 <a name='nonlintri'></a>
 ### 5.1 Non-Linear Triangulation [Extra]:
 Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error can be refined (EXPLAIN THIS LINE). The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point:
-<WRITE THE EQUATION>
-Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. <EXPLAIN PROPERLY>
+[WRITE THE EQUATION]
+Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [EXPLAIN PROPERLY]
 
 <a name='pnp'></a>
 ### 6. Perspective-$$n$$-Points:
