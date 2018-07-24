@@ -46,7 +46,7 @@ Before rejecting the correspondences, let us first understand
 <div class="fig fighighlight">
   <img src="/assets/sfm/featmatch.png" width="100%">
   <div class="figcaption">
-    Projection of \(a\) on \(b\) (\(a1\)), and rejection of \(a\) from \(b\) (\(a2\)).
+    Figure 1: Feature matching between two images from different views
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -64,12 +64,12 @@ and the plane formed can be denoted by $$\pi$$. Since these points are coplanar,
 <div class="fig fighighlight">
   <img src="/assets/sfm/epipole1.png"  width="120%">
   <div class="figcaption">
- 	Caption goes here.
+ 	Figure 2(a): Caption goes here.
   </div>
-
+<br>
   <img src="/assets/sfm/epipole2.png"  width="120%">
   <div class="figcaption">
-  	Caption goes here.
+  	Figure 2(b): Caption goes here.
   </div>
 </div>
 
@@ -95,6 +95,7 @@ $$\begin{bmatrix} x'_i & y'_i & 1 \end{bmatrix}
 
 
 $$x_i x'_i f_{11} + x_i y'_i f_{21} + x_i f_{31} + y_i x'_i f_{12} + y_i y'_i f_{22} + y_i f_{32} +  x'_i f_{13} + y'_i f_{23} + f_{33}=0$$
+<br>
 
 Simplifying for $$m$$ correspondences,
 
@@ -112,7 +113,7 @@ $$Ax=0$$ is obtained.
 <div class="fig fighighlight">
   <img src="/assets/sfm/FMatrixRank.png"  width="120%">
   <div class="figcaption">
- 	Algorithm 1: F Matrix: Rank 3 vs Rank 2 comparison
+ 	Figure 3: F Matrix: Rank 3 vs Rank 2 comparison
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -134,15 +135,13 @@ Since the point correspondences are computed using SIFT or some other feature de
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/ransac.png"  width="120%">
+  <img src="/assets/sfm/ransac.png"  width="100%">
   <div class="figcaption">
  	Algorithm 1: Get Inliers RANSAC
   </div>
   <div style="clear:both;"></div>
 </div>
 
-
-      
       
 ### 2. Estimate *Essential Matrix* from Fundamental Matrix: 
 Since we have computed the $$\mathbf{F}$$ using epipolar constrains, we can find the relative camera poses between the two images. This can be computed using the *Essential Matrix*, $$\mathbf{E}$$. Essential matrix is another $$3\times3$$ matrix, but with some additional properties that relates the corresponding points assuming that the cameras obeys the pinhole model (unlike $$\mathbf{F}$$). More specifically, 
@@ -181,7 +180,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 ### 5. Perspective-$$n$$-Points:
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/pnpransac.png"  width="120%">
+  <img src="/assets/sfm/pnpransac.png"  width="100%">
   <div class="figcaption">
  	Algorithm 2: PnP RANSAC
   </div>
@@ -200,7 +199,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 ### 7. Summary:
 Here is the following summary of the entire _traditional SfM_ pipeline:
 <div class="fig fighighlight">
-  <img src="/assets/sfm/summary.png"  width="120%">
+  <img src="/assets/sfm/summary.png"  width="100%">
   <div class="figcaption">
  	Algorithm 3: Structure from Motion pipeline
   </div>
