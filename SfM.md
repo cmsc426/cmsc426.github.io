@@ -87,7 +87,7 @@ F = reshape(x, [3,3])';
 ### 2.3 Match Outlier Rejection via RANSAC:
 Since the point correspondences are computed using SIFT or some other feature descriptors, the data is bound to be noisy and (in general) contains several outliers. Thus, to remove these outliers, we use RANSAC algorithm _(Yes! The same as used in Panorama stitching!)_ to obtain a better estimate of the fundamental matrix. So, out of all possibilities, the $$\mathbf{F}$$ matrix with maximum number of inliers is chosen.
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
-<ADD THE FIGURE HERE>
+[ADD THE FIGURE HERE]
       
       
 ### 3. Estimate *Essential Matrix* from Fundamental Matrix: 
