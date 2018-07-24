@@ -232,7 +232,7 @@ To solve the above optimization problem which is of the form \\(Ax=0\\), we need
 Null-space or kernel of a linear map \\(L: V \rightarrow W \\) between two vector spaces \\(V, W\\) is the set of all elements such that \\(L(\mathbf{v})=0\\). In set notation,
 
 $$
-\ker(L) = \text{null}{L} = \left\{\mathbf {v} \in V \vert L(\mathbf {v} )=\mathbf {0} \right\}
+\ker(L) = \text{null}(L) = \left\{\mathbf {v} \in V \vert L(\mathbf {v} )=\mathbf {0} \right\}
 $$
 
 To understand how this will help in solving \\(A\mathbf{x}=0\\), we need to understand the concept of **rank of a matrix** first. The rank of a matrix \\(A\\) is defined as the number of linearly independent columns of \\(A\\), this is mathematically defined as the dimension of the vector space spanned by the columns of \\(A\\). The easiest way to find the rank of a matrix is to take the Eigen-decomposition (for square matrices) or the SVD (for any shaped matrix). The number of non-zero eigenvalues or the number of non-zero singularvalues gives the rank of a matrix. The rank can be atmost the smallest dimension of the matrix \\(A\\), i.e., if \\(A \in \mathbb{R}^{m \times n}\\) and \\(n < m \\) , then \\(\text{rank}(A)\le n\\). Now that we know what rank means, we can state the **Rank-nullity** theorem as follows:
@@ -250,13 +250,13 @@ Let us find the nullspace using SVD. Let the SVD of \\(A = U\Sigma V^T\\). Now, 
 Note that, a simple assumption made about the noise in the previous line fitting example is that, the noise is white gaussian with a mean of zero and some standard deviation. Inuitively, it means that the probability of data points away from the line is decreases as the distance between the point and the line increases. Mathematically the noise is derived from the following distribution:
 
 $$
-p(\mathbf{x}) = \frac{1}{\sqrt{(2 \pi)^3 \vert \Sigma \vert}}\exp{(\frac{1}{2}(\mathbf{x}-\mu)^T\Sigma^{-1}(x-\mu))} = \mathcal{N(\mathbf{x} \vert \mu, \Sigma)}
+p(\mathbf{x}) = \frac{1}{\sqrt{(2 \pi)^3 \vert \Sigma \vert}}e^{\left(\frac{1}{2}(\mathbf{x}-\mu)^T\Sigma^{-1}(x-\mu)\right)} = \mathcal{N(\mathbf{x} \vert \mu, \Sigma)}
 $$
 
-Here, \\(\mathbf{x}\\) represents the vector in a space \\(\mathbb{R}^n\\). In our line-fitting example, \\(n=2\\). Sample datapoints with their linear least-suares line solution is shown below:
+Here, \\(\mathbf{x}\\) represents the vector in a space \\(\mathbb{R}^n\\). In our line-fitting example, \\(n=2\\). Sample datapoints with their linear least-squares line solution is shown below:
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/math/linearregression.png" width="70%">
-  <div class="figcaption">Random data points and their inear least-suares line solution.</div>
+  <div class="figcaption">Random data points and their inear least-squares line solution.</div>
 </div>
 
