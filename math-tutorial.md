@@ -10,7 +10,7 @@ The Table of Contents:
 - [Singular Value Decomposition (SVD)](#svd)
 - [Line fitting using Linear Least Squares](#linefit)
 	- [Null-space](#nullspace)
-- [\\(A\mathbf{x}=b\\)](#axeqb)
+- [\\(A\mathbf{x}=\mathbf{b}\\)](#axeqb)
 
 
 <a name='hilbert'></a>
@@ -247,16 +247,48 @@ Let us find the nullspace using SVD. Let the SVD of \\(A = U\Sigma V^T\\). Now, 
 
 **The best-fit solution is therefore given by the last column of \\(V\\) (last row of \\(V^T\\)**. 
 
-Note that, a simple assumption made about the noise in the previous line fitting example is that, the noise is white gaussian with a mean of zero and some standard deviation. Inuitively, it means that the probability of data points away from the line is decreases as the distance between the point and the line increases. Mathematically the noise is derived from the following distribution:
+Note that, a simple assumption made about the noise in the previous line fitting example is that, the noise is white gaussian with a mean of zero and some standard deviation. Inuitively, it means that the probability of data points away from the line is decreases as the distance between the point and the line increases. Mathematically the noise is derived from the following distribution (Co-variance is denoted as \\(\Sigma\\)):
 
 $$
-p(\mathbf{x}) = \frac{1}{\sqrt{(2 \pi)^3 \vert \Sigma \vert}}e^{\left(\frac{1}{2}(\mathbf{x}-\mu)^T\Sigma^{-1}(x-\mu)\right)} = \mathcal{N(\mathbf{x} \vert \mu, \Sigma)}
+p(\mathbf{x}) = \frac{1}{\sqrt{(2 \pi)^3 \vert \Sigma \vert}}e^{\left(\frac{1}{2}(\mathbf{x})^T\Sigma^{-1}(x)\right)} = \mathcal{N(\mathbf{x} \vert 0, \Sigma)}
 $$
 
 Here, \\(\mathbf{x}\\) represents the vector in a space \\(\mathbb{R}^n\\). In our line-fitting example, \\(n=2\\). Sample datapoints with their linear least-squares line solution is shown below:
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/math/linearregression.png" width="70%">
-  <div class="figcaption">Random data points and their inear least-squares line solution.</div>
+  <div class="figcaption">Random data points and their linear least-squares line solution.</div>
 </div>
 
+<a name='axeqb'></a>
+## \\(A\mathbf{x}=\mathbf{b}\\)
+You might be wondering what the title means. The last method (\\(A\matbf{x}=\mathbf{0}\\)) we solved is called Linear Homogeneous set of equations and \\(A\mathbf{x}=\mathbf{b}\\) is called Linear Inhomogeneous set of equations. The problem formulation is slightly different from the earlier case as one would except. 
+
+We have \\(N\\) observations of \\([\mathbf{x_i}\mathbf{, y_i]^T\\) where \\(x_i \mathbb{R}^{n \times 1}\\) and \\(y_i \mathbb{R}^1). We want to fit a model such that 
+
+$$
+y_i = \mathbf{x_i}^T \beta 
+$$
+
+However due to noise (assumed to be gaussian with mean zero and some co-variance, i.e., ) the data samples are obtained from:
+
+$$
+y_i = \mathbf{x_i}^T \beta + \mathcal{N(\mathbf{x} \vert 0, \Sigma)}
+$$
+
+In matrix form:
+
+$$
+\mathbf{y} = \mathbf{X}^T \beta + \mathcal{N(\mathbf{x} \vert 0, \Sigma)}
+$$
+
+The optimization problem is defined next:
+
+$$
+\begin{equation*}
+\begin{aligned}
+& \underset{\beta}{\text{argmin}}
+& & \vert \vert \mathbf{y} - \mathbf{X}\beta \vert \vert \\
+\end{aligned}
+\end{equation*}
+$$
