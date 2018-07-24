@@ -177,6 +177,7 @@ So our optimization/minimization problem becomes:
 $$
 \underset{\Theta}{\operatorname{argmax}}\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}
 $$
+
 The function \\(\sum_{i=1}^N \frac{\left(ax+by+c\right)^2}{a^2+b^2}\\) depicts the sum of distances (this is just a scaled version of the average) from each point to the line. Because we are minimizing the square of \\(R\\), the minimum value the optimization function can take is 0. This happens when all the points like exactly on the line. Like we said before, this rarely happens and in these cases there is **no-exact solution** (only some/no points pass through the line). This solution is called the **Least-squares solution** and the optimization problem is referred to as Ordinary Least Squares (OLS) or Linear Least Squares or Linear Regression in the machine learning community. To find the solution, let us write down the constraints we have. We **ideally** want all points to lie on the best-fit line. This can mathematically be written as:
 
 $$
@@ -192,4 +193,16 @@ $$
 \begin{bmatrix} x_1 & y_1 & 1 \\ & \vdots & \\ x_N & y_N & 1\end{bmatrix} \begin{bmatrix} a \\ b \\c \end{bmatrix} = \mathbf{0}
 $$
 
+The trivial solution to the above problem is obtained when \\(\begin{bmatrix} a \\ b \\c \end{bmatrix} = 0\\). This is the case where the constraint mathematically satisfies the solution but physically doesn't make much sense as we get back the origin. To avoid this we modify the optimization problem as follows:
 
+$$
+\begin{equation*}
+\begin{aligned}
+& \underset{X}{\text{minimize}}
+& & \mathrm{trace}(X) \\
+& \text{subject to}
+& & X_{ij} = M_{ij}, \; (i,j) \in \Omega, \\
+&&& X \succeq 0.
+\end{aligned}
+\end{equation*}
+$$
