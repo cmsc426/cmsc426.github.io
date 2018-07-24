@@ -7,14 +7,22 @@ Table of Contents:
 - [Structure from Motion](#SfM)
 - [Feature Matching](#featmatch)
 - [Estimating Fundamental Matrix](#estfundmatrix)
+      
       - [Epipolar Geometry](#epipole)
+      
       - [Fundamental Matrix](#fundmatrix)
+      
       - [Match Outlier Rejection using RANSAC](#ransac)
+      
 - [Estimate Camera Pose from Essential Matrix](#essential)
 - [Check for Cheirality Condition using Triangulation](#tri)
+      
       - [Non-Linear Triangulation](#nonlintri)
+      
 - [Perspective-$$n$$-points](#pnp)
-      - [Non-Linear PnP](#nonlinpnp)
+    
+    - [Non-Linear PnP](#nonlinpnp)
+    
 - [Bundle Adjustment](#ba)
 - [Summary](#summary)
 
