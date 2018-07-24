@@ -1,6 +1,5 @@
 <a name='SfM'></a>
 ## Structure from Motion
-
 ---
 layout: page
 mathjax: true
