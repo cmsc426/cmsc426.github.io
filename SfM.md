@@ -4,7 +4,7 @@ mathjax: true
 title: Structure from Motion
 permalink: /SfM/
 ---
-by [Chahat Deep Singh](http://chahatdeep.github.io/)<br>
+This article is written by [Chahat Deep Singh](http://chahatdeep.github.io/).<br>
 
 Table of Contents:
 
