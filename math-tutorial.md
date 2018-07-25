@@ -389,7 +389,7 @@ Repeat Steps 1-3 until model with the most inliers over all samples is found (or
   <div class="figcaption">Repeat steps 1-3.  Here we have 12 inliers. These awesome figures are adapted from Prof. Silvo Savarese's slides.</div>  
 </div>
 
-The number of iterations \\(N\\) needed to have a probability \\(p\\) of success with 2 points and at a outlier ratio \\(e\\) chosen at each step is given by
+The number of iterations \\(N\\) needed to have a probability \\(p\\) of success with 2 points being chosen at every iteration to fit a line and at a outlier ratio \\(e\\) chosen at each step is given by
 
 $$
 N = \frac{\log\left(1-p\right)}{\left(1-\left( 1 - e\right)^2 \right)}
