@@ -13,8 +13,7 @@ The Table of Contents:
 - [\\(A\mathbf{x}=\mathbf{b}\\)](#axeqb)
 - [Effect of outliers on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them](#reg)
 - [Random Sample Consensus (RANSAC) for outlier rejection](#ransac)
-- [Hough Transform](#hough)
-- [Summary]
+- [Summary](#summary)
 
 <a name='hilbert'></a>
 ## Hilbert Space, Vectors, Dot and Cross Products
@@ -335,7 +334,7 @@ $$
 \end{equation*}
 $$
 
-In the above problem, \\(\lambda\\) is a user chosen value which determines the amount of penalization/penalty (prior) on the norm of \\(\beta\\). This new optimization problem is called the **Ridge Regression** or (Tikhonov regularization). As you would expect, this also has a closed form solution given by:
+In the above problem, \\(\lambda\\) is a user chosen value which determines the amount of penalization/penalty (prior) on the norm of \\(\beta\\). This new optimization problem is called the **Ridge Regression** or Tikhonov regularization or Linear least squares with L\\(_2\\) penalty. As you would expect, this also has a closed form solution given by:
 
 $$
 \hat{\beta} = \left( \mathbf{X}^T \mathbf{X} + \lambda I \right)^{-1} \mathbf{X}^T\mathbf{y}
@@ -345,4 +344,61 @@ Here, \\(I\\) is the identity matrix. The reason why Ridge regression can handle
 
 <a name='ransac'></a>
 ## Random Sample Consensus (RANSAC) for outlier rejection
-All the above methods work well for noise but not for outliers. The outliers shift the result in the direction of the outliers. 
+All the above methods work well for noise but not for outliers. The outliers shift the result in the direction of the outliers (see figure below).
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/math/leastsquaresnoise.png" width="70%">
+  <div class="figcaption">Fitted line is heavily affected by outliers.</div>
+</div>
+
+
+The image below shows what we want RANSAC to do. The red points show the points excluded as outliers for solving the line fitting problem. The blue points are the points included in the line fitting solution. The blue line shows the fitted line without outliers. 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/math/ransac.png" width="70%">
+  <div class="figcaption">Fitted line with RANSAC. Observe that outliers have no influence on the result.</div>
+</div>
+
+The idea of RANSAC is voting. RANSAC makes the following assumptions:
+
+**Assumption 1:** Noise features will not vote consistently for any single model ("few" outliers when compared to inliers).
+
+**Assumption 2:** There are enough features to agree on a good model ("few" missing data).
+
+RANSAC algorithm is very simple and can be implemented in less than 40 lines in MATLAB. The algorithm is as follows:
+
+**Step 1:** Select random sample of minimum required size to fit model (in our case 2, a minimum of 2 points are required to fit a line).
+
+**Step 2:** Fit the best model from sample set (line passing through both points). 
+
+**Step 3:** Compute the set of inliers to this model from whole data set (inliers are defined as those points whose distance to the fitted line are less than some user chosen threshold).
+
+Repeat Steps 1-3 until model with the most inliers over all samples is found (or for some set number of iterations or until a inlier set is a certain percentage of the data, like 90%).
+
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/math/ransacdata.png" width="70%">
+  <div class="figcaption">All the data points given. We want to ignore the outliers and fit a least squares line.</div>
+  <img src="/assets/math/ransac1.png" width="70%">
+  <div class="figcaption">Select 2 points at random.</div>
+  <img src="/assets/math/ransac2.png" width="70%">
+  <div class="figcaption">Fit a line to the selected 2 points.</div>
+  <img src="/assets/math/ransac3.png" width="70%">
+  <div class="figcaption">Measure number of inliers. Here we have 4 inliers.</div>
+  <img src="/assets/math/ransac4.png" width="70%">
+  <div class="figcaption">Repeat steps 1-3.  Here we have 12 inliers. These awesome figures are adapted from Prof. Silvo Savarese's slides.</div>  
+</div>
+
+The number of iterations \\(N\\) needed to have a probability \\(p\\) of success with 2 points and at a outlier ratio \\(e\\) chosen at each step is given by
+
+$$
+N = \frac{\log\left(1-p\right)}{\left(1-\left( 1 - e\right)^2 \right)}
+$$
+
+To put this in perspective, we **only need 17 iterations to be 95% sure that we'll find a good solution even with 50% outliers.** 
+
+Another voting scheme which works well for fitting curves with lesser number of parameters is the [Hough Transform](https://en.wikipedia.org/wiki/Hough_transform). This is left as a self-reading article. 
+
+<a name='summary'></a>
+## Summary
+
