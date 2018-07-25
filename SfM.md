@@ -141,16 +141,12 @@ Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of mat
  	Algorithm 1: Get Inliers RANSAC
   </div>
   <div style="clear:both;"></div>
-</div>
-
- 
-<div class="fig fighighlight">
+<br><br>
   <img src="/assets/sfm/featmatchransac.png"  width="100%">
   <div class="figcaption">
  	Figure: Feature matching after RANSAC. (Green: Selected correspondences; Red: Rejected correspondences)
   </div>
   <div style="clear:both;"></div>
-</div>
 
      
 ### 2. Estimate *Essential Matrix* from Fundamental Matrix: 
@@ -181,7 +177,7 @@ $$r_3\mathbf{(X-C)} > 0$$
 where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). Not all triangulated points satisfy this coniditon due of the presence of correspondence noise. The best camera configuration, $$(C, R, X)$$ is the one that produces the maximum number of points satisfying the cheirality condition. 
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/lintria.png"  width="100%">
+  <img src="/assets/sfm/lintria.png"  width="60%">
   <div class="figcaption">
   	Initial triangulation plot with disambiguity, showing all four possible camera poses.
   </div>
@@ -217,11 +213,28 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 </div>
 
 
+<div class="fig fighighlight">
+  <img src="/assets/sfm/PnPRANSAC.png"  width="100%">
+  <div class="figcaption">
+ 	Plot of the camera poses with feature points. Different color represents feature correspondences from different pair of images. Blue points are features from Image 1 and Image 2; Red points are features from Image 2 and Image 3 etc.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
 
 <a name='nonlinpnp'></a>
 
 <a name='ba'></a>
 ### 6. Bundle Adjustment:
+<div class="fig fighighlight">
+  <img src="/assets/sfm/BA.png"  width="100%">
+  <div class="figcaption">
+ 	Non linear 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
 
 
 <a name='summary'></a>
