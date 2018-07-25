@@ -16,6 +16,10 @@
     {% include footer.html %}
 
     <!-- mathjax -->
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    MathJax.Hub.Config({
+      Tex: { equationNumbers: { autoNumber: "AMS" } }
+    });
+    </script>
     </body>
 </html>
