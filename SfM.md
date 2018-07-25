@@ -36,7 +36,8 @@ Let's learn how to recreate such algorithm. There are a few steps that collectiv
 - Check for **Cheirality Condition** using **Triangulation** 
 - **Perspective-n-Point**
 - **Bundle Adjustment**
-*(If you haven't heard of the following before, don't worry! If you knew the following already, you wouldn't be taking the class right now!)*
+*(If you haven't heard of the following before, don't worry! If you knew the following already, you wouldn't be taking the class right now!)* 
+
 
 <a name='featmatch'></a>
 ### 1. Feature Matching, Fundamental Matrix and RANSAC:
