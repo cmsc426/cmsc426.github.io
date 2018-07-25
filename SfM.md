@@ -4,6 +4,7 @@ mathjax: true
 title: Structure from Motion
 permalink: /SfM/
 ---
+by [Chahat Deep Singh](http://chahatdeep.github.io/)
 Table of Contents:
 
 - [Structure from Motion](#SfM)
@@ -142,7 +143,16 @@ Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of mat
   <div style="clear:both;"></div>
 </div>
 
-      
+ 
+<div class="fig fighighlight">
+  <img src="/assets/sfm/featmatchransac.png"  width="100%">
+  <div class="figcaption">
+ 	Figure: Feature matching after RANSAC. (Green: Selected correspondences; Red: Rejected correspondences)
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+     
 ### 2. Estimate *Essential Matrix* from Fundamental Matrix: 
 Since we have computed the $$\mathbf{F}$$ using epipolar constrains, we can find the relative camera poses between the two images. This can be computed using the *Essential Matrix*, $$\mathbf{E}$$. Essential matrix is another $$3\times3$$ matrix, but with some additional properties that relates the corresponding points assuming that the cameras obeys the pinhole model (unlike $$\mathbf{F}$$). More specifically, 
 $$\mathbf{E}$$ = $$\mathbf{K^TFK}$$
@@ -170,11 +180,30 @@ To check the cheirality condition, triangulate the 3D points (given two camera p
 $$r_3\mathbf{(X-C)} > 0$$
 where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). Not all triangulated points satisfy this coniditon due of the presence of correspondence noise. The best camera configuration, $$(C, R, X)$$ is the one that produces the maximum number of points satisfying the cheirality condition. 
 
+<div class="fig fighighlight">
+  <img src="/assets/sfm/lintria.png"  width="100%">
+  <div class="figcaption">
+  	Initial triangulation plot with disambiguity, showing all four possible camera poses.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
+
 <a name='nonlintri'></a>
 ### 4.1 Non-Linear Triangulation [Extra]:
 Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error can be refined (EXPLAIN THIS LINE). The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point:
 [WRITE THE EQUATION]
 Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [EXPLAIN PROPERLY]
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/nonlintria.png"  width="100%">
+  <div class="figcaption">
+ 	Non linear 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
 
 <a name='pnp'></a>
 ### 5. Perspective-$$n$$-Points:
