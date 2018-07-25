@@ -50,7 +50,7 @@ Before rejecting the correspondences, let us first understand what Fundamental m
 <div class="fig fighighlight">
   <img src="/assets/sfm/featmatch.png" width="100%">
   <div class="figcaption">
-    Figure 1: Feature matching between two images from different views
+    Figure 1: Feature matching between two images from different views.
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -197,7 +197,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 <div class="fig fighighlight">
   <img src="/assets/sfm/nonlintria.png"  width="100%">
   <div class="figcaption">
- 	Non linear 
+ 	Comparison between non-linear vs linear triangulation.
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -232,7 +232,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 <div class="fig fighighlight">
   <img src="/assets/sfm/BA.png"  width="100%">
   <div class="figcaption">
- 	The final reconstructed scene after Sparse Bundle Adjustment (SBA)
+ 	The final reconstructed scene after Sparse Bundle Adjustment (SBA).
   </div>
   <div style="clear:both;"></div>
 </div>
