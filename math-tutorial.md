@@ -377,15 +377,15 @@ Repeat Steps 1-3 until model with the most inliers over all samples is found (or
 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/math/ransacdata.png" width="70%">
+  <img src="/assets/math/ransacdata.png" width="35%">
   <div class="figcaption">All the data points given. We want to ignore the outliers and fit a least squares line.</div>
-  <img src="/assets/math/ransac1.png" width="70%">
+  <img src="/assets/math/ransac1.png" width="35%">
   <div class="figcaption">Select 2 points at random.</div>
-  <img src="/assets/math/ransac2.png" width="70%">
+  <img src="/assets/math/ransac2.png" width="35%">
   <div class="figcaption">Fit a line to the selected 2 points.</div>
-  <img src="/assets/math/ransac3.png" width="70%">
+  <img src="/assets/math/ransac3.png" width="35%">
   <div class="figcaption">Measure number of inliers. Here we have 4 inliers.</div>
-  <img src="/assets/math/ransac4.png" width="70%">
+  <img src="/assets/math/ransac4.png" width="35%">
   <div class="figcaption">Repeat steps 1-3.  Here we have 12 inliers. These awesome figures are adapted from Prof. Silvo Savarese's slides.</div>  
 </div>
 
