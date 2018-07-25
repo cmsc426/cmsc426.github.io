@@ -189,7 +189,7 @@ where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). No
 
 
 <a name='nonlintri'></a>
-### 4.1 Non-Linear Triangulation [Extra]:
+### 4.1 Non-Linear Triangulation:
 Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error can be refined (EXPLAIN THIS LINE). The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point:
 [WRITE THE EQUATION]
 Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [EXPLAIN PROPERLY]
