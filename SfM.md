@@ -7,7 +7,7 @@ permalink: /SfM/
 by [Chahat Deep Singh](http://chahatdeep.github.io/)
 Table of Contents:
 
-- [Structure from Motion](#SfM)
+- [Introduction](#intro)
 - [Feature Matching](#featmatch)
 - [Estimating Fundamental Matrix](#estfundmatrix)  
 	- [Epipolar Geometry](#epipole)
@@ -25,6 +25,7 @@ Table of Contents:
 - [Bundle Adjustment](#ba)
 - [Summary](#summary)
 
+<a name='intro'></a>
 ## Introduction
 
 We have been playing with images for so long, mostly in 2D scene. Recall [project 2](cmsc426.github.io) where we stitched multiple images with about 30-50% common features between a couple of images. Now let's learn how to **reconstruct a 3D scene and simultaneously obtain the camera poses** of a monocular camera w.r.t. the given scene. This procedure is known as Structure from Motion (SfM). As the name suggests, you are creating the entire **rigid** structure from a set of images with different view points (or equivalently a camera in motion). A few years ago, Agarwal et. al published [Building Rome in a Day](http://grail.cs.washington.edu/rome/rome_paper.pdf) in which they reconstructed the entire city just by using a large collection of photos from the Internet. Ever heard of Microsoft [Photosynth?](https://en.wikipedia.org/wiki/Photosynth) _Facinating? isn't it!?_ There are a few open source SfM algorithm available online like [VisualSFM](http://ccwu.me/vsfm/). _Try them!_ 
@@ -147,7 +148,7 @@ Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of mat
  	Figure: Feature matching after RANSAC. (Green: Selected correspondences; Red: Rejected correspondences)
   </div>
   <div style="clear:both;"></div>
-
+</div>
      
 ### 2. Estimate *Essential Matrix* from Fundamental Matrix: 
 Since we have computed the $$\mathbf{F}$$ using epipolar constrains, we can find the relative camera poses between the two images. This can be computed using the *Essential Matrix*, $$\mathbf{E}$$. Essential matrix is another $$3\times3$$ matrix, but with some additional properties that relates the corresponding points assuming that the cameras obeys the pinhole model (unlike $$\mathbf{F}$$). More specifically, 
@@ -214,7 +215,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/PnPRANSAC.png"  width="100%">
+  <img src="/assets/sfm/PnPRANSAC.png"  width="60%">
   <div class="figcaption">
  	Plot of the camera poses with feature points. Different color represents feature correspondences from different pair of images. Blue points are features from Image 1 and Image 2; Red points are features from Image 2 and Image 3 etc.
   </div>
@@ -230,7 +231,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 <div class="fig fighighlight">
   <img src="/assets/sfm/BA.png"  width="100%">
   <div class="figcaption">
- 	Non linear 
+ 	The final reconstructed scene after Sparse Bundle Adjustment (SBA)
   </div>
   <div style="clear:both;"></div>
 </div>
