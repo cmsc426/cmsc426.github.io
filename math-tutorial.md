@@ -13,7 +13,6 @@ The Table of Contents:
 - [\\(A\mathbf{x}=\mathbf{b}\\)](#axeqb)
 - [Effect of outliers on \\(A\mathbf{x}=\mathbf{b}\\) and Regularization to combat them](#reg)
 - [Random Sample Consensus (RANSAC) for outlier rejection](#ransac)
-- [Summary](#summary)
 
 <a name='hilbert'></a>
 ## Hilbert Space, Vectors, Dot and Cross Products
@@ -398,7 +397,3 @@ $$
 To put this in perspective, we **only need 17 iterations to be 95% sure that we'll find a good solution even with 50% outliers.** 
 
 Another voting scheme which works well for fitting curves with lesser number of parameters is the [Hough Transform](https://en.wikipedia.org/wiki/Hough_transform). This is left as a self-reading article. 
-
-<a name='summary'></a>
-## Summary
-
