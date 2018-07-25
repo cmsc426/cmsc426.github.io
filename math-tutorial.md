@@ -354,7 +354,7 @@ All the above methods work well for noise but not for outliers. The outliers shi
 The image below shows what we want RANSAC to do. The red points show the points excluded as outliers for solving the line fitting problem. The blue points are the points included in the line fitting solution. The blue line shows the fitted line without outliers. 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/math/ransac.png" width="70%">
+  <img src="/assets/math/ransac.png" width="35%">
   <div class="figcaption">Fitted line with RANSAC. Observe that outliers have no influence on the result.</div>
 </div>
 
