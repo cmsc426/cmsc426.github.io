@@ -3,6 +3,8 @@ layout: page
 mathjax: true
 permalink: /colorseg/
 ---
+This article is written by [Nitin J. Sanket](http://nitinjsanket.github.io).
+
 Table of Contents:
 
 - [Introduction to perception in an intelligent system](#intro)

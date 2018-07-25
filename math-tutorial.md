@@ -3,6 +3,8 @@ layout: page
 title: Math Tutorial
 permalink: /math-tutorial/
 ---
+This article is written by [Nitin J. Sanket](http://nitinjsanket.github.io).
+
 The Table of Contents:
 
 - [Hilbert Space, Vectors, Dot and Cross Products](#hilbert)
