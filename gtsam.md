@@ -18,6 +18,15 @@ Let us consider a toy example to understand how one would solve SfM/SLAM in GTSA
 
 Now, let us say that each landmark is uniqely numbered so that we can distinguish between them. Let each landmark \\(\mathbf{l_k}\\) be represented by am \\(\mathbb{R}^2\\) vector which contains the \\(x\\) and \\(y\\) coordinate and is denoted by \\( \mathbf{l_k} = \begin{bmatrix} l_{k,x} & \_{k,y}\end{bmatrix}^T\\). The SfM/SLAM problem is to find the realtive pose of the landmarks and the pose of the robot when the robot is moving in the world. The key assumption here is that the landmarks are **stationary**. Dealing with non-stationary objects in the world is still an unsolved research topic. 
 
+<div class="fig figleft fighighlight">
+  <img src="/assets/sfm/gtsam3.png" width="50%">
+  <div class="figcaption">
+    The world with numbered landmarks (red x's) and robot at time \( t = 0\) (blue circle). The **start of service** origin is chosen as the robot's pose at time \( t = 0\) (blue asterisk).
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
 Mathematically, we want to get the best estimate of the landmark locations \\(\mathbf{l_k}\\) and robot pose at every time instant \\(\mathbf{x_t}\\) given the robot has a noisy sense of how it's moving (odometry or ego-motion) denoted by \\(\mathbf{o_{t}^{t+1}}\\) and the noisy measurements of the some landmark location(s) at each time instant \\(\mathbf{m_t}\\).  Let the state/pose of the robot at time \\(t\\) be defined as \\( \mathbf{x_t} = \begin{bmatrix} x_t & y_t & \theta_t \end{bmatrix}^T = \begin{bmatrix} x & y & \theta \end{bmatrix}^T_t  \\). Also, let us assume that the landmarks don't occlude each other and the camera has some field of view (say 120\\( ^\circ\\) for example).
 
 Now, let's talk about the **measurement model**  or our model of the measurements from the camera sensor. This is the prior information of what we know about the camera sensor (field of view, resolution and so on) we are using and also the prior information about the landmark properties (a translucent landmark is bad for LIDAR, a featureless wall is bad for the camera and so on). 
@@ -26,11 +35,37 @@ Now, let's talk about the **measurement model**  or our model of the measurement
 - The sensor is not perfect hence you see the landmark with a probability of \\( p_{obs} = 0.95\\), i.e., 95% of the time the sensor **sees** the landmark if it exists and 5% of the time the landmark doesnt see the landmark if it doesnt exist. Note that we are not considering the case of seeing a landmark if it doesn't exist.
 - The measurement of the robot at time \\(t\\) with respect to landmark \\( \mathbf{l_k} \\) is given by \\( \mathbf{m_{t,k}} = \begin{bmatrix} m_{t,k,x} & m_{t,k,y}\end{bmatrix}^T\\). The measurement is a scaled noisy vector pointing from the robot's current pose to the landmark.
 - \\( \mathbf{m_{t,k}} \\) is noisy with zero mean additive white gaussian noise. It can be modelled as drawn from \\( \mathbf{m_{t,k}} = \mathbf{\hat{m_{t,k}}}  + \mathcal{N}(0, \Sigma_m) \\). Here, \\( \mathbf{\hat{m_{t,k}}} \\) is the noiseless measurement and \\( \Sigma_m\\) is the measurement noise. \\( \Sigma_m\\) generally can be found in the manufacturer datasheet of a particular sensor.
+- The landmark's ID is never mistaken (it's perfect), i.e., landmark 1 if seen will **always** be classified as landmark 1 and nothing else.
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsam4.png" width="100%">
+  <div class="figcaption">
+    Left: The robot's view of the world at \(t=0\). Right: Zoomed in view of the same. 
+  </div>
+  <img src="/assets/sfm/gtsam4_1.png" width="100%">
+  <div class="figcaption">
+    Left: The robot's observations at \(t=0\). Notice that the blue lines indicate the landmark is seen and red lines indicate that the landmarks are not seen/missed by the sensor. Right: Zoomed in view of the same shows the noise in measurements. Small blue circles indicate the measurements of the corresponding landmarks. 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
 
 Now, let's talk about the **odometry model**  or our model of how the robot moves. This can come from simple measurements like a wheel encoder in a ground robot or motor speeds in a quadrotor/drone or fancy/complex measurements like a kinect or Visual Odometry (this involves computing feature matches, fundamental matrix, essential matrix, triangulation and  PnP). More about Visual Odometry later.  
 
 - Odometry indicates the robot's estimates of it's own movement between two time instants \\(t \\) and \\(t + 1\\). This is denoted by \\( \mathbf{o_{t}^{t+1}}\\).
 - The odometry estimates are noisy with zero mean additive white gaussian noise. It can be modelled as drawn from \\( \mathbf{o_{t}^{t+1}} = \mathbf{\hat{o_{t}^{t+1}}} + \mathcal{N}(0, \Sigma_o )\\). Here, \\( \mathbf{\hat{o}_{t}^{t+1}} \\) is the noiseless measurement and \\( \Sigma_o\\) is the odometry noise. \\( \Sigma_o\\) generally a tuned parameter or estimated using a much more accurate localization setup like a [motion capture setup](https://www.vicon.com/). 
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsam5.png" width="100%">
+  <div class="figcaption">
+    Left: The robot's moves 1 step from \(t=0\) to \(t=1\). Right: Zoomed in view of the same. Observe that the odometry (blue asterisk at \(t=1\) is noisy, i.e., doesnt co-incide with the blue circle at the same time).
+  </div>
+  <img src="/assets/sfm/gtsam6.png" width="100%">
+  <div class="figcaption">
+   Left: The robot's moves 4 step from \(t=0\) to \(t=4\). Right: Zoomed in view of the same. 
+  </div>
+  <div style="clear:both;"></div>
+</div>
 
 The **Simultaneous Localization and Mapping (SLAM)** or **Structure from Motion (SfM)** problem is defined as follows. Given initial pose \\(\mathbf{x_0}\\), odometry estimates \\(\mathbf{o_t^{t+1}}\\) and landmark measurements \\( \mathbf{m_t} \\) (all the measurements at time \\(t\\)), find the **Best estimate** of landmark locations \\( \mathbf{l_k}\\) and robot pose \\(\mathbf{x_t}\\) at every time instant. Observe that we said best estimate and not compute the perfect value. This is because, there is no way to find the perfect value unless we have \\(\infty\\) measurements (Refer to [**Central Limit Theroem**](https://en.wikipedia.org/wiki/Central_limit_theorem) for the reason). 
 
