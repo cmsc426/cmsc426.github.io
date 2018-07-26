@@ -79,7 +79,7 @@ The **Simultaneous Localization and Mapping (SLAM)** or **Structure from Motion 
 The SLAM/SfM problem can be thought of in a Baeysian way (something like expectation maximization we saw in the GMM project). This leads to setting up a **Bayesian graph/network** which is shown below:
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/gtsam8.png" width="100%">
+  <img src="/assets/sfm/gtsam8.png" width="80%">
   <div class="figcaption">
    A Hidden Markov Model (HMM) represented as a Bayesian graph for the SLAM/SfM problem. Notice that it's hard to observe the differences between which of the quantities are observations and which are to be estimated. Nodes/bubbles represent known and unknown quantities and edges/lines represent constraints. 
   </div>
@@ -90,9 +90,46 @@ Because the Bayesian graph has no differentiation between known and unknown quan
 
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/gtsam9.png" width="100%">
+  <img src="/assets/sfm/gtsam9.png" width="80%">
   <div class="figcaption">
    A Hidden Markov Model (HMM) represented as a Factor graph for the SLAM/SfM problem. Notice how easy the graph is to understand as compared to the Bayesian graph we saw before.
   </div>
   <div style="clear:both;"></div>
 </div>
+
+First, let's talk about some factor graph terminology. A **Unary factor** is a factor which is connected only on one side to an unknown. This represents the prior information and is used to represent the initial state of the robot. For eg., look at the  factor connected to \\(\mathbf{x_0}\\). Each contraint is associated with a covariance matrix which indicates how strongly one should enforce it for the optimization. Think of it as a measure of amount of slack you want to cut to that constraint in that particular optimization. If we really want to enforce the constraint that the initial pose is the origin, we would choose a very small covariance for it. A **Binary factor** is a factor which is connected on both sides to unknowns. This represents the constraints between the two unknowns. This is generally used to represent the measurements of the landmarks and the odometry. Note that the appripriate covariance needs to be used (\\(\Sigma_m or \Sigma_o\\)). 
+
+Now, let's dive into the math which is working behind the mask of the factor graph. 
+
+**Prior:**
+
+$$
+\phi(\mathbf{x_0}) \propto P(\mathbf{x_0})
+$$
+
+Here, \\( \phi\\) represents the value of the factor and \\(P\\) represents the probability function. Prior is represented using a unary factor.
+
+**Motion Model/Odometry:**
+
+$$
+\psi_{t-1,t}(\mathbf{x_{t}}, \mathbf{x_{t}}) \propto P(\mathbf{x_{t}}\vert \mathbf{x_{t-1}}, \mathbf{u_t})
+$$
+
+Here, \\(\mathbf{u_t}\\) represents the control signal given to the robot to move from \\(\mathbf{x_{t-1}\\) to \\(\mathbf{x_t}\\). Motion Model/Odometry is represented using a binary factor.
+
+**Measurement/Observation Model:**
+
+$$
+\psi_{t,k}(\mathbf{x_{t}}, \mathbf{l_k}) \propto P(\mathbf{m_{t,k}}\vert \mathbf{x_{t}}, \mathbf{l_k})
+$$
+
+Here, \\( \mathbf{m_{t,k} \\) is the measurement of \\(k^{\text{th}}\\) landmark \\(\mathbf{l_k}\\) at time \\(t\\). Measurement/Observation Model is represented using a binary factor.
+
+The **MAP problem/value of the graph to maximize** is defined as follows:
+
+$$
+P(\mathbf{\Theta}) \propto \prod_{t=0}^T \phi_t(\theta_t) \prod_{\{ i, j\}, i< j} \psi_{ij}(\theta_i, \theta_j)\\
+\mathbf{\Theta} \overset{\Delta}{=} (\mathbf{X}, \mathbf{L})
+$$
+
+Here, \\(\mathbf{X}, \mathbf{L} \\) represents the set of all states and landmark locations and \\(T\\) is the final time when the robot stops. 
