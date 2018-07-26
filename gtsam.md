@@ -115,7 +115,7 @@ $$
 \psi_{t-1,t}(\mathbf{x_{t}}, \mathbf{x_{t}}) \propto P(\mathbf{x_{t}}\vert \mathbf{x_{t-1}}, \mathbf{u_t})
 $$
 
-Here, \\(\mathbf{u_t}\\) represents the control signal given to the robot to move from \\(\mathbf{x_{t-1}\\) to \\(\mathbf{x_t}\\). Motion Model/Odometry is represented using a binary factor.
+Here, \\(\mathbf{u_t}\\) represents the control signal given to the robot to move from \\(\mathbf{x_{t-1}}\\) to \\(\mathbf{x_t}\\). Motion Model/Odometry is represented using a binary factor.
 
 **Measurement/Observation Model:**
 
@@ -123,7 +123,7 @@ $$
 \psi_{t,k}(\mathbf{x_{t}}, \mathbf{l_k}) \propto P(\mathbf{m_{t,k}}\vert \mathbf{x_{t}}, \mathbf{l_k})
 $$
 
-Here, \\( \mathbf{m_{t,k} \\) is the measurement of \\(k^{\text{th}}\\) landmark \\(\mathbf{l_k}\\) at time \\(t\\). Measurement/Observation Model is represented using a binary factor.
+Here, \\( \mathbf{m_{t,k} \\) is the measurement of \\(k^{\text{th}}\\) landmark \\(\mathbf{l_k}}\\) at time \\(t\\). Measurement/Observation Model is represented using a binary factor.
 
 The **MAP problem/value of the graph to maximize** is defined as follows:
 
@@ -132,4 +132,9 @@ P(\mathbf{\Theta}) \propto \prod_{t=0}^T \phi_t(\theta_t) \prod_{\{ i, j\}, i< j
 \mathbf{\Theta} \overset{\Delta}{=} (\mathbf{X}, \mathbf{L})
 $$
 
-Here, \\(\mathbf{X}, \mathbf{L} \\) represents the set of all states and landmark locations and \\(T\\) is the final time when the robot stops. 
+Here, \\(\mathbf{X}, \mathbf{L} \\) represents the set of all states and landmark locations and \\(T\\) is the final time when the robot stops. GTSAM uses either a [Levenberg Marquardt](https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm) or the [Dogleg optimizer](https://optimization.mccormick.northwestern.edu/index.php/Trust-region_methods) to obtain the MAP estimates of the unknown parameters.
+
+The code for the example in this toy example can be found on [Nitin's github here](https://github.com/NitinJSanket/CMSC828THW1). Feel free to play around and ask any questions you have to the TAs. 
+
+
+
