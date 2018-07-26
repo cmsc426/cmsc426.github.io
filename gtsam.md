@@ -123,7 +123,7 @@ $$
 \psi_{t,k}(\mathbf{x_{t}}, \mathbf{l_k}) \propto P(\mathbf{m_{t,k}}\vert \mathbf{x_{t}}, \mathbf{l_k})
 $$
 
-Here, \\( \mathbf{m_{t,k} \\) is the measurement of \\(k^{\text{th}}\\) landmark \\(\mathbf{l_k}}\\) at time \\(t\\). Measurement/Observation Model is represented using a binary factor.
+Here, \\( \mathbf{m_{t,k}} \\) is the measurement of \\(k^{\text{th}}\\) landmark \\(\mathbf{l_k}}\\) at time \\(t\\). Measurement/Observation Model is represented using a binary factor.
 
 The **MAP problem/value of the graph to maximize** is defined as follows:
 
