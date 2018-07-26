@@ -40,7 +40,7 @@ Now, let's talk about the **measurement model**  or our model of the measurement
 <div class="fig fighighlight">
   <img src="/assets/sfm/gtsam4.png" width="100%">
   <div class="figcaption">
-    Left: The robot's view of the world at \(t=0\). Right: Zoomed in view of the same. 
+    Left: The robot's view of the world at \(t=0\). Right: Zoomed in view of the same. The view is showed as a green highlight.
   </div>
   <br>
   <img src="/assets/sfm/gtsam4_1.png" width="100%">
@@ -66,8 +66,33 @@ Now, let's talk about the **odometry model**  or our model of how the robot move
   <div class="figcaption">
    Left: The robot's moves 4 step from \(t=0\) to \(t=4\). Right: Zoomed in view of the same. 
   </div>
+  <br>
+  <img src="/assets/sfm/gtsam7.png" width="60%">
+  <div class="figcaption">
+   What we want the algorithm to do. Estimate pose of the robot and landmarks.
+  </div>
   <div style="clear:both;"></div>
 </div>
 
 The **Simultaneous Localization and Mapping (SLAM)** or **Structure from Motion (SfM)** problem is defined as follows. Given initial pose \\(\mathbf{x_0}\\), odometry estimates \\(\mathbf{o_t^{t+1}}\\) and landmark measurements \\( \mathbf{m_t} \\) (all the measurements at time \\(t\\)), find the **Best estimate** of landmark locations \\( \mathbf{l_k}\\) and robot pose \\(\mathbf{x_t}\\) at every time instant. Observe that we said best estimate and not compute the perfect value. This is because, there is no way to find the perfect value unless we have \\(\infty\\) measurements (Refer to [**Central Limit Theroem**](https://en.wikipedia.org/wiki/Central_limit_theorem) for the reason). 
 
+The SLAM/SfM problem can be thought of in a Baeysian way (something like expectation maximization we saw in the GMM project). This leads to setting up a **Bayesian graph/network** which is shown below:
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsam8.png" width="100%">
+  <div class="figcaption">
+   A Hidden Markov Model (HMM) represented as a Bayesian graph for the SLAM/SfM problem. Notice that it's hard to observe the differences between which of the quantities are observations and which are to be estimated. Nodes/bubbles represent known and unknown quantities and edges/lines represent constraints. 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+Because the Bayesian graph has no differentiation between known and unknown quantities for representation, the complexity of solving the graph is high even for a small number of parameters. As estimating the Maximum a-Posteriori (MAP) for just 3 measurements involes 6 factors and this grows exponentially making the process very very slow. We will not discuss how this is done as it is out of the scope of this class. Interested readers are referred to [this article](http://borg.cc.gatech.edu/sites/edu.borg/files/downloads/gtsam.pdf). A better representation model is a **Factor Graph**. In the factor graph model, only the unknown quantities are represented in nodes/bubbles. The known quantities and constraints are encoded in the solid squared and edges. This representation makes it super easy to understand the problem in hand. To do an MAP inference, we maximize the **value of the graph** which will be defined later mathematically. Let us first look at the factor graph image.
+
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsam9.png" width="100%">
+  <div class="figcaption">
+   A Hidden Markov Model (HMM) represented as a Factor graph for the SLAM/SfM problem. Notice how easy the graph is to understand as compared to the Bayesian graph we saw before.
+  </div>
+  <div style="clear:both;"></div>
+</div>
