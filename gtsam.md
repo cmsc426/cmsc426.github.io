@@ -18,8 +18,8 @@ Let us consider a toy example to understand how one would solve SfM/SLAM in GTSA
 
 Now, let us say that each landmark is uniqely numbered so that we can distinguish between them. Let each landmark \\(\mathbf{l_k}\\) be represented by am \\(\mathbb{R}^2\\) vector which contains the \\(x\\) and \\(y\\) coordinate and is denoted by \\( \mathbf{l_k} = \begin{bmatrix} l_{k,x} & \_{k,y}\end{bmatrix}^T\\). The SfM/SLAM problem is to find the realtive pose of the landmarks and the pose of the robot when the robot is moving in the world. The key assumption here is that the landmarks are **stationary**. Dealing with non-stationary objects in the world is still an unsolved research topic. 
 
-<div class="fig figleft fighighlight">
-  <img src="/assets/sfm/gtsam3.png" width="50%">
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsam3.png" width="60%">
   <div class="figcaption">
     The world with numbered landmarks (red x's) and robot at time \( t = 0\) (blue circle). The <b>start of service</b> origin is chosen as the robot's pose at time \( t = 0\) (blue asterisk).
   </div>
