@@ -21,7 +21,7 @@ Now, let us say that each landmark is uniqely numbered so that we can distinguis
 <div class="fig figleft fighighlight">
   <img src="/assets/sfm/gtsam3.png" width="50%">
   <div class="figcaption">
-    The world with numbered landmarks (red x's) and robot at time \( t = 0\) (blue circle). The **start of service** origin is chosen as the robot's pose at time \( t = 0\) (blue asterisk).
+    The world with numbered landmarks (red x's) and robot at time \( t = 0\) (blue circle). The <b>start of service</b> origin is chosen as the robot's pose at time \( t = 0\) (blue asterisk).
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -42,6 +42,7 @@ Now, let's talk about the **measurement model**  or our model of the measurement
   <div class="figcaption">
     Left: The robot's view of the world at \(t=0\). Right: Zoomed in view of the same. 
   </div>
+  <br>
   <img src="/assets/sfm/gtsam4_1.png" width="100%">
   <div class="figcaption">
     Left: The robot's observations at \(t=0\). Notice that the blue lines indicate the landmark is seen and red lines indicate that the landmarks are not seen/missed by the sensor. Right: Zoomed in view of the same shows the noise in measurements. Small blue circles indicate the measurements of the corresponding landmarks. 
@@ -60,6 +61,7 @@ Now, let's talk about the **odometry model**  or our model of how the robot move
   <div class="figcaption">
     Left: The robot's moves 1 step from \(t=0\) to \(t=1\). Right: Zoomed in view of the same. Observe that the odometry (blue asterisk at \(t=1\) is noisy, i.e., doesnt co-incide with the blue circle at the same time).
   </div>
+  <br>
   <img src="/assets/sfm/gtsam6.png" width="100%">
   <div class="figcaption">
    Left: The robot's moves 4 step from \(t=0\) to \(t=4\). Right: Zoomed in view of the same. 
