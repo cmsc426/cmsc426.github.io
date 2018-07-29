@@ -139,7 +139,7 @@ The code for the example in this toy example can be found on [Nitin's github her
 Now, that we've understood the Toy example (If you haven't played around with [Nitin's code](https://github.com/NitinJSanket/CMSC828THW1), now is a good time to do so!). Let us focus on the task in the project. The images for the project are taken from a quadrotor/drone flying over a carpet of [april tags](https://april.eecs.umich.edu/software/apriltag.html) with New York's cityscape (taken from Google Maps) in-between the tags for added features in-case you decided to get creative and use it for odometry. A photo of the data being collected is shown below: 
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/Quadrotorflyigovertags.jpg" width="80%">
+  <img src="/assets/sfm/Quadrotorflyigovertags.jpg">
   <div class="figcaption">
    A quadrotor flying over a carpet of April Tags. The quadrotor is equipped with a front facing camera, a downward facing camera and an Inertial Measurement Unit (IMU). 
   </div>
@@ -152,7 +152,7 @@ Now, let's talk about what this "magical" April tag is. An [AprilTag](https://ap
 Let us consider the pose estimation of a camera given one AprilTag. The AprilTag library gives us the location of the tag corners on the image. Refer to [Nitin's Github](https://github.com/NitinJSanket/AprilTagsC) for a link to the modified wrapper which can be run from Matlab directly using the `system` command. A sample of how an April Tag looks in the camera image is shown below:
 
  <div class="fig fighighlight">
-  <img src="/assets/sfm/Quadrotorflyigovertags.jpg">
+  <img src="/assets/sfm/singletag.jpg">
   <div class="figcaption">
    How the AprilTag looks at different distances on the image.
   </div>
@@ -167,14 +167,54 @@ Let us consider the pose estimation of a camera given one AprilTag. The AprilTag
   <div style="clear:both;"></div>
 </div>
 
-Notice that we only obtain the tag corner locations on the image. We need to compute the camera pose from these corners. We have encoutered this scenario before, i.e., given the image coordinates \\(\mathbf{x}\\) and their corresponding world coordinates \\(\mathbf{X}\\), we need to compute the camera pose. This is exactly the same as the Perspective-n-Point problem we saw earlier. Let us consider a special case of this problem, if we assume that all the points lie on a plane (for the april tag it does anyway). The transformation from the world to the image plane becomes a **Homography**. Let us write this down mathematically. The projection formula is given by
+Notice that we only obtain the tag corner locations on the image. We need to compute the camera pose from these corners. We have encoutered this scenario before, i.e., given the image coordinates \\(\mathbf{x}\\) and their corresponding world coordinates \\(\mathbf{X}\\), we need to compute the camera pose. This is exactly the same as the Perspective-n-Point problem we saw earlier. Let us consider a special case of this problem, if we assume that all the points lie on a plane (for the april tag it does anyway). The transformation from the world to the image plane becomes a **Homography**. Let us write this down mathematically. The projection formula is given by:
 
 $$
-\begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & r_3 & T\end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}
+\begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & r_3 & T \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}
 $$
 
-- Recall homography
-- Quadrotor flying over tags image
+Here, \\( R = \begin{bmatrix} r_1 & r_2 & r_3 \\) is the rotation matrix representing the orientation of the camera in the world and \\(T\\) is the translation or position of the camera in the world. 
+
+Because, we are interested in finding the pose of the camera \\( \begin{bmatrix} r_1 & r_2 & r_3 & T\end{bmatrix} \\) with respect to the april tag \\(\mathbf{X}\\), and we know that the april tag is on a plane. We can arbitraily chose the world coordinate as \\(Z=0\\), i.e., the tag's plane in the world is the \\(Z=0\\) plane. This can be mathematically written as:
+
+$$
+\begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & T \end{bmatrix} \begin{bmatrix} X \\ Y \\ W \end{bmatrix}
+$$
+
+Now, let us denote \\( \begin{bmatrix} r_1 & r_2 & T \end{bmatrix} \\) as \\( H \\), the **homography matrix** which encompasses the pose of the camera. We are intersted in finding the pose of the camera, i.e., \\( R, T\\). 
+
+$$
+K^{-1}H = \begin{bmatrix}h_1' & h_2' & h_3' end{bmatrix}
+$$ 
+
+We need a minimum of 4 point correspondences between the tag image locations and the world points to **uniquely** determine the pose of the camera. Luckily, we have 4 corners in the April Tag. Now the rotation matrix which can be formed from the values of \\(K^{-1}H \\) are given by \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} \\). However note that, this only guarentees that the columns are orthogonal but not that the determinant as +1, i.e., this solution doesn't guarentee a valid rotation matrix. The optimization problem is to find a valid rotation matrix closest to the solution we found in the last step. This can be mathematically written as:
+
+$$
+\underset{R \in SO(3)}{\operatorname{argmin}} \vert \vert R - \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} \vert \vert_F^2 
+$$
+
+Where the norm used in the above equation is called [Frobenious Norm](http://mathworld.wolfram.com/FrobeniusNorm.html).
+
+As always, our best friend SVD can help us solve the above optimization problem. 
+
+$$
+begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} = U\Sigma V^T
+$$
+
+The "best" valid rotation matrix approximating the above matrix is given by:
+
+$$
+R = U begin{bmatrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & \det{UV^T} end{bmatrix}V^T
+$$
+
+The diagonal matrix ensures/improses the constraint that the determinant is +1 and because U, V^T are obtained from the decomposition of \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} \\), the orthonomlaity is automatically satisfied. Hence \\(R\\) is a valid rotation matrix. 
+
+The translation/position can be found as:
+
+$$
+T = \frac{h_3'}{\vert \vert h_1' \vert \vert}
+$$
+
 - Data given
 - Factor graph explained
 - Cite PennCOSYVIO paper
