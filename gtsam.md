@@ -217,8 +217,25 @@ $$
 
 **However, in the most general case one would need to stick to solving the PnP problem.** 
 
-The project you are solving is closely related to [Nitin's Masters Thesis](https://drive.google.com/file/d/0B-6qEdcGmuD8bkl4MmpnTXI4RXM/view?usp=sharing) at the University of Pennsylvania. The concepts used in the Thesis are also presented in Nitin's [ICRA paper](http://www.cis.upenn.edu/~kostas/mypub.dir/pfrommer17icra.pdf). More details about the project can also be found on the [project website](https://daniilidis-group.github.io/penncosyvio/).
+The project you are solving is closely related to [Nitin's Masters Thesis](https://drive.google.com/file/d/0B-6qEdcGmuD8bkl4MmpnTXI4RXM/view?usp=sharing) at the University of Pennsylvania. The concepts used in the Thesis are also presented in [Nitin's ICRA paper](http://www.cis.upenn.edu/~kostas/mypub.dir/pfrommer17icra.pdf). More details about the project can also be found on the [PennCOSYVIO's project website](https://daniilidis-group.github.io/penncosyvio/).
 
-- Data given
-- Factor graph explained
-- Cite PennCOSYVIO paper
+Now, that we have all the ideas we need to tackle the problem in hand, let us remind ourselves of the problem in hand. We are given data from a downward facing camera of a quadrotor flying over a carpet of april tags. We want to estimate the pose of the camera/quadrotor at every-time instant whilst localizing the april tags in the "chosen" world reference frame. This problem of camera pose estimation is very easy if the locations of the tags in the world is known and this merely reduces to a Homography estimation problem in case of planar tag placement or PnP in general. However, generally we don't know the locations of the tags in the world. In such cases, we need to simultaneously estimate the pose of the camera and the locations of the tags. This is called Structure from Motion (SfM) or Simultaneous Localization and Mapping (SLAM). 
+
+Now, let us collate all the information we know about the scene. 
+- The carpet of april tags are placed over the floor which can be assumed to be a flat surface/plane.
+- The quadrotor is moving reasonably slowly.
+- Let us choose the first tag detection in the first frame as the world origin and the vector in the direction of \\(p_1\\) to \\(p_2\\) be world \\(X\\) and vector in direction of \\(p_1\\) to \\(p_4\\) be world \\(Y\\). Refer to figure below.
+- All april tags are of the same size and this size is known.
+- The april tags are rigidly attached to the ground with minimal effect from the downforce of the propellers of the quadrotor.
+
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/apriltagdet.jpg" width="50%">
+  <div class="figcaption">
+   The output of the April Tags library are shown are red, green, blue and magenta circles (the corners of the tags in the image). 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+Now, we can start building the Factor Graph for the Bundle Adjustment part in the SfM/SLAM pipeline.
+
