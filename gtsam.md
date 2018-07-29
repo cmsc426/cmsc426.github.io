@@ -136,7 +136,16 @@ Here, \\(\mathbf{X}, \mathbf{L} \\) represents the set of all states and landmar
 
 The code for the example in this toy example can be found on [Nitin's github here](https://github.com/NitinJSanket/CMSC828THW1). Feel free to play around and ask any questions you have to the TAs. 
 
-Now, that we've understood the Toy example (If you haven't played around with [Nitin's code](https://github.com/NitinJSanket/CMSC828THW1), now is a good time to do so!). Let us focus on the task in the project. The images for the project are taken from a [quadrotor/drone](https://www.parrot.com/us/drones/parrot-bebop-2-fpv) flying over a carpet of april tags with New York's cityscape in-between the tags for added features in-case you decided to get creative to use it for odometry. The data is a set of frames captured from the [Parrot SLAM Dunk module](https://developer.parrot.com/docs/slamdunk/) which is not manufactured anymore. The SLAM Dunk has 2 cameras and an Inertial Measurement Unit (IMU) on board, but we'll only use data from a single camera. 
+Now, that we've understood the Toy example (If you haven't played around with [Nitin's code](https://github.com/NitinJSanket/CMSC828THW1), now is a good time to do so!). Let us focus on the task in the project. The images for the project are taken from a quadrotor/drone flying over a carpet of [april tags](https://april.eecs.umich.edu/software/apriltag.html) with New York's cityscape in-between the tags for added features in-case you decided to get creative to use it for odometry. A photo of the data being collected is shown below:
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/Quadrotorflyigovertags.jpg" width="80%">
+  <div class="figcaption">
+   A quadrotor flying over a carpet of April Tags. The quadrotor is equipped with a front facing camera, a downward facing camera and an Inertial Measurement Unit (IMU). 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
 
 - Explain about April Tags
 - Recall homography
