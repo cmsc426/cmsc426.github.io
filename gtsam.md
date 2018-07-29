@@ -252,7 +252,7 @@ This resulting factor graph is shown below:
 <div class="fig fighighlight">
   <img src="/assets/sfm/factorgraph.png">
   <div class="figcaption">
-  The factor graph for Bundle Adjustment in SfM/SLAM problem. \\(\matbhf{x_t}\\) represents camera pose at time \\(t\\) and \\(\mathbf{L_k^i}\\) represents the \\(i^{\text{th}}\\) corner of the \\(k^{\text{th}}\\) tag. We want to estimate the things in the bubble and the solid/filled bubbles are the constraints imposed.
+  The factor graph for Bundle Adjustment in SfM/SLAM problem. \(\matbhf{x_t}\) represents camera pose at time \(t\) and \(\mathbf{L_k^i}\) represents the \(i^{\text{th}}\) corner of the \(k^{\text{th}}\) tag. We want to estimate the things in the bubble and the solid/filled bubbles are the constraints imposed. The constraints for the 100\(\text{th}\) landmark and \(x_1\) are not shown for the purpose of brevity.
   </div>
   <div style="clear:both;"></div>
 </div>
