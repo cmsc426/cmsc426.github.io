@@ -136,7 +136,7 @@ Here, \\(\mathbf{X}, \mathbf{L} \\) represents the set of all states and landmar
 
 The code for the example in this toy example can be found on [Nitin's github here](https://github.com/NitinJSanket/CMSC828THW1). Feel free to play around and ask any questions you have to the TAs. 
 
-Now, that we've understood the Toy example (If you haven't played around with [Nitin's code](https://github.com/NitinJSanket/CMSC828THW1), now is a good time to do so!). Let us focus on the task in the project. The images for the project are taken from a quadrotor/drone flying over a carpet of [april tags](https://april.eecs.umich.edu/software/apriltag.html) with New York's cityscape in-between the tags for added features in-case you decided to get creative to use it for odometry. A photo of the data being collected is shown below:
+Now, that we've understood the Toy example (If you haven't played around with [Nitin's code](https://github.com/NitinJSanket/CMSC828THW1), now is a good time to do so!). Let us focus on the task in the project. The images for the project are taken from a quadrotor/drone flying over a carpet of [april tags](https://april.eecs.umich.edu/software/apriltag.html) with New York's cityscape (taken from Google Maps) in-between the tags for added features in-case you decided to get creative and use it for odometry. A photo of the data being collected is shown below: 
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/Quadrotorflyigovertags.jpg" width="80%">
@@ -146,6 +146,28 @@ Now, that we've understood the Toy example (If you haven't played around with [N
   <div style="clear:both;"></div>
 </div>
 
+Now, let's talk about what this "magical" April tag is. An [AprilTag](https://april.eecs.umich.edu/software/apriltag.html) is a visual fiducial (something of a known shape and size) system, useful for a wide variety of tasks including augmented reality, robotics and camera calibration. It was developed by the April lab at the University of Michigan, Ann Arbor. It is one of the most common fiducial markers used in robotics. Though it is slow, it is extremely robust and works well for even a very small tag size. There have been better fiducial markers developed over the years, some of them are: [ChromaTag](https://arxiv.org/pdf/1708.02982.pdf), [RuneTag](http://www.dsi.unive.it/~bergamasco/runetag/) and [CCTag](https://github.com/alicevision/CCTag). Because of it' robustness and commonality, we'll use the AprilTag. Specifically we'll use AprilTags v2 because of it's higher speed as compared to AprilTags v1 with minimal loss in robustness. 
+
+
+Let us consider the pose estimation of a camera given one AprilTag. The AprilTag library gives us the location of the tag corners on the image. Refer to [Nitin's Github](https://github.com/NitinJSanket/AprilTagsC) for a link to the modified wrapper which can be run from Matlab directly using the `system` command. A sample of how an April Tag looks in the camera image is shown below:
+
+ <div class="fig fighighlight">
+  <img src="/assets/sfm/Quadrotorflyigovertags.jpg">
+  <div class="figcaption">
+   How the AprilTag looks at different distances on the image.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/apriltagdet.jpg" width="50%">
+  <div class="figcaption">
+   The output of the April Tags library are shown are red, green, blue and magenta circles (the corners of the tags in the image). 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+Notice that we only obtain the tag corner locations on the image. We need to compute the camera pose from these corners. We have encoutered this scenario before, i.e., given the image coordinates \\(\mathbf{x}\\) and their corresponding world coordinates \\(\mathbf{X}\\), we need to compute the camera pose. This is exactly the same as the Perspective-n-Point problem we saw earlier. Let us consider a special case of this problem,  
 
 - Explain about April Tags
 - Recall homography
