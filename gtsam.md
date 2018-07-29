@@ -215,6 +215,8 @@ $$
 T = \frac{h_3'}{\vert \vert h_1' \vert \vert}
 $$
 
+**However, in the most general case one would need to stick to solving the PnP problem.** 
+
 - Data given
 - Factor graph explained
 - Cite PennCOSYVIO paper
