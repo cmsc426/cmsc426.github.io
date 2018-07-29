@@ -187,10 +187,10 @@ $$
 K^{-1}H = \begin{bmatrix}h_1' & h_2' & h_3' end{bmatrix}
 $$ 
 
-We need a minimum of 4 point correspondences between the tag image locations and the world points to **uniquely** determine the pose of the camera. Luckily, we have 4 corners in the April Tag. Now the rotation matrix which can be formed from the values of \\(K^{-1}H \\) are given by \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} \\). However note that, this only guarentees that the columns are orthogonal but not that the determinant as +1, i.e., this solution doesn't guarentee a valid rotation matrix. The optimization problem is to find a valid rotation matrix closest to the solution we found in the last step. This can be mathematically written as:
+We need a minimum of 4 point correspondences between the tag image locations and the world points to **uniquely** determine the pose of the camera. Luckily, we have 4 corners in the April Tag. Now the rotation matrix which can be formed from the values of \\(K^{-1}H \\) are given by \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} \\). However note that, this only guarentees that the columns are orthogonal but not that the determinant as +1, i.e., this solution doesn't guarentee a valid rotation matrix. The optimization problem is to find a valid rotation matrix closest to the solution we found in the last step. This can be mathematically written as:
 
 $$
-\underset{R \in SO(3)}{\operatorname{argmin}} \vert \vert R - \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} \vert \vert_F^2 
+\underset{R \in SO(3)}{\operatorname{argmin}} \vert \vert R - \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} \vert \vert_F^2 
 $$
 
 Where the norm used in the above equation is called [Frobenious Norm](http://mathworld.wolfram.com/FrobeniusNorm.html).
@@ -198,16 +198,16 @@ Where the norm used in the above equation is called [Frobenious Norm](http://mat
 As always, our best friend SVD can help us solve the above optimization problem. 
 
 $$
-begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} = U\Sigma V^T
+begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} = U\Sigma V^T
 $$
 
 The "best" valid rotation matrix approximating the above matrix is given by:
 
 $$
-R = U begin{bmatrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & \det{UV^T} end{bmatrix}V^T
+R = U begin{bmatrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & \det{UV^T} \end{bmatrix}V^T
 $$
 
-The diagonal matrix ensures/improses the constraint that the determinant is +1 and because U, V^T are obtained from the decomposition of \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' end{bmatrix} \\), the orthonomlaity is automatically satisfied. Hence \\(R\\) is a valid rotation matrix. 
+The diagonal matrix ensures/improses the constraint that the determinant is +1 and because U, V^T are obtained from the decomposition of \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} \\), the orthonomlaity is automatically satisfied. Hence \\(R\\) is a valid rotation matrix. 
 
 The translation/position can be found as:
 
