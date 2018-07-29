@@ -167,9 +167,12 @@ Let us consider the pose estimation of a camera given one AprilTag. The AprilTag
   <div style="clear:both;"></div>
 </div>
 
-Notice that we only obtain the tag corner locations on the image. We need to compute the camera pose from these corners. We have encoutered this scenario before, i.e., given the image coordinates \\(\mathbf{x}\\) and their corresponding world coordinates \\(\mathbf{X}\\), we need to compute the camera pose. This is exactly the same as the Perspective-n-Point problem we saw earlier. Let us consider a special case of this problem,  
+Notice that we only obtain the tag corner locations on the image. We need to compute the camera pose from these corners. We have encoutered this scenario before, i.e., given the image coordinates \\(\mathbf{x}\\) and their corresponding world coordinates \\(\mathbf{X}\\), we need to compute the camera pose. This is exactly the same as the Perspective-n-Point problem we saw earlier. Let us consider a special case of this problem, if we assume that all the points lie on a plane (for the april tag it does anyway). The transformation from the world to the image plane becomes a **Homography**. Let us write this down mathematically. The projection formula is given by
 
-- Explain about April Tags
+$$
+\begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & r_3 & T\end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}
+$$
+
 - Recall homography
 - Quadrotor flying over tags image
 - Data given
