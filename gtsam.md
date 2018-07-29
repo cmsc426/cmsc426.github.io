@@ -175,7 +175,7 @@ $$
 
 Here, \\( R = \begin{bmatrix} r_1 & r_2 & r_3 \\) is the rotation matrix representing the orientation of the camera in the world and \\(T\\) is the translation or position of the camera in the world. 
 
-Because, we are interested in finding the pose of the camera \\( \begin{bmatrix} r_1 & r_2 & r_3 & T\end{bmatrix} \\) with respect to the april tag \\(\mathbf{X}\\), and we know that the april tag is on a plane. We can arbitraily chose the world coordinate as \\(Z=0\\), i.e., the tag's plane in the world is the \\(Z=0\\) plane. This can be mathematically written as:
+Because, we are interested in finding the pose of the camera \\( \begin{bmatrix} r_1 & r_2 & r_3 & T \end{bmatrix} \\) with respect to the april tag \\(\mathbf{X}\\), and we know that the april tag is on a plane. We can arbitraily chose the world coordinate as \\(Z=0\\), i.e., the tag's plane in the world is the \\(Z=0\\) plane. This can be mathematically written as:
 
 $$
 \begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & T \end{bmatrix} \begin{bmatrix} X \\ Y \\ W \end{bmatrix}
@@ -184,7 +184,7 @@ $$
 Now, let us denote \\( \begin{bmatrix} r_1 & r_2 & T \end{bmatrix} \\) as \\( H \\), the **homography matrix** which encompasses the pose of the camera. We are intersted in finding the pose of the camera, i.e., \\( R, T\\). 
 
 $$
-K^{-1}H = \begin{bmatrix}h_1' & h_2' & h_3' end{bmatrix}
+K^{-1}H = \begin{bmatrix}h_1' & h_2' & h_3' \end{bmatrix}
 $$ 
 
 We need a minimum of 4 point correspondences between the tag image locations and the world points to **uniquely** determine the pose of the camera. Luckily, we have 4 corners in the April Tag. Now the rotation matrix which can be formed from the values of \\(K^{-1}H \\) are given by \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} \\). However note that, this only guarentees that the columns are orthogonal but not that the determinant as +1, i.e., this solution doesn't guarentee a valid rotation matrix. The optimization problem is to find a valid rotation matrix closest to the solution we found in the last step. This can be mathematically written as:
@@ -198,13 +198,13 @@ Where the norm used in the above equation is called [Frobenious Norm](http://mat
 As always, our best friend SVD can help us solve the above optimization problem. 
 
 $$
-begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} = U\Sigma V^T
+\begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} = U\Sigma V^T
 $$
 
 The "best" valid rotation matrix approximating the above matrix is given by:
 
 $$
-R = U begin{bmatrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & \det{UV^T} \end{bmatrix}V^T
+R = U \begin{bmatrix}1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & \det{UV^T} \end{bmatrix}V^T
 $$
 
 The diagonal matrix ensures/improses the constraint that the determinant is +1 and because U, V^T are obtained from the decomposition of \\( \begin{bmatrix}h_1' & h_2' & h_1' \times h_2' \end{bmatrix} \\), the orthonomlaity is automatically satisfied. Hence \\(R\\) is a valid rotation matrix. 
