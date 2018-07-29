@@ -173,7 +173,7 @@ $$
 \begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & r_3 & T \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}
 $$
 
-Here, \\( R = \begin{bmatrix} r_1 & r_2 & r_3 \\) is the rotation matrix representing the orientation of the camera in the world and \\(T\\) is the translation or position of the camera in the world. 
+Here, \\( R = \begin{bmatrix} r_1 & r_2 & r_3 \end{bmatrix}\\) is the rotation matrix representing the orientation of the camera in the world and \\(T\\) is the translation or position of the camera in the world. 
 
 Because, we are interested in finding the pose of the camera \\( \begin{bmatrix} r_1 & r_2 & r_3 & T \end{bmatrix} \\) with respect to the april tag \\(\mathbf{X}\\), and we know that the april tag is on a plane. We can arbitraily chose the world coordinate as \\(Z=0\\), i.e., the tag's plane in the world is the \\(Z=0\\) plane. This can be mathematically written as:
 
