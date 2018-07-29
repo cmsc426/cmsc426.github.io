@@ -217,6 +217,8 @@ $$
 
 **However, in the most general case one would need to stick to solving the PnP problem.** 
 
+The project you are solving is closely related to [Nitin's Masters Thesis](https://drive.google.com/file/d/0B-6qEdcGmuD8bkl4MmpnTXI4RXM/view?usp=sharing) at the University of Pennsylvania. The concepts used in the Thesis are also presented in Nitin's [ICRA paper](http://www.cis.upenn.edu/~kostas/mypub.dir/pfrommer17icra.pdf). More details about the project can also be found on the [project website](https://daniilidis-group.github.io/penncosyvio/).
+
 - Data given
 - Factor graph explained
 - Cite PennCOSYVIO paper
