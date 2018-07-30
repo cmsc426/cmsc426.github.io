@@ -5,3 +5,4 @@ Notes and assignments for University of Maryland's Computer Vision Class [CMSC42
 - [ ] Scale metric vs relative (explain after BA and camera model)
 - [ ] Write one line about Hidden Markov Model (HMM)
 - [ ] Say that all April Tags are unique/distinct.
+- [ ] Change ProjectionFactor to GenericProjectionFactor in the graph.
