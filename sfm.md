@@ -206,7 +206,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 
 <a name='pnp'></a>
 ### 5. Perspective-$$n$$-Points:
-Now, since we have a set of $n$ 3D points in the world and their $2D$ projections in the image, the camera pose can be estimated as a linear least squares problem. 
+Now, since we have a set of $$n$$ 3D points in the world and their $$2D$$ projections in the image, the camera pose can be estimated as a linear least squares problem. 
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/pnpransac.png"  width="80%">
