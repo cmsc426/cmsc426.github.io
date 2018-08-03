@@ -191,7 +191,7 @@ where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). No
 <a name='nonlintri'></a>
 ### 4.1 Non-Linear Triangulation:
 Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error (Recall [Project 2](https://cmsc426.github.io/pano/#reproj)) can be refined. The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point: 
-$$\underset{x}{\operatorname{min}}\sum_{j=1,2}\left(u^j - \frac{P_1^{jT}\tilde{\phi}{P_3^{jT}\tilde{X}}\right)^2 + \left(v^j - \frac{P_2^{jT}\tilde{\phi}{P_3^{jT}\tilde{X}}\right)^2$$
+$$\underset{x}{\operatorname{min}}$$ $$\sum_{j=1,2}\left(u^j - \frac{P_1^{jT}\tilde{\phi}}{P_3^{jT}{X}}\right)^2 + \left(v^j - \frac{P_2^{jT}\tilde{\phi}}{P_3^{jT}{X}}\right)^2$$
 
 Here, $$j$$ is the index of each camera, $$\tilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [elaborate]
 
