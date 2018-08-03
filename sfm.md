@@ -252,5 +252,5 @@ Let's see the entire Structure from Motion problem once again: (ADD THE DIAGRAM)
 
 
 The above sequence forms the traditional way of solving the problem of SfM. *But we have something much better in mind for you!*
-<a href="https://cmsc426.github.io/gtsam/"><b>Click here for <u>Part II: The Modern Approach</b></a>
+<a href="https://cmsc426.github.io/gtsam/"><b>Click here for <u>Part II: The Modern Approach</u></b></a>
 
