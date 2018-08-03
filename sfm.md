@@ -28,7 +28,6 @@ Table of Contents:
 
 <a name='intro'></a>
 ## Introduction
-
 We have been playing with images for so long, mostly in 2D scene. Recall [project 2](cmsc426.github.io) where we stitched multiple images with about 30-50% common features between a couple of images. Now let's learn how to **reconstruct a 3D scene and simultaneously obtain the camera poses** of a monocular camera w.r.t. the given scene. This procedure is known as Structure from Motion (SfM). As the name suggests, you are creating the entire **rigid** structure from a set of images with different view points (or equivalently a camera in motion). A few years ago, Agarwal et. al published [Building Rome in a Day](http://grail.cs.washington.edu/rome/rome_paper.pdf) in which they reconstructed the entire city just by using a large collection of photos from the Internet. Ever heard of Microsoft [Photosynth?](https://en.wikipedia.org/wiki/Photosynth) _Facinating? isn't it!?_ There are a few open source SfM algorithm available online like [VisualSFM](http://ccwu.me/vsfm/). _Try them!_ 
 
 Let's learn how to recreate such algorithm. There are a few steps that collectively form SfM:
@@ -112,7 +111,7 @@ Thus, we require at least 8 points to solve the above homogenous system. That is
 With $$N \geq 8$$ correspondences between two images, the fundamental matrix, $$F$$ can be obtained as:
 By stacking the above equation in a matrix $$A$$, the equation
 $$Ax=0$$ is obtained.
-	This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the <a href="https://cmsc426.github.io/math-tutorial/#svd">Math modules</a>. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero. If $$F$$ has a full rank then it will have an empty null-space _i.e._ it won't have any point that is on entire set of lines. Thus, there wouldn't be any epipoles. See fig [NUMBER] for full rank comparisons for $$F$$ matrices.
+	This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the <a href="https://cmsc426.github.io/math-tutorial/#svd">Math module</a>. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero. If $$F$$ has a full rank then it will have an empty null-space _i.e._ it won't have any point that is on entire set of lines. Thus, there wouldn't be any epipoles. See fig [NUMBER] for full rank comparisons for $$F$$ matrices.
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/FMatrixRank.png"  width="120%">
@@ -139,7 +138,7 @@ Since the point correspondences are computed using SIFT or some other feature de
 Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of matching corresponding points (computed using SIFT) which maximizes the number of inliers.
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/ransac.png"  width="100%">
+  <img src="/assets/sfm/ransac.png"  width="80%">
   <div class="figcaption">
  	Algorithm 1: Get Inliers RANSAC
   </div>
@@ -191,9 +190,10 @@ where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). No
 
 <a name='nonlintri'></a>
 ### 4.1 Non-Linear Triangulation:
-Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error can be refined (EXPLAIN THIS LINE). The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point:
-[WRITE THE EQUATION]
-Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [EXPLAIN PROPERLY]
+Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error (Recall [Project 2](https://cmsc426.github.io/pano/#reproj)) can be refined. The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point: 
+$$\underset{\x}{\operatorname{min}}\sum_{j=1,2}\left(u^j - \dfrac{P_1^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2$$
+
+Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [elaborate]
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/nonlintria.png"  width="100%">
@@ -206,18 +206,17 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 
 <a name='pnp'></a>
 ### 5. Perspective-$$n$$-Points:
+Now, since we have a set of $n$ 3D points in the world and their $2D$ projections in the image, the camera pose can be estimated as a linear least squares problem. 
 
 <div class="fig fighighlight">
-  <img src="/assets/sfm/pnpransac.png"  width="100%">
+  <img src="/assets/sfm/pnpransac.png"  width="80%">
   <div class="figcaption">
  	Algorithm 2: PnP RANSAC
   </div>
   <div style="clear:both;"></div>
-</div>
 
 
-<div class="fig fighighlight">
-  <img src="/assets/sfm/PnPRANSAC.png"  width="60%">
+  <img src="/assets/sfm/PnPRANSAC.png"  width="50%">
   <div class="figcaption">
  	Plot of the camera poses with feature points. Different color represents feature correspondences from different pair of images. Blue points are features from Image 1 and Image 2; Red points are features from Image 2 and Image 3 etc.
   </div>
@@ -230,31 +229,28 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 
 <a name='ba'></a>
 ### 6. Bundle Adjustment:
+Once you have computed all the camera poses and 3D points, we need to refine the poses and 3D points together, initialized by previous reconstruction by minimizing reporjection error.
 <div class="fig fighighlight">
-  <img src="/assets/sfm/BA.png"  width="100%">
+  <img src="/assets/sfm/BA.png"  width="80%">
   <div class="figcaption">
  	The final reconstructed scene after Sparse Bundle Adjustment (SBA).
   </div>
   <div style="clear:both;"></div>
 </div>
+The optimization problem can formulated as following:
 
+$$\underset{{C_i, q_i}_{i=1}^i,{X}_{j=1}^J}{\operatorname{min}}\sum_{i=1}^I\sum_{j=1}^J V_{ij}\left(\left(u^j - \dfrac{P_1^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2\right)$$
+where $$V_{ij}$$ is the visibility matrix.
+(_Don't scratch your head yet!_)
 
+ Visibility matrix signifies the relationship between the camera and a point. $$V_{ij}$$ is one if $$j^{th}$$ point is visible from the $$i^{th}$$ camera and zero otherwise.
 
-<a name='summary'></a>
-### 7. Summary:
-Here is the following summary of the entire _traditional SfM_ pipeline:
-<div class="fig fighighlight">
-  <img src="/assets/sfm/summary.png"  width="100%">
-  <div class="figcaption">
- 	Algorithm 3: Structure from Motion pipeline
-  </div>
-  <div style="clear:both;"></div>
-</div>
+One can use a nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB but is extremely slow as the number of parameters are large. The <i>Sparse Bundle Adjustment</i> toolbox is designed to solve such optimization problem by exploiting sparsity of visibility matrix, $$V$$.
 
-
+Let's see the entire Structure from Motion problem once again: (ADD THE DIAGRAM)
 
 
 
 The above sequence forms the traditional way of solving the problem of SfM. *But we have something much better in mind for you!*
+<a href="https://cmsc426.github.io/gtsam/"><b>Click here for <u>Part II: The Modern Approach</b></a>
 
-GTSAM starts here.....
