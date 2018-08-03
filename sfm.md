@@ -150,7 +150,7 @@ Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of mat
   </div>
   <div style="clear:both;"></div>
 </div>
-     
+
 ### 2. Estimate *Essential Matrix* from Fundamental Matrix: 
 Since we have computed the $$\mathbf{F}$$ using epipolar constrains, we can find the relative camera poses between the two images. This can be computed using the *Essential Matrix*, $$\mathbf{E}$$. Essential matrix is another $$3\times3$$ matrix, but with some additional properties that relates the corresponding points assuming that the cameras obeys the pinhole model (unlike $$\mathbf{F}$$). More specifically, 
 $$\mathbf{E}$$ = $$\mathbf{K^TFK}$$
@@ -161,7 +161,7 @@ _It is important to note that the $$\mathbf{F}$$ is defined in the original imag
 
 <a name='essential'></a>
 ### 3. Estimate **Camera Pose** from Essential Matrix
-Since the $$\mathbf{E}$$ matrix is identified, the four camera pose configurations: $$(C_1, R_1), (C_2, R_2), (C_3, R_3)$$ and $$(C_4, R4)$$ where $$\ C\in\mathbb{R}^3$$ is the camera center and $$R\in SO(3)$$ is the rotation matrix, can be computed. Thus, the camera pose can be written as:
+The camera pose consists of 6 degrees-of-freedom (DOF) Rotation (Roll, Pitch, Yaw) and Translation (X, Y, Z) of the camera with respect to the world. Since the $$\mathbf{E}$$ matrix is identified, the four camera pose configurations: $$(C_1, R_1), (C_2, R_2), (C_3, R_3)$$ and $$(C_4, R4)$$ where $$\ C\in\mathbb{R}^3$$ is the camera center and $$R\in SO(3)$$ is the rotation matrix, can be computed. Thus, the camera pose can be written as:
 $$P = KR\begin{bmatrix}I_{3\times3} & -C\end{bmatrix}$$
 These four pose configurations can be computed from $$\mathbf{E}$$ matrix. Let $$\mathbf{E}=UDV^T$$ and $$W=\begin{bmatrix}0 & -1 & 0\\ 1 & 0 & 0\\ 0 & 0 & 1\end{bmatrix}$$. The four configurations can be written as: 
 1. $$C_1=U(:, 3)$$ and $$R_1=UWV^T$$
@@ -190,10 +190,10 @@ where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). No
 
 <a name='nonlintri'></a>
 ### 4.1 Non-Linear Triangulation:
-Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error (Recall [Project 2](https://cmsc426.github.io/pano/#reproj)) can be refined. The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point: 
+Given two camera poses and linearly triangulated points, $$X$$, the locations of the 3D points that minimizes the reprojection error (Recall [Project 2](https://cmsc426.github.io/pano/#reproj)) can be refined. The linear triangulation minimizes the algebraic error. Though, the reprojection error is geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point:<br>
 $$\underset{x}{\operatorname{min}}$$ $$\sum_{j=1,2}\left(u^j - \frac{P_1^{jT}\widetilde{\phi}}{P_3^{jT}{X}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{\phi}}{P_3^{jT}{X}}\right)^2$$
 
-Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. [elaborate]
+Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous representation of $$X$$. $$P_i^T$$ is each row of camera projection matrix, $$P$$. This minimization is highly nonlinear due to the divisions. The initial guess of the solution, $$X_0$$, is estimated via the linear triangulation to minimize the cost function. This minimization can be solved using nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB. 
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/nonlintria.png"  width="100%">
@@ -206,7 +206,9 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 
 <a name='pnp'></a>
 ### 5. Perspective-$$n$$-Points:
-Now, since we have a set of $$n$$ 3D points in the world and their $$2D$$ projections in the image, the camera pose can be estimated as a linear least squares problem. 
+Now, since we have a set of $$n$$ 3D points in the world, their $$2D$$ projections in the image and the intrinsic parameter; the 6 DOF camera pose can be estimated using linear least squares. This fundamental problem, in general is known as _Persepective_-$$n$$-_Point_ (PnP). For there to exist a solution, $$n\geq 3$$. There are multiple methods to solve the P$$n$$P problem and have an assumptions in most of them that the camera is calibrated. Methods such as [Unified P$$n$$P](https://pdfs.semanticscholar.org/f1d6/2775d4a51161663ff9453b37bb21a1263f25.pdf) (or UPnP) do not abide with the said assumption as they estimate both intrinsic and extrinsic parameters.
+
+P$$n$$P is prone to error as there are outliers in the given set of point correspondences. To overcome this error, we can use RANSAC (yes, again!) to make our camera pose more robust to outliers. The alogrithm below depicts the solution with RANSAC.
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/pnpransac.png"  width="80%">
