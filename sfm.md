@@ -239,7 +239,7 @@ Once you have computed all the camera poses and 3D points, we need to refine the
 </div>
 The optimization problem can formulated as following:
 
-$$\underset{\{C_i, q_i\}_{i=1}^i,\{X\}_{j=1}^J}{\operatorname{min}}\sum_{i=1}^I\sum_{j=1}^J V_{ij}\left(\left(u^j - \dfrac{P_1^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2\right)$$
+\\(\underset{\{C_i, q_i\}_{i=1}^i,\{X\}_{j=1}^J}{\operatorname{min}}\sum_{i=1}^I\sum_{j=1}^J V_{ij}\left(\left(u^j - \dfrac{P_1^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\widetilde{\phi}{P_3^{jT}\widetilde{X}}\right)^2\right))\\
 where $$V_{ij}$$ is the visibility matrix.
 (_Don't scratch your head yet!_)
 
