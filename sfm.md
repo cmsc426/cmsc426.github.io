@@ -225,8 +225,9 @@ P$$n$$P is prone to error as there are outliers in the given set of point corres
   <div style="clear:both;"></div>
 </div>
 
+Just like in triangulation, since we have the linearly estimated camera pose, we can refine the camera pose that minimizes the reprojection error (Linear PnP only minimizes the algebraic error). Though, reprojection error is the geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point.
 
-
+$$\underset{C,R}{\operatorname{min}}$$ $$\sum_{i=1,J}\left(u^j - \frac{P_1^{jT}\widetilde{X_j}}{P_3^{jT}{\widetilde{X_j}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{X_j}}{P_3^{jT}{X_j}}\right)^2$$
 <a name='nonlinpnp'></a>
 
 <a name='ba'></a>
@@ -245,14 +246,16 @@ The optimization problem can formulated as following:
 where $$V_{ij}$$ is the visibility matrix.
 (_Don't scratch your head yet!_)
 
- Visibility matrix signifies the relationship between the camera and a point. $$V_{ij}$$ is one if $$j^{th}$$ point is visible from the $$i^{th}$$ camera and zero otherwise.
+ Visibility matrix signifies the relationship between the camera and a point. $$V_{ij}$$ is one if $$j^{th}$$ point is visible from the $$i^{th}$$ camera and zero otherwise. One can use a nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB but is extremely slow as the number of parameters are large. The <i>Sparse Bundle Adjustment</i> toolbox is designed to solve such optimization problem by exploiting sparsity of visibility matrix, $$V$$.
 
-One can use a nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB but is extremely slow as the number of parameters are large. The <i>Sparse Bundle Adjustment</i> toolbox is designed to solve such optimization problem by exploiting sparsity of visibility matrix, $$V$$.
+Clearly, solving such a method to compute the structure from motion is complex and slow _(can take a couple of hours for only 8-10 images)_. The above steps collectively is the traditional way of solving the problem of SfM. However, due to recent advances in graph optimization for visual systems, we can solve the same problem in real time.
 
 Let's see the entire Structure from Motion problem once again: (ADD THE DIAGRAM)
+CAPTION: Solving SfM using the traditional method
 
 
+(Add GTSAM Diagram): CAPTION Solving SfM using the modern approach
 
-The above sequence forms the traditional way of solving the problem of SfM. *But we have something much better in mind for you!*
+
 <a href="https://cmsc426.github.io/gtsam/"><b>Click here for <u>Part II: The Modern Approach</u></b></a>
 
