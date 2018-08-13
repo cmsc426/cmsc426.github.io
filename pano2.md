@@ -13,21 +13,21 @@ Now that we have learned about a few building blocks of computer vision from [li
 
 
 <div class="fig figcenter fighighlight">
-  <img src="assets/pano/delicate-arch-set.jpg" width="49%">
+  <img src="/assets/pano/delicate-arch-set.jpg" width="49%">
   <div class="figcaption"> Fig. 1: Image Set for Panorama Stitching: Delicate Arch (at Arches National Park, Utah) </div>
 </div>
 
 
 <div class="fig figcenter fighighlight">
-  <img src="assets/pano/delicate-arch-pano.jpg" width="49%">
+  <img src="/assets/pano/delicate-arch-pano.jpg" width="49%">
   <div class="figcaption"> Fig. 2: Panorama image of the Delicate Arch </div>
 </div>
 
 
 For this project, let us consider a set of sample images as shown in the Fig. 3.  
 <div class="fig figcenter fighighlight">
-  <img src="assets/pano/pano-image-set.png" width="49%">
-  <div class="figcaption"> Sample image set for panorama stitching </div>
+  <img src="/assets/pano/pano-image-set.png" width="49%">
+  <div class="figcaption"> Fig. 3: Sample image set for panorama stitching </div>
 </div>
 
 
