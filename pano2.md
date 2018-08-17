@@ -47,8 +47,10 @@ Now that we have matched all the features correspondences,
 When we are trying to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Figure [NUMBER (fig 5 in project)] below highlights the stitching with bad distortion at the edges. 
 
 To overcome such distortion problem at the edges, we will be using cylinderical projection on the images first before performing other operations. Essentially, this is a pre-processing step. The following equations transform between normal image co-ordinates and cylinderical co-ordinates: 
-$$x` = f tan \left(\cfrac{x-x_c}{f}\right)+x_c$$
-$$y` = \left( \cfrac{y-y_c}{cos\left(\cfrac{x-x_c}{f}\right)}\right)+y_c$$
+
+$$x' = f tan \left(\cfrac{x-x_c}{f}\right)+x_c$$
+
+$$y' = \left( \cfrac{y-y_c}{cos\left(\cfrac{x-x_c}{f}\right)}\right)+y_c$$
 
 
 
