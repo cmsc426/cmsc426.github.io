@@ -13,35 +13,48 @@ Now that we have learned about a few building blocks of computer vision from [li
 
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/pano/delicate-arch-set.jpg" width="80%">
-  <div class="figcaption"> Fig. 1: Image Set for Panorama Stitching: Delicate Arch (at Arches National Park, Utah) </div>
-  <img src="/assets/pano/delicate-arch-pano.jpg" width="80%">
+  <img src="/assets/pano/delicate-arch-set.jpg" width="100%">
+  <div class="figcaption"> Fig. 1: Image Set for Panorama Stitching: Delicate Arch (at Arches National Park, Utah) </div><br>
+  <img src="/assets/pano/delicate-arch-pano.jpg" width="100%">
   <div class="figcaption"> Fig. 2: Panorama image of the Delicate Arch </div>
 </div>
 
 
 For this project, let us consider a set of sample images as shown in the Fig. 3.  
 <div class="fig figcenter fighighlight">
-  <img src="/assets/pano/pano-image-set.png" width="80%">
+  <img src="/assets/pano/pano-image-set.png" width="100%">
   <div class="figcaption"> Fig. 3: Sample image set for panorama stitching </div>
 </div>
 
 
 
-## 2. ANMS:
-Adaptive Non-Maximal Suppression (or ANMS) 
+## 2. Adaptive Non-Maximal Suppression (or ANMS):
+The objective of this step is to detect corners such that they are equally distributed across the image in order to avoid weird artifacts in warping. Corners in the image can be detected using `cornermetric` function with the appropriate parameters. The output is a matrix of corner scores
+
+
 
 
 ## 3. Feature Descriptor: 
 
 
 ## 4. Feature Matching
-
+In the previous step, you encoded each keypoint by $$64\times1$$ feature vector. Now, you want to match the feature points among the two images you want to stitch together. In computer vision terms, this step is called as finding feature correspondences within the 2 images. Pick a point in image 1, compute sum of square difference between all points in image 2. Take the ratio of best match (lowest distance) to the second best match (second lowest distance) and if this is below some ratio keep the matched pair or reject it. Repeat this for all points in image 1. You will be left with only the comfident feature correspondences and these points will be used to estimate the transformation between the 2 images also called as _Homography_[Recall pano-I]. Use the function `dispMatchedFeatures` given to you to visualize feature correspondences. Fig [Number] shows a sample output of `disMatchedFeatures` on the first two images.
 
 ## 5. RANSAC to estimate Robust Homography:
-
+Now that we have matched all the features correspondences, 
 
 ## 6. Cylinderical Projection
+When we are trying to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Figure [NUMBER (fig 5 in project)] below highlights the stitching with bad distortion at the edges. 
+
+To overcome such distortion problem at the edges, we will be using cylinderical projection on the images first before performing other operations. Essentially, this is a pre-processing step. The following equations transform between normal image co-ordinates and cylinderical co-ordinates: 
+$$x` = f tan \left(\cfrac{x-x_c}{f}\right)+x_c$$
+$$y` = \left( \cfrac{y-y_c}{cos\left(\cfrac{x-x_c}{f}\right)}\right)+y_c$$
+
+
+
+
+
+
 
 
 ## 7. Blending Images:
