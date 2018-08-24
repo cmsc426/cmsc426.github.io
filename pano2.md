@@ -1,9 +1,22 @@
 ---
 layout: page
+mathjax: true
+title: Panorama Stitching
 permalink: /pano2/
 ---
 
 Table of Contents:
+
+- [Introduction](#intro)
+- [Adaptive Non-Maximal Suppression](#anms)
+- [Feature Descriptor](#feat-descriptor)
+- [Feature Matching](#feat-matching)
+- [RANSAC to estimate Robust Homography](#homography)
+- [Cylinderical Projection](#cyl-projection)
+- [Blending Images](#blending)
+- [Discussion](#discussion)
+
+
 
 
 <a name='intro'></a>
@@ -20,7 +33,7 @@ Now that we have learned about a few building blocks of computer vision from [li
 </div>
 
 
-For this project, let us consider a set of sample images as shown in the Fig. 3.  
+For this project, let us consider a set of sample images with much stronger corners as shown in the Fig. 3.  
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/pano-image-set.png" width="100%">
   <div class="figcaption"> Fig. 3: Sample image set for panorama stitching </div>
