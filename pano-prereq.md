@@ -34,13 +34,20 @@ Table of Contents:
 
 
 <a name='quick'></a>
-## 1. Introduction:
+## 1. Introduction
 
 We have seen fascinating things that our camera applications like instagram, snachat or your default phone app do. It can be creating a full structure of your face for facial recognition or simply creating a panorama from multiple images. In this course, we will learn how to recreate such applications but before that we require to learn about the basics like filtering, features, camera models and tranformations. This article is all about laying down the groundwork for the aforementioned applications. Let's start with some basic operations that can applied on an image.
 
-## 2. Convolution:
+## 2. Features and Convolution
+### 2.1 What are features?
+What are <i>features</i> for Machine vision? <i> Is it similar as Human visual perception? This question can have different answers but one thing is certain that feature detection is an imperative building block for a variety of computer vision applications. We all have seen <i> Panorama Stitching </i> in our smartphones or other softwares like Adobe Photoshop or AutoPano Pro. The fundamental idea in such softwares is to align two or more images before seamlessly stitching into a panorama image. Now back to the question, <i> what kind of features should be detected before the alignment? </i> Can you think of a few types of features?
 
-Ever heard of Convolutional Neural Networks (CNN)? What is convolution? It is really 'convoluted'? </i> Before we really understand what convolution really means, think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
+Certain locations in the images like building corners or mountain peaks can be considered as features. These kinds of localized features are known as <i>corners</i> or keypoints or interest points and are widely used in different applications. These are characterized by the appearance of neigborhood pixels surrounding the point (or local patches). The other kind of feature is based on the orientation and local appearance and is generally of a good indicator of object boundaries and occlusion events. <i> Occlusion means that there is something in the field of view of the camera but due to some sensor/optical property or some other scenario, you can't.</i> 
+
+There are multiple ways to detect certain features. One of the way is <b>convolution</b>. 
+
+### 2.2 Convolution
+<i>Ever heard of Convolutional Neural Networks (CNN)? What is convolution? It is really 'convoluted'? </i> Before we really understand what convolution really means, think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
 
 Convolution is an operation between two functions, resulting in another function that depicts how the shape of first function is modified by the second function. The convolution of two functions, say $$f$$ and $$g$$ is written is $$f\star g$$ or $$f*g$$ and is defined as:
 
@@ -175,52 +182,8 @@ You can implement the following the `MATLAB` using the function `edge` with vari
 
 
 
-## -----------------------------------------------------
-
-## 1. Introduction:
-
-
-
-
-## 2. - Features and Convolution:
-- What are features?
-- Ever heard of Convolutional Neural Networks?
-- 1D Conv
-- 2D and 3D Conv
-- Conv in images
-- Kernels
-- Deconvolution
-- Optional read [Fourier Transform]
-
-
-## 3. Filtering:
-- Point operators
-- Filtering (`imfilter` and `imgaussfilt`) (MEAN, MEDIAN filters)
-- Sobel, Prewitt filtering (- Derivates in images)
-- Padding in images (`paddarray`)
-- Erosion and Dilation (`imerode` and `imdilate`)
-- Denoising
-
-## 4. Types of Features:
-
-- Edge: Sobel, Prewitt, Roberts, Canny and `approxcanny`
-- Corner: Harris, Shi Tomasi, FAST
-- Blob detection: LoG, DoG
-- Descriptor: SIFT (Scale selectivity (CIS 580) Multi-scale concepts), SURF and HOG
-
-
-
-
-
 
 ## Features and Convolution:
-### 2.1 What are features?
-What are <i>features</i> for Machine vision? <i> Is it similar as Human visual perception? This question can have different answers but one thing is certain that feature detection is an imperative building block for a variety of computer vision applications. We all have seen <i> Panorama Stitching </i> in our smartphones or other softwares like Adobe Photoshop or AutoPano Pro. The fundamental idea in such softwares is to align two or more images before seamlessly stitching into a panorama image. Now back to the question, <i> what kind of features should be detected before the alignment? </i> Can you think of a few types of features?
-
-Certain locations in the images like building corners or mountain peaks can be considered as features. These kinds of localized features are known as <i>corners</i> or keypoints or interest points and are widely used in different applications. These are characterized by the appearance of neigborhood pixels surrounding the point (or local patches). The other kind of feature is based on the orientation and local appearance and is generally of a good indicator of object boundaries and occlusion events. <i> Occlusion means that there is something in the field of view of the camera but due to some sensor/optical property or some other scenario, you can't.</i> 
-
-There are multiple ways to detect certain features. One of them is convolution. <i> 
-
 
 
 [Kernels (known as point operators): Sobel (derivatives in images) and Prewitt]
