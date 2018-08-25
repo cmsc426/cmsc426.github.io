@@ -40,6 +40,88 @@ We have seen fascinating things that our camera applications like instagram, sna
 
 ## 2. Convolution:
 
+Ever heard of Convolutional Neural Networks (CNN)? What is convolution? It is really 'convoluted'? </i> Before we really understand what convolution really means, think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
+
+Convolution is an operation between two functions, resulting in another function that depicts how the shape of first function is modified by the second function. The convolution of two functions, say $$f$$ and $$g$$ is written is $$f\star g$$ or $$f*g$$ and is defined as:
+
+$$
+(f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau = \int_{-\infty}^{\infty} f(t-\tau)g(\tau)d\tau
+$$
+
+
+The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common under (between $f$ and $g$) 
+
+Let's try to visualize convolution in one dimension. The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common area under the functions  $$f$$ and $$g$$.
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/Conv1D.png" width="49%">
+  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
+</div>
+
+Since we would be dealing with discrete functions in this course, let us look at a simple discrete 1D example:
+$$f = [10, 50, 60, 10, 20, 40, 30]$$ and 
+$$g = [1/3, 1/3, 1/3]$$
+Let the output be denoted by $$h$$. What would be the value of $$h(3)$$? In order to compute this, we slide $$g$$ so that it is centered around $$f(3)$$ _i.e._
+$$\begin{bmatrix}10 & 50 & 60 & 10 & 20 & 40 & 30\\0 & 1/3 & 1/3 & 1/3 & 0 & 0 & 0\end{bmatrix}$$
+We multiply the corresponding values of $$f$$ and $$g$$ and then add up the products _i.e._
+$$h(3)=\dfrac{1}{3}50+\dfrac{1}{3}60\dfrac{1}{3}10=40$$
+Again, it can be infered that the function $$g$$ (also known as kernel operator or the filter) is computing a windowed average of the image.
+
+Similarly, one can compute 2D convolutions (and hence any $$N$$ dimensions convolution) as shown in image below:
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/Conv2D.png" width="49%">
+  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
+</div>
+These convolutions are the most commonly used operations for smoothing and sharpening tasks. Look at the example down below:
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/ConvImg.png" width="49%">
+  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
+</div>
+Different kernels (or convolution masks) can be used to perform different level of sharpness:
+
+<div class="fig figcenter fighighlight">
+  <img src="assets/pano/DifferentKernel.png" width="49%">
+  <div class="figcaption">(a). Convolution with an identity masks results the same image as the input image. (b). Sharpening the image. (c). Normalization (or box blur). (d). 3X3 Gaussian blur. (e). 5X5 Gaussian blur. (f). 5X5 unsharp mask, it is based on the gaussian blur. NOTE: The denominator outside all the matrices are used to normalize the operation.</div>
+</div>
+
+Apart from the smoothness operations, convolutions can be used to detect features such as edges as well. Figure **[Number]** shows ....
+<div class="fig figcenter fighighlight">
+  <img src="assets/pano/ConvImgEdge.png" width="49%">
+  <div class="figcaption">Detecting edges in an image with different kernels.</div>
+</div>
+
+
+### Deconvolution:
+
+Clearly as the name suggests, deconvolution is simply a process that reverses the effects of convolution on the given information. Deconvolution is generally implemented by computing the _Fourier Transform_ of the signal $$h$$ and the transfer function $$g$$ (where $$h=f * g$$). In frequency domain, (assuming no noise) we can say that:
+$$F=H/G$$
+[Optional Read: Fourier Transformation](Link goes here)
+One can perform deblurring and restoration tasks using deconvolution as shown in figure:
+<div class="fig figcenter fighighlight">
+  <img src="assets/pano/deconv.png" width="49%">
+  <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
+</div>
+
+
+Now, since we have learned the basic fundamentals about convolution and deconvolution, let's dig deep into _Kernels_ or _point operators_). One can apply small convolution filters of size $$2\times2$$ or $$3\times3$$ or so on. These can be _Sobel, Roberts, Prewitt, Laplacian_ operators etc. Operators like these are a good approximation of the derivates in an image. Though, for a better approximation of derivatives, larger masks like _Gaussian_ or _Gabor_ filters are used.
+But what does it mean to take the derivative of an image? The derivative or the gradient of an image is defined as: 
+$$\nabla f=\left[\dfrac{\delta f}{\delta x}, \dfrac{\delta f}{\delta y}\right]$$
+It is important to note that the gradient of an image points towards the direction in which the intensity changes at the highest rate and thus the direction is given by:
+$$\theta=tan^{-1}\left(\dfrac{\delta f}{\delta y}\Bigg{/}\dfrac{\delta f}{\delta x}\right)$$
+Moreover, the gradient direction is always perpendicular to the edge and the edge strength can by given by:
+$$||\nabla f|| = \sqrt{\left(\dfrac{\delta f}{\delta x}\right)^2 + \left(\dfrac{\delta f}{\delta y}\right)^2}$$\In practice, the partial derivatives can by written as discrete gradients as the different of values between consecutive pixels _i.e._ $$f(x+1,y) -  f(x,y)$$ as $$\delta x$$  and  $$f(x,y+1) -  f(x,y)$$ as $$\delta y$$.
+
+Figure below shows commonly used gradient operators. 
+<div class="fig figcenter fighighlight">
+  <img src="assets/pano/gradoperators.png" width="49%">
+  <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
+</div>
+
+You can implement the following the `MATLAB` using the function `edge` with various methods for edge detection.
+
+
+
+
+
 
 - Ever heard of Convolutional Neural Networks?
 - 1D Conv
@@ -137,85 +219,7 @@ What are <i>features</i> for Machine vision? <i> Is it similar as Human visual p
 
 Certain locations in the images like building corners or mountain peaks can be considered as features. These kinds of localized features are known as <i>corners</i> or keypoints or interest points and are widely used in different applications. These are characterized by the appearance of neigborhood pixels surrounding the point (or local patches). The other kind of feature is based on the orientation and local appearance and is generally of a good indicator of object boundaries and occlusion events. <i> Occlusion means that there is something in the field of view of the camera but due to some sensor/optical property or some other scenario, you can't.</i> 
 
-There are multiple ways to detect certain features. One of them is convolution. <i> What is convolution? It is really 'convoluted'? </i> Before we really understand what convolution really means, think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
-
-Convolution is an operation between two functions, resulting in the another function that depicts how the shape of first function is modified by the second function. The convolution of two functions, say $$f$$ and $$g$$ is written is $$f\star g$$ or $$f*g$$ and is defined as:
-$$
-(f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau = \int_{-\infty}^{\infty} f(t-\tau)g(\tau)d\tau
-$$
-
-
-The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common under (between $f$ and $g$) 
-
-Let's try to visualize convolution in one dimension. The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common area under the functions  $$f$$ and $$g$$.
-<div class="fig figcenter fighighlight">
-  <img src="/assets/pano/Conv1D.png" width="49%">
-  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
-</div>
-
-Since we would be dealing with discrete functions in this course, let us look at a simple discrete 1D example:
-$$f = [10, 50, 60, 10, 20, 40, 30]$$ and 
-$$g = [1/3, 1/3, 1/3]$$
-Let the output be denoted by $$h$$. What would be the value of $$h(3)$$? In order to compute this, we slide $$g$$ so that it is centered around $$f(3)$$ _i.e._
-$$\begin{bmatrix}10 & 50 & 60 & 10 & 20 & 40 & 30\\0 & 1/3 & 1/3 & 1/3 & 0 & 0 & 0\end{bmatrix}$$
-We multiply the corresponding values of $$f$$ and $$g$$ and then add up the products _i.e._
-$$h(3)=\dfrac{1}{3}50+\dfrac{1}{3}60\dfrac{1}{3}10=40$$
-Again, it can be infered that the function $$g$$ (also known as kernel operator or the filter) is computing a windowed average of the image.
-
-Similarly, one can compute 2D convolutions (and hence any $$N$$ dimensions convolution) as shown in image below:
-<div class="fig figcenter fighighlight">
-  <img src="/assets/pano/Conv2D.png" width="49%">
-  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
-</div>
-These convolutions are the most commonly used operations for smoothing and sharpening tasks. Look at the example down below:
-<div class="fig figcenter fighighlight">
-  <img src="/assets/pano/ConvImg.png" width="49%">
-  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
-</div>
-Different kernels (or convolution masks) can be used to perform different level of sharpness:
-
-<div class="fig figcenter fighighlight">
-  <img src="assets/pano/DifferentKernel.png" width="49%">
-  <div class="figcaption">(a). Convolution with an identity masks results the same image as the input image. (b). Sharpening the image. (c). Normalization (or box blur). (d). 3X3 Gaussian blur. (e). 5X5 Gaussian blur. (f). 5X5 unsharp mask, it is based on the gaussian blur. NOTE: The denominator outside all the matrices are used to normalize the operation.</div>
-</div>
-
-Apart from the smoothness operations, convolutions can be used to detect features such as edges as well. Figure **[Number]** shows ....
-<div class="fig figcenter fighighlight">
-  <img src="assets/pano/ConvImgEdge.png" width="49%">
-  <div class="figcaption">Detecting edges in an image with different kernels.</div>
-</div>
-
-
-### Deconvolution:
-
-Clearly as the name suggests, deconvolution is simply a process that reverses the effects of convolution on the given information. Deconvolution is generally implemented by computing the _Fourier Transform_ of the signal $$h$$ and the transfer function $$g$$ (where $$h=f * g$$). In frequency domain, (assuming no noise) we can say that:
-$$F=H/G$$
-[Optional Read: Fourier Transformation](Link goes here)
-One can perform deblurring and restoration tasks using deconvolution as shown in figure:
-<div class="fig figcenter fighighlight">
-  <img src="assets/pano/deconv.png" width="49%">
-  <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
-</div>
-
-
-Now, since we have learned the basic fundamentals about convolution and deconvolution, let's dig deep into _Kernels_ or _point operators_). One can apply small convolution filters of size $$2\times2$$ or $$3\times3$$ or so on. These can be _Sobel, Roberts, Prewitt, Laplacian_ operators etc. Operators like these are a good approximation of the derivates in an image. Though, for a better approximation of derivatives, larger masks like _Gaussian_ or _Gabor_ filters are used.
-But what does it mean to take the derivative of an image? The derivative or the gradient of an image is defined as: 
-$$\nabla f=\left[\dfrac{\delta f}{\delta x}, \dfrac{\delta f}{\delta y}\right]$$
-It is important to note that the gradient of an image points towards the direction in which the intensity changes at the highest rate and thus the direction is given by:
-$$\theta=tan^{-1}\left(\dfrac{\delta f}{\delta y}\Bigg{/}\dfrac{\delta f}{\delta x}\right)$$
-Moreover, the gradient direction is always perpendicular to the edge and the edge strength can by given by:
-$$||\nabla f|| = \sqrt{\left(\dfrac{\delta f}{\delta x}\right)^2 + \left(\dfrac{\delta f}{\delta y}\right)^2}$$\In practice, the partial derivatives can by written as discrete gradients as the different of values between consecutive pixels _i.e._ $$f(x+1,y) -  f(x,y)$$ as $$\delta x$$  and  $$f(x,y+1) -  f(x,y)$$ as $$\delta y$$.
-
-Figure below shows commonly used gradient operators. 
-<div class="fig figcenter fighighlight">
-  <img src="assets/pano/gradoperators.png" width="49%">
-  <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
-</div>
-
-You can implement the following the `MATLAB` using the function `edge` with various methods for edge detection.
-
-
-
+There are multiple ways to detect certain features. One of them is convolution. <i> 
 
 
 
