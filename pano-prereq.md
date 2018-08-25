@@ -39,6 +39,8 @@ Table of Contents:
 We have seen fascinating things that our camera applications like instagram, snachat or your default phone app do. It can be creating a full structure of your face for facial recognition or simply creating a panorama from multiple images. In this course, we will learn how to recreate such applications but before that we require to learn about the basics like filtering, features, camera models and tranformations. This article is all about laying down the groundwork for the aforementioned applications. Let's start with some basic operations that can applied on an image.
 
 ## 2. Convolution:
+
+
 - Ever heard of Convolutional Neural Networks?
 - 1D Conv
 - 2D and 3D Conv
@@ -198,11 +200,11 @@ One can perform deblurring and restoration tasks using deconvolution as shown in
 
 Now, since we have learned the basic fundamentals about convolution and deconvolution, let's dig deep into _Kernels_ or _point operators_). One can apply small convolution filters of size $$2\times2$$ or $$3\times3$$ or so on. These can be _Sobel, Roberts, Prewitt, Laplacian_ operators etc. Operators like these are a good approximation of the derivates in an image. Though, for a better approximation of derivatives, larger masks like _Gaussian_ or _Gabor_ filters are used.
 But what does it mean to take the derivative of an image? The derivative or the gradient of an image is defined as: 
-$$\nebula f=\left[\dfrac{\delta f}{\delta x}, \dfrac{\delta f}{\delta y}\right]$$
+$$\nabla f=\left[\dfrac{\delta f}{\delta x}, \dfrac{\delta f}{\delta y}\right]$$
 It is important to note that the gradient of an image points towards the direction in which the intensity changes at the highest rate and thus the direction is given by:
 $$\theta=tan^{-1}\left(\dfrac{\delta f}{\delta y}\Bigg{/}\dfrac{\delta f}{\delta x}\right)$$
 Moreover, the gradient direction is always perpendicular to the edge and the edge strength can by given by:
-$$||\nebula f|| = \sqrt{\left(\dfrac{\delta f}{\delta x}\right)^2 + \left(\dfrac{\delta f}{\delta y}\right)^2}$$\In practice, the partial derivatives can by written as discrete gradients as the different of values between consecutive pixels _i.e._ $$f(x+1,y) -  f(x,y)$$ as $$\delta x$$  and  $$f(x,y+1) -  f(x,y)$$ as $$\delta y$$.
+$$||\nabla f|| = \sqrt{\left(\dfrac{\delta f}{\delta x}\right)^2 + \left(\dfrac{\delta f}{\delta y}\right)^2}$$\In practice, the partial derivatives can by written as discrete gradients as the different of values between consecutive pixels _i.e._ $$f(x+1,y) -  f(x,y)$$ as $$\delta x$$  and  $$f(x,y+1) -  f(x,y)$$ as $$\delta y$$.
 
 Figure below shows commonly used gradient operators. 
 <div class="fig figcenter fighighlight">
