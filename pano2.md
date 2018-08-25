@@ -42,7 +42,7 @@ For this project, let us consider a set of sample images with much stronger corn
 
 
 ## 2. Adaptive Non-Maximal Suppression (or ANMS):
-The objective of this step is to detect corners such that they are equally distributed across the image in order to avoid weird artifacts in warping. Corners in the image can be detected using `cornermetric` function with the appropriate parameters. The output is a matrix of corner scores
+The objective of this step is to detect corners such that they are equally distributed across the image in order to avoid weird artifacts in warping. Corners in the image can be detected using `cornermetric` function with the appropriate parameters. The output is a matrix of corner scores 
 
 
 
@@ -68,8 +68,19 @@ $$y' = \left( \cfrac{y-y_c}{cos\left(\cfrac{x-x_c}{f}\right)}\right)+y_c$$
 
 
 
+<p>
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="1010" height="700" codebase="http://active.macromedia.com/flash7/cabs/ swflash.cab#version=9,0,0,0">
+<param name="movie" value="Projection.swf">
+<param name="quality" value="high">
+<param name="play" value="true">
+<embed src="Projection.swf" width="1010" height="700" play="true" quality="high" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">      
+</object>
+</p>
 
 
+
+
+<embed src="Projection.swf" width="1010" height="700" play="true" quality="high" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
 
 
 ## 7. Blending Images:
