@@ -35,7 +35,7 @@ Table of Contents:
 <a name='quick'></a>
 ## 1. Introduction:
 
-	We have seen fascinating things that our camera applications like instagram, snachat or your default phone app do. It can be creating a full structure of your face for facial recognition or simply creating a panorama from multiple images. In this course, we will learn how to recreate such applications but before that we require to learn about the basics like filtering, features, camera models and tranformations. This article is all about laying down the groundwork for the aforementioned applications. Let's start with basic operations that can applied on an image.
+We have seen fascinating things that our camera applications like instagram, snachat or your default phone app do. It can be creating a full structure of your face for facial recognition or simply creating a panorama from multiple images. In this course, we will learn how to recreate such applications but before that we require to learn about the basics like filtering, features, camera models and tranformations. This article is all about laying down the groundwork for the aforementioned applications. Let's start with basic operations that can applied on an image.
 
 
 
