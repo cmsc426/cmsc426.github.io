@@ -1,14 +1,40 @@
 ---
 layout: page
-permalink: /pano/
+permalink: /pano-prereq/
 ---
 
+This article is written by <a href="">Chahat Deep Singh</a>
+
+
 Table of Contents:
+
+- [Introduction](#intro)
+- [Convolution](#convolution)
+- [Filtering](#filtering)
+- [Features](#features)
+	- [Edges](#edges)
+	- [Corners](#corners)
+	- [Feature Descriptors](#feat-desc)
+- [Camera Optics](#optics)
+	- [Camera Model](#pinhole)
+	- [Distortion](#distortion)
+	- [Camera Calibration (or Intrinsic Calibration)](#intrinsic)
+	- [Extrinsic Calibration](#extrinsic)
+- [Transformations in Images](#transform)
+	- [Homogenous Coordinates](#homo-coordinates)
+	- [Projective Geometry](#projective-geometry)
+	- [Affine Transformation](#affine)
+	- [Vanishing Points](#vanishing-points)
+	- [Homography](#homography)
+	- [Single View Geometry](#single-view-geometry)
+- [Optical Flow](#flow)
+- [Discussion](#discussion)
 
 
 <a name='quick'></a>
 ## 1. Introduction:
 
+We have seen fascinating things that our camera applications like instagram, snachat or your default phone app do. It can be creating a full structure of your face for facial recognition or simply creating a panorama from multiple images. In this course, we will learn how to recreate such applications but before that we require to learn about the basics like filtering, features, camera models and tranformations. This article is all about laying down the groundwork for the aforementioned applications. 
 
 
 
