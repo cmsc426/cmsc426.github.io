@@ -1,7 +1,8 @@
 ---
 layout: page
-permalink: /pano-prereq/
+mathjax: true
 title: Learning the basics: Computer Vision
+permalink: /pano-prereq/
 ---
 
 This article is written by <a href="">Chahat Deep Singh</a>
