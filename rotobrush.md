@@ -22,7 +22,7 @@ Table of Content:
 
 
 
-<div class="fig figcenter fighighlight">
+<!--<div class="fig figcenter fighighlight">-->
 	<iframe src="https://www.youtube.com/watch?v=XSXRcXrPyIM"
 	width="768px" heigh="432px" framborder="0" allowfullscreen></iframe>
-</div>
+<!--</div>-->
