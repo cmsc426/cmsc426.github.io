@@ -37,7 +37,7 @@ Table of Contents:
 <a name='quick'></a>
 ## 1. Introduction
 
-We have seen fascinating things that our camera applications like instagram, snachat or your default phone app do. It can be creating a full structure of your face for facial recognition or simply creating a panorama from multiple images. In this course, we will learn how to recreate such applications but before that we require to learn about the basics like filtering, features, camera models and tranformations. This article is all about laying down the groundwork for the aforementioned applications. Let's start with some basic operations that can applied on an image.
+We have seen fascinating things that our camera applications like instagram, snachat or your default phone app do. It can be creating a full structure of your face for facial recognition or simply creating a panorama from multiple images. In this course, we will learn how to recreate such applications but before that we require to learn about the basics like filtering, features, camera models and transformations. This article is all about laying down the groundwork for the aforementioned applications. Let's start with understanding the most basic aspects of an image: features.
 
 ## 2. Features and Convolution
 ### 2.1 What are features?
@@ -46,7 +46,7 @@ What are <i>features</i> for Machine vision? <i> Is it similar as Human visual p
 Certain locations in the images like building corners or mountain peaks can be considered as features. These kinds of localized features are known as <i>corners</i> or keypoints or interest points and are widely used in different applications. 
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/strong-corners.png" width="49%">
-  <div class="figcaption">The section in red illustrates good or strong corner features while the black depicts weak or bad features.</div>
+  <div class="figcaption">The section in <b><font color="red">red</font></b> illustrates good or strong corner features while the <b>black</b> depicts weak or bad features.</div>
 </div>
 
 These are characterized by the appearance of neigborhood pixels surrounding the point (or local patches). The other kind of feature is based on the orientation and local appearance and is generally of a good indicator of object boundaries and occlusion events. <i> Occlusion means that there is something in the field of view of the camera but due to some sensor/optical property or some other scenario, you can't.</i> 
