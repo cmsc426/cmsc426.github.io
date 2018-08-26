@@ -71,6 +71,8 @@ Let's try to visualize convolution in one dimension. The following image depcits
   <div class="figcaption">.</div>
 </div>
 
+http://colah.github.io/posts/2014-07-Understanding-Convolutions/
+
 Since we would be dealing with discrete functions in this course, let us look at a simple discrete 1D example:
 $$f = [10, 50, 60, 10, 20, 40, 30]$$ and 
 $$g = [1/3, 1/3, 1/3]$$
