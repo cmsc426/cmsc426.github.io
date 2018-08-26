@@ -44,7 +44,7 @@ As mentioned in the introduction section, we need to provide a foreground mask f
 For the subsequent frames, the local classifiers are used for estimating an updated foreground mask. First, the object's movements between frames is estimated for reposition of the image windows. The goal is to have the windows stay in the same position on the object's boundary, or the most similar place possible. With the window positions updated, we then use the local classifiers to re-estimate the foreground mask for each window. These windows
 overlap, so we merge their foreground masks together to obtain a final, full-object mask. Optionally, we can rerun the local classifiers and merging steps to refine the mask for this frame. Before moving on to the next frame, we re-train the local classifiers, so they remain accurate despite changes in background (and possibly foreground) appearance.
 
-<a style="padding:10px">
+<a style="padding:10px; border: 5px solid gray; margin:2px">
 <b>NOTE:</b> 
 In order to develop a practical video cutout that can perform on complicated video with deformable objects, it is import to follow the two underlying principles:<br>
 1. <b>Multiple cues should be used for extracting</b> the foreground such as <b>color, shape, motion and texture information</b>. Among these, shape plays a vital role for maintaining a temporally-coherent recognition.
