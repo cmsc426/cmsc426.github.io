@@ -52,7 +52,7 @@ Certain locations in the images like corners of a building or mountain peaks can
 The other kind of feature is based on the orientation and local appearance and is generally a good indicator of object boundaries and occlusion events. <i> (Occlusion means that there is something in the field of view of the camera but due to some sensor/optical property or some other scenario, you can't.)</i> There are multiple ways to detect certain features. One of the way is <b>convolution</b>. 
 
 ### 2.2 Convolution
-<i>Ever heard of Convolutional Neural Networks (CNN)? What is convolution? Is it really that 'convoluted'? </i> Let's try to answer such questions but before that let's understand what convolution really means! Think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
+<i>Ever heard of Convolutional Neural Networks (CNN)? What is convolution? Is it really that 'convoluted'? </i> Let's try to answer such questions but before that let's understand what convolution really means! Think of it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
 
 Convolution is an operation between two functions, resulting in another function that depicts how the shape of first function is modified by the second function. The convolution of two functions, say $$f$$ and $$g$$ is written is $$f\star g$$ or $$f*g$$ and is defined as:
 
@@ -60,10 +60,7 @@ $$
 (f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau = \int_{-\infty}^{\infty} f(t-\tau)g(\tau)d\tau
 $$
 
-
-The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common under (between $$f$$ and $$g$$) 
-
-Let's try to visualize convolution in one dimension. The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common area under the functions  $$f$$ and $$g$$.
+Let's try to visualize convolution in one dimension. The following <i>figure</i> depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common area under the functions  $$f$$ and $$g$$.
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/conv.gif" width="49%">
   <div class="figcaption">.</div>
