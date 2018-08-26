@@ -47,8 +47,8 @@ overlap, so we merge their foreground masks together to obtain a final, full-obj
 <p style="background-color:#ddd; padding:5px">
 <b>NOTE:</b> 
 In order to develop a practical video cutout that can perform on complicated video with deformable objects, it is import to follow the two underlying principles:
-1. <b>Multiple cues should be used for extracting</b> the foreground such as <b>color, shape, motion and texture information</b>. Among these, shape plays a vital role for maintaining a temporally-coherent recognition.
-2. Multiple cues should be evaluated and integrated not just globally, but locally as well in order to maximize their discriminant powers. 
+<b>1.</b> Multiple cues should be used for extracting the foreground such as <b>color, shape, motion and texture information</b>. Among these, shape plays a vital role for maintaining a temporally-coherent recognition.
+<b>2.</b> Multiple cues should be evaluated and integrated not just globally, but locally as well in order to maximize their discriminant powers. 
 </p>
 
 
