@@ -35,9 +35,20 @@ In this article, we specifically will implement an algorithm called <a href="htt
 
 As mentioned in the introduction section, we need to provide a foreground mask for the object that needs to be segmented. This can be done using `roipoly` from Image Processing Toolbox in MATLAB. The <i>SnapCut</i> can then sample a series of overlapping image windows along the object's boundary. For each such windows, a <i>local classifier</i> is created which is trained to classify whether a pixel belongs to foreground or background. The classifier is trained in such a way that it not only takes into account the color (like [2]) but shape as well. 
 
-For the subsequent frames, the local classifiers are used for estimating an updated foreground mask. First, the object's movements between frames is estimated for reposition of the image windows.
+<div class="fig figcenter fighighlight">
+<img src="/assets/rotobrush/initial.gif" width="100%">
+<div class="figcaption"> Fig. 2: Creating the initial foreground mask
+</div>
+</div>
 
 
+For the subsequent frames, the local classifiers are used for estimating an updated foreground mask. First, the object's movements between frames is estimated for reposition of the image windows. The goal is to have the windows stay in the same position on the object's boundary, or the most similar place possible. 
+
+
+
+
+## Acknowledgement
+This article is adapted from CMSC426 spring 2018 project.
 
 ## References
 1. Bai, X., Wang, J., Simons, D. and Sapiro, G., 2009, July. Video snapcut: robust video object cutout using localized classifiers. In ACM Transactions on Graphics (ToG) (Vol. 28, No. 3, p. 70). ACM.
