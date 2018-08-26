@@ -23,6 +23,6 @@ Table of Content:
 
 
 <div class="fig figcenter fighighlight">
-<img src="/assets/rotorbrush/demo.gif" width="100%">
+<img src="/assets/rotobrush/demo.gif" width="100%">
 <div class="figcaption"> Fig. 1
 </div>
