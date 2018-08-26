@@ -134,21 +134,6 @@ You can implement the following the `MATLAB` using the function `edge` with vari
 
 
 
-- Ever heard of Convolutional Neural Networks?
-- 1D Conv
-- 2D and 3D Conv
-- Conv in images
-- Deconvolution
-- Optional read [Fourier Transform]
-
-## 3. Filtering:
-- Point operators
-- Filtering (`imfilter` and `imgaussfilt`) (MEAN, MEDIAN filters)
-- Sobel, Prewitt filtering
-- Padding in images (`paddarray`)
-- Erosion and Dilation (`imerode` and `imdilate`)
-- Denoising
-
 ## 4. Features Detection:
 - What are features?
 - Derivates in images
@@ -264,3 +249,6 @@ Lens distortion....
 - Points and lines: A line in any plane can be represented as: $$ax+by+c=0$$ where $$a,b,c\in\mathbb{R}$$. This line can also be represented as a vector $$(a,b,c)^T$$. It is important to note that the vector can be of any scale $$\lambda$$ _i.e._ the line can be written as a vector $$\lambda(a,b,c)^T$$ $$\ \ \forall \lambda\in\mathbb{R}-\{0\}$$. A set of such vectors with different values of $$k$$ forms an equivalence class of vectors and are known as homogenous vectors or homogenous coordinates.
 - 3D point projection (Metric Space): The real world point $$(X,Y,Z)$$ is projected on the image plane as 
 
+
+
+	We are familiar with Euclidean spaces and Euclidean geometry that describes our 3D world very well.
