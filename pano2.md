@@ -22,7 +22,7 @@ Table of Contents:
 <a name='intro'></a>
 ## 1. Introduction:
 
-Now that we have learned about a few building blocks of computer vision from [link: Pano Part 1], let us try to do something cool with it! The purpose of this project is to stitch two or more images in order to create one seamless panorama image. Each image should have few repeated local features ($$\sim 30$$ or more, emperically chosen). In this project, you need to capture multiple such images. Note that your camera motion should be limited to purely translational or purely rotational around the camera center. The following method of stitching images should work for most image sets but you'll need to be creative for working on harder image sets. 
+Now that we have learned about a few building blocks of computer vision from [link: Pano Part 1], let us try to do something cool with it! The purpose of this project is to stitch two or more images in order to create one seamless panorama image. Each image should have few repeated local features ($$\sim 30%$$ or more, emperically chosen). In this project, you need to capture multiple such images. Note that your camera motion should be limited to purely translational or purely rotational around the camera center. The following method of stitching images should work for most image sets but you'll need to be creative for working on harder image sets. 
 
 
 <div class="fig figcenter fighighlight">
