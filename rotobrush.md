@@ -25,6 +25,7 @@ In this project, we will learn segmenting objects in a video sequence. Given a <
 <img src="/assets/rotobrush/demo.gif" width="100%">
 <div class="figcaption"> Fig. 1: Segmenting out non-rigid objects in a video sequence
 </div>
+</div>
 
 In this article, we specifically will implement an algorithm called <a href="http://juew.org/projects/SnapCut/snapcut.htm"><i>Video SnapCut</i></a> (also known as <i>RotoBrush</i> in <i>Adobe After Effects</i>) by Bai et. al. To get a very good inituition, we would <b>highly recommend</b> watching this 5 min <a href="https://www.youtube.com/watch?v=XSXRcXrPyIM"> video </a> that describes the entire paper.
 
