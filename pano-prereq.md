@@ -49,9 +49,7 @@ Certain locations in the images like building corners or mountain peaks can be c
   <div class="figcaption">Fig. 1: The section in <b><font color="red">red</font></b> illustrates good or strong corner features while the <b>black</b> depicts weak or bad features.</div>
 </div>
 
- The other kind of feature is based on the orientation and local appearance and is generally of a good indicator of object boundaries and occlusion events. <i> Occlusion means that there is something in the field of view of the camera but due to some sensor/optical property or some other scenario, you can't.</i> 
-
-There are multiple ways to detect certain features. One of the way is <b>convolution</b>. 
+The other kind of feature is based on the orientation and local appearance and is generally a good indicator of object boundaries and occlusion events. <i> (Occlusion means that there is something in the field of view of the camera but due to some sensor/optical property or some other scenario, you can't.)</i> There are multiple ways to detect certain features. One of the way is <b>convolution</b>. 
 
 ### 2.2 Convolution
 <i>Ever heard of Convolutional Neural Networks (CNN)? What is convolution? It is really that 'convoluted'? </i> Let's try to answer such questions but before we really understand what convolution really means, think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
