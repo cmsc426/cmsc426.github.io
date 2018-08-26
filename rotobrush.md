@@ -22,7 +22,7 @@ Table of Content:
 
 
 
-<!--<div class="fig figcenter fighighlight">-->
-	<iframe src="https://www.youtube.com/watch?v=XSXRcXrPyIM"
-	width="768px" heigh="432px" framborder="0" allowfullscreen></iframe>
-<!--</div>-->
+<div class="fig figcenter fighighlight">
+<img src="/assets/rotorbrush/demo.gif" width="100%">
+<div class="figcaption"> Fig. 1
+</div>
