@@ -63,12 +63,12 @@ $$
 $$
 
 
-The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common under (between $f$ and $g$) 
+The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common under (between $$f$$ and $$g$$) 
 
 Let's try to visualize convolution in one dimension. The following image depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common area under the functions  $$f$$ and $$g$$.
 <div class="fig figcenter fighighlight">
-  <img src="/assets/pano/Conv1D.png" width="49%">
-  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
+  <img src="/assets/pano/conv.gif" width="49%">
+  <div class="figcaption">uron (left) and its mathematical model (right).</div>
 </div>
 
 Since we would be dealing with discrete functions in this course, let us look at a simple discrete 1D example:
