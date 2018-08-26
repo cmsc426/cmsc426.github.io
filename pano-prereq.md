@@ -1,7 +1,7 @@
 ---
 layout: page
 mathjax: true
-title: Learning the basics: Computer Vision
+title: Learning the basics of Computer Vision
 permalink: /pano-prereq/
 ---
 
