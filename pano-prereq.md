@@ -21,6 +21,7 @@ Table of Contents:
 	- [Camera Model](#pinhole)
 	- [Distortion](#distortion)
 	- [Camera Calibration (or Intrinsic Calibration)](#intrinsic)
+		- [Reprojection Error](#reproj-error)
 	- [Extrinsic Calibration](#extrinsic)
 - [Transformations in Images](#transform)
 	- [Homogenous Coordinates](#homo-coordinates)
@@ -53,7 +54,7 @@ These are characterized by the appearance of neigborhood pixels surrounding the 
 There are multiple ways to detect certain features. One of the way is <b>convolution</b>. 
 
 ### 2.2 Convolution
-<i>Ever heard of Convolutional Neural Networks (CNN)? What is convolution? It is really that 'convoluted'? </i> Before we really understand what convolution really means, think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
+<i>Ever heard of Convolutional Neural Networks (CNN)? What is convolution? It is really that 'convoluted'? </i> Let's try to answer such questions but before we really understand what convolution really means, think it as an operation of changing the pixel values to a new set of values based on the values of the nearby pixels. <i> Didn't get the gist of it? Don't worry! </i>
 
 Convolution is an operation between two functions, resulting in another function that depicts how the shape of first function is modified by the second function. The convolution of two functions, say $$f$$ and $$g$$ is written is $$f\star g$$ or $$f*g$$ and is defined as:
 
