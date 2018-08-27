@@ -117,7 +117,7 @@ where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s
 
 
 
-#e Acknowledgement
+## Acknowledgement
 This article is adapted from CMSC426 spring 2018 project.
 
 ## References
