@@ -69,7 +69,7 @@ inside the window a foreground (object) probability, based on the local statisti
 <p style="background-color:#ddd; padding:5px">Note: Since each local window moves along its own (averaged) motion vector, the distances between updated neighboring windows may slightly vary. This is one of the main reasons to
 use overlapping windows in the keyframe, so that after propagation, the foreground boundary is still fully covered by the windows.</p>
 
-The window-level <i>local classifiers</i> are composed of a color model (<a href="https://cmsc426.github.io/colorseg/#gmm">GMM</a> to be precise), a shape model (the foreground mask  and a shape confidence mask). Confidence metrics are calculated for the color and shape models: for the color model this is a single value, and for the shape model it is a mask. When the color and shape models are integrated into a single mask, the confidence values are used to assign more weight to the more confident model. Fig. 4 illustrates the segmented foreground and combined probability for local classifiers.
+The window-level <i>local classifiers</i> are composed of a color model (<a href="https://cmsc426.github.io/colorseg/#gmm" style="text-decoration:none">GMM</a> to be precise), a shape model (the foreground mask  and a shape confidence mask). Confidence metrics are calculated for the color and shape models: for the color model this is a single value, and for the shape model it is a mask. When the color and shape models are integrated into a single mask, the confidence values are used to assign more weight to the more confident model. Fig. 4 illustrates the segmented foreground and combined probability for local classifiers.
 
 <div class="fig figcenter fighighlight">
 <img src="/assets/rotobrush/fig4.png" width="100%">
@@ -85,7 +85,7 @@ In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $
 
 Now, for a pixel $$x$$ in the window, its foreground probability generated from the color model is computed as:
 
-$$p_c(x) = p_c(x|\mathcal{F}
+$$p_c(x) = p_c(x|\mathcal{F}$$
 
 
 ## Acknowledgement
