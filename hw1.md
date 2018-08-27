@@ -39,9 +39,9 @@ The data is provided in the form of .mat file ( click [here](https://github.com/
 
 ### File tree and naming
 
-Your submission on Canvas must be a zip file, following the naming convention <b>``YourDirectoryID\_hw1.zip"<\b>.  For example, xyz123\_hw1.zip.  The file <b>must have the following directory structure<\b>, based on the starter files
+Your submission on Canvas must be a zip file, following the naming convention <b>YourDirectoryID_hw1.zip<\b>.  For example, xyz123_hw1.zip.  The file <b> must have the following directory structure<\b>, based on the starter files
 
-YourDirectoryID\_hw1.zip.
+YourDirectoryID_hw1.zip.
  - data/. 
  - plot_eigen.m.
  - least_square.m.
