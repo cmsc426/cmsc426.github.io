@@ -81,7 +81,8 @@ The window-level <i>local classifiers</i> are composed of a color model (<a href
 ### Initializing the Color Model
 The purpose of the color model is to classify pixels as foreground $$\mathcal{F}$$ or background $$\mathcal{B}$$ based on their color. The assumption is that $$\mathcal{F}$$ and $$\mathcal{B}$$ pixels generally differ in color. The color model is based on GMM. One can use Matlab’s `fitgmdist` and `gmdistribution` function from Statistics and Machine Learning toolbox, but NOT using Computer Vision toolbox for GMMs is prohibited for this project.
 
-In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $$\mathcal{B}$$ regions seperately. <p style="background-color:#ddd; padding:5px"><b>Note:</b> Use <i>Lab</i> color space for the color models. To avoid possible sampling errors, we only use pixels whose spatial distance to the segmented boundary is larger than a threshold (5 pixels in our system) as the training data for the GMMs. </p>
+In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $$\mathcal{B}$$ regions seperately.
+<p style="background-color:#ddd; padding:5px"><b>Note:</b> Use <i>Lab</i> color space for the color models. To avoid possible sampling errors, we only use pixels whose spatial distance to the segmented boundary is larger than a threshold (5 pixels in our system) as the training data for the GMMs. </p>
 
 Now, for a pixel $$x$$ in the window, its foreground probability generated from the color model is computed as:
 
