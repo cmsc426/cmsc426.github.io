@@ -18,7 +18,7 @@ This home work is designed to test your understanding of Math tutorial discussed
 
 ## What you need to do
 
-The data is provided in the form of .mat file. The data has various noise level as shown in the Figure 1.
+The data is provided in the form of .mat file ( click [here](https://github.com/cmsc426/cmsc426.github.io/blob/master/assets/hw1/hw1_data.zip) to download). The data has various noise level as shown in the Figure 1.
 
 <div class="fig fighighlight">
   <img src="/assets/hw1/data.jpg" width="100%">
