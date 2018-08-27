@@ -41,7 +41,7 @@ In this article, we specifically will implement an algorithm called <a href="htt
 As mentioned in the introduction section, we need to provide a foreground mask for the object that needs to be segmented. This can be done using `roipoly` from Image Processing Toolbox in MATLAB. The <i>SnapCut</i> can then sample a series of overlapping image windows along the object's boundary. For each such windows, a <i>local classifier</i> is created which is trained to classify whether a pixel belongs to foreground or background. The classifier is trained in such a way that it not only takes into account the color (like [2]) but shape as well. 
 
 <div class="fig figcenter fighighlight">
-<img src="/assets/rotobrush/initial.gif" width="70%">
+<img src="/assets/rotobrush/initial.gif" width="60%">
 <div class="figcaption"> Fig. 2: Creating the initial foreground mask
 </div>
 </div>
