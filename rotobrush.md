@@ -109,7 +109,7 @@ The local shape model $$M_s$$ contains the existing segmentation mask $$L^t(x)$$
 $$f_s(x)=1-exp(-d^2(x)\ /\ \sigma^2_s)$$
 
 where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s$$ is a parameter. A larger $$\sigma_s$$ means the shape confidence is low around the foreground boundary while a small $$\sigma_s$$ means high confidence on the segmentation mask $$L^t(x)$$. 
-<p style="background-color:#ddd; padding:5px"><b>Note:</b> $$\sigma_s$$ is a very important parameter in this approach and can be adaptively and automatically adjusted to achieve accurate local segmentation.</p>
+<b>Note:</b> $$\sigma_s$$ is a very important parameter in this approach and can be adaptively and automatically adjusted to achieve accurate local segmentation.
 
 
 
