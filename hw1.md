@@ -7,7 +7,13 @@ permalink: /hw1/
 **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
 
 Table of Contents:
+- [Introduction](#intro)
+- [What you need to do](#problem)
+  - [Problem Statement](#pro)
+- [Submission Guidelines](#sub)
+- [Collaboration Policy](#coll)
 
+<a name='intro'></a>
 ## Introduction
 
 This home work is designed to test your understanding of mathematics tutorial discussed in this [link](https://cmsc426.github.io/math-tutorial/). The task is to fit the line to two dimensional data points using different linear least square techniques discussed in the tutorials:
@@ -16,6 +22,7 @@ This home work is designed to test your understanding of mathematics tutorial di
 - Outliers rejection using Regularization
 - Outliers rejection using RANSAC
 
+<a name='problem'></a>
 ## What you need to do
 
 The 2D points data is provided in the form of .mat file ( click [here](https://github.com/cmsc426/cmsc426.github.io/blob/master/assets/hw1/hw1_data.zip) to download). The visualization of data with different noise level is shown in the following figure.
@@ -27,11 +34,13 @@ The 2D points data is provided in the form of .mat file ( click [here](https://g
   <div style="clear:both;"></div>
 </div>
 
+<a name='pro'></a>
 ### Problem Statement 
 
 - Write matlab code to visualize geometric interpretation of eigenvalues/covariance matrix as discussed in this [link](http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/) [40 points]  
 - Decide the best outlier rejection technique for each of these datasets and write matlab code to fit the line. Also, discuss why your choice of technique is optimal [60 points] 
 
+<a name='sub'></a>
 ## Submission Guidelines
 
 <b> If your submission does not comply with the following guidelines, you'll be given ZERO credit </b>
@@ -57,6 +66,6 @@ For each section of the homework, explain briefly what you did, and describe any
 
 As usual, your report must be full English sentences,**not** commented code. There is a word limit of 750 words and no minimum length requirement
 
-
+<a name='coll'></a>
 ## Collaboration Policy
 You are **not allowed** to discuss the ideas with other people. The code should be your own, and should be the result of you exercising your own understanding of it. If you reference anyone else's code in writing your project, you must properly cite it in your code (in comments) and your writeup.  For the full honor code refer to the CMSC426 Fall 2018 website
