@@ -52,6 +52,14 @@ In order to develop a practical video cutout that can perform on complicated vid
 </p>
 
 
+<a href=""></a>
+## Segmenting with Localized Classifiers
+### Local Windows
+Once the initial mask is obtained, say $$L^t(x)$$ on a keyframe $$I_t$$, a set of overlapping windows $$W_q^t,...,W_n^t$$ along its contour $$C_t$$ are to be uniformly sampled as shown in Fig. 3. <p style="background-color:#ddd; padding:5px">Assume single contour for now, multiple contours can be handled in the same way)</p> The size and density of the windows can be chosen emperically, usually $$30\times30$$ to $$80\times80$$ pixels. As shown in Fig. 3, 
+<p style="background-color:#ddd; padding:5px">Note: Since each local window moves along its own (averaged) motion vector, the distances between updated neighboring windows may slightly vary. This is one of the main reasons to
+use overlapping windows in the keyframe, so that after propagation, the foreground boundary is still fully covered by the windows.</p>
+
+
 
 ## Acknowledgement
 This article is adapted from CMSC426 spring 2018 project.
