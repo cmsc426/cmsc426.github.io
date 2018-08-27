@@ -111,6 +111,11 @@ $$f_s(x)=1-exp(-d^2(x)\ /\ \sigma^2_s)$$
 where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s$$ is a parameter. A larger $$\sigma_s$$ means the shape confidence is low around the foreground boundary while a small $$\sigma_s$$ means high confidence on the segmentation mask $$L^t(x)$$. 
 <b>Note:</b> $$\sigma_s$$ is a very important parameter in this approach and can be adaptively and automatically adjusted to achieve accurate local segmentation.
 
+<div class="fig figcenter fighighlight">
+<img src="/assets/rotobrush/sigma.png" width="100%">
+<div class="figcaption">(a) As color confidence fc increases (more separable foreground and background color distributions), the value of σs increases, giving less weight to the shape prior. (b) Profile of the shape prior fs(x). An example of (c) color probability pc(x), (d) shape confidence fs(x) with parameter σs, and (e) the integrated probability $$p_k^k(x)$$.
+</div>
+</div>
 
 
 
