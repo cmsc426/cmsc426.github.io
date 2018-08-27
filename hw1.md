@@ -10,7 +10,7 @@ Table of Contents:
 
 ## Introduction
 
-This home work is designed to test your understanding of Math tutorial discussed in this [link](https://cmsc426.github.io/math-tutorial/). The task is to fit the line to two dimensional data points using different linear least square techniques discussed in the tutorials:
+This home work is designed to test your understanding of mathematics tutorial discussed in this [link](https://cmsc426.github.io/math-tutorial/). The task is to fit the line to two dimensional data points using different linear least square techniques discussed in the tutorials:
 
 - Line fitting using Linear Least Squares
 - Outliers rejection using Regularization
@@ -18,12 +18,11 @@ This home work is designed to test your understanding of Math tutorial discussed
 
 ## What you need to do
 
-The data is provided in the form of .mat file ( click [here](https://github.com/cmsc426/cmsc426.github.io/blob/master/assets/hw1/hw1_data.zip) to download). The data has various noise level as shown in the Figure 1.
+The 2D points data is provided in the form of .mat file ( click [here](https://github.com/cmsc426/cmsc426.github.io/blob/master/assets/hw1/hw1_data.zip) to download). The visualization of data with different noise level is shown in the following figure.
 
 <div class="fig fighighlight">
   <img src="/assets/hw1/data.jpg" width="100%">
   <div class="figcaption">
-    2D data points.
   </div>
   <div style="clear:both;"></div>
 </div>
