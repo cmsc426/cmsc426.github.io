@@ -32,3 +32,32 @@ The data is provided in the form of .mat file ( click [here](https://github.com/
 
 - Write matlab code to visualize geometric interpretation of eigenvalues/covariance matrix as discussed in this [link](http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/) [40 points]  
 - Decide the best outlier rejection technique for each of these datasets and write matlab code to fit the line. Also, discuss why your choice of technique is optimal [60 points] 
+
+## Submission Guidelines
+
+<b> If your submission does not comply with the following guidelines, you'll be given ZERO credit </b>
+
+### File tree and naming
+
+Your submission on Canvas must be a zip file, following the naming convention <b>``YourDirectoryID\_hw1.zip"<\b>.  For example, xyz123\_hw1.zip.  The file <b>must have the following directory structure<\b>, based on the starter files
+
+YourDirectoryID\_hw1.zip.
+ - data/. 
+ - plot_eigen.m.
+ - least_square.m.
+ - report.pdf
+
+
+### Report
+For each section of the homework, explain briefly what you did, and describe any interesting problems you encountered and/or solutions you implemented.  You must include the following details in your writeup:
+
+- Your understanding of eigenvectors and eigenvalues
+- Your choice of outlier rejection technique for each dataset
+- Limitation of each outliers rejection technique
+
+
+As usual, your report must be full English sentences,<b>not</b> commented code. There is a word limit of 750 words and no minimum length requirement
+
+
+## Collaboration Policy
+You are <b>not allowed</b> to discuss the ideas with other people. The code should be your own, and should be the result of you exercising your own understanding of it. If you reference anyone else's code in writing your project, you must properly cite it in your code (in comments) and your writeup.  For the full honor code refer to the CMSC426 Fall 2018 website
