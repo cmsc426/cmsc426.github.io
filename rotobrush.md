@@ -87,6 +87,15 @@ In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $
 Now, for a pixel $$x$$ in the window, its foreground probability generated from the color model is computed as:
 
 $$p_c(x) = p_c(x|\mathcal{F})\ /\ (p_c(x|\mathcal{F})+p_c(x|\mathcal{B}))$$
+where $$p_c(x|\mathcal{F})$$ and $$p_c(x|\mathcal{B})$$ are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
+
+
+### Color Model Confidence
+The local color model confidence $$f_c$$ is used to describe how separable the local foreground is against the local background using just the color model. Let $$L^t(x)$$ be the known segmentation label ($$\mathcal{F}=1$$ and $$\mathcal{B}=0) of pixel $$x$$ for the current frame, $$f_c$$ is computed as
+
+$$f_c=1-\cfrac{\int_{W_k}|L^t(x)-p_c(x)|\cdot\omega_c(x)dx}{\int_{W_k}\omega_c(x)dx}$$
+
+The weighing function $$\omega_c(x)$$ is computed as $$\omega_c(x)=exp(-d^2(x)\ /\ \sigma_c^2$$, where $$d(x)$$ is the spatial distance between $$x$$ and the foreground boundary, computed using the distance transform. $$\sigma_c$$ is fixed as half of the window size. $$\omega_c(x)$$ is higher when $$x$$ is closer to the boundary <i>i.e.</i> the color model is required to work well near the foreground boundary for accurate segmentation.
 
 
 ## Acknowledgement
