@@ -21,7 +21,7 @@ This home work is designed to test your understanding of Math tutorial discussed
 The data is provided in the form of .mat file. The data has various noise level as shown in the Figure 1.
 
 <div class="fig fighighlight">
-  <img src="/assets/hw1/data.png" width="60%">
+  <img src="/assets/hw1/data.jpeg" width="60%">
   <div class="figcaption">
     2D data points.
   </div>
