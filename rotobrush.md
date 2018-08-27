@@ -22,7 +22,7 @@ Table of Content:
 In this project, we will learn segmenting objects in a video sequence. Given a <i> good</i> boundary detection in the initial frame of a video, the object can be tracked and segmented out in the remaining sequence. It is much easier to segment the rigid objects in the scene using traditional tracking algorithms but the same can't be said for deformable objects like the one you can see in the Fig. 1. 
 
 <div class="fig figcenter fighighlight">
-<img src="/assets/rotobrush/demo.gif" width="100%">
+<img src="/assets/rotobrush/demo.gif" width="80%">
 <div class="figcaption"> Fig. 1: Segmenting out non-rigid objects in a video sequence
 </div>
 </div>
@@ -36,7 +36,7 @@ In this article, we specifically will implement an algorithm called <a href="htt
 As mentioned in the introduction section, we need to provide a foreground mask for the object that needs to be segmented. This can be done using `roipoly` from Image Processing Toolbox in MATLAB. The <i>SnapCut</i> can then sample a series of overlapping image windows along the object's boundary. For each such windows, a <i>local classifier</i> is created which is trained to classify whether a pixel belongs to foreground or background. The classifier is trained in such a way that it not only takes into account the color (like [2]) but shape as well. 
 
 <div class="fig figcenter fighighlight">
-<img src="/assets/rotobrush/initial.gif" width="100%">
+<img src="/assets/rotobrush/initial.gif" width="70%">
 <div class="figcaption"> Fig. 2: Creating the initial foreground mask
 </div>
 </div>
