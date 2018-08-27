@@ -11,9 +11,14 @@ Table of Content:
 
 - [Introduction](#intro)
 - [Overview](#overview)
-- [](#)
+- [Segmenting Localized Classifiers](#local-classifiers)
+	- [Initializing Local Windows](#local-windows)
+	- [Initializing Color Models](#color-model)
+	- [Color Confidence](#color-confidence)
+	- [Shape Model](#shape-model)
 
-
+- [Acknowledgement](#ackn)
+- [References](#ref)
 
 
 <a href="#intro"></a>
