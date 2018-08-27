@@ -39,7 +39,7 @@ The data is provided in the form of .mat file ( click [here](https://github.com/
 
 ### File tree and naming
 
-Your submission on Canvas must be a zip file, following the naming convention <b> YourDirectoryID_hw1.zip <\b>.  For example, xyz123_hw1.zip.  The file <b> must have the following directory structure<\b>, based on the starter files
+Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_hw1.zip**.  For example, xyz123_hw1.zip.  The file **must have the following directory structure**, based on the starter files
 
 YourDirectoryID_hw1.zip.
  - data/. 
@@ -56,8 +56,8 @@ For each section of the homework, explain briefly what you did, and describe any
 - Limitation of each outliers rejection technique
 
 
-As usual, your report must be full English sentences,<b>not</b> commented code. There is a word limit of 750 words and no minimum length requirement
+As usual, your report must be full English sentences,**not** commented code. There is a word limit of 750 words and no minimum length requirement
 
 
 ## Collaboration Policy
-You are <b>not allowed</b> to discuss the ideas with other people. The code should be your own, and should be the result of you exercising your own understanding of it. If you reference anyone else's code in writing your project, you must properly cite it in your code (in comments) and your writeup.  For the full honor code refer to the CMSC426 Fall 2018 website
+You are **not allowed** to discuss the ideas with other people. The code should be your own, and should be the result of you exercising your own understanding of it. If you reference anyone else's code in writing your project, you must properly cite it in your code (in comments) and your writeup.  For the full honor code refer to the CMSC426 Fall 2018 website
