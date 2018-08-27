@@ -97,6 +97,12 @@ $$f_c=1-\cfrac{\int_{W_k}|L^t(x)-p_c(x)|\cdot\omega_c(x)dx}{\int_{W_k}\omega_c(x
 
 The weighing function $$\omega_c(x)$$ is computed as $$\omega_c(x)=exp(-d^2(x)\ /\ \sigma_c^2$$, where $$d(x)$$ is the spatial distance between $$x$$ and the foreground boundary, computed using the distance transform. $$\sigma_c$$ is fixed as half of the window size. $$\omega_c(x)$$ is higher when $$x$$ is closer to the boundary <i>i.e.</i> the color model is required to work well near the foreground boundary for accurate segmentation.
 
+### Shape Model
+The local shape model $$M_s$$ contains the existing segmentation mask $$L^t(x)$$ and a shape confidence mask computed as 
+
+$$f_s(x)=1-exp(-d^2(x)\ /\ \sigma^2_s)$$
+
+
 
 ## Acknowledgement
 This article is adapted from CMSC426 spring 2018 project.
