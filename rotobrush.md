@@ -34,6 +34,9 @@ In this project, we will learn segmenting objects in a video sequence. Given a <
 
 In this article, we specifically will implement an algorithm called <a href="http://juew.org/projects/SnapCut/snapcut.htm"><i>Video SnapCut</i></a> (also known as <i>RotoBrush</i> in <i>Adobe After Effects</i>) by Bai et. al. To get a very good inituition, we would <b>highly recommend</b> watching this 5 min <a href="https://www.youtube.com/watch?v=XSXRcXrPyIM"> video </a> that describes the entire paper.
 
+<p style="background-color:#ddd; padding:5px">
+<b>Note:</b> Reading the paper [1] is highly recommended.</p>
+
 
 <a href="System Overview"></a>
 ## Overview
@@ -114,7 +117,7 @@ where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s
 
 <div class="fig figcenter fighighlight">
 <img src="/assets/rotobrush/sigma.png" width="100%">
-<div class="figcaption">Figure 5: (a) As color confidence $f_c$ increases (more separable foreground and background color distributions), the value of σ increases, giving less weight to the shape prior. (b) Profile of the shape prior f(x). An example of (c) color probability, (d) shape confidence with parameter σ, and (e) the integrated probability $$p_k^k(x)$$.
+<div class="figcaption">Figure 5: (a) As color confidence $f_c$ increases (more separable foreground and background color distributions), the value of σ increases, giving less weight to the shape prior. (b) Profile of the shape prior f(x). An example of (c) color probability, (d) shape confidence with parameter σ, and (e) the integrated probability p_k^k(x).
 </div>
 </div>
 
