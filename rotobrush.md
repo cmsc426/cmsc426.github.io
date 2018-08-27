@@ -59,14 +59,28 @@ Once the initial mask is obtained, say $$L^t(x)$$ on a keyframe $$I_t$$, a set o
 Each window defines the application range of a local classifier, and the classifier will assign to every pixel
 inside the window a foreground (object) probability, based on the local statistics it gathers. Neighboring windows overlap for about one-third of the window size.
 
+<div class="fig figcenter fighighlight">
+<img src="/assets/rotobrush/local-window.png" width="100%">
+<div class="figcaption"> Fig. 3: Illustrating local classifiers. (a) Overlapping classifiers are initialized along the object boundary on frame t. (b) These classifiers are then propagated onto the next frame by motion estimation.
+</div>
+</div>
+
 <p style="background-color:#ddd; padding:5px">Note: Since each local window moves along its own (averaged) motion vector, the distances between updated neighboring windows may slightly vary. This is one of the main reasons to
 use overlapping windows in the keyframe, so that after propagation, the foreground boundary is still fully covered by the windows.</p>
 
 The window-level <i>local classifiers</i> are composed of a color model (<a href="https://cmsc426.github.io/colorseg/#gmm">GMM</a> to be precise), a shape model (the foreground mask  and a shape confidence mask). Confidence metrics are calculated for the color and shape models: for the color model this is a single value, and for the shape model it is a mask. When the color and shape models are integrated into a single mask, the confidence values are used to assign more weight to the more confident model.
 
+<div class="fig figcenter fighighlight">
+<img src="/assets/rotobrush/fig4.png" width="100%">
+<div class="figcaption"> Fig. 4: (a) Each classifier contains a local color model and shape model, they are initialized on frame t and updated on frame t+1. Local classification results are then combined to generate a global foreground probability map. (e) The final segmented foreground object on frame t + 1.
+</div>
+</div>
+
 
 ### Initializing the Color Model
-The purpose of the color model is to classify pixels as foreground $$\mathcal{F}$$ or background $$\mathcal{B}$$ based on their color. The assumption is that foreground and background pixels will generally differ in color. The color model is based on Gaussian Mixture Models; you can use Matlab’s fitgmdist and gmdistribution classes, but not the vision-specific functions/tools based on GMMs.
+The purpose of the color model is to classify pixels as foreground $$\mathcal{F}$$ or background $$\mathcal{B}$$ based on their color. The assumption is that $$\mathcal{F}$$ and $$\mathcal{B}$$ pixels generally differ in color. The color model is based on GMM. One can use Matlab’s `fitgmdist` and `gmdistribution` function from Statistics and Machine Learning toolbox, but NOT using Computer Vision toolbox for GMMs is prohibited for this project.
+
+
 
 
 
