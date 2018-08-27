@@ -119,12 +119,11 @@ where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s
 </div>
 
 
+A simple explanation for updating local models can be found in 
 
 
 
 
-## Acknowledgement
-This article is adapted from CMSC426 spring 2018 project.
 
 ## References
 1. Bai, X., Wang, J., Simons, D. and Sapiro, G., 2009, July. Video snapcut: robust video object cutout using localized classifiers. In ACM Transactions on Graphics (ToG) (Vol. 28, No. 3, p. 70). ACM.
