@@ -93,7 +93,7 @@ Now, for a pixel $$x$$ in the window, its foreground probability generated from 
 
 $$p_c(x)=p_c(x | \mathcal{F})\ / \ \left(p_c(x | \mathcal{F})+p_c(x | \mathcal{B})\right)$$
 
-where $$p_c(x\mathcal{F})$$ and $$p_c(x\mathcal{B})$$ are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
+where $$p_c(x | \mathcal{F})$$ and $$p_c(x | \mathcal{B})$$ are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
 
 
 ### Color Model Confidence
@@ -110,6 +110,9 @@ $$f_s(x)=1-exp(-d^2(x)\ /\ \sigma^2_s)$$
 
 where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s$$ is a parameter. A larger $$\sigma_s$$ means the shape confidence is low around the foreground boundary while a small $$\sigma_s$$ means high confidence on the segmentation mask $$L^t(x)$$. 
 <p style="background-color:#ddd; padding:5px"><b>Note:</b> $$\sigma_s$$ is a very important parameter in this approach and can be adaptively and automatically adjusted to achieve accurate local segmentation.</p>
+
+
+
 
 
 
