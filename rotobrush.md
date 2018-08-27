@@ -91,7 +91,7 @@ In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $
 
 Now, for a pixel $$x$$ in the window, its foreground probability generated from the color model is computed as:
 
-$$p_c(x)=p_c(x\mathcal{F}) / (p_c(x\mathcal{F})+p_c(x\mathcal{B}))$$
+$$p_c(x)=p_c(x\mathcal{F})\ / \ (p_c(x\mathcal{F})+p_c(x\mathcal{B}))$$
 
 where $$p_c(x\mathcal{F})$$ and $$p_c(x\mathcal{B})$$ are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
 
