@@ -102,8 +102,8 @@ In the above equations, $$f$$ is the focal length of the lens in pixels (feel fr
 A sample input image and its cylinderical projection is shown in Fig. 7.
 
 <div class="fig figcenter fighighlight">
-  <img src="/assets/pano/input_image.png" width="100%">
-  <img src="/assets/pano/cylinderical_image.png" width="100%">
+  <img src="/assets/pano/input_image.png" width="60%">
+  <img src="/assets/pano/cylinderical_image.png" width="60%">
   <div class="figcaption"> Fig. 7: Original Image vs Cylinderical Projection. </div>
 </div>
 
