@@ -193,7 +193,7 @@ This gives a real-valued probability map for the foreground mask. We want a bina
 </div>
 </div>
 
-<i>SnapCut</i> is a novel video cutout system which, unlike previous systems, uses adaptive local classifiers for segmenting dynamic video objects. By localizing the classifiers, the system achieves significantly better results than previous systems for complicated vidoes, including complex color distributions, dynamic backgrounds and non-rigid foreground deformations.
+<i>SnapCut</i> is a novel video cutout system which uses adaptive local classifiers for segmenting dynamic video objects. By localizing the classifiers, the system achieves significantly better results than previous systems for complicated vidoes, including complex color distributions, dynamic backgrounds and non-rigid foreground deformations.
 
 <a name='ref'></a>
 ## 8. References
