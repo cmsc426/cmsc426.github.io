@@ -113,6 +113,13 @@ However, when you compute the values of $$(x',y')$$ they might not be integers. 
 with black pixels, fill them using some weighted combination of it’s neighbours (gaussian works best). A trivial way to do this is to blur the image and copy paste pixel values on-to original image where there were pure black pixels. (You can also initialize pixels to NaN’s instead of zeros to avoid removing actual zero pixels).
 
 ## 7. Blending Images:
+Panorama can be produced by overlaying the pairwise aligned images to create the final output image. The following MATLAB functions can be useful to solve this (like $$\texttt{imtransform}$$ and $$\texttt{imwarp}$$). Feel free to implement $$\texttt{imwarp}$$ or similar function by yourself. For such implementation, apply bilinear tranpolation when you copy pixel values. Feel free to use any third party code for warping and transforming images. Fig. 8 shows the panorama output for the image set in Fig. 3.
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/pano-output.png" width="80%">
+  <div class="figcaption"> Fig. 8: Final Panorama output. </div>
+</div>
+
+
 ### A. Poisson Blending
 
 ## 8. Discussion
