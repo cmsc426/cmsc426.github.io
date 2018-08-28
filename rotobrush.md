@@ -35,7 +35,7 @@ In this project, we will learn segmenting objects in a video sequence. Given a <
 In this article, we specifically will implement an algorithm called <a href="http://juew.org/projects/SnapCut/snapcut.htm"><i>Video SnapCut</i></a> (also known as <i>RotoBrush</i> in <i>Adobe After Effects</i>) by Bai et. al. To get a very good inituition, we would <b>highly recommend</b> watching this 5 min <a href="https://www.youtube.com/watch?v=XSXRcXrPyIM"> video </a> that describes the entire paper.
 
 <p style="background-color:#ddd; padding:5px">
-<b>Note:</b> Reading the paper <a href="#intro">[1]</a> is highly recommended.</p>
+<b>Note:</b> Reading the paper <a href="#intro">[1]</a> is HIGHLY RECOMMENDED.</p>
 
 
 <a href="System Overview"></a>
