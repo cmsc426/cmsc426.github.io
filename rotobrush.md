@@ -60,8 +60,9 @@ In order to develop a practical video cutout that can perform on complicated vid
 </p>
 
 
-<a name=""></a>
+<a name='segmenting-loc-classifiers'></a>
 ## Segmenting with Localized Classifiers
+<a name='local-windows'></a>
 ### Local Windows
 Once the initial mask is obtained, say $$L^t(x)$$ on a keyframe $$I_t$$, a set of overlapping windows $$W_q^t,...,W_n^t$$ along its contour $$C_t$$ are to be uniformly sampled as shown in Fig. 3.
 <i>Assume single contour for now, multiple contours can be handled in the same way.</i> The size and density of the windows can be chosen emperically, usually $$30\times30$$ to $$80\times80$$ pixels. 
@@ -169,7 +170,7 @@ where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ s
 This gives a real-valued probability map for the foreground mask. We want a binary mask. The simplest solution would be to threshold the values of the probability map. This may produce a somewhat rough result. Bai et. al. use Graph Cut segmentation to obtain a better final result: you are encouraged (but not required) to use Matlab’s `lazysnapping` tool to implement this. Fig. 6 shows the output of <i>Video SnapCut</i>
 
 <div class="fig figcenter fighighlight">
-<img src="/assets/rotobrush/result.png" width="80%">
+<img src="/assets/rotobrush/results.png" width="80%">
 <div class="figcaption"> Fig. 1: Video SnapCut output. First two images on each dataset illustrates the foreground cut-out. The last image on each frame shows how SnapCut can be use to modify the background only.
 </div>
 </div>
