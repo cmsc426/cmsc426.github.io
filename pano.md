@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Panorama Stitching
-permalink: /pano2/
+permalink: /pano/
 ---
 
 Table of Contents:
