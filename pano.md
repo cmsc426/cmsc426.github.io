@@ -82,7 +82,7 @@ Recall the RANSAC steps are:
 6. Re-compute least-squares $$\hat{H}$$ estimate on all of the inliers. Use the function `est_homography` given to you.
 
 ## 6. Cylinderical Projection
-When we are try to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Fig. 6 below highlights the stitching with bad distortion at the edges. 
+When we are try to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Fig. 6 below highlights the stitching with bad distortion at the edges. Check <a href="https://graphics.stanford.edu/courses/cs178/applets/projection.html">this implementation/demo</a> of cylinderical projection.
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/distortion.png" width="100%">
@@ -119,8 +119,10 @@ Panorama can be produced by overlaying the pairwise aligned images to create the
   <div class="figcaption"> Fig. 8: Final Panorama output. </div>
 </div>
 
+<i>Come up with a logic to blend the common region between images while not affecting the regions which are not common.</i> Here, common means shared region, <i>i.e.</i>, a part of first image and part of second image should overlap in the output panorama. Describe what you did in your report. You CAN NOT use any built-in Matlab function or third party code to do this.
 
-### A. Poisson Blending
+<p style="background-color:#ddd; padding:5px"><b>Note:</b> The pipeline talks about how to stitch a pair of images, you need to extend this to work for multiple images. You can re-run your images pairwise or do something smarter.</p>
+Your end goal is to be able to stitch any number of given images - maybe 2 or 3 or 4 or 100, your algorithm should work. If a random image with no matches are given, your algorithm needs to report an error.
 
-## 8. Discussion
+<p style="background-color:#ddd; padding:5px"><b>Note:</b> When blending these images, there are inconsistency between pixels from different input images due to different exposure/white balance settings or photometric distortions or vignetting. This can be resolved by <i><a href="http://www.irisa.fr/vista/Papers/2003_siggraph_perez.pdf">Poisson blending</a></i>. You can use third party code for the seamless panorama stitching.
 
