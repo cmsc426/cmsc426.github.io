@@ -77,7 +77,7 @@ Recall the RANSAC steps are:
 1. Select four feature pairs (at random), $$p_i$$ from image 1, $$p_i^1$$ from image 2.
 2. Compute homography $$H$$ (exact). Use the function $$\texttt{est_homography}$$ that will be provided to you. Check Panorama assignment!
 3. Compute inliers where $$SSD(p_i^1, Hp_i) < \texttt{thresh}$$. Here, $$Hp_i$$ computed using the $$\texttt{apply_homography}$$ function given to you.
-4. Repeat the last three steps until you have exhausted $$N$$<sub>max</sub>$$ number of iterations (specified by user) or you found more than percentage of inliers (Say $$90\%$$ for example).
+4. Repeat the last three steps until you have exhausted $$N$$<sub>max</sub> number of iterations (specified by user) or you found more than percentage of inliers (Say $$90\%$$ for example).
 5. Keep largest set of inliers.
 6. Re-compute least-squares $$\hat{H}$$ estimate on all of the inliers. Use the function `est_homography` given to you.
 
