@@ -161,6 +161,7 @@ After the previous step, we have a foreground probability mask for each local wi
 
 $$p_{\mathcal{F}}(x)=\cfrac{\sum_{k}p_{\mathcal{F}}^k(x)(x-c_k)+\epsilon)^{-1}}{\sum_k(x-c_k+\epsilon)^{-1}}$$
 
+where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ such that the updated window $$W^{t+1}_k$$ covers the pixel), is a small constant ($$0.1$$ in the system), and $$c_k$$ is the center of the window ($$|x − ck|$$ is the distance from the pixel $$x$$ to the center).
 
 
 <a name='ref'></a>
