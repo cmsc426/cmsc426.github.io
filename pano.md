@@ -4,7 +4,7 @@ mathjax: true
 title: Panorama Stitching
 permalink: /pano/
 ---
-
+**This article is written by <a href="http://chahatdeep.github.io/">Chahat Deep Singh</a>**
 Table of Contents:
 
 - [Introduction](#intro)
@@ -14,8 +14,6 @@ Table of Contents:
 - [RANSAC to estimate Robust Homography](#homography)
 - [Cylinderical Projection](#cyl-projection)
 - [Blending Images](#blending)
-- [Discussion](#discussion)
-
 
 
 
@@ -83,7 +81,7 @@ Recall the RANSAC steps are:
 5. Keep largest set of inliers.
 6. Re-compute least-squares $$\hat{H}$$ estimate on all of the inliers. Use the function `est_homography` given to you.
 
-<a name='cyl-proj'></a>
+<a name='cyl-projection'></a>
 ## 6. Cylinderical Projection
 When we are try to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Fig. 6 below highlights the stitching with bad distortion at the edges. Check <a href="https://graphics.stanford.edu/courses/cs178/applets/projection.html">this implementation/demo</a> of cylinderical projection from Stanford Computer Graphics department.
 
