@@ -35,7 +35,7 @@ In this project, we will learn segmenting objects in a video sequence. Given a <
 In this article, we specifically will implement an algorithm called <a href="http://juew.org/projects/SnapCut/snapcut.htm"><i>Video SnapCut</i></a> (also known as <i>RotoBrush</i> in <i>Adobe After Effects</i>) by Bai et. al. To get a very good inituition, we would <b>highly recommend</b> watching this 5 min <a href="https://www.youtube.com/watch?v=XSXRcXrPyIM"> video </a> that describes the entire paper.
 
 <p style="background-color:#ddd; padding:5px">
-<b>Note:</b> Reading the paper [1] is highly recommended.</p>
+<b>Note:</b> Reading the paper <a href="#intro">[1]</a> is highly recommended.</p>
 
 
 <a href="System Overview"></a>
@@ -95,7 +95,6 @@ In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $
 Now, for a pixel $$x$$ in the window, its foreground probability generated from the color model is computed as:
 
 $$p_c(x)=p_c(x | \mathcal{F})\ / \ \left(p_c(x | \mathcal{F})+p_c(x | \mathcal{B})\right)$$
-
 where \(p_c(x\mathcal{F})\) and \(p_c(x | \mathcal{B})\) are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
 
 
@@ -127,7 +126,7 @@ A simple explanation for updating local models can be found in
 
 
 
-
+<a href="#ref"></a>
 ## References
 1. Bai, X., Wang, J., Simons, D. and Sapiro, G., 2009, July. Video snapcut: robust video object cutout using localized classifiers. In ACM Transactions on Graphics (ToG) (Vol. 28, No. 3, p. 70). ACM.
 2. Wang, J. and Cohen, M.F., 2005, October. An iterative optimization approach for unified image segmentation and matting. In Computer Vision, 2005. ICCV 2005. Tenth IEEE International Conference on (Vol. 2, pp. 936-943). IEEE.
