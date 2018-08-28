@@ -189,7 +189,7 @@ This gives a real-valued probability map for the foreground mask. We want a bina
 
 <div class="fig figcenter fighighlight">
 <img src="/assets/rotobrush/results.png" width="80%">
-<div class="figcaption"> Fig. 1: Video SnapCut output. First two images on each dataset illustrates the foreground cut-out. The last image on each frame shows how SnapCut can be use to modify the background only.
+<div class="figcaption"> Fig. 1: Video SnapCut output. First two images on each dataset illustrates the foreground cut-out. The last image on each datset shows how SnapCut can be use to modify the background only.
 </div>
 </div>
 
