@@ -166,7 +166,13 @@ where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ s
 
 ### Extracting the Final Foreground Mask
 
-This gives a real-valued probability map for the foreground mask. We want a binary mask. The simplest solution would be to threshold the values of the probability map. This may produce a somewhat rough result. Bai et. al. use Graph Cut segmentation to obtain a better final result: you are encouraged (but not required) to use Matlab’s `lazysnapping` tool to implement this.
+This gives a real-valued probability map for the foreground mask. We want a binary mask. The simplest solution would be to threshold the values of the probability map. This may produce a somewhat rough result. Bai et. al. use Graph Cut segmentation to obtain a better final result: you are encouraged (but not required) to use Matlab’s `lazysnapping` tool to implement this. Fig. 6 shows the output of <i>Video SnapCut</i>
+
+<div class="fig figcenter fighighlight">
+<img src="/assets/rotobrush/result.png" width="80%">
+<div class="figcaption"> Fig. 1: Video SnapCut output. First two images on each dataset illustrates the foreground cut-out. The last image on each frame shows how SnapCut can be use to modify the background only.
+</div>
+</div>
 
 <hr>
 
