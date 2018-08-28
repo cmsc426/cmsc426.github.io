@@ -94,7 +94,7 @@ In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $
 
 Now, for a pixel $$x$$ in the window, its foreground probability generated from the color model is computed as:
 
-$$p_c(x)=p_c(x | \mathcal{F})\ / \ \left(p_c(x | \mathcal{F})+p_c(x | \mathcal{B})\right)$$
+$$p_c(x)=p_c(x \vert \mathcal{F})\ / \ \left(p_c(x \vert \mathcal{F})+p_c(x \vert \mathcal{B})\right)$$
 
 
 where \(p_c\)    \( p_c(x\mathcal{F}) \) and \(p_c(x | \mathcal{B})\) are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
@@ -161,7 +161,7 @@ After the previous step, we have a foreground probability mask for each local wi
 
 $$p_{\mathcal{F}}(x)=\cfrac{\sum_{k}p_{\mathcal{F}}^k(x)(x-c_k)+\epsilon)^{-1}}{\sum_k(x-c_k+\epsilon)^{-1}}$$
 
-where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ such that the updated window $$W^{t+1}k$$ covers the pixel), is a small constant ($$0.1$$ in the system), and $$c_k$$ is the center of the window ($$\abs{x − c_k}$$ is the distance from the pixel $$x$$ to the center).
+where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ such that the updated window $$W^{t+1}k$$ covers the pixel), is a small constant ($$0.1$$ in the system), and $$c_k$$ is the center of the window ($$\vert x − c_k \vert$$ is the distance from the pixel $$x$$ to the center).
 
 This gives a real-valued probability map for the foreground mask. We want a binary mask. The simplest solution would be to threshold the values of the probability map. This may produce a somewhat rough result. Bai et. al. use Graph Cut segmentation to obtain a better final result: you are encouraged (but not required) to use Matlab’s `lazysnapping` tool to implement this.
 
