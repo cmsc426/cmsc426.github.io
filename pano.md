@@ -107,7 +107,7 @@ A sample input image and its cylinderical projection is shown in Fig. 7.
   <div class="figcaption"> Fig. 7: Original Image vs Cylinderical Projection. </div>
 </div>
 
-<p style="background-color:#ddd; padding:5px"><b>Note:</b> The above equations talk about pixel coordinates are not pixel values. The idea is you compute the coordinate transformation and copy poaste pixel values to these new pixel coordinates (in all 3 RGB channel).</p>
+<p style="background-color:#ddd; padding:5px"><b>Note: The above equations talk about pixel coordinates, NOT pixel values.</b> The idea is you compute the coordinate transformation and copy poaste pixel values to these new pixel coordinates (in all 3 RGB channel).</p>
 
 However, when you compute the values of $$(x',y')$$ they might not be integers. A simple way to get around this is to use round or actually interpolate the values. If you decide to round the co-ordinates off you might be left
 with black pixels, fill them using some weighted combination of it’s neighbours (gaussian works best). A trivial way to do this is to blur the image and copy paste pixel values on-to original image where there were pure black pixels. (You can also initialize pixels to NaN’s instead of zeros to avoid removing actual zero pixels).
