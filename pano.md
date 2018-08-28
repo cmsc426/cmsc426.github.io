@@ -95,7 +95,7 @@ $$x' = f \cdot tan \left(\cfrac{x-x_c}{f}\right)+x_c$$
 
 $$y' = \left( \cfrac{y-y_c}{cos\left(\cfrac{x-x_c}{f}\right)}\right)+y_c$$
 
-In the above equations, $$f$$ is the focal length of the lens in pixels (feel free to experiment with values, generally values range from 100 to 500, however this totally depends on the camera and can lie outside this range). The original image co-ordinates are $$(x, y)$$ and the transformed image co-ordinates (in cylindrical co-ordinates) are $$(x' ,y')$$. $$x_c$$ and $$y_c$$ are the image center co-ordinates. Note that, $$x$$ is the column number and $$y$$ is the row number in <style="all-small-caps">MATLAB</style> $$\scshape{First}$$.
+In the above equations, $$f$$ is the focal length of the lens in pixels (feel free to experiment with values, generally values range from 100 to 500, however this totally depends on the camera and can lie outside this range). The original image co-ordinates are $$(x, y)$$ and the transformed image co-ordinates (in cylindrical co-ordinates) are $$(x' ,y')$$. $$x_c$$ and $$y_c$$ are the image center co-ordinates. Note that, $$x$$ is the column number and $$y$$ is the row number in MATLAB.
 
 <p style="background-color:#ddd; padding:5px"><b>Note:</b> Use `meshgrid`, `ind2sub`, `sub2ind` to speed up this part. <b>Using loops will TAKE FOREVER!</b></p>
 
