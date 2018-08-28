@@ -139,11 +139,11 @@ While this method for window re-positioning is not perfect, errors are accommoda
 Now that the local windows have been properly re-centered, we can update the local classifiers
 for the new frame.
 
-### Updating the Shape Model
+#### Updating the Shape Model
 The shape model is composed of the foreground mask and the shape confidence map. These
 are both carried over from the previous frame.
 
-### Updating the Color Model 
+#### Updating the Color Model 
 The distribution of colors in the foreground and background may change from one frame to the next, as different parts of the scene move independently. We want to update the color model to reflect these changes. Simply replacing the existing color model with a new pair of GMMs every frame could pose problems. For one, if there’s a sudden change in color in one frame, which quickly disappears in the next, our color model will be completely de-railed.
 Moreover, the new GMMs may have degraded performance because of improper labling of the pixels used to train them. This is because we label "foreground" and "background" pixels based on the foreground mask, and that may be less accurate after updating window locations in the previous step. <br>
 So what can we do? Bai. et. al. propose to compare two color models: the existing one from the previous frame and a combination of the previous and new frame’s GMMs. They first observe that the colors in the foreground region don’t change much between frames, while the background region can change significantly. Therefore we’d expect the number of pixels classifier by the model as foreground to be relatively consistent between frames. If the number of foreground pixels increases under the new color model, then we should stick with the old one. If we choose the new color model, we must also re-compute the color confidence value, as was done in <i>section 4.3</i>.
@@ -151,7 +151,7 @@ So what can we do? Bai. et. al. propose to compare two color models: the existin
 
 ## Updating the Shape and Color Models
 For each window, we now merge the foreground maps produced by the shape and color models, weighting them based on the shape confidence map.  The foreground probability $$p_{\mathcal{F}}^k(x)$$, corresponding to the window \(W_k\) in the current frame, becomes a linear combination of the updated color probability \(p_c(x)\) and the updated (warped) binary shape mask \(L^{t+1}(x)\), using the shape confidence map \(f_s(x)\) with the just computed \(\sigma_s\) as the interpolation coefficients:<br>
-$$p_{\mathcal{F}}^k(x)=f_s(x)L^{t+1}(x)+(1-f_s(x))p_c(x)$$
+$$p_{\mathcal{F}}^k(x)=f_s(x)L^{t+1}(x)+(1-f_s(x))p_c(x)$$<br>
 Examples of \(p_c(x)\), \(f_s(x)\) and \(p_{\mathcal{F}}^k(x)\) are shown in Fig. 5(c,d,e).
 
 
