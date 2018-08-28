@@ -17,10 +17,14 @@ Table of Content:
 	- [Color Confidence](#color-model-conf)
 	- [Shape Model](#shape-model)
 - [Updating Window Locations](#update-window-loc)
-	- [Estimate the Motion of the Entire Object](#estimate-local-boundary)
-	- []
-
-- [Acknowledgement](#ackn)
+	- [Estimate the Motion of the Entire Object](#estimate-object-motion)
+	- [Estimate Local Boundary Deformation](#estimate-local-boundary)
+- [Update Local Classifier](#update-local-classifier)
+	- [Updating the Shape Model](#)
+	- [Updating the Color Model](#)
+- [Updating the Shape and Color Models](#)
+- [Merging Local Windows](#)
+	- [Extracting the Final Foreground Mask](#)
 - [References](#ref)
 
 
