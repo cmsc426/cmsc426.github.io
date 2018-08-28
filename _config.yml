@@ -1,10 +1,10 @@
 # Site settings
 title: CMSC426 Computer Vision
-email: yiannis@cs.umd.edu
+#email: yiannis@cs.umd.edu
 description: "Course materials and notes for University of Maryland's class CMSC426: Computer Vision."
 baseurl: ""
 url: "http://cmsc426.github.io"
-github_username:  cmsc426
+#github_username:  cmsc426
 
 # Build settings
 markdown: kramdown
