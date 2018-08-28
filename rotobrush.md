@@ -20,11 +20,11 @@ Table of Content:
 	- [Estimate the Motion of the Entire Object](#estimate-object-motion)
 	- [Estimate Local Boundary Deformation](#estimate-local-boundary)
 - [Update Local Classifier](#update-local-classifier)
-	- [Updating the Shape Model](#)
-	- [Updating the Color Model](#)
-- [Updating the Shape and Color Models](#)
-- [Merging Local Windows](#)
-	- [Extracting the Final Foreground Mask](#)
+	- [Updating the Shape Model](#update-shape-model)
+	- [Updating the Color Model](#update-color-model)
+- [Updating the Shape and Color Models](#update-shape-and-color)
+- [Merging Local Windows](#merge-local-windows)
+	- [Extracting the Final Foreground Mask](#extract-final-mask)
 - [References](#ref)
 
 
