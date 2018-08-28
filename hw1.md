@@ -7,11 +7,16 @@ permalink: /2018/hw/hw1/
 **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
 
 Table of Contents:
+- [Due Date](#due)
 - [Introduction](#intro)
 - [What you need to do](#problem)
   - [Problem Statement](#pro)
 - [Submission Guidelines](#sub)
 - [Collaboration Policy](#coll)
+
+<a name='due'></a>
+## Due Date 
+September 6, 2018
 
 <a name='intro'></a>
 ## Introduction
