@@ -66,7 +66,7 @@ In the previous step, you encoded each keypoint by $$64\times1$$ feature vector.
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/feat-match.png" width="100%">
-  <div class="figcaption"> Fig. 5: Output of `dispMatchedFeatures` on first 2 images. </div>
+  <div class="figcaption"> Fig. 5: Output of \(\texttt{dispMatchedFeatures}\) on first 2 images. </div>
 </div>
 
 
@@ -82,7 +82,13 @@ Recall the RANSAC steps are:
 6. Re-compute least-squares $$\hat{H}$$ estimate on all of the inliers. Use the function `est_homography` given to you.
 
 ## 6. Cylinderical Projection
-When we are trying to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Figure [NUMBER (fig 5 in project)] below highlights the stitching with bad distortion at the edges. 
+When we are try to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Fig. 6 below highlights the stitching with bad distortion at the edges. 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/distortion.png" width="100%">
+  <div class="figcaption"> Fig. 6: Panorama stitched using projective transform showing bad distortion at edges. </div>
+</div>
+
 
 To overcome such distortion problem at the edges, we will be using cylinderical projection on the images first before performing other operations. Essentially, this is a pre-processing step. The following equations transform between normal image co-ordinates and cylinderical co-ordinates: 
 
