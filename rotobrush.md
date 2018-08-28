@@ -5,7 +5,7 @@ title: Rotobrush
 permalink: /rotobrush/
 ---
 
-This article is written by <a href="">Chahat Deep Singh</a> 
+This article is written by <b><a href="http://chahatdeep.umiacs.io">Chahat Deep Singh</a></b>.
 
 Table of Content:
 
@@ -21,7 +21,7 @@ Table of Content:
 - [References](#ref)
 
 
-<a href="#intro"></a>
+<a name='intro'></a>
 ## Introduction
 
 In this project, we will learn segmenting objects in a video sequence. Given a <i> good</i> boundary detection in the initial frame of a video, the object can be tracked and segmented out in the remaining sequence. It is much easier to segment the rigid objects in the scene using traditional tracking algorithms but the same can't be said for deformable objects like the one you can see in the Fig. 1. 
@@ -35,10 +35,10 @@ In this project, we will learn segmenting objects in a video sequence. Given a <
 In this article, we specifically will implement an algorithm called <a href="http://juew.org/projects/SnapCut/snapcut.htm"><i>Video SnapCut</i></a> (also known as <i>RotoBrush</i> in <i>Adobe After Effects</i>) by Bai et. al. To get a very good inituition, we would <b>highly recommend</b> watching this 5 min <a href="https://www.youtube.com/watch?v=XSXRcXrPyIM"> video </a> that describes the entire paper.
 
 <p style="background-color:#ddd; padding:5px">
-<b>Note:</b> Reading the paper <a href="#intro">[1]</a> is HIGHLY RECOMMENDED.</p>
+<b>Note:</b> Reading the paper <a href="#ref">[1]</a> is HIGHLY RECOMMENDED.</p>
 
 
-<a href="System Overview"></a>
+<a name='overview'></a>
 ## Overview
 
 As mentioned in the introduction section, we need to provide a foreground mask for the object that needs to be segmented. This can be done using `roipoly` from Image Processing Toolbox in MATLAB. The <i>SnapCut</i> can then sample a series of overlapping image windows along the object's boundary. For each such windows, a <i>local classifier</i> is created which is trained to classify whether a pixel belongs to foreground or background. The classifier is trained in such a way that it not only takes into account the color (like [2]) but shape as well. 
@@ -60,7 +60,7 @@ In order to develop a practical video cutout that can perform on complicated vid
 </p>
 
 
-<a href=""></a>
+<a name=""></a>
 ## Segmenting with Localized Classifiers
 ### Local Windows
 Once the initial mask is obtained, say $$L^t(x)$$ on a keyframe $$I_t$$, a set of overlapping windows $$W_q^t,...,W_n^t$$ along its contour $$C_t$$ are to be uniformly sampled as shown in Fig. 3.
@@ -126,7 +126,7 @@ A simple explanation for updating local models can be found in
 
 
 
-<a href="#ref"></a>
+<a name='ref'></a>
 ## References
 1. Bai, X., Wang, J., Simons, D. and Sapiro, G., 2009, July. Video snapcut: robust video object cutout using localized classifiers. In ACM Transactions on Graphics (ToG) (Vol. 28, No. 3, p. 70). ACM.
 2. Wang, J. and Cohen, M.F., 2005, October. An iterative optimization approach for unified image segmentation and matting. In Computer Vision, 2005. ICCV 2005. Tenth IEEE International Conference on (Vol. 2, pp. 936-943). IEEE.
