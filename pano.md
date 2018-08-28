@@ -20,7 +20,7 @@ Table of Contents:
 
 
 <a name='intro'></a>
-## 1. Introduction:
+## 1. Introduction
 
 Now that we have learned about a few building blocks of computer vision from [link: Pano Part 1], let us try to do something cool with it! The purpose of this project is to stitch two or more images in order to create one seamless panorama image. Each image should have few repeated local features ($$\sim 30-50\%$$ or more, emperically chosen). In this project, you need to capture multiple such images. Note that your camera motion should be limited to purely translational or purely rotational around the camera center. The following method of stitching images should work for most image sets but you'll need to be creative for working on harder image sets. 
 
@@ -41,7 +41,7 @@ For this project, let us consider a set of sample images with much stronger corn
 
 
 
-## 2. Adaptive Non-Maximal Suppression (or ANMS):
+## 2. Adaptive Non-Maximal Suppression (or ANMS)
 The objective of this step is to detect corners such that they are equally distributed across the image in order to avoid weird artifacts in warping. Corners in the image can be detected using `cornermetric` function with the appropriate parameters. The output is a matrix of corner scores: the higher the score, the higher the probability of that pixel being a corner. <i> Try to visualize the output using the Matlab function </i>`imagesc` or `surf`.
 
 To find particular strong corners that are spread across the image, first we need to find $$N$$<sub>strong</sub> corners. Feel free to use MATLAB function `imregionalmax`. Because, when you take a real image, the corner is never perfectly sharp, each corner might get a lot of hits out of the $$N$$ strong corners - we want to choose only the $$N$$<sub>best</sub> best corners after ANMS. In essence, you will get a lot more corners than you should! ANMS will try to find corners which are local maxima.
@@ -56,7 +56,7 @@ Fig 4. shows the output after ANMS. Clearly, the corners are spread across the i
   <div class="figcaption"> Fig. 4: Output of ANMS on first 2 images. </div>
 </div>
 
-## 3. Feature Descriptor: 
+## 3. Feature Descriptor
 In the previous step, you found the feature points (locations of the N best best corners after ANMS are called the feature points). You need to describe each feature point by a feature vector, this is like encoding the information at each feature points by a vector. One of the easiest feature descriptor is described next.
 
 Take a patch of size $$40 \times 40$$ centered <b>(this is very important)</b> around the keypoint. Now apply gaussian blur (feel free to play around with the parameters, for a start you can use Matlab’s default parameters in `fspecial` command, Yes! you are allowed to use `fspecial` command in this project). Now, sub-sample the blurred output (this reduces the dimension) to $$8 \times 8$$. Then reshape to obtain a $$64 \times 1$$ vector. Standardize the vector to have zero mean and variance of 1 <i>(This can be done by subtracting all values by mean and then dividing by the standard deviation)</i>. Standardization is used to remove bias and some illumination effect.
@@ -70,7 +70,7 @@ In the previous step, you encoded each keypoint by $$64\times1$$ feature vector.
 </div>
 
 
-## 5. RANSAC to estimate Robust Homography:
+## 5. RANSAC to estimate Robust Homography
 We now have matched all the features correspondences but not all matches will be right. To remove incorrect matches, we will use a robust method called <i>Random Sampling Concensus</i> or <b>RANSAC</b> to compute homography.
 
 Recall the RANSAC steps are: 
@@ -89,13 +89,13 @@ When we are try to stitch a lot of images with translation, a simple projective 
   <div class="figcaption"> Fig. 6: Panorama stitched using projective transform showing bad distortion at edges. </div>
 </div>
 
-
 To overcome such distortion problem at the edges, we will be using cylinderical projection on the images first before performing other operations. Essentially, this is a pre-processing step. The following equations transform between normal image co-ordinates and cylinderical co-ordinates: 
 
 $$x' = f tan \left(\cfrac{x-x_c}{f}\right)+x_c$$
 
 $$y' = \left( \cfrac{y-y_c}{cos\left(\cfrac{x-x_c}{f}\right)}\right)+y_c$$
 
+In the above equations, $$f$$ is the focal length of the lens in pixels (feel free to experiment with values, generally values range from 100 to 500, however this totally depends on the camera and can lie outside this range). The original image co-ordinates are $$(x, y)$$ and the transformed image co-ordinates (in cylindrical co-ordinates) are $$(x' ,y')$$. $$x_c$$ and $$y_c$$ are the image center co-ordinates. Note that, x is the column number and $$y$$ is the row number in $$\textsc{MATLAB}$$.
 
 ## 7. Blending Images:
 ### A. Poisson Blending
