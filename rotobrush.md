@@ -5,7 +5,7 @@ title: Rotobrush
 permalink: /rotobrush/
 ---
 
-This article is written by <b><a href="http://chahatdeep.umiacs.io">Chahat Deep Singh</a></b>.
+<b>This article is written by <a href="http://chahatdeep.umiacs.io">Chahat Deep Singh</a></b>.
 
 Table of Content:
 
