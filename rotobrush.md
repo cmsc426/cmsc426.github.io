@@ -114,7 +114,7 @@ $$f_s(x)=1-exp(-d^2(x)\ /\ \sigma^2_s)$$
 
 where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s$$ is a parameter. A larger $$\sigma_s$$ means the shape confidence is low around the foreground boundary while a small $$\sigma_s$$ means high confidence on the segmentation mask $$L^t(x)$$. Fig. 5(d) shows an example of the shape confidence map.
 <b>Note:</b> $$\sigma_s$$ is a very important parameter in this approach and can be adaptively and automatically adjusted to achieve accurate local segmentation.
-A simple explanation for updating local models can be found in section 2.3 in [1].
+A simple explanation for updating local models can be found in <i>section 2.3</i> in [1].
 
 <div class="fig figcenter fighighlight">
 <img src="/assets/rotobrush/sigma.png" width="100%">
@@ -122,8 +122,34 @@ A simple explanation for updating local models can be found in section 2.3 in [1
 </div>
 </div>
 
+## Updating Window Locations
+In the previous section, we set up local classifiers for identifying foreground and background pixels within their windows. As we move on to the next video frame, the object and background may move and/or change. Our local classifier windows must move to stay centered on approximately the same place on the object’s boundary.
+We accomplish this by tracking two kinds of motion: the rigid motion of the whole object, and then the smaller local deformations of the object’s boundary. For example, in Fig. 3, the football player is overall falling downwards (motion affecting the entire object), as well as bending his arms, turning his head, bending his legs, etc. (changing specific regions of the object’s boundary).
+
+### Estimate the Motion of the Entire Object
+To estimate the overall motion of the object, find matching feature points on the object in the two frames, and use them to find an affine transform between the images. Use this to align the object in frame 1 to frame 2. "This initial shape alignment usually captures and compensates for large rigid motions of the foreground object." Use Matlab’s `estimateGeometricTransform` to do so.
+
+### Estimate Local Boundary Deformation
+After applying the affine transform from the previous step, we want to track the boundary movement/deformation for the local windows. Optical flow will give us an estimate of each pixel’s motion between frames. However, as per Bai et. al. , <i>"optical flow is unreliable, especially near boundaries where occlusions occur”</i>. Luckily, we know exactly where the object’s boundary is! Thus, to get a more accurate estimate, find the average of the flow vectors inside the object’s bounds. Use this average vector to estimate how to re-center the local window in the new frame.
+
+While this method for window re-positioning is not perfect, errors are accommodated by the significant overlap between neighboring windows: they should still overlap enough that the object’s entire boundary is covered. You can use Matlab’s optical flow functionality, such as the `opticalFlowHS` function.
 
 
+## Update Local Classifier
+Now that the local windows have been properly re-centered, we can update the local classifiers
+for the new frame.
+
+### Updating the Shape Model
+The shape model is composed of the foreground mask and the shape confidence map. These
+are both carried over from the previous frame.
+
+### Updating the Color Model 
+The distribution of colors in the foreground and background may change from one frame to the next, as different parts of the scene move independently. We want to update the color model to reflect these changes. Simply replacing the existing color model with a new pair of GMMs every frame could pose problems. For one, if there’s a sudden change in color in one frame, which quickly disappears in the next, our color model will be completely de-railed.
+Moreover, the new GMMs may have degraded performance because of improper labling of the pixels used to train them. This is because we label "foreground" and "background" pixels based on the foreground mask, and that may be less accurate after updating window locations in the previous step. <br>
+So what can we do? Bai. et. al. propose to compare two color models: the existing one from the previous frame and a combination of the previous and new frame’s GMMs. They first observe that the colors in the foreground region don’t change much between frames, while the background region can change significantly. Therefore we’d expect the number of pixels classifier by the model as foreground to be relatively consistent between frames. If the number of foreground pixels increases under the new color model, then we should stick with the old one. If we choose the new color model, we must also re-compute the color confidence value, as was done in <i>section 4.3</i>.
+
+
+## Updating the Shape and Color Models
 
 
 
