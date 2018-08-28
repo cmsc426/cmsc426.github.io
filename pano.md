@@ -5,6 +5,7 @@ title: Panorama Stitching
 permalink: /pano/
 ---
 **This article is written by <a href="http://chahatdeep.github.io/">Chahat Deep Singh</a>**
+
 Table of Contents:
 
 - [Introduction](#intro)
