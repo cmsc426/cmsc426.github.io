@@ -70,7 +70,7 @@ In order to develop a practical video cutout that can perform on complicated vid
 <a name='segmenting-loc-classifiers'></a>
 ## 3. Segmenting with Localized Classifiers
 <a name='local-windows'></a>
-### 3.1 Local Windows
+### 3.1. Local Windows
 Once the initial mask is obtained, say $$L^t(x)$$ on a keyframe $$I_t$$, a set of overlapping windows $$W_q^t,...,W_n^t$$ along its contour $$C_t$$ are to be uniformly sampled as shown in Fig. 3.
 <i>Assume single contour for now, multiple contours can be handled in the same way.</i> The size and density of the windows can be chosen emperically, usually $$30\times30$$ to $$80\times80$$ pixels. 
 Each window defines the application range of a local classifier, and the classifier will assign to every pixel
@@ -94,7 +94,7 @@ The window-level <i>local classifiers</i> are composed of a color model (<a href
 </div>
 
 <a name='init-color'></a>
-### 3.2 Initializing the Color Model
+### 3.2. Initializing the Color Model
 The purpose of the color model is to classify pixels as foreground $$\mathcal{F}$$ or background $$\mathcal{B}$$ based on their color. The assumption is that $$\mathcal{F}$$ and $$\mathcal{B}$$ pixels generally differ in color. The color model is based on GMM. One can use Matlab’s `fitgmdist` and `gmdistribution` function from Statistics and Machine Learning toolbox, but NOT using Computer Vision toolbox for GMMs is prohibited for this project.
 
 In order to create the color model, two GMMs are build for $$\mathcal{F}$$ and $$\mathcal{B}$$ regions seperately.
@@ -109,7 +109,7 @@ where $$p_c$$, $$p_c(x \vert \mathcal{F})$$ and $$p_c(x \vert \mathcal{B})$$ are
 
 
 <a name='color-model-conf'></a>
-### 3.3 Color Model Confidence
+### 3.3. Color Model Confidence
 The local color model confidence $$f_c$$ is used to describe how separable the local foreground is against the local background using just the color model. Let $$L^t(x)$$ be the known segmentation label ($$\mathcal{F}=1$$ and $$\mathcal{B}=0)$$ of pixel $$x$$ for the current frame, $$f_c$$ is computed as
 
 $$f_c=1-\cfrac{\int_{W_k}|L^t(x)-p_c(x)|\cdot\omega_c(x)dx}{\int_{W_k}\omega_c(x)dx}$$
@@ -117,7 +117,7 @@ $$f_c=1-\cfrac{\int_{W_k}|L^t(x)-p_c(x)|\cdot\omega_c(x)dx}{\int_{W_k}\omega_c(x
 The weighing function $$\omega_c(x)$$ is computed as $$\omega_c(x)=exp(-d^2(x)\ /\ \sigma_c^2$$, where $$d(x)$$ is the spatial distance between $$x$$ and the foreground boundary, computed using the distance transform. $$\sigma_c$$ is fixed as half of the window size. $$\omega_c(x)$$ is higher when $$x$$ is closer to the boundary <i>i.e.</i> the color model is required to work well near the foreground boundary for accurate segmentation.
 
 <a name='shape-model'></a>
-### 3.4 Shape Model
+### 3.4. Shape Model
 The local shape model $$M_s$$ contains the existing segmentation mask $$L^t(x)$$ and a shape confidence mask computed as 
 
 $$f_s(x)=1-exp(-d^2(x)\ /\ \sigma^2_s)$$
@@ -138,11 +138,11 @@ In the previous section, we set up local classifiers for identifying foreground 
 We accomplish this by tracking two kinds of motion: the rigid motion of the whole object, and then the smaller local deformations of the object’s boundary. For example, in Fig. 3, the football player is overall falling downwards (motion affecting the entire object), as well as bending his arms, turning his head, bending his legs, etc. (changing specific regions of the object’s boundary).
 
 <a name='estimate-object-motion'></a>
-### 4.1 Estimate the Motion of the Entire Object
+### 4.1. Estimate the Motion of the Entire Object
 To estimate the overall motion of the object, find matching feature points on the object in the two frames, and use them to find an affine transform between the images. Use this to align the object in frame 1 to frame 2. "This initial shape alignment usually captures and compensates for large rigid motions of the foreground object." Use Matlab’s `estimateGeometricTransform` to do so.
 
 <a name='estimate-local-boundary'></a>
-### 4.2 Estimate Local Boundary Deformation
+### 4.2. Estimate Local Boundary Deformation
 After applying the affine transform from the previous step, we want to track the boundary movement/deformation for the local windows. Optical flow will give us an estimate of each pixel’s motion between frames. However, as per Bai et. al. , <i>"optical flow is unreliable, especially near boundaries where occlusions occur”</i>. Luckily, we know exactly where the object’s boundary is! Thus, to get a more accurate estimate, find the average of the flow vectors inside the object’s bounds. Use this average vector to estimate how to re-center the local window in the new frame.
 
 While this method for window re-positioning is not perfect, errors are accommodated by the significant overlap between neighboring windows: they should still overlap enough that the object’s entire boundary is covered. You can use Matlab’s optical flow functionality, such as the `opticalFlowHS` function.
@@ -154,12 +154,12 @@ Now that the local windows have been properly re-centered, we can update the loc
 for the new frame.
 
 <a name='update-shape-model'></a>
-### 5.1 Updating the Shape Model
+### 5.1. Updating the Shape Model
 The shape model is composed of the foreground mask and the shape confidence map. These
 are both carried over from the previous frame.
 
 <a name='update-color-model'></a>
-### 5.2 Updating the Color Model 
+### 5.2. Updating the Color Model 
 The distribution of colors in the foreground and background may change from one frame to the next, as different parts of the scene move independently. We want to update the color model to reflect these changes. Simply replacing the existing color model with a new pair of GMMs every frame could pose problems. For one, if there’s a sudden change in color in one frame, which quickly disappears in the next, our color model will be completely de-railed.
 Moreover, the new GMMs may have degraded performance because of improper labling of the pixels used to train them. This is because we label "foreground" and "background" pixels based on the foreground mask, and that may be less accurate after updating window locations in the previous step. <br>
 So what can we do? Bai. et. al. propose to compare two color models: the existing one from the previous frame and a combination of the previous and new frame’s GMMs. They first observe that the colors in the foreground region don’t change much between frames, while the background region can change significantly. Therefore we’d expect the number of pixels classifier by the model as foreground to be relatively consistent between frames. If the number of foreground pixels increases under the new color model, then we should stick with the old one. If we choose the new color model, we must also re-compute the color confidence value, as was done in <i>section 4.3</i>.
@@ -183,7 +183,7 @@ $$p_{\mathcal{F}}(x)=\cfrac{\sum_{k}p_{\mathcal{F}}^k(x)(x-c_k)+\epsilon)^{-1}}{
 where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ such that the updated window $$W^{t+1}k$$ covers the pixel), is a small constant ($$0.1$$ in the system), and $$c_k$$ is the center of the window ($$\vert x − c_k \vert$$ is the distance from the pixel $$x$$ to the center).
 
 <a name='extract-final-mask'></a>
-### 7.1 Extracting the Final Foreground Mask
+### 7.1. Extracting the Final Foreground Mask
 
 This gives a real-valued probability map for the foreground mask. We want a binary mask. The simplest solution would be to threshold the values of the probability map. This may produce a somewhat rough result. Bai et. al. use Graph Cut segmentation to obtain a better final result: you are encouraged (but not required) to use Matlab’s `lazysnapping` tool to implement this. Fig. 6 shows the output of <i>Video SnapCut</i>
 
@@ -195,7 +195,7 @@ This gives a real-valued probability map for the foreground mask. We want a bina
 
 
 <a name='ref'></a>
-## References
+## 8. References
 1. Bai, X., Wang, J., Simons, D. and Sapiro, G., 2009, July. Video snapcut: robust video object cutout using localized classifiers. In ACM Transactions on Graphics (ToG) (Vol. 28, No. 3, p. 70). ACM.
 2. Wang, J. and Cohen, M.F., 2005, October. An iterative optimization approach for unified image segmentation and matting. In Computer Vision, 2005. ICCV 2005. Tenth IEEE International Conference on (Vol. 2, pp. 936-943). IEEE.
 <hr>
