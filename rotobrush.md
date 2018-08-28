@@ -168,7 +168,7 @@ where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ s
 
 This gives a real-valued probability map for the foreground mask. We want a binary mask. The simplest solution would be to threshold the values of the probability map. This may produce a somewhat rough result. Bai et. al. use Graph Cut segmentation to obtain a better final result: you are encouraged (but not required) to use Matlab’s `lazysnapping` tool to implement this.
 
-
+<hr>
 
 <a name='ref'></a>
 ## References
