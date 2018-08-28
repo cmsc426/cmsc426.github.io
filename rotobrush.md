@@ -118,7 +118,7 @@ A simple explanation for updating local models can be found in <i>section 2.3</i
 
 <div class="fig figcenter fighighlight">
 <img src="/assets/rotobrush/sigma.png" width="100%">
-<div class="figcaption">Figure 5: (a) As color confidence $f_c$ increases (more separable foreground and background color distributions), the value of σ increases, giving less weight to the shape prior. (b) Profile of the shape prior f(x). An example of (c) color probability, (d) shape confidence with parameter σ, and (e) the integrated probability \(p_k^k(x)\).
+<div class="figcaption">Fig. 5: (a) As color confidence \(f_c\) increases (more separable foreground and background color distributions), the value of \(\sigma_s\) increases, giving less weight to the shape prior. (b) Profile of the shape prior \(f(x)\). An example of (c) color probability, (d) shape confidence with parameter \(\sigma\), and (e) the integrated probability \(p_k^k(x)\).
 </div>
 </div>
 
