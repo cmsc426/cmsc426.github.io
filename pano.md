@@ -50,7 +50,7 @@ To find particular strong corners that are spread across the image, first we nee
   <img src="/assets/pano/anms.png" width="100%">
 </div>
 
-<b>Note:</b> Fig 4. shows the output after ANMS. Clearly, the corners are spread across the image. To plot these dots over the image in MATLAB, do: $$\texttt{imshow(..)}$$
+<b>Note:</b> Fig 4. shows the output after ANMS. Clearly, the corners are spread across the image. To plot these dots over the image in MATLAB, do: $$\texttt{imshow(..); hold on; plot(...); hold off;}$$
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/anms-output.png" width="100%">
   <div class="figcaption"> Fig. 4: Output of ANMS on first 2 images. </div>
