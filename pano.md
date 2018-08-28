@@ -40,7 +40,7 @@ For this project, let us consider a set of sample images with much stronger corn
 </div>
 
 
-
+<a name='anms'></a>
 ## 2. Adaptive Non-Maximal Suppression (or ANMS)
 The objective of this step is to detect corners such that they are equally distributed across the image in order to avoid weird artifacts in warping. Corners in the image can be detected using `cornermetric` function with the appropriate parameters. The output is a matrix of corner scores: the higher the score, the higher the probability of that pixel being a corner. <i> Try to visualize the output using the Matlab function </i>`imagesc` or `surf`.
 
@@ -56,11 +56,13 @@ Fig 4. shows the output after ANMS. Clearly, the corners are spread across the i
   <div class="figcaption"> Fig. 4: Output of ANMS on first 2 images. </div>
 </div>
 
+<a name='feat-descriptor'></a>
 ## 3. Feature Descriptor
 In the previous step, you found the feature points (locations of the N best best corners after ANMS are called the feature points). You need to describe each feature point by a feature vector, this is like encoding the information at each feature points by a vector. One of the easiest feature descriptor is described next.
 
 Take a patch of size $$40 \times 40$$ centered <b>(this is very important)</b> around the keypoint. Now apply gaussian blur (feel free to play around with the parameters, for a start you can use Matlab’s default parameters in `fspecial` command, Yes! you are allowed to use `fspecial` command in this project). Now, sub-sample the blurred output (this reduces the dimension) to $$8 \times 8$$. Then reshape to obtain a $$64 \times 1$$ vector. Standardize the vector to have zero mean and variance of 1 <i>(This can be done by subtracting all values by mean and then dividing by the standard deviation)</i>. Standardization is used to remove bias and some illumination effect.
 
+<a name='feat-match'></a>
 ## 4. Feature Matching
 In the previous step, you encoded each keypoint by $$64\times1$$ feature vector. Now, you want to match the feature points among the two images you want to stitch together. In computer vision terms, this step is called as finding feature correspondences within the 2 images. Pick a point in image 1, compute sum of square difference between all points in image 2. Take the ratio of best match (lowest distance) to the second best match (second lowest distance) and if this is below some ratio keep the matched pair or reject it. Repeat this for all points in image 1. You will be left with only the comfident feature correspondences and these points will be used to estimate the transformation between the 2 images also called as <a href="pano-prereq#homography">_Homography_</a>. Use the function `dispMatchedFeatures` given to you to visualize feature correspondences. Fig. 5 shows a sample output of `disMatchedFeatures` on the first two images.
 
@@ -69,7 +71,7 @@ In the previous step, you encoded each keypoint by $$64\times1$$ feature vector.
   <div class="figcaption"> Fig. 5: Output of \(\texttt{dispMatchedFeatures}\) on first 2 images. </div>
 </div>
 
-
+<a name='homography'></a>
 ## 5. RANSAC to estimate Robust Homography
 We now have matched all the features correspondences but not all matches will be right. To remove incorrect matches, we will use a robust method called <i>Random Sampling Concensus</i> or <b>RANSAC</b> to compute homography.
 
@@ -81,6 +83,7 @@ Recall the RANSAC steps are:
 5. Keep largest set of inliers.
 6. Re-compute least-squares $$\hat{H}$$ estimate on all of the inliers. Use the function `est_homography` given to you.
 
+<a name='cyl-proj'></a>
 ## 6. Cylinderical Projection
 When we are try to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Fig. 6 below highlights the stitching with bad distortion at the edges. Check <a href="https://graphics.stanford.edu/courses/cs178/applets/projection.html">this implementation/demo</a> of cylinderical projection from Stanford Computer Graphics department.
 
@@ -112,6 +115,7 @@ A sample input image and its cylinderical projection is shown in Fig. 7.
 However, when you compute the values of $$(x',y')$$ they might not be integers. A simple way to get around this is to use round or actually interpolate the values. If you decide to round the co-ordinates off you might be left
 with black pixels, fill them using some weighted combination of it’s neighbours (gaussian works best). A trivial way to do this is to blur the image and copy paste pixel values on-to original image where there were pure black pixels. (You can also initialize pixels to NaN’s instead of zeros to avoid removing actual zero pixels).
 
+<a name='blending'></a>
 ## 7. Blending Images:
 Panorama can be produced by overlaying the pairwise aligned images to create the final output image. The following MATLAB functions can be useful to solve this (like $$\texttt{imtransform}$$ and $$\texttt{imwarp}$$). Feel free to implement $$\texttt{imwarp}$$ or similar function by yourself. For such implementation, apply bilinear tranpolation when you copy pixel values. Feel free to use any third party code for warping and transforming images. Fig. 8 shows the panorama output for the image set in Fig. 3.
 <div class="fig figcenter fighighlight">
