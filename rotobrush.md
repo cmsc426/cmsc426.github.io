@@ -150,8 +150,10 @@ So what can we do? Bai. et. al. propose to compare two color models: the existin
 
 
 ## Updating the Shape and Color Models
-For each window, we now merge the foreground maps produced by the shape and color models, weighting them based on the shape confidence map.  The foreground probability $$p_{\mathcal{F}}^k(x)$$, corresponding to the window $$W_k$$ in the current frame, becomes a linear combination of the updated color probability $$p_c(x)$$ and the updated (warped) binary shape mask $$L^{t+1}(x)$$, using the shape confidence map $$f_s(x)$$ with the just computed $$\sigma_s$$ as the interpolation coefficients:<br>
-$$p_{\mathcal{F}}^k(x)=f_s(x)L^{t+1}(x)+(1-f_s(x))p_c(x)$$<br>
+For each window, we now merge the foreground maps produced by the shape and color models, weighting them based on the shape confidence map.  The foreground probability $$p_{\mathcal{F}}^k(x)$$, corresponding to the window $$W_k$$ in the current frame, becomes a linear combination of the updated color probability $$p_c(x)$$ and the updated (warped) binary shape mask $$L^{t+1}(x)$$, using the shape confidence map $$f_s(x)$$ with the just computed $$\sigma_s$$ as the interpolation coefficients:<
+
+$$p_{\mathcal{F}}^k(x)=f_s(x)L^{t+1}(x)+(1-f_s(x))p_c(x)$$
+
 Examples of $$p_c(x)$$, $$f_s(x)$$ and $$p_{\mathcal{F}}^k(x)$$ are shown in <i>Fig. 5(c,d,e)</i>.
 
 
