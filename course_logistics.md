@@ -1,6 +1,13 @@
 This is a temporary file, where we'll hash out the course logistics.
 This document is a work in progress; the final, official logistics will be on the course homepage.
 
+## Office Hours
+Jack Rasiel - TBA
+Chethan M Parameshwara - TBA
+Professor Aloimonos - (By appointment)
+
+TA Office hours are held in the 4th floor TA rooms in AV Williams.
+
 ## Course Objectives
 
 This is an introductory course on computer vision and computational photography. This course will explore image formation, image features, image segmentation, image stitching, image recognition, motion estimation, and 3D point cloud processing. 
@@ -58,9 +65,15 @@ Midterm Exam: 15%
 Class Participation - Lecture: 5%
 Class Participation - Piazza:  5%
 
-### Projects
-### Homeworks
+### Assignments  
+All projects are intended to be done in groups of three.  Homeworks, however, must be done
+individually (though you may collaborate with your peers as per "Collaboration Policy and Honor
+Code" below). 
+
 ### Class Participation
+The class participation grade is based on participation in lecture and in the course piazza.  To get
+a good participation grade, attend and be active in lectures, and be active (asking useful questions
+and/or providing useful answers) on the class Piazza.
 
 ## Late Policy
 This course moves quickly, and concepts tend to build on top of each other.  Therefore it's very important to keep up with the material.  To encourage this, late assignments are docked 20% for the first day, and 10% per day after that.
