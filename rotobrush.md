@@ -156,12 +156,15 @@ $$p_{\mathcal{F}}^k(x)=f_s(x)L^{t+1}(x)+(1-f_s(x)) \ p_c(x)$$
 
 Examples of $$p_c(x)$$, $$f_s(x)$$ and $$p_{\mathcal{F}}^k(x)$$ are shown in <i>Fig. 5(c,d,e)</i>.
 
-## Merging Local Windows and Extracting the Final Foreground Mask
+## Merging Local Windows 
+
 After the previous step, we have a foreground probability mask for each local window. We now merge the overlapping local windows into a global foreground mask. In this overlapping window design, a pixel is often covered by multiple adjacent windows, and its foreground probability is a weighted linear combination of the probabilities computed from each window it belongs to,
 
 $$p_{\mathcal{F}}(x)=\cfrac{\sum_{k}p_{\mathcal{F}}^k(x)(x-c_k)+\epsilon)^{-1}}{\sum_k(x-c_k+\epsilon)^{-1}}$$
 
 where $$k$$ is the index of local windows (the sum ranges over all the $$k-s$$ such that the updated window $$W^{t+1}k$$ covers the pixel), is a small constant ($$0.1$$ in the system), and $$c_k$$ is the center of the window ($$\vert x − c_k \vert$$ is the distance from the pixel $$x$$ to the center).
+
+### Extracting the Final Foreground Mask
 
 This gives a real-valued probability map for the foreground mask. We want a binary mask. The simplest solution would be to threshold the values of the probability map. This may produce a somewhat rough result. Bai et. al. use Graph Cut segmentation to obtain a better final result: you are encouraged (but not required) to use Matlab’s `lazysnapping` tool to implement this.
 
