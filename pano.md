@@ -46,6 +46,13 @@ The objective of this step is to detect corners such that they are equally distr
 
 To find particular strong corners that are spread across the image, first we need to find $$N$$<sub>strong</sub> corners. Feel free to use MATLAB function `imregionalmax`. 
 
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/anms.png" width="100%">
+</div>
+
+
+
+
 
 
 ## 3. Feature Descriptor: 
