@@ -97,11 +97,11 @@ Now, for a pixel $$x$$ in the window, its foreground probability generated from 
 $$p_c(x)=p_c(x | \mathcal{F})\ / \ \left(p_c(x | \mathcal{F})+p_c(x | \mathcal{B})\right)$$
 
 
-where \(p_c(x\mathcal{F})\) and \(p_c(x | \mathcal{B})\) are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
+where \( p_c(x\mathcal{F}) \) and \(p_c(x | \mathcal{B})\) are the corresponding probabilities computed from the two GMMs. <i>Refer to section 2.1 for more details.</i>
 
 
 ### Color Model Confidence
-The local color model confidence $$f_c$$ is used to describe how separable the local foreground is against the local background using just the color model. Let $$L^t(x)$$ be the known segmentation label ($$\mathcal{F}=1$$ and $$\mathcal{B}=0) of pixel $$x$$ for the current frame, $$f_c$$ is computed as
+The local color model confidence $$f_c$$ is used to describe how separable the local foreground is against the local background using just the color model. Let $$L^t(x)$$ be the known segmentation label ($$\mathcal{F}=1$$ and $$\mathcal{B}=0)$$ of pixel $$x$$ for the current frame, $$f_c$$ is computed as
 
 $$f_c=1-\cfrac{\int_{W_k}|L^t(x)-p_c(x)|\cdot\omega_c(x)dx}{\int_{W_k}\omega_c(x)dx}$$
 
