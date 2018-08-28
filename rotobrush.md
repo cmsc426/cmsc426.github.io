@@ -143,7 +143,7 @@ To estimate the overall motion of the object, find matching feature points on th
 
 <a name='estimate-local-boundary'></a>
 ### 4.2. Estimate Local Boundary Deformation
-After applying the affine transform from the previous step, we want to track the boundary movement/deformation for the local windows. Optical flow will give us an estimate of each pixel’s motion between frames. However, as per Bai et. al. , <i>"optical flow is unreliable, especially near boundaries where occlusions occur”</i>. Luckily, we know exactly where the object’s boundary is! Thus, to get a more accurate estimate, find the average of the flow vectors inside the object’s bounds. Use this average vector to estimate how to re-center the local window in the new frame.
+After applying the affine transform from the previous step, we want to track the boundary movement/deformation for the local windows. <a href="pano-prereq#optical-flow">Optical flow</a> will give us an estimate of each pixel’s motion between frames. However, as per Bai et. al. , <i>"optical flow is unreliable, especially near boundaries where occlusions occur”</i>. Luckily, we know exactly where the object’s boundary is! Thus, to get a more accurate estimate, find the average of the flow vectors inside the object’s bounds. Use this average vector to estimate how to re-center the local window in the new frame.
 
 While this method for window re-positioning is not perfect, errors are accommodated by the significant overlap between neighboring windows: they should still overlap enough that the object’s entire boundary is covered. You can use Matlab’s optical flow functionality, such as the `opticalFlowHS` function.
 
