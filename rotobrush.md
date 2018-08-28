@@ -85,7 +85,7 @@ The window-level <i>local classifiers</i> are composed of a color model (<a href
 </div>
 </div>
 
-
+<a name='init-color'></a>
 ### Initializing the Color Model
 The purpose of the color model is to classify pixels as foreground $$\mathcal{F}$$ or background $$\mathcal{B}$$ based on their color. The assumption is that $$\mathcal{F}$$ and $$\mathcal{B}$$ pixels generally differ in color. The color model is based on GMM. One can use Matlab’s `fitgmdist` and `gmdistribution` function from Statistics and Machine Learning toolbox, but NOT using Computer Vision toolbox for GMMs is prohibited for this project.
 
