@@ -71,7 +71,16 @@ In the previous step, you encoded each keypoint by $$64\times1$$ feature vector.
 
 
 ## 5. RANSAC to estimate Robust Homography:
-Now that we have matched all the features correspondences, 
+We now have matched all the features correspondences but not all matches will be right. To remove incorrect matches, we will use a robust method called <i>Random Sampling Concensus</i> or <b>RANSAC</b> to compute homography.
+
+Recall the RANSAC steps are: 
+<ul>
+<li>Select four feature pairs (at random), $$p_i$$ from image 1, $$p_i^1$$ from image 2.</li>
+<li>Compute homography $$H$$ (exact). Use the function $$\texttt{est_homography}$$ that will be provided to you. Check Panorama assignment!</li>
+<li>Compute inliers where $$SSD(p_i^1, Hp_i) < \texttt{thresh}$$. Here, $$Hp_i$$ computed using the $$\texttt{apply_homography}$$ function given to you.</li>
+<li>Repeat the last three steps until you have exhausted $$N$$<sub>max</sub>$$ number of iterations (specified by user) or you found more than percentage of inliers (Say $$90\%$$ for example).</li>
+<li>Keep largest set of inliers.</li>
+<li>Re-compute least-squares $$\hat{H}$$ estimate on all of the inliers. Use the function `est_homography` given to you.
 
 ## 6. Cylinderical Projection
 When we are trying to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Figure [NUMBER (fig 5 in project)] below highlights the stitching with bad distortion at the edges. 
