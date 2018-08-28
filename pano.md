@@ -42,9 +42,9 @@ For this project, let us consider a set of sample images with much stronger corn
 
 
 ## 2. Adaptive Non-Maximal Suppression (or ANMS):
-The objective of this step is to detect corners such that they are equally distributed across the image in order to avoid weird artifacts in warping. Corners in the image can be detected using `cornermetric` function with the appropriate parameters. The output is a matrix of corner scores: the higher the score, the higher the probability of that pixel being a corner. <i> Try to visualize the output using the Matlab function `imagesc`.</i>
+The objective of this step is to detect corners such that they are equally distributed across the image in order to avoid weird artifacts in warping. Corners in the image can be detected using `cornermetric` function with the appropriate parameters. The output is a matrix of corner scores: the higher the score, the higher the probability of that pixel being a corner. <i> Try to visualize the output using the Matlab function </i>`imagesc`.
 
-To find particular $$N$$ strong corners, say $$N$$<sub>strong</sub> that are spread across the image
+To find particular strong corners that are spread across the image, first we need to find $$N$$<sub>strong</sub> corners. Feel free to use MATLAB function `imregionalmax`. 
 
 
 
