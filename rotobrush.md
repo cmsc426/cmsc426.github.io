@@ -35,7 +35,7 @@ In this project, we will learn segmenting objects in a video sequence. Given a <
 In this article, we specifically will implement an algorithm called <a href="http://juew.org/projects/SnapCut/snapcut.htm"><i>Video SnapCut</i></a> (also known as <i>RotoBrush</i> in <i>Adobe After Effects</i>) by Bai et. al. To get a very good inituition, we would <b>highly recommend</b> watching this 5 min <a href="https://www.youtube.com/watch?v=XSXRcXrPyIM"> video </a> that describes the entire paper.
 
 <p style="background-color:#ddd; padding:5px">
-<b>Note:</b> Reading the paper <a href="#ref">[1]</a> is HIGHLY RECOMMENDED.</p>
+<b>Note:</b> Reading the paper <a href="#ref">[1]</a> is <b>HIGHLY RECOMMENDED</b>.</p>
 
 
 <a name='overview'></a>
@@ -114,7 +114,7 @@ $$f_s(x)=1-exp(-d^2(x)\ /\ \sigma^2_s)$$
 
 where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s$$ is a parameter. A larger $$\sigma_s$$ means the shape confidence is low around the foreground boundary while a small $$\sigma_s$$ means high confidence on the segmentation mask $$L^t(x)$$. Fig. 5(d) shows an example of the shape confidence map.
 <b>Note:</b> $$\sigma_s$$ is a very important parameter in this approach and can be adaptively and automatically adjusted to achieve accurate local segmentation.
-
+A simple explanation for updating local models can be found in section 2.3 in [1].
 
 <div class="fig figcenter fighighlight">
 <img src="/assets/rotobrush/sigma.png" width="100%">
@@ -123,7 +123,6 @@ where $$d(x)$$ stands for the distance to the foreground boundary and $$\sigma_s
 </div>
 
 
-A simple explanation for updating local models can be found in 
 
 
 
