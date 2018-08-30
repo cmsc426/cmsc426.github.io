@@ -9,9 +9,9 @@ Slides from lecture are posted below.
 
 <table style="width:60%; border:1px">
   <tr>
-    <b><th>#</th>
+    <b><th><a align="left">#</th>
     <th>Date</th> 
-     <th>Link</th></b>
+     <th>Link</th></b></a>
   </tr>
   <tr>
     <td>1</td>
