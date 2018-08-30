@@ -23,13 +23,9 @@ Table of Contents:
 
 Have you ever played with these adorable Nao robots? 
 
-<object width="425" height="350">
-  <param name="movie" value="https://www.youtube.com/watch?v=Gy_wbhQxd_0" />
-  <param name="wmode" value="transparent" />
-  <embed src="https://www.youtube.com/watch?v=Gy_wbhQxd_0"
-         type="application/x-shockwave-flash"
-         wmode="transparent" width="425" height="350" />
-</object>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Gy_wbhQxd_0
+" target="_blank"><img src="http://img.youtube.com/vi/Gy_wbhQxd_0/0.jpg" 
+alt=" Nao robot demo " width="480" height="360" border="10" /></a>
 
 
 Nao robots are star players in RoboCup, an annual autonomous robot soccer competitions. 
