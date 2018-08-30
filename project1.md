@@ -42,3 +42,30 @@ Nao's training has two phases:
 
 <a name='problem'></a>
 ## What you need to do
+
+
+<a name='pro'></a>
+### Problem Statement 
+
+<a name='sub'></a>
+## Submission Guidelines
+
+<b> If your submission does not comply with the following guidelines, you'll be given ZERO credit </b>
+
+### File tree and naming
+
+Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj1.zip**.  For example, xyz123_proj1.zip.  The file **must have the following directory structure**, based on the starter files
+
+[          ]
+
+### Report
+For each section of the homework, explain briefly what you did, and describe any interesting problems you encountered and/or solutions you implemented.  You must include the following details in your writeup:
+
+[        ] 
+
+As usual, your report must be full English sentences,**not** commented code. There is a word limit of 750 words and no minimum length requirement
+
+<a name='coll'></a>
+## Collaboration Policy
+You are encouraged to discuss the ideas with your peers. However, the code should be your own, and should be the result of you exercising your own understanding of it. If you reference anyone else's code in writing your project, you must properly cite it in your code (in comments) and your writeup.  For the full honor code refer to the CMSC426 Fall 2018 website
+
