@@ -24,9 +24,9 @@ Table of Contents:
 Have you ever played with these adorable Nao robots? 
 
 <object width="425" height="350">
-  <param name="movie" value="" />
+  <param name="movie" value="https://www.youtube.com/watch?v=Gy_wbhQxd_0" />
   <param name="wmode" value="transparent" />
-  <embed src=""
+  <embed src="https://www.youtube.com/watch?v=Gy_wbhQxd_0"
          type="application/x-shockwave-flash"
          wmode="transparent" width="425" height="350" />
 </object>
