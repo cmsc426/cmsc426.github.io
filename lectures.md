@@ -4,14 +4,13 @@ title: Lectures
 permalink: /lectures/
 ---
 
-<h2><center> Lectures </center></h2>
 Slides from lecture are posted below.
 
-<table style="width:60%; border:1px">
+<table style="width:80%; border:1px">
   <tr>
-    <b><th>#</th>
-    <th>Date</th> 
-     <th>Link</th></b>
+    <b><th style="text-align:left">#</th>
+    <th style="text-align:left">Date</th> 
+    <th style="text-align:left">Link</th></b>
   </tr>
   <tr>
     <td>1</td>
