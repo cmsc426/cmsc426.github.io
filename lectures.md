@@ -7,7 +7,7 @@ permalink: /lectures/
 <h2><center> Lectures </center></h2>
 Slides from lecture are posted below.
 
-<table style="width:60%">
+<table style="width:60%; border:1px">
   <tr>
     <b><th>#</th>
     <th>Date</th> 
