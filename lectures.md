@@ -4,9 +4,23 @@ title: Lectures
 permalink: /lectures/
 ---
 
-# Lectures
+<h2><center> Lectures </center></h2>
 Slides from lecture are posted below.
 
- | # | Date | Link |
- | --- |:-----|:-----|
- |  1  | 08-28 | <a href="ppts/perception_for_robots-I.pptx">link</a> |
+<table style="width:60%">
+  <tr>
+    <b><th>#</th>
+    <th>Date</th> 
+     <th>Link</th></b>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Aug 28, 2018</td> 
+   <td><a href="https://drive.google.com/open?id=1emeHcyBkpA_KLdm1mQpeDQQ9QyjUBCCt">Lecture 1 PPT</a> </td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td> Aug 30, 2018 </td> 
+   <td><a href="">Lecture 2 PPT</a> </td>
+  </tr>
+</table>
