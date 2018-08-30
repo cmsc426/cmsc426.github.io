@@ -44,7 +44,7 @@ Nao's training has two phases:
 ## What you need to do
 To make logistics easier, we have collected camera data from Nao robot on behalf of you and saved the data in form of color images. as you can see our lab setup. 
 <div class="fig fighighlight">
-  <img src="/assets/proj1/proj1_image.png" width="100%">
+  <img src="/assets/proj1/proj1_image.PNG" width="100%">
   <div class="figcaption">
   </div>
   <div style="clear:both;"></div>
