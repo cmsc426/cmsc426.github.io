@@ -301,12 +301,12 @@ where $$N$$ is the number of training samples. The above is not a simple functio
 Randomly choose $$\pi_i, \mu_i, \Sigma_i \qquad \forall i \in [1, k]$$
 - Alternate until convergence:
 	- Expectation Step or E-step: Evaluate the model/Assign points to clusters
-	Cluster Weight $$ \alpha_{i,j} = \frac{\pi_j p(\mathbf{x}_i \vert C_j)}{\sum_{j=1}^k \pi_j p(\mathbf{x}_i \vert C_j)} $$
+	Cluster Weight $$ \alpha_{i,j} = \frac{\pi_j p(x_i \vert C_j)}{\sum_{j=1}^k \pi_j p(x_i \vert C_j)} $$
 	\\(i\\) is the data point index, \\(j\\) is the cluster index.
 	- Maximization Step or M-step: Evaluate best parameters $$ \Theta $$ to best fit the points
 	
 	$$ 
-	\mu_j = \frac{\sum_{i=1}^N \alpha_{i,j} \mathbf{x}_i}{\sum_{i=1}^N \alpha_{i,j}}
+	\mu_j = \frac{\sum_{i=1}^N \alpha_{i,j} x_i}{\sum_{i=1}^N \alpha_{i,j}}
 	$$
 	
 
