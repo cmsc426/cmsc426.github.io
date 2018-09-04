@@ -27,13 +27,13 @@ Slides from lecture are posted below.
     <td> Aug 30, 2018 </td> 
    <td><a href="">Lecture 2 PPT</a> </td>
   </tr>
-</table>
-
+  
 <!--Lecture 3-->
  <tr>
     <td>3</td>
     <td>Sept 04, 2018</td> 
    <td><a href="https://drive.google.com/open?id=1VQuujb56jSWB1GRASxXipzxgx0_ULn70">Lecture 3 (Project 1) </a> </td>
   </tr>
+</table>
 
 
