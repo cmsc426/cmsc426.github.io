@@ -44,9 +44,9 @@ To make logistics easier, we have collected camera data from Nao robot on behalf
 ### Problem Statement 
 
 1. Write matlab code to cluster the orange ball using [single gaussians](https://cmsc426.github.io/colorseg/#gaussian) [30 points] 
-2. Write matlab code to cluster the orange ball using [Gaussian Mixture Model](https://cmsc426.github.io/colorseg/#gmm) [40 points] and estimate the [depth](https://cmsc426.github.io/colorseg/#distest) of the ball [20 points]. Also, plot all the GMM ellipsoids[10 points].
+2. Write matlab code to cluster the orange ball using [Gaussian Mixture Model](https://cmsc426.github.io/colorseg/#gmm) [40 points] and estimate the [depth](https://cmsc426.github.io/colorseg/#distest) of the ball [20 points]. Also, plot all the GMM ellipsoids[10 points]. 
 
-Refer below algorithm in designing your software architecture. 
+You are **not** suppose to use any matlab built-in functions like fitgmdist() or gmdistribution.fit() for GMM. To help you with code implementation, we have given the pseudocode :-) 
 
 
 <div class="fig fighighlight">
@@ -84,7 +84,7 @@ For each section of the project, explain briefly what you did, and describe any 
 - Present your distance estimate and cluster segmentation results for each test image
 - Explain strengths and limitation of your algorithm. Also, explain why the algorithm failed on some test images
 
-As usual, your report must be full English sentences,**not** commented code. There is a word limit of 1500 words and no minimum length requirement
+As usual, your report must be full English sentences, **not** commented code. There is a word limit of 1500 words and no minimum length requirement
 
 <a name='coll'></a>
 ## Collaboration Policy
