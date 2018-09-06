@@ -89,14 +89,14 @@ These convolutions are the most commonly used operations for smoothing and sharp
 Different kernels (or convolution masks) can be used to perform different level of sharpness:
 
 <div class="fig figcenter fighighlight">
-  <img src="assets/pano/DifferentKernel.png" width="49%">
+  <img src="/assets/pano/DifferentKernel.png" width="49%">
   <div class="figcaption">(a). Convolution with an identity masks results the same image as the input image. (b). Sharpening the image. (c). Normalization (or box blur). (d). 3X3 Gaussian blur. (e). 5X5 Gaussian blur. (f). 5X5 unsharp mask, it is based on the gaussian blur. NOTE: The denominator outside all the matrices are used to normalize the operation.</div>
 </div>
 
 Apart from the smoothness operations, convolutions can be used to detect features such as edges as well. The figure given below shows 
 how different kernel can be used to find the edges in an image using convolution.
 <div class="fig figcenter fighighlight">
-  <img src="assets/pano/ConvImgEdge.png" width="49%">
+  <img src="/assets/pano/ConvImgEdge.png" width="49%">
   <div class="figcaption">Detecting edges in an image with different kernels.</div>
 </div>
 
