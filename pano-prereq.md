@@ -106,9 +106,10 @@ A good explanation of convolution is given <a href="http://colah.github.io/posts
 
 ### Deconvolution:
 
-Clearly as the name suggests, deconvolution is simply a process that reverses the effects of convolution on the given information. Deconvolution is generally implemented by computing the _Fourier Transform_ of the signal $$h$$ and the transfer function $$g$$ (where $$h=f * g$$). In frequency domain, (assuming no noise) we can say that:
-$$F=H/G$$
-[Optional Read: Fourier Transformation](Link goes here)
+Clearly as the name suggests, deconvolution is simply a process that reverses the effects of convolution on the given information. Deconvolution is implemented (generally) by computing the _Fourier Transform_ of the signal $$h$$ and the transfer function $$g$$ (where $$h=f * g$$). In frequency domain, (assuming no noise) we can say that:
+$$F=H/G$$. [Optional Read: Fourier Transformation](Link goes here).
+
+
 One can perform deblurring and restoration tasks using deconvolution as shown in figure:
 <div class="fig figcenter fighighlight">
   <img src="assets/pano/deconv.png" width="49%">
