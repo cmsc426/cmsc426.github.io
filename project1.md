@@ -43,7 +43,7 @@ To make logistics easier, we have collected camera data from Nao robot on behalf
 <a name='pro'></a>
 ### Problem Statement 
 
-1. Write matlab code to cluster the orange ball using [single gaussians](https://cmsc426.github.io/colorseg/#gaussian) [30 points] 
+1. Write matlab code to cluster the orange ball using [single gaussian](https://cmsc426.github.io/colorseg/#gaussian) [30 points] 
 2. Write matlab code to cluster the orange ball using [Gaussian Mixture Model](https://cmsc426.github.io/colorseg/#gmm) [40 points] and estimate the [depth](https://cmsc426.github.io/colorseg/#distest) of the ball [20 points]. Also, plot all the GMM ellipsoids[10 points]. 
 
 You are **not** suppose to use any matlab built-in functions like fitgmdist() or gmdistribution.fit() for GMM. To help you with code implementation, we have given the pseudocode :-) 
