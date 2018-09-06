@@ -60,15 +60,14 @@ $$
 (f*g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau = \int_{-\infty}^{\infty} f(t-\tau)g(\tau)d\tau
 $$
 
-Let's try to visualize convolution in one dimension. The following <i>figure</i> depcits the convolution <i>(in black)</i> of the two functions <i>(red and green).</i> One can think convolution as the common area under the functions  $$f$$ and $$g$$.
+Let's try to visualize convolution in one dimension. The following <i>figure</i> depcits the convolution <i>(in black)</i> of the two functions <i>(blue and red).</i> One can think convolution as the common area under the functions  $$f$$ and $$g$$.
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/conv.gif" width="49%">
-  <div class="figcaption">.</div>
+  <div class="figcaption">Convolution of \(f\) and \(g\) is given by the area under the black curve.</div>
 </div>
 
-http://colah.github.io/posts/2014-07-Understanding-Convolutions/
 
-Since we would be dealing with discrete functions in this course (as images are of the size $$M\timesN$$), let us look at a simple discrete 1D example:
+Since we would be dealing with discrete functions in this course (as images are of the size $$M\times N$$), let us look at a simple discrete 1D example:
 $$f = [10, 50, 60, 10, 20, 40, 30]$$ and 
 $$g = [1/3, 1/3, 1/3]$$
 Let the output be denoted by $$h$$. What would be the value of $$h(3)$$? In order to compute this, we slide $$g$$ so that it is centered around $$f(3)$$ _i.e._
@@ -99,6 +98,9 @@ Apart from the smoothness operations, convolutions can be used to detect feature
   <img src="assets/pano/ConvImgEdge.png" width="49%">
   <div class="figcaption">Detecting edges in an image with different kernels.</div>
 </div>
+
+
+A good explanation of convolution is given <a href="http://colah.github.io/posts/2014-07-Understanding-Convolutions/">here</a>.
 
 
 ### Deconvolution:
