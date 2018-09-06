@@ -7,7 +7,7 @@ permalink: /2018/proj/p1/
 **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
 
 Table of Contents:
-- [Due Date](#due)
+- [Deadline](#due)
 - [Introduction](#intro)
 - [What you need to do](#problem)
   - [Problem Statement](#pro)
@@ -15,7 +15,7 @@ Table of Contents:
 - [Collaboration Policy](#coll)
 
 <a name='due'></a>
-## Due Date 
+## Deadline 
 10:59AM, Tuesday, September 18, 2018
 
 <a name='intro'></a>
