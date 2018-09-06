@@ -69,22 +69,22 @@ Let's try to visualize convolution in one dimension. The following <i>figure</i>
 
 Since we would be dealing with discrete functions in this course (as images are of the size $$M\times N$$), let us look at a simple discrete 1D example:
 $$f = [10, 50, 60, 10, 20, 40, 30]$$ and 
-$$g = [1/3, 1/3, 1/3]$$
+$$g = [1/3, 1/3, 1/3]$$.
 Let the output be denoted by $$h$$. What would be the value of $$h(3)$$? In order to compute this, we slide $$g$$ so that it is centered around $$f(3)$$ _i.e._
-$$\begin{bmatrix}10 & 50 & 60 & 10 & 20 & 40 & 30\\0 & 1/3 & 1/3 & 1/3 & 0 & 0 & 0\end{bmatrix}$$
+$$\begin{bmatrix}10 & 50 & 60 & 10 & 20 & 40 & 30\\0 & 1/3 & 1/3 & 1/3 & 0 & 0 & 0\end{bmatrix}$$.
 We multiply the corresponding values of $$f$$ and $$g$$ and then add up the products _i.e._
 $$h(3)=\dfrac{1}{3}50+\dfrac{1}{3}60\dfrac{1}{3}10=40$$
-Again, it can be infered that the function $$g$$ (also known as kernel operator or the filter) is computing a windowed average of the image.
+It can be inferred that the function $$g$$ (also known as kernel or the filter) is computing a windowed average of the image.
 
 Similarly, one can compute 2D convolutions (and hence any $$N$$ dimensions convolution) as shown in image below:
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/Conv2D.png" width="49%">
-  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
+  <div class="figcaption">Convolution of a Matrix with a kernal.</div>
 </div>
 These convolutions are the most commonly used operations for smoothing and sharpening tasks. Look at the example down below:
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/ConvImg.png" width="49%">
-  <div class="figcaption">A cartoon drawing of a biological neuron (left) and its mathematical model (right).</div>
+  <div class="figcaption">Smoothing/Blurring using Convolution.</div>
 </div>
 Different kernels (or convolution masks) can be used to perform different level of sharpness:
 
