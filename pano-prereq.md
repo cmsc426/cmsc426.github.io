@@ -112,12 +112,12 @@ $$F=H/G$$. [Optional Read: Fourier Transformation](Link goes here).
 
 One can perform deblurring and restoration tasks using deconvolution as shown in figure:
 <div class="fig figcenter fighighlight">
-  <img src="assets/pano/deconv.png" width="49%">
+  <img src="/assets/pano/deconv.png" width="49%">
   <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
 </div>
 
 
-Now, since we have learned the basic fundamentals about convolution and deconvolution, let's dig deep into _Kernels_ or _point operators_). One can apply small convolution filters of size $$2\times2$$ or $$3\times3$$ or so on. These can be _Sobel, Roberts, Prewitt, Laplacian_ operators etc. Operators like these are a good approximation of the derivates in an image. Though, for a better approximation of derivatives, larger masks like _Gaussian_ or _Gabor_ filters are used.
+Now, since we have learned the fundamentals about convolution and deconvolution, let's dig deep into _Kernels_ or _point operators_). One can apply small convolution filters of size $$2\times2$$ or $$3\times3$$ or so on. These can be _Sobel, Roberts, Prewitt, Laplacian_ operators etc. Operators like these are a good approximation of the derivates in an image. Though, for a better approximation of derivatives, larger masks like _Gaussian_ or _Gabor_ filters are used.
 But what does it mean to take the derivative of an image? The derivative or the gradient of an image is defined as: 
 $$\nabla f=\left[\dfrac{\delta f}{\delta x}, \dfrac{\delta f}{\delta y}\right]$$
 It is important to note that the gradient of an image points towards the direction in which the intensity changes at the highest rate and thus the direction is given by:
@@ -127,7 +127,7 @@ $$||\nabla f|| = \sqrt{\left(\dfrac{\delta f}{\delta x}\right)^2 + \left(\dfrac{
 
 Figure below shows commonly used gradient operators. 
 <div class="fig figcenter fighighlight">
-  <img src="assets/pano/gradoperators.png" width="49%">
+  <img src="/assets/pano/gradoperators.png" width="49%">
   <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
 </div>
 
