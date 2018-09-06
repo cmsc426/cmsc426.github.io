@@ -112,7 +112,7 @@ $$F=H/G$$. [Optional Read: Fourier Transformation](Link goes here).
 
 One can perform deblurring and restoration tasks using deconvolution as shown in figure:
 <div class="fig figcenter fighighlight">
-  <img src="/assets/pano/deconv.png" width="49%">
+  <img src="/assets/pano/deconv.jpg" width="49%">
   <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
 </div>
 
@@ -164,14 +164,6 @@ You can implement the following the `MATLAB` using the function `edge` with vari
 - Deep learning, CNN and Deep Homography
 - Single View Geometry
 
-## 7. Panorama Stitching:
-- ANMS
-- Feature Correspondence
-- Homography
-- Make it robust using RANSAC
-- Cylindrical Projection
-- Blending images (Laplacian Pyramid)
-- 
 
 
 
