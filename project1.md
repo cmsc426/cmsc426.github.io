@@ -38,7 +38,7 @@ Nao's training has two phases:
 
 <a name='problem'></a>
 ## What you need to do
-To make logistics easier, we have collected camera data from Nao robot on behalf of you and saved the data in the form of color images. Click [here](https://drive.google.com/file/d/17XiM86JqHqko4JC00-E4w4sPKnzh2iMz/view?usp=sharing) to download. The image names represent the depth of the ball from Nao robot in centimeters. We shall release test dataset 24 hours before the deadline i.e. 10:59AM, Monday, September 17.
+To make logistics easier, we have collected camera data from Nao robot on behalf of you and saved the data in the form of color images. Click [here](https://drive.google.com/file/d/17XiM86JqHqko4JC00-E4w4sPKnzh2iMz/view?usp=sharing) to download. The image names represent the depth of the ball from Nao robot in centimeters. We will release the test dataset 24 hours before the deadline i.e. 10:59AM, Monday, September 17.
 
 <a name='pro'></a>
 ### Problem Statement 
