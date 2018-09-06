@@ -30,7 +30,7 @@ alt=" Nao robot demo " width="480" height="360" border="0" /></a>
 
 Nao robots are star players in RoboCup, an annual autonomous robot soccer competitions. 
 We are planning to build the Maryland RoboCup team to compete in RoboCup 2019 so we need your help. 
-Would you like to help us in Nao's soccer training? We need to train Nao to detect a soccer ball and estimate the depth of the ball to know how far to kick it.
+Would you like to help us in Nao's soccer training? We need to train Nao to detect a soccer ball and estimate the depth of the ball to know how far to kick.
 
 Nao's training has two phases:
 - Color Segmentation using Gaussian Mixture Model (GMM)
