@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Color Segmentation using GMM
-permalink: /2018/proj/proj1/
+permalink: /2018/proj/p1/
 ---
 **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
 
@@ -16,16 +16,16 @@ Table of Contents:
 
 <a name='due'></a>
 ## Due Date 
-10:59AM, Tuesday, September 17, 2018
+10:59AM, Tuesday, September 18, 2018
 
 <a name='intro'></a>
 ## Introduction
 
-Have you ever played with these adorable Nao robots? 
+Have you ever played with these adorable Nao robots? Click on the image to watch a cool demo.  
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=Gy_wbhQxd_0
 " target="_blank"><img src="http://img.youtube.com/vi/Gy_wbhQxd_0/0.jpg" 
-alt=" Nao robot demo " width="480" height="360" border="10" /></a>
+alt=" Nao robot demo " width="480" height="360" border="0" /></a>
 
 
 Nao robots are star players in RoboCup, an annual autonomous robot soccer competitions. 
@@ -38,16 +38,23 @@ Nao's training has two phases:
 
 <a name='problem'></a>
 ## What you need to do
-To make logistics easier, we have collected camera data from Nao robot on behalf of you and saved the data in form of color images. as you can see our lab setup. 
+To make logistics easier, we have collected camera data from Nao robot on behalf of you and saved the data in the form of color images. Click [here](https://drive.google.com/file/d/17XiM86JqHqko4JC00-E4w4sPKnzh2iMz/view?usp=sharing) to download. The image names represent the depth of the ball from Nao robot in centimeters. We shall release test dataset 24 hours before the deadline i.e. 10:59AM, Monday, September 17.
+
+<a name='pro'></a>
+### Problem Statement 
+
+1. Write matlab code to cluster the orange ball using [single gaussians](https://cmsc426.github.io/colorseg/#gaussian) [30 points] 
+2. Write matlab code to cluster the orange ball using [Gaussian Mixture Model](https://cmsc426.github.io/colorseg/#gmm) [40 points] and estimate the [depth](https://cmsc426.github.io/colorseg/#distest) of the ball [20 points]. Also, plot all the GMM ellipsoids[10 points].
+
+Refer below algorithm in designing your software architecture. 
+
+
 <div class="fig fighighlight">
   <img src="/assets/proj1/proj1_image.PNG" width="100%">
   <div class="figcaption">
   </div>
   <div style="clear:both;"></div>
 </div>
-
-<a name='pro'></a>
-### Problem Statement 
 
 <a name='sub'></a>
 ## Submission Guidelines
@@ -56,16 +63,28 @@ To make logistics easier, we have collected camera data from Nao robot on behalf
 
 ### File tree and naming
 
-Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj1.zip**.  For example, xyz123_proj1.zip.  The file **must have the following directory structure**, based on the starter files
+Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj1.zip**.  For example, xyz123_proj1.zip.  The file **must have the following directory structure**. 
 
-[          ]
+YourDirectoryID_proj1.zip.
+ - train_images/.
+ - test_images/.
+ - results/.
+ - GMM.m
+ - trainGMM.m
+ - testGMM.m
+ - measureDepth.m
+ - plotGMM.m
+ - report.pdf
 
 ### Report
-For each section of the homework, explain briefly what you did, and describe any interesting problems you encountered and/or solutions you implemented.  You must include the following details in your writeup:
+For each section of the project, explain briefly what you did, and describe any interesting problems you encountered and/or solutions you implemented.  You must include the following details in your writeup:
 
-[        ] 
+- Your choice of color space, initialization method and number of gaussians in the GMM
+- Explain why GMM is better than single gaussian 
+- Present your distance estimate and cluster segmentation results for each test image
+- Explain strengths and limitation of your algorithm. Also, explain why the algorithm failed on some test images
 
-As usual, your report must be full English sentences,**not** commented code. There is a word limit of 750 words and no minimum length requirement
+As usual, your report must be full English sentences,**not** commented code. There is a word limit of 1500 words and no minimum length requirement
 
 <a name='coll'></a>
 ## Collaboration Policy
