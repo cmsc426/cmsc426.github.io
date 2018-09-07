@@ -393,7 +393,7 @@ Repeat Steps 1-3 until model with the most inliers over all samples is found (or
 The number of iterations \\(N\\) needed to have a probability \\(p\\) of success with 2 points being chosen at every iteration to fit a line and at a outlier ratio \\(e\\) chosen at each step is given by
 
 $$
-N = \frac{\log\left(1-p\right)}{\left\log(1-\left( 1 - e\right)^2 \right)}
+N = \frac{\log\left(1-p\right)}{\log\left(1-\left( 1 - e\right)^2 \right)}
 $$
 
 To put this in perspective, we **only need 17 iterations to be 95% sure that we'll find a good solution even with 50% outliers.** 
