@@ -301,21 +301,21 @@ where $$N$$ is the number of training samples. The above is not a simple functio
 Randomly choose $$\pi_i, \mu_i, \Sigma_i \qquad \forall i \in [1, k]$$
 - Alternate until convergence:
 	- Expectation Step or E-step: Evaluate the model/Assign points to clusters
-	Cluster Weight $$ \alpha_{i,j} = \frac{\pi_j p(x_i \vert C_j)}{\sum_{j=1}^k \pi_j p(x_i \vert C_j)} $$
-	\\(i\\) is the data point index, \\(j\\) is the cluster index.
+	Cluster Weight $$ \alpha_{i,j} = \frac{\pi_i p(x_j \vert C_i)}{\sum_{i=1}^k \pi_i p(x_j \vert C_i)} $$
+	\\(j\\) is the data point index, \\(i\\) is the cluster index.
 	- Maximization Step or M-step: Evaluate best parameters $$ \Theta $$ to best fit the points
 	
 	$$ 
-	\mu_j = \frac{\sum_{i=1}^N \alpha_{i,j} x_i}{\sum_{i=1}^N \alpha_{i,j}}
+	\mu_i = \frac{\sum_{j=1}^N \alpha_{i,j} x_j}{\sum_{j=1}^N \alpha_{i,j}}
 	$$
 	
 
 	$$ 
-	\Sigma_k = \frac{\sum_{i=1}^N \alpha_{i,j} (x_i-\mu_i)(x_i-\mu_i)^T}{\sum_{i=1}^N \alpha_{i,j}}
+	\Sigma_k = \frac{\sum_{j=1}^N \alpha_{i,j} (x_j-\mu_i)(x_j-\mu_i)^T}{\sum_{j=1}^N \alpha_{i,j}}
 	$$
 
 	$$ 
-	\pi_j = \frac{1}{N}\sum_i \alpha_{i,j}
+	\pi_i = \frac{1}{N}\sum_j \alpha_{i,j}
 	$$
 	
 Convergence is defined as $$\sum_i\vert \vert \mu_i^{t+1} -  \mu_i^{t}\vert \vert \ge \tau$$ where $$i$$ denotes the cluster number, $$t$$ denotes the iteration number and $$\tau$$ is some user defiened threshold. To understand more about the mathematical derivation which is fairly involved go to [this link](https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.EM).
