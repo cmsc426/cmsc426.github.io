@@ -34,6 +34,20 @@ Slides from lecture are posted below.
     <td>Sept 04, 2018</td> 
    <td><a href="https://drive.google.com/open?id=1VQuujb56jSWB1GRASxXipzxgx0_ULn70">Lecture 3 (Project 1) </a> </td>
   </tr>
+  
+  <!--Lecture 4--> 
+ <tr>
+    <td>4</td>
+    <td> Sept 06, 2018 </td> 
+   <td><a href=""></a> </td>
+  </tr>
+  
+<!--Lecture 5-->
+ <tr>
+    <td>5</td>
+    <td>Sept 11, 2018</td> 
+   <td><a href="https://drive.google.com/open?id=18b2068C0p6XK9v2ZpvwhtxiN_1S6Rx_n">Correlation and Convolution</a> </td>
+  </tr>
 </table>
 
 
