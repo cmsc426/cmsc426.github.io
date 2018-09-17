@@ -19,7 +19,7 @@ Table of Contents:
 
 
 <a name='intro'></a>
-## 1. Introduction
+## Introduction
 
 Now that we have learned about a few building blocks of computer vision from <a href="vision-basics">Learning the basics</a>, let us try to do something cool with it! The purpose of this project is to stitch two or more images in order to create one seamless panorama image. Each image should have few repeated local features ($$\sim 30-50\%$$ or more, emperically chosen). In this project, you need to capture multiple such images. Note that your camera motion should be limited to purely translational or purely rotational around the camera center. The following method of stitching images should work for most image sets but you'll need to be creative for working on harder image sets. 
 
@@ -122,7 +122,7 @@ Panorama can be produced by overlaying the pairwise aligned images to create the
   <div class="figcaption"> Fig. 8: Final Panorama output. </div>
 </div>
 
-<i>Come up with a logic to blend the common region between images while not affecting the regions which are not common.</i> Here, common means shared region, <i>i.e.</i>, a part of first image and part of second image should overlap in the output panorama. Describe what you did in your report. You CAN NOT use any built-in Matlab function or third party code to do this.
+<i>Come up with a logic to blend the common region between images while not affecting the regions which are not common.</i> Here, common means shared region, <i>i.e.</i>, a part of first image and part of second image should overlap in the output panorama. Describe what you did in your report. **Feel free to use any built-in Matlab function or third party code to do this.**
 
 <p style="background-color:#ddd; padding:5px"><b>Note:</b> The pipeline talks about how to stitch a pair of images, you need to extend this to work for multiple images. You can re-run your images pairwise or do something smarter.</p>
 Your end goal is to be able to stitch any number of given images - maybe 2 or 3 or 4 or 100, your algorithm should work. If a random image with no matches are given, your algorithm needs to report an error.

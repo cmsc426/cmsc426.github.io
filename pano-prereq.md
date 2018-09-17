@@ -5,7 +5,7 @@ title: Learning the basics of Computer Vision
 permalink: /pano-prereq/
 ---
 
-This article is written by <a href="">Chahat Deep Singh</a>
+**This article is written by <a href="">Chahat Deep Singh</a>**
 
 
 Table of Contents:
@@ -101,13 +101,12 @@ how different kernel can be used to find the edges in an image using convolution
 </div>
 
 
-A good explanation of convolution is given <a href="http://colah.github.io/posts/2014-07-Understanding-Convolutions/">here</a>.
+A good explanation of convolution can also be found <a href="http://colah.github.io/posts/2014-07-Understanding-Convolutions/">here</a>.
 
 
 ### Deconvolution:
 
-Clearly as the name suggests, deconvolution is simply a process that reverses the effects of convolution on the given information. Deconvolution is implemented (generally) by computing the _Fourier Transform_ of the signal $$h$$ and the transfer function $$g$$ (where $$h=f * g$$). In frequency domain, (assuming no noise) we can say that:
-$$F=H/G$$. Fourier Transformation: [Optional Read](https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/), [Video]("https://www.youtube.com/watch?v=spUNpyF58BY")
+Clearly as the name suggests, deconvolution is simply a process that reverses the effects of convolution on the given information. Deconvolution is implemented (generally) by computing the _Fourier Transform_ of the signal $$h$$ and the transfer function $$g$$ (where $$h=f * g$$). In frequency domain, (assuming no noise) we can say that: $$F=H/G$$. Fourier Transformation: [Optional Read](https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/), [Video](https://www.youtube.com/watch?v=spUNpyF58BY/)
 
 
 One can perform deblurring and restoration tasks using deconvolution as shown in figure:
@@ -117,33 +116,90 @@ One can perform deblurring and restoration tasks using deconvolution as shown in
 </div>
 
 
-Now, since we have learned the fundamentals about convolution and deconvolution, let's dig deep into _Kernels_ or _point operators_). One can apply small convolution filters of size $$2\times2$$ or $$3\times3$$ or so on. These can be _Sobel, Roberts, Prewitt, Laplacian_ operators etc. Operators like these are a good approximation of the derivates in an image. Though, for a better approximation of derivatives, larger masks like _Gaussian_ or _Gabor_ filters are used.
+Now, since we have learned the fundamentals about convolution and deconvolution, let's dig deep into _Kernels_ or _point operators_). One can apply small convolution filters of size $$2\times2$$ or $$3\times3$$ or so on. These can be _Sobel, Roberts, Prewitt, Laplacian_ operators etc. We'll learn about them in a while. Operators like these are a good approximation of the derivates in an image. While for a better texture analysis in an image, larger masks like _Gabor_ filters are used.
 But what does it mean to take the derivative of an image? The derivative or the gradient of an image is defined as: 
 $$\nabla f=\left[\dfrac{\delta f}{\delta x}, \dfrac{\delta f}{\delta y}\right]$$
 It is important to note that the gradient of an image points towards the direction in which the intensity changes at the highest rate and thus the direction is given by:
 $$\theta=tan^{-1}\left(\dfrac{\delta f}{\delta y}\Bigg{/}\dfrac{\delta f}{\delta x}\right)$$
 Moreover, the gradient direction is always perpendicular to the edge and the edge strength can by given by:
-$$||\nabla f|| = \sqrt{\left(\dfrac{\delta f}{\delta x}\right)^2 + \left(\dfrac{\delta f}{\delta y}\right)^2}$$\In practice, the partial derivatives can by written as discrete gradients as the different of values between consecutive pixels _i.e._ $$f(x+1,y) -  f(x,y)$$ as $$\delta x$$  and  $$f(x,y+1) -  f(x,y)$$ as $$\delta y$$.
+$$||\nabla f|| = \sqrt{\left(\dfrac{\delta f}{\delta x}\right)^2 + \left(\dfrac{\delta f}{\delta y}\right)^2}$$. In practice, the partial derivatives can be written (in discrete form) as the different of values between consecutive pixels _i.e._ $$f(x+1,y) -  f(x,y)$$ as $$\delta x$$  and  $$f(x,y+1) -  f(x,y)$$ as $$\delta y$$.
 
 Figure below shows commonly used gradient operators. 
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/gradoperators.png" width="49%">
-  <div class="figcaption">Left half of the image represents the input image. Right half represents the image after deconvolution.</div>
+  <div class="figcaption">Commonly used gradient operators.</div>
 </div>
 
-You can implement the following the `MATLAB` using the function `edge` with various methods for edge detection.
+You can implement the following in MATLAB using the function `edge` with various methods for edge detection. 
+Before reading any further, try the following in MATLAB:
+-  `C = conv2(A, B)` <b>[Refer](https://www.mathworks.com/help/matlab/ref/conv2.html) </b>
+-  `BW = edge(I, method, threshold, sigma)` <b>[Refer](https://www.mathworks.com/help/images/ref/edge.html)</b>
+-  `B = imfilter(A, h, 'conv')` <b>[Refer](https://www.mathworks.com/help/images/ref/imfilter.html)</b>
+
+### Different Operators:
+
+1. Sobel Operator: This operator has two $$3\times 3$$ kernels that are convolved with the original image `I` in order to compute the approximations of the derivatives.
+The horizontal and vertical are defined as follows:
+
+$$G_x = \begin{bmatrix} +1 & 0 & -1 \\ +2 & 0 & -2 \\ +1 & 0 & -1 \end{bmatrix}$$
+
+$$G_y = \begin{bmatrix} +1 & +2 & +1 \\ 0 & 0 & 0 \\ -1 & -2 & -1 \end{bmatrix}$$
+
+The gradient magnitude can be given as: $$G=\sqrt{G^2_x + G^2_y}$$ and the gradient direction can be written as: $$\theta=a tan \Bigg(\cfrac{G_y}{G_x}\Bigg)$$. Figure below shows the input image and its output after convolving with Sobel operator.
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/filt1.png" width="70%">
+  <div class="figcaption">(a). Input Image. (b). Sobel Output.</div>
+</div>
+
+2. Prewitt:
+
+$$G_x = \begin{bmatrix} +1 & 0 & -1 \\ +1 & 0 & -1 \\ +1 & 0 & -1 \end{bmatrix}$$
+
+$$G_y = \begin{bmatrix} +1 & +1 & +1 \\ 0 & 0 & 0 \\ -1 & -1 & -1 \end{bmatrix}$$
+
+3. Roberts:
+
+$$G_x = \begin{bmatrix} +1 & 0 \\ 0 & -1 \end{bmatrix}$$
+
+$$G_x = \begin{bmatrix} 0 & +1 \\ -1 & 0 \end{bmatrix}$$
+
+
+4. Canny:
+Unlike any other filters, we have studied above, canny goes a bit further. In Canny edge detection, before finding the intensities of the image, a gaussian filter is applied to smooth the image in order to remove the noise. Now, one the gradient intensity is computed on the imge, it uses _non-maximum suppression_ to suppress only the weaker edges in the image. Refer: [A computational approach to edge detection](https://ieeexplore.ieee.org/document/4767851/). `MATLAB` has an `approxcanny` function that finds the edges using an approximate version which provides faster execution time at the expense of less precise detection. Figure below illustrates different edge detectors.
+
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/filt2.png" width="80%">
+  <div class="figcaption">(a). Prewitt Output. (b). Roberts Output. (c). Canny Output (d) Laplacian of Gaussian (LoG). </div>
+</div>
+
+
+### Corner Detection:
+Now that we have learned about different edge features, let's understand what corner features are! Corner detection is used to extract certain kinds of features and common in panorama stitching (Project 1), video tracking (project 3), object recognition, motion detection etc. 
+
+_What is a corner?_ To put it simply, a corner is the intersection of two edges. One can also define corner as: if there exist a point in an image such that there are two defintive (and different) edge directions in a local neighborhood of that point, then it is considered as a corner feature. In computer vision, corners are commonly written as 'interest points' in literature. 
+
+The paramount property of a corner detector is the ability to detect the same corner in multiple images under different translation, rotation, lighting etc. The simplest approach for corner detection in images is using correlation. (Correlation is similar in nature to convolution of two functions). Optional Read: [Correlation](http://www.ee.ic.ac.uk/hp/staff/dmb/courses/e1fourier/00800_correlation.pdf)
+
+
+FAST: Features from Accelerated Segment Test
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/harris.jpg" width="33%">
+  <img src="/assets/pano/shi-tomasi.jpg" width="32.9%">
+  <img src="/assets/pano/fast.jpg" width="33%">
+  <div class="figcaption">(a). Harris Corner Detection. (b). Shi-Tomasi Corner Detection. (c). FAST Corner Detection.</div>
+</div>
 
 
 
+### Blob detection: 
+- LoG (Laplacian of Gaussian)
+- DoG (Difference of Gaussian)
 
 
+### Feature Descriptor:
 
-## 4. Features Detection:
-- What are features?
-- Derivates in images
-- Edge: Canny `approxcanny` , Sobel, Prewitt, Roberts.
-- Corner: Harris, Shi Tomasi, FAST
-- Blob detection: LoG, DoG
 - Feature Descriptor: SIFT (Scale selectivity (CIS 580) Multi-scale concepts), SURF and HOG
 
 
@@ -168,26 +224,31 @@ You can implement the following the `MATLAB` using the function `edge` with vari
 
 
 
-## Features and Convolution:
-
-
-[Kernels (known as point operators): Sobel (derivatives in images) and Prewitt]
 [Filtering] imfilt and imgauss
-[Padding]
-[Erode and dilate]
-[Denoise]
-[Back to features...we already studied about sobel and prewitt edge detectors]
-[Adaptive edge detectors: Canny and approxCanny]
-[Corners]
-[Blob: LoG and Dog]
 [Feature Descriptor: SIFT (Scale selectivity (CIS 580) Multi-scale concepts), SURF and HOG]
 
 
-<a name='intro'></a>
+<a name='optics'></a>
 ## Camera Optics
-We learned about ISO, shutter speed, apertures and focal length in the [Color Imaging](https://cmsc426.github.io/colorseg/#colimaging), project 1. Let us now learn about how the camera optics work! We have learned that smaller the Field Of View (FOV), larger the focal length ($$f$$) is. One can say:
+We learned about ISO, shutter speed, apertures and focal length in the [Color Imaging section](https://cmsc426.github.io/colorseg/#colimaging) in project 1. Let us now learn about how the camera optics work! We have learned that smaller the Field Of View (FOV), larger the focal length ($$f$$) is. One can say:
 $$FOV = tan^{-1}\left(\dfrac{d}{2f}\right)$$
-where $$d$$ is the camera sensor size. Figure [focal length] shows the effect of focal length to the FOV. And clearly, larger the focal length, the more _zoomed-in_ image is captured. Also, large focal length compresses the depth. Fig [imagesatdifferentF] and [depth-of-field] illustrates images captured at different focal length and their effects.
+where $$d$$ is the camera sensor size. The  figure below shows the effect of focal length to the FOV. 
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/diff-focal.png" width="80%">
+  <div class="figcaption">. </div>
+</div>
+
+Also, large focal length compresses the depth. The following figure illustrates images captured at different focal length and their effects.
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/pano/diff-f.png" width="80%">
+  <img src="/assets/pano/depth-of-field.png" width="60%">
+  <div class="figcaption">. </div>
+</div>
+
+
+
 
 Lens distortion....
 
