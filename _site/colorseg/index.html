@@ -324,7 +324,7 @@ Randomly choose <script type="math/tex">\pi_i, \mu_i, \Sigma_i \qquad \forall i 
   </li>
 </ul>
 
-<p>Convergence is defined as <script type="math/tex">\sum_i\vert \vert \mu_i^{t+1} -  \mu_i^{t}\vert \vert \ge \tau</script> where <script type="math/tex">i</script> denotes the cluster number, <script type="math/tex">t</script> denotes the iteration number and <script type="math/tex">\tau</script> is some user defiened threshold. To understand more about the mathematical derivation which is fairly involved go to <a href="https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.EM">this link</a>.</p>
+<p>Convergence is defined as <script type="math/tex">\sum_i\vert \vert \mu_i^{t+1} -  \mu_i^{t}\vert \vert \le \tau</script> where <script type="math/tex">i</script> denotes the cluster number, <script type="math/tex">t</script> denotes the iteration number and <script type="math/tex">\tau</script> is some user defiened threshold. To understand more about the mathematical derivation which is fairly involved go to <a href="https://alliance.seas.upenn.edu/~cis520/dynamic/2017/wiki/index.php?n=Lectures.EM">this link</a>.</p>
 
 <p>Now that we have estimated/learnt all the parameters in our model, i.e., <script type="math/tex">\Theta = \{ \mu_1, \mu_2, \cdots, \mu_k, \Sigma_1, \Sigma_2, \cdots, \Sigma_k, \pi_1, \pi_2, \cdots, \pi_k\}</script> we can estimate the posterior probability using the following equation:</p>
 
