@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Color Segmentation using GMM
-permalink: /2018/proj/p1/
+permalink: /2018/proj/p2/
 ---
 
 Table of Contents:
