@@ -54,7 +54,9 @@ A brief description of each step (you'll implement the steps **in bold**):
 
 
 ## Project Files and Starter Code
-Please find the starter code at this link.  
+Please find the starter code at <a
+href="https://drive.google.com/file/d/1RA-NYd3CErQSqKy0OAlC7LqCgIiuxKiw/view?usp=sharing">this
+link</a>.  
 
 This also includes three sets of "training
 images".  Twenty-four hours before the due date, we'll distribute a "test set" of two more sets of images (look out for an announcement on Piazza).
