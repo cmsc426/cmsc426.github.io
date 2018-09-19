@@ -1,7 +1,7 @@
 ---
 layout: page
 mathjax: true
-title: Linear Least Squares
+title: Image Features and Warping 
 permalink: /2018/hw/hw2/
 ---
 
@@ -20,8 +20,8 @@ Table of Contents:
 <a name='intro'></a>
 ## Introduction
 
-This homework reviews some important concepts from Project 2 (Panorama Stitching).  It is composed
-of a coding problem and several short answer questions.
+This homework reviews some important concepts related to Project 2 (Panorama Stitching).  It is composed
+of a coding problem and two short answer questions.
 
 <a name='part1'></a>
 ## Part 1: Coding - Harris Corner Detection (50 pts)
