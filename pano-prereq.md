@@ -5,8 +5,10 @@ title: Learning the basics of Computer Vision
 permalink: /pano-prereq/
 ---
 
-**This article is written by <a href="">Chahat Deep Singh</a>**
 
+**This article is written by <a href="http://chahatdeep.github.io/">Chahat Deep Singh.</a>** (chahat[at]terpmail.umd.edu)
+
+Please contact **Chahat** if there are any errors.
 
 Table of Contents:
 
