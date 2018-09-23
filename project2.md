@@ -2,8 +2,11 @@
 layout: page
 mathjax: true
 title: Color Segmentation using GMM
-permalink: /2018/proj/p2-not-yet-released/
+permalink: /2018/proj/p2/
 ---
+
+**This article is written by [Jack Rasiel](http://jackrasiel.com/).**
+Please contact **Jack Rasiel** if there are any errors.
 
 Table of Contents:
 - [Deadline](#due)
