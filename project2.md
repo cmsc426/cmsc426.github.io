@@ -30,7 +30,7 @@ This document just provides an overview of what you need to do.  For a full brea
 Here's a system diagram, showing each step in your panorama-stitching pipeline:
 
 <div class="fig figcenter fighighlight">
-  <img src="assets/proj2/system_diagram.png" width="100%">
+  <img src="/assets/proj2/system_diagram.png" width="100%">
 </div>
 
 
