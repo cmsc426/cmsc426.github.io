@@ -56,7 +56,7 @@ Answer briefly-- two paragraphs or fewer.
 
 
 ### Question 2:  Image Warping and Invertible Transformations (35 pts)
-Given a digital image, and an invertible transformation \\\textbf{\~H}\\ of the form
+Given a digital image, and an invertible transformation $$\textbf{\~H}$$ of the form
 
 we would like to compute the warped image whereby each point in the original image is transformed to
 its new location.
@@ -66,13 +66,13 @@ $$
 \tilde{p}' \equiv \tilde{H} \tilde{p}
 $$
 We could envision a somewhat straightforward algorithm for performing this image warp:
-for each location \\\tilde{p}\\ in the original image, compute the nearest pixel location of the
-transformed point \\\tilde{p}'\\ in the warped image, and copy the color found in \\\tilde{p}\\ into the
-warped image at location \\\tilde{p}'\\.
+for each location $$\tilde{p}$$ in the original image, compute the nearest pixel location of the
+transformed point $$\tilde{p}'$$ in the warped image, and copy the color found in $$\tilde{p}$$ into the
+warped image at location $$\tilde{p}'$$.
 
 However, the vastly preferable algorithm is to loop over the \textit{destination} pixels
-\\\tilde{p}'\\ in the warped image, and use the inverse transformation \\\tilde{H}^{-1}\\ to identify
-the nearest pixel \\\tilde{p}\\ in the source image and copy the color from that source pixel to the
+$$\tilde{p}'$$ in the warped image, and use the inverse transformation $$\tilde{H}^{-1}$$ to identify
+the nearest pixel $$\tilde{p}$$ in the source image and copy the color from that source pixel to the
 destination.
 
 What is the difference between the two approaches? Why is the second one preferable?  Please answer
