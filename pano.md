@@ -4,7 +4,9 @@ mathjax: true
 title: Panorama Stitching
 permalink: /pano/
 ---
-**This article is written by <a href="http://chahatdeep.github.io/">Chahat Deep Singh</a>**
+**This article is written by <a href="http://chahatdeep.github.io/">Chahat Deep Singh.</a>** (chahat[at]terpmail[dot]umd[dot]edu)
+
+Please contact **Chahat** if there are any errors.
 
 Table of Contents:
 
