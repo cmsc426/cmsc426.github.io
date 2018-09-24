@@ -56,15 +56,16 @@ Answer briefly-- two paragraphs or fewer.
 
 
 ### Question 2:  Image Warping and Invertible Transformations (35 pts)
-Given a digital image, and an invertible transformation $$\textbf{\~H}$$ of the form
-
-we would like to compute the warped image whereby each point in the original image is transformed to
-its new location.
-This type of image warping is exactly what the Matlab `imwarp` function does, for
-example.
+Given a digital image, and an invertible transformation $$\tilde{\textbf{H}}$$ of the form
 $$
 \tilde{p}' \equiv \tilde{H} \tilde{p}
 $$
+we would like to compute the warped image whereby each point in the original image is transformed to
+its new location.
+
+This type of image warping is exactly what the Matlab `imwarp` function does, for
+example.
+
 We could envision a somewhat straightforward algorithm for performing this image warp:
 for each location $$\tilde{p}$$ in the original image, compute the nearest pixel location of the
 transformed point $$\tilde{p}'$$ in the warped image, and copy the color found in $$\tilde{p}$$ into the
