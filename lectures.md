@@ -25,7 +25,7 @@ Slides from lecture are posted below.
  <tr>
     <td>2</td>
     <td> Aug 30, 2018 </td> 
-   <td><a href="">Lecture 2 PPT</a> </td>
+   <td><a href=""></a> </td>
   </tr>
   
 <!--Lecture 3-->
@@ -47,6 +47,20 @@ Slides from lecture are posted below.
     <td>5</td>
     <td>Sept 11, 2018</td> 
    <td><a href="https://drive.google.com/open?id=18b2068C0p6XK9v2ZpvwhtxiN_1S6Rx_n">Correlation and Convolution</a> </td>
+  </tr>
+
+  <!--Lecture 6--> 
+ <tr>
+    <td>6</td>
+    <td> Sept 18, 2018 </td> 
+   <td><a href="https://drive.google.com/open?id=106jAGu3RTRXp0M5f5Iz4qfV32SNaC4Jc">Edges Detection</a></td>
+  </tr>
+  
+<!--Lecture 7-->
+ <tr>
+    <td>7</td>
+    <td>Sept 20, 2018</td> 
+   <td><a href="https://drive.google.com/open?id=1do6Qacm5-3fxc00kq2_0os75kmtBalI9">SIFT Features</a></td>
   </tr>
 </table>
 
