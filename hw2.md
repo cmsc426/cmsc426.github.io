@@ -71,7 +71,7 @@ for each location $$\tilde{p}$$ in the original image, compute the nearest pixel
 transformed point $$\tilde{p}'$$ in the warped image, and copy the color found in $$\tilde{p}$$ into the
 warped image at location $$\tilde{p}'$$.
 
-However, the vastly preferable algorithm is to loop over the \textit{destination} pixels
+However, the vastly preferable algorithm is to loop over the *destination* pixels
 $$\tilde{p}'$$ in the warped image, and use the inverse transformation $$\tilde{H}^{-1}$$ to identify
 the nearest pixel $$\tilde{p}$$ in the source image and copy the color from that source pixel to the
 destination.
