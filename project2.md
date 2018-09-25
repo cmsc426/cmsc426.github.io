@@ -1,7 +1,7 @@
 ---
 layout: page
 mathjax: true
-title: Color Segmentation using GMM
+title: Panorama Stitching
 permalink: /2018/proj/p2/
 ---
 
