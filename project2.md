@@ -22,7 +22,7 @@ Table of Contents:
 
 The aim of this project is to implement an end-to-end pipeline for panorama stitching. We all use the panorama mode on our smart-phones-- you'll implement a pipeline which does the same basic thing! 
 
-This document just provides an overview of what you need to do.  For a full breakdown of how each step in the pipeline works, see <a href="">the course notes for this project</a>.
+This document just provides an overview of what you need to do.  For a full breakdown of how each step in the pipeline works, see <a href="https://cmsc426.github.io/pano/">the course notes for this project</a>.
 
 <a name='system_overview'></a>
 ## System Overview
