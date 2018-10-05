@@ -53,7 +53,7 @@ Slides from lecture are posted below.
  <tr>
     <td>6</td>
     <td> Sept 18, 2018 </td> 
-   <td><a href="https://drive.google.com/open?id=106jAGu3RTRXp0M5f5Iz4qfV32SNaC4Jc">Edges Detection</a></td>
+   <td><a href="https://drive.google.com/open?id=106jAGu3RTRXp0M5f5Iz4qfV32SNaC4Jc">Edge Detection</a></td>
   </tr>
   
 <!--Lecture 7-->
@@ -61,6 +61,36 @@ Slides from lecture are posted below.
     <td>7</td>
     <td>Sept 20, 2018</td> 
    <td><a href="https://drive.google.com/open?id=1do6Qacm5-3fxc00kq2_0os75kmtBalI9">SIFT Features</a></td>
+  </tr>
+  
+ 
+  <!--Lecture 8--> 
+ <tr>
+    <td>6</td>
+    <td> Sept 25, 2018 </td> 
+   <td></td>
+  </tr>
+  
+<!--Lecture 9-->
+ <tr>
+    <td>7</td>
+    <td>Sept 27, 2018</td> 
+   <td></td>
+  </tr>
+  
+  
+  <!--Lecture 10--> 
+ <tr>
+    <td>6</td>
+    <td> Oct 03, 2018 </td> 
+   <td>-</td>
+  </tr>
+  
+<!--Lecture 11-->
+ <tr>
+    <td>11</td>
+    <td>Oct 05, 2018</td> 
+   <td><a href="https://drive.google.com/open?id=13x8DPDCxS81p4gpUnveFNHtYHan2NV9L">Project 2: Pano. Stitching</a></td>
   </tr>
 </table>
 
