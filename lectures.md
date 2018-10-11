@@ -68,14 +68,14 @@ Slides from lecture are posted below.
  <tr>
     <td>6</td>
     <td> Sept 25, 2018 </td> 
-   <td></td>
+  <td>Linear Review <a href="https://drive.google.com/open?id=1aGShG1NwqxWDz7VtFU5TWDgXTxXCYzh6">1</a>, <a href="https://drive.google.com/open?id=19XuIh0o2vCENzeR6zQyJYKvLCDb5x1eB">2</a></td>
   </tr>
   
 <!--Lecture 9-->
  <tr>
     <td>7</td>
     <td>Sept 27, 2018</td> 
-   <td></td>
+  <td><a href="https://drive.google.com/open?id=1fi6AmTTnHiO_uIFb068lSspu4mBH_mmv">Projective Geometry</a></td>
   </tr>
   
   
@@ -91,6 +91,20 @@ Slides from lecture are posted below.
     <td>11</td>
     <td>Oct 05, 2018</td> 
    <td><a href="https://drive.google.com/open?id=13x8DPDCxS81p4gpUnveFNHtYHan2NV9L">Project 2: Pano. Stitching</a></td>
+  </tr>
+    
+  <!--Lecture 12--> 
+ <tr>
+    <td>6</td>
+    <td> Oct 09, 2018 </td> 
+   <td><a href="https://drive.google.com/open?id=1lN7pQXVzzVVigDuGnbZ9QCwTmm_nikN8">Camera Calibration</a></td>
+  </tr>
+  
+<!--Lecture 13-->
+ <tr>
+    <td>11</td>
+    <td>Oct 11, 2018</td> 
+   <td><a href=""></a></td>
   </tr>
 </table>
 
