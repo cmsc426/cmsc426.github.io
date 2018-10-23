@@ -19,12 +19,6 @@ Table of Contents:
 	- [Deconvolution](#deconv)
 	- [Different Operators](#diff-operators)
 	- [Corner Detection](#corner-detection)
-	- [Blob Detection](#blob-detection)(Coming Soon)
-- [Camera Optics](#optics) (Coming Soon)
-	- [Camera Model](#pinhole)
-	- [Distortion](#distortion)
-	- [Camera Calibration (or Intrinsic Calibration)](#intrinsic)
-	- [Extrinsic Calibration](#extrinsic)
 - [Optical Flow](#flow) (Coming Soon)
 
 
