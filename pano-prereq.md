@@ -19,7 +19,7 @@ Table of Contents:
 	- [Deconvolution](#deconv)
 	- [Different Operators](#diff-operators)
 	- [Corner Detection](#corner-detection)
-- [Optical Flow](#flow) (Coming Soon)
+<!-- - [Optical Flow](#flow) (Coming Soon) -->
 
 
 <a name='intro'></a>
