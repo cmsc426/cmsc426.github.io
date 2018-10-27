@@ -157,7 +157,7 @@ $$\mathbf{E}$$ = $$\mathbf{K^TFK}$$
 where $$\mathbf{K}$$ is the camera calibration matrix or camera intrinsic matrix. Clearly, the essential matrix can be extracted from $$\mathbf{F}$$ and $$\mathbf{K}$$. As in the case of $$\mathbf{F}$$ matrix computation, the singular values of $$\mathbf{E}$$ are not necessarily $$(1,1,0)$$ due to the noise in $$\mathbf{K}$$. This can be corrected by reconstructing it with $$(1,1,0)$$ singular values, _i.e._
 $$\mathbf{E}=U\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}V^T$$
 
-_It is important to note that the $$\mathbf{F}$$ is defined in the original image space (i.e. pixel coordinates) whereas $$\mathbf{E}$$ is in the normalized image coordinates. Normalized image coordinates have the origin at the optical center of the image. Also, relative camera poses between two views can be computed using $$\mathbf{E}$$ matrix. Moreover, $$\mathbf{F}$$ has 8 degrees of freedom while $$\mathbf{E}$$ has 5 as it takes camera parameters in account. ([5-Point Motion Estimation Made Easy](http://users.cecs.anu.edu.au/~hongdong/new5pt_cameraREady_ver_1.pdf))_
+_It is important to note that the $$\mathbf{F}$$ is defined in the original image space (i.e. pixel coordinates) whereas $$\mathbf{E}$$ is in the normalized image coordinates. Normalized image coordinates have the origin at the optical center of the image. Also, relative camera poses between two views can be computed using $$\mathbf{E}$$ matrix. Moreover, $$\mathbf{F}$$ has 7 degrees of freedom while $$\mathbf{E}$$ has 5 as it takes camera parameters in account. ([5-Point Motion Estimation Made Easy](http://users.cecs.anu.edu.au/~hongdong/new5pt_cameraREady_ver_1.pdf))_
 
 <a name='essential'></a>
 ### 3. Estimate **Camera Pose** from Essential Matrix
