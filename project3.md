@@ -1,7 +1,7 @@
 ---
 layout: page
 mathjax: true
-title: Panorama Stitching
+title: Rotobrush
 permalink: /2018/proj/p3/
 ---
 
