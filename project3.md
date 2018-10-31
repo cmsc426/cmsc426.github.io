@@ -27,10 +27,6 @@ This document just provides an overview of what you need to do.  For a full brea
 
 Here's a system diagram, showing each step in your rotobrush pipeline:
 
-<div class="fig figcenter fighighlight">
-  <img src="/assets/rotobrush/overview.png" width="100%">
-</div>
-
 
 A brief description of each step (you'll implement the steps **in bold**):
 - **`myRotobrush.m`:  Wrapper function.**
