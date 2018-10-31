@@ -8,7 +8,7 @@ permalink: /2018/proj/p3/
 Table of Contents:
 - [Deadline](#due)
 - [Introduction](#intro)
-- [System Overview](#system_overview)
+- [Implementation Overview](#system_overview)
 - [Submission Guidelines](#sub)
 - [Collaboration Policy](#coll)
 
@@ -25,7 +25,7 @@ This document just provides an overview of what you need to do.  For a full brea
 <a name='system_overview'></a>
 ## Implementation Overview
 
-Download the code and data <a href="https://www.dropbox.com/s/32fa11l5pnakcph/CMSC426_P3.zip"> here </a>
+Download the starter code and data <a href="https://www.dropbox.com/s/32fa11l5pnakcph/CMSC426_P3.zip"> here </a>
 
 
 A brief description of each step (you'll implement the steps **in bold**):
@@ -58,10 +58,7 @@ For **extra credit**, implement any remaining part of the SnapCut paper (other t
 Try to make your system robust as much as possible! Hint: Try to have additional image features, something beyond shape and color!
 
 
-## Project Files and Starter Code
-Please find the starter code at <a
-href=" ">this
-link</a>.  
+## Project Files
 
 When running `MyRotobrush.m`, it must load a set of frames from the folder `Frames/`. Assume
 that the frames will be `jpeg` images of the form `1.jpg`, `2.jpg`, etc. Your program must then
