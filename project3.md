@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Panorama Stitching
-permalink: /2018/proj/p3-test/
+permalink: /2018/proj/p3/
 ---
 
 Table of Contents:
@@ -23,9 +23,9 @@ The aim of this project is to segment deformable object from a given video seque
 This document just provides an overview of what you need to do.  For a full breakdown of how each step in the pipeline works, see <a href="https://cmsc426.github.io/rotobrush/">the course notes for this project</a>.
 
 <a name='system_overview'></a>
-## System Overview
+## Implementation Overview
 
-Here's a system diagram, showing each step in your rotobrush pipeline:
+Download the code and data <a href="https://www.dropbox.com/s/32fa11l5pnakcph/CMSC426_P3.zip"> here </a>
 
 
 A brief description of each step (you'll implement the steps **in bold**):
