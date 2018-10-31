@@ -33,15 +33,16 @@ Here's a system diagram, showing each step in your rotobrush pipeline:
 
 
 A brief description of each step (you'll implement the steps **in bold**):
-
-- `function 1`:  What it does. 
-- `function 1`:  What it does. 
-- `function 1`:  What it does. 
-- `function 1`:  What it does. 
-- `function 1`:  What it does. 
-- `function 1`:  What it does. 
-- `function 1`:  What it does. 
-- `function 1`:  What it does. 
+- **`myRotobrush.m`:  Wrapper function.**
+- `initLocalWindows.m`:  Creates local windows on boundary of mask. 
+- **`initColorModels.m`:   Initializes color models.** 
+- **`initShapeConfidences.m`: Initializes shape confidences.** 
+- **`localFlowWarp.m`:  Calculates local window movement based on optical flow between frames.**
+- **`calculateGlobalAffine.m`:  Finds affine transform between two frames.** 
+- **`updateModels.m`:  Update shape and color models.** 
+- `showLocalWindows.m`:  Plots local windows. 
+- `showColorConfidences.m`: Plots the color confidence for each local window. 
+- `equidistantPointsOnPerimeter.m`: Find equally spaced points along the perimeter of a polygon
 
 
 ### Point Distribution:
@@ -75,7 +76,7 @@ frame, draw the tracked boundary in red and save the result with the same filena
 
 #### Functions Allowed 
 
-For this project, **[FILL HERE]** imfilter, conv2, imrotate, im2double, rgb2gray, fspecial, imtransform, imwarp (and imref2d), meshgrid, sub2ind, ind2sub and all other plotting and matrix operation/manipulation functions are allowed.
+For this project, roipoly, fitgmdist, estimateGeometricTransform, opticalFlowFarneback, vl_sift (http://www.vlfeat.org/overview/sift.html), imfilter, conv2, imrotate, im2double, rgb2gray, fspecial, imtransform, imwarp (and imref2d), meshgrid, sub2ind, ind2sub and all other plotting and matrix operation/manipulation functions are allowed.
 
 <a name='sub'></a>
 ## Submission Guidelines
@@ -83,18 +84,12 @@ For this project, **[FILL HERE]** imfilter, conv2, imrotate, im2double, rgb2gray
 
 ### File tree and naming
 
-Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj2.zip**.  For example, xyz123_proj2.zip.  The file **must have the following directory structure**: 
+Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj3.zip**.  For example, xyz123_proj3.zip.  The file **must have the following directory structure**: 
 
-- `YourDirectoryID_proj2.zip/`
+- `YourDirectoryID_proj3.zip/`
     - `Code/`
         - `MyRotobrush.m`
-        - `function1.m`
-        - `function2.m`
-        - `function3.m`
-        - `function4.m`
-        - `function5.m`
-        - `function6.m`
-        - *(any dependencies of MyPanorama.m)
+        - *(any dependencies of MyRotobrush.m)
     - `Input/`
     - `Output/`
     - `result1.mp4`
