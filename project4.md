@@ -81,7 +81,7 @@ at time `TLeftImgs(1)`.
 function.
 
 <div class="fig fighighlight">
-  <img src="/assets/proj4/apriltag.png" width="100%">
+  <img src="/assets/proj4/apriltag.png" width="40%">
   <div class="figcaption">
     Figure 2: AprilTag, with corners highlighted.
   </div>
