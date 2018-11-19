@@ -227,7 +227,7 @@ P$$n$$P is prone to error as there are outliers in the given set of point corres
 
 Just like in triangulation, since we have the linearly estimated camera pose, we can refine the camera pose that minimizes the reprojection error (Linear PnP only minimizes the algebraic error). Though, reprojection error is the geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point.
 
-$$\underset{C,R}{\operatorname{min}}$$ $$\sum_{i=1,J}\left(u^j - \frac{P_1^{jT}\widetilde{X_j}}{P_3^{jT}{\widetilde{X_j}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{X_j}}{P_3^{jT}{X_j}}\right)^2$$
+$$\underset{C,R}{\operatorname{min}} \sum_{i=1,J} \left(u^j - \frac{P_1^{jT}\widetilde{X_j}}{P_3^{jT}{\widetilde{X_j}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{X_j}}{P_3^{jT}{X_j}}\right)^2$$
 <a name='nonlinpnp'></a>
 
 <a name='ba'></a>
