@@ -62,7 +62,7 @@ The fundamental matrix, denoted by $$F$$, is a $$3\times 3$$ (_rank 2_) matrix t
 
 <a name='epipole'></a>
 ### 1.2. Epipolar Geometry:
-Let's say a point $$\mathbf{X}$$ in the 3D-space (viewed in two images) is captured as $$\mathbf{x}$$ in the first image and $$\mathbf{x'}$$ in the second. _Can you think how to formulate the relation between the corresponding image points $$\mathbf{x}$$ and $$\mathbf{x'}$$?_ Consider figure **(ref epipolar geometry fig)**. Let $$\mathbf{C}$$ and $$\mathbf{C'}$$ be the respective camera centers which forms the baseline for the stereo system. Clearly, the points $$\mathbf{x}$$, $$\mathbf{x'}$$ and $$\mathbf{X}$$ (or $$\mathbf{C}$$, $$\mathbf{C'}$$ and $$\mathbf{X}$$) are coplanar _i.e._  $$\mathbf{\overrightarrow{Cx}}\cdot \left(\mathbf{\overrightarrow{CC'}}\times\mathbf{\overrightarrow{C'x'}}\right)=0$$ 
+Let's say a point $$\mathbf{X}$$ in the 3D-space (viewed in two images) is captured as $$\mathbf{x}$$ in the first image and $$\mathbf{x'}$$ in the second. _Can you think how to formulate the relation between the corresponding image points $$\mathbf{x}$$ and $$\mathbf{x'}$$?_ Consider Fig. 2. Let $$\mathbf{C}$$ and $$\mathbf{C'}$$ be the respective camera centers which forms the baseline for the stereo system. Clearly, the points $$\mathbf{x}$$, $$\mathbf{x'}$$ and $$\mathbf{X}$$ (or $$\mathbf{C}$$, $$\mathbf{C'}$$ and $$\mathbf{X}$$) are coplanar _i.e._  $$\mathbf{\overrightarrow{Cx}}\cdot \left(\mathbf{\overrightarrow{CC'}}\times\mathbf{\overrightarrow{C'x'}}\right)=0$$ 
 and the plane formed can be denoted by $$\pi$$. Since these points are coplanar, the rays back-projected from $$\mathbf{x}$$ and $$\mathbf{x'}$$ intersect at $$\mathbf{X}$$. This is the most significant property in searching for a correspondence. 
 
 <div class="fig fighighlight">
@@ -80,7 +80,7 @@ and the plane formed can be denoted by $$\pi$$. Since these points are coplanar,
 
 Now, let us say that only $$\mathbf{x}$$ is known, not $$\mathbf{x'}$$. We know that the point $$\mathbf{x'}$$ lies in the plane $$\pi$$ which is governed by the camera baseline $$\mathbf{CC'}$$ and $$\mathbf{\overrightarrow{Cx}}$$.  Hence the point $$\mathbf{x'}$$ lies on the line of intersetion of $$\mathbf{l'}$$ of $$\pi$$ with the second image plane. The line $$\mathbf{l'}$$ is the image in the second view of the ray back-projected from $$\mathbf{x}$$. This line $$\mathbf{l'}$$ is called the _epipolar line_ corresponding to $$\mathbf{x}$$. The benifit is that you don't need to search for the point corresponding to $$\mathbf{x}$$ in the entire image plane as it can be restricted to the $$\mathbf{l'}$$.
 
-- **Epipole** is the point of intersection of the line joining the camera centers with the image plane. (see $$\mathbf{e}$$ and $$\mathbf{e'}$$ in the figure <refer here>) 
+- **Epipole** is the point of intersection of the line joining the camera centers with the image plane. (see $$\mathbf{e}$$ and $$\mathbf{e'}$$ in the Fig. 2(a)) 
 - **Epipolar plane** is the plane containing the baseline.
 - **Epipolar line** is the intersection of an epipolar plane with the image plane. *All the epipolar lines intersect at the epipole.* 
 
@@ -111,7 +111,7 @@ Thus, we require at least 8 points to solve the above homogenous system. That is
 With $$N \geq 8$$ correspondences between two images, the fundamental matrix, $$F$$ can be obtained as:
 By stacking the above equation in a matrix $$A$$, the equation
 $$Ax=0$$ is obtained.
-	This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the <a href="https://cmsc426.github.io/math-tutorial/#svd">Math module</a>. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero. If $$F$$ has a full rank then it will have an empty null-space _i.e._ it won't have any point that is on entire set of lines. Thus, there wouldn't be any epipoles. See fig [NUMBER] for full rank comparisons for $$F$$ matrices.
+	This system of equation can be answered by solving the linear least squares using Singular Value Decomposition (SVD) as explained in the <a href="https://cmsc426.github.io/math-tutorial/#svd">Math module</a>. When applying SVD to matrix $$\mathbf{A}$$, the decomposition $$\mathbf{USV^T}$$ would be obtained with $$\mathbf{U}$$ and $$\mathbf{V}$$ orthonormal matrices and a diagonal matrix $$\mathbf{S}$$ that contains the singular values. The singular values $$\sigma_i$$ where $$i\in[1,9], i\in\mathbb{Z}$$, are positive and are in decreasing order with $$\sigma_9=0$$ since we have 8 equations for 9 unknowns. Thus, the last column of $$\mathbf{V}$$ is the true solution given that $$\sigma_i\neq 0 \  \forall i\in[1,8], i\in\mathbb{Z}$$. However, due to noise in the correspondences, the estimated $$\mathbf{F}$$ matrix can be of rank 3 _i.e._ $$\sigma_9\neq0$$. So, to enfore the rank 2 constraint, the last singular value of the estimated $$\mathbf{F}$$ must be set to zero. If $$F$$ has a full rank then it will have an empty null-space _i.e._ it won't have any point that is on entire set of lines. Thus, there wouldn't be any epipoles. See Fig. 3 for full rank comparisons for $$F$$ matrices.
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/FMatrixRank.png"  width="120%">
@@ -146,7 +146,7 @@ Below is the pseduo-code that returns the $$\mathbf{F}$$ matrix for a set of mat
 <br><br>
   <img src="/assets/sfm/featmatchransac.png"  width="100%">
   <div class="figcaption">
- 	Figure: Feature matching after RANSAC. (Green: Selected correspondences; Red: Rejected correspondences)
+ 	Figure 4: Feature matching after RANSAC. (Green: Selected correspondences; Red: Rejected correspondences)
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -181,7 +181,7 @@ where $$r_3$$ is the third row of the rotation matrix (z-axis of the camera). No
 <div class="fig fighighlight">
   <img src="/assets/sfm/lintria.png"  width="60%">
   <div class="figcaption">
-  	Initial triangulation plot with disambiguity, showing all four possible camera poses.
+  	Figure 5: Initial triangulation plot with disambiguity, showing all four possible camera poses.
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -198,7 +198,7 @@ Here, $$j$$ is the index of each camera, $$\widetilde{X}$$ is the hoomogeneous r
 <div class="fig fighighlight">
   <img src="/assets/sfm/nonlintria.png"  width="100%">
   <div class="figcaption">
- 	Comparison between non-linear vs linear triangulation.
+ 	Figure 6: Comparison between non-linear vs linear triangulation.
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -220,7 +220,7 @@ P$$n$$P is prone to error as there are outliers in the given set of point corres
 
   <img src="/assets/sfm/PnPRANSAC.png"  width="50%">
   <div class="figcaption">
- 	Plot of the camera poses with feature points. Different color represents feature correspondences from different pair of images. Blue points are features from Image 1 and Image 2; Red points are features from Image 2 and Image 3 etc.
+ 	Figure 7: Plot of the camera poses with feature points. Different color represents feature correspondences from different pair of images. Blue points are features from Image 1 and Image 2; Red points are features from Image 2 and Image 3 etc.
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -236,7 +236,7 @@ Once you have computed all the camera poses and 3D points, we need to refine the
 <div class="fig fighighlight">
   <img src="/assets/sfm/BA.png"  width="80%">
   <div class="figcaption">
- 	The final reconstructed scene after Sparse Bundle Adjustment (SBA).
+ 	Figure 7: The final reconstructed scene after Sparse Bundle Adjustment (SBA).
   </div>
   <div style="clear:both;"></div>
 </div>
