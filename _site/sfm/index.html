@@ -209,7 +209,7 @@ where <script type="math/tex">\mathbf{K}</script> is the camera calibration matr
 <script type="math/tex">% <![CDATA[
 \mathbf{E}=U\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}V^T %]]></script></p>
 
-<p><em>It is important to note that the <script type="math/tex">\mathbf{F}</script> is defined in the original image space (i.e. pixel coordinates) whereas <script type="math/tex">\mathbf{E}</script> is in the normalized image coordinates. Normalized image coordinates have the origin at the optical center of the image. Also, relative camera poses between two views can be computed using <script type="math/tex">\mathbf{E}</script> matrix. Moreover, <script type="math/tex">\mathbf{F}</script> has 8 degrees of freedom while <script type="math/tex">\mathbf{E}</script> has 5 as it takes camera parameters in account. (<a href="http://users.cecs.anu.edu.au/~hongdong/new5pt_cameraREady_ver_1.pdf">5-Point Motion Estimation Made Easy</a>)</em></p>
+<p><em>It is important to note that the <script type="math/tex">\mathbf{F}</script> is defined in the original image space (i.e. pixel coordinates) whereas <script type="math/tex">\mathbf{E}</script> is in the normalized image coordinates. Normalized image coordinates have the origin at the optical center of the image. Also, relative camera poses between two views can be computed using <script type="math/tex">\mathbf{E}</script> matrix. Moreover, <script type="math/tex">\mathbf{F}</script> has 7 degrees of freedom while <script type="math/tex">\mathbf{E}</script> has 5 as it takes camera parameters in account. (<a href="http://users.cecs.anu.edu.au/~hongdong/new5pt_cameraREady_ver_1.pdf">5-Point Motion Estimation Made Easy</a>)</em></p>
 
 <p><a name="essential"></a><br />
 ### 3. Estimate <strong>Camera Pose</strong> from Essential Matrix<br />
@@ -278,7 +278,7 @@ Now, since we have a set of <script type="math/tex">n</script> 3D points in the 
 
 <p>Just like in triangulation, since we have the linearly estimated camera pose, we can refine the camera pose that minimizes the reprojection error (Linear PnP only minimizes the algebraic error). Though, reprojection error is the geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point.</p>
 
-<p><script type="math/tex">\underset{C,R}{\operatorname{min}}</script> <script type="math/tex">\sum_{i=1,J}\left(u^j - \frac{P_1^{jT}\widetilde{X_j}}{P_3^{jT}{\widetilde{X_j}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{X_j}}{P_3^{jT}{X_j}}\right)^2</script><br />
+<p><script type="math/tex">\underset{C,R}{\operatorname{min}} \sum_{i=1,J} \left(u^j - \frac{P_1^{jT}\widetilde{X_j}}{P_3^{jT}{\widetilde{X_j}}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{X_j}}{P_3^{jT}{X_j}}\right)^2</script><br />
 <a name="nonlinpnp"></a></p>
 
 <p><a name="ba"></a><br />
@@ -293,18 +293,13 @@ Once you have computed all the camera poses and 3D points, we need to refine the
 </div>
 <p>The optimization problem can formulated as following:</p>
 
-<p>\(\underset{{C_i, q_i}<em>{i=1}^i,{X}</em>{j=1}^J}{\operatorname{min}}\sum_{i=1}^I\sum_{j=1}^J V_{ij}\left(\left(u^j - \dfrac{P_1^{jT}\tilde{\phi}{P_3^{jT}\tilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\tilde{\phi}{P_3^{jT}\tilde{X}}\right)^2\right))\<br />
+<p><script type="math/tex">\underset{\{C_i, q_i\}_{i=1}^i,\{X\}_{j=1}^J}{\operatorname{min}}\sum_{i=1}^I\sum_{j=1}^J V_{ij}\left(\left(u^j - \dfrac{P_1^{jT}\tilde{\phi}}{P_3^{jT}\tilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\tilde{\phi}}{P_3^{jT}\tilde{X}}\right)^2\right)</script><br />
 where <script type="math/tex">V_{ij}</script> is the visibility matrix.<br />
 (<em>Don’t scratch your head yet!</em>)</p>
 
 <p>Visibility matrix signifies the relationship between the camera and a point. <script type="math/tex">V_{ij}</script> is one if <script type="math/tex">j^{th}</script> point is visible from the <script type="math/tex">i^{th}</script> camera and zero otherwise. One can use a nonlinear optimization toolbox such as <code class="highlighter-rouge">fminunc</code> or <code class="highlighter-rouge">lsqnonlin</code> in MATLAB but is extremely slow as the number of parameters are large. The <i>Sparse Bundle Adjustment</i> toolbox is designed to solve such optimization problem by exploiting sparsity of visibility matrix, <script type="math/tex">V</script>.</p>
 
-<p>Clearly, solving such a method to compute the structure from motion is complex and slow <em>(can take a couple of hours for only 8-10 images)</em>. The above steps collectively is the traditional way of solving the problem of SfM. However, due to recent advances in graph optimization for visual systems, we can solve the same problem in real time.</p>
-
-<p>Let’s see the entire Structure from Motion problem once again: (ADD THE DIAGRAM)<br />
-CAPTION: Solving SfM using the traditional method</p>
-
-<p>(Add GTSAM Diagram): CAPTION Solving SfM using the modern approach</p>
+<p>Clearly, solving such a method to compute the structure from motion is complex and slow <em>(can take upto an hour for only 8-10 images)</em>. The above steps collectively is the traditional way of solving the problem of SfM. However, due to recent advances in graph optimization for visual systems, we can solve the same problem in real time. Let’s read further about the modern approach of solving the same problem.</p>
 
 <p><a href="https://cmsc426.github.io/gtsam/"><b>Click here for <u>Part II: The Modern Approach</u></b></a></p>
 

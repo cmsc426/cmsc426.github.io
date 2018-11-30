@@ -227,7 +227,7 @@ P$$n$$P is prone to error as there are outliers in the given set of point corres
 
 Just like in triangulation, since we have the linearly estimated camera pose, we can refine the camera pose that minimizes the reprojection error (Linear PnP only minimizes the algebraic error). Though, reprojection error is the geometrically meaningful error and can be computed by measuring error between measurement and projected 3D point.
 
-$$\underset{C,R}{\operatorname{min}} \sum_{i=1,J} \left(u^j - \frac{P_1^{jT}\widetilde{X_j}}{P_3^{jT}{\widetilde{X_j}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{X_j}}{P_3^{jT}{X_j}}\right)^2$$
+$$\underset{C,R}{\operatorname{min}} \sum_{i=1,J} \left(u^j - \frac{P_1^{jT}\widetilde{X_j}}{P_3^{jT}{\widetilde{X_j}}}\right)^2 + \left(v^j - \frac{P_2^{jT}\widetilde{X_j}}{P_3^{jT}{X_j}}\right)^2$$
 <a name='nonlinpnp'></a>
 
 <a name='ba'></a>
@@ -242,19 +242,15 @@ Once you have computed all the camera poses and 3D points, we need to refine the
 </div>
 The optimization problem can formulated as following:
 
-\\(\underset{\{C_i, q_i\}_{i=1}^i,\{X\}_{j=1}^J}{\operatorname{min}}\sum_{i=1}^I\sum_{j=1}^J V_{ij}\left(\left(u^j - \dfrac{P_1^{jT}\tilde{\phi}{P_3^{jT}\tilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\tilde{\phi}{P_3^{jT}\tilde{X}}\right)^2\right))\\
+$$\underset{\{C_i, q_i\}_{i=1}^i,\{X\}_{j=1}^J}{\operatorname{min}}\sum_{i=1}^I\sum_{j=1}^J V_{ij}\left(\left(u^j - \dfrac{P_1^{jT}\tilde{\phi}}{P_3^{jT}\tilde{X}}\right)^2 + \left(v^j - \dfrac{P_2^{jT}\tilde{\phi}}{P_3^{jT}\tilde{X}}\right)^2\right)$$
 where $$V_{ij}$$ is the visibility matrix.
 (_Don't scratch your head yet!_)
 
  Visibility matrix signifies the relationship between the camera and a point. $$V_{ij}$$ is one if $$j^{th}$$ point is visible from the $$i^{th}$$ camera and zero otherwise. One can use a nonlinear optimization toolbox such as `fminunc` or `lsqnonlin` in MATLAB but is extremely slow as the number of parameters are large. The <i>Sparse Bundle Adjustment</i> toolbox is designed to solve such optimization problem by exploiting sparsity of visibility matrix, $$V$$.
 
-Clearly, solving such a method to compute the structure from motion is complex and slow _(can take a couple of hours for only 8-10 images)_. The above steps collectively is the traditional way of solving the problem of SfM. However, due to recent advances in graph optimization for visual systems, we can solve the same problem in real time.
-
-Let's see the entire Structure from Motion problem once again: (ADD THE DIAGRAM)
-CAPTION: Solving SfM using the traditional method
+Clearly, solving such a method to compute the structure from motion is complex and slow _(can take upto an hour for only 8-10 images)_. The above steps collectively is the traditional way of solving the problem of SfM. However, due to recent advances in graph optimization for visual systems, we can solve the same problem in real time. Let's read further about the modern approach of solving the same problem.
 
 
-(Add GTSAM Diagram): CAPTION Solving SfM using the modern approach
 
 
 <a href="https://cmsc426.github.io/gtsam/"><b>Click here for <u>Part II: The Modern Approach</u></b></a>

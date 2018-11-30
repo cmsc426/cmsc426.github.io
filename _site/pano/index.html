@@ -50,7 +50,9 @@
   </header>
 
   <article class="post-content">
-  <p><strong>This article is written by <a href="http://chahatdeep.github.io/">Chahat Deep Singh</a></strong></p>
+  <p><strong>This article is written by <a href="http://chahatdeep.github.io/">Chahat Deep Singh.</a></strong> (chahat[at]terpmail.umd.edu)</p>
+
+<p>Please contact <strong>Chahat</strong> if there are any errors.</p>
 
 <p>Table of Contents:</p>
 
@@ -121,7 +123,7 @@ We now have matched all the features correspondences but not all matches will be
 1. Select four feature pairs (at random), <script type="math/tex">p_i</script> from image 1, <script type="math/tex">p_i^1</script> from image 2.<br />
 2. Compute homography <script type="math/tex">H</script> (exact). Use the function <code class="highlighter-rouge">est_homography</code> that will be provided to you. Check Panorama assignment!<br />
 3. Compute inliers where <script type="math/tex">% <![CDATA[
-SSD(p_i^1, Hp_i) < \texttt{thresh} %]]></script>. Here, <script type="math/tex">Hp_i</script> computed using the <script type="math/tex">\texttt{apply_homography}</script> function given to you.<br />
+SSD(p_i^1, Hp_i) < \texttt{thresh} %]]></script>. Here, <script type="math/tex">Hp_i</script> computed using the <script type="math/tex">\texttt{apply_homography}</script> function given to you. <script type="math/tex">SSD</script>: Sum of Square Distance.<br />
 4. Repeat the last three steps until you have exhausted <script type="math/tex">N</script><sub>max</sub> number of iterations (specified by user) or you found more than percentage of inliers (Say <script type="math/tex">90\%</script> for example).<br />
 5. Keep largest set of inliers.<br />
 6. Re-compute least-squares <script type="math/tex">\hat{H}</script> estimate on all of the inliers. Use the function <code class="highlighter-rouge">est_homography</code> given to you.</p>
