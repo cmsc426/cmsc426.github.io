@@ -140,6 +140,17 @@ Logistics and bookkeeping you **must** include at the top of your report:
  - The name of each group member.
  - A brief (one paragraph or less) description of what each group member contributed to the project.
 
+You must include output plots of the landmarks in 3D with the camera poses/localization, as shown in
+the example below.
+
+<div class="fig fighighlight">
+  <img src="/assets/proj4/example_results.png" width="80%">
+  <div class="figcaption">
+    Plot of landmark and camera poses, viewed from above.  Please also provide plots viewed from the side.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
 We want you to demonstrate an understanding of the concepts involved in the project, and to show the output produced by your code.
 
 Assume that we're familiar with the project, so you don't need to spend time repeating what's already in the course notes.  Instead, focus on any interesting problems you encountered and/or solutions you implemented.
