@@ -16,7 +16,10 @@ Table of Contents:
 
 <a name='due'></a>
 ## Deadline 
-11:59:59PM, Monday, December 10, 2018
+11:59:59PM, Tuesday, December 18, 2018
+- This is a ***strict*** deadline-- we will not accept late submissions, with of without late days.
+***Submissions made by 11:59PM December 10 will receive extra credit equal to 25% of their grade on
+the project.***
 
 <a name='intro'></a>
 ## Introduction
@@ -136,7 +139,6 @@ Your submission on Canvas must be a zip file, following the naming convention **
 
 Logistics and bookkeeping you **must** include at the top of your report:
 
- - Late days used (if any).
  - The name of each group member.
  - A brief (one paragraph or less) description of what each group member contributed to the project.
 
