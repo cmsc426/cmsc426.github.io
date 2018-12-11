@@ -167,6 +167,7 @@ Let us consider the pose estimation of a camera given one AprilTag. The AprilTag
   <div style="clear:both;"></div>
 </div>
 
+<a name='homography'></a>
 Notice that we only obtain the tag corner locations on the image. We need to compute the camera pose from these corners. We have encoutered this scenario before, i.e., given the image coordinates \\(\mathbf{x}\\) and their corresponding world coordinates \\(\mathbf{X}\\), we need to compute the camera pose. This is exactly the same as the Perspective-n-Point problem we saw earlier. Let us consider a special case of this problem, if we assume that all the points lie on a plane (for the april tag it does anyway). The transformation from the world to the image plane becomes a **Homography**. Let us write this down mathematically. The projection formula is given by:
 
 $$
@@ -271,15 +272,36 @@ Now, let's look at how GTSAM will be used in Project 4. As mentioned in the [pro
 
 In order for GTSAM to work well, we need to initialize the values of the factor graph to a reasonable values. The next part of this section talks about building the factor graph and initializing the values. 
 
-Let us consider the first frame of a sequence. Let us denote the pose of the camera as \\(x_0\\) and let Tag 10's left bottom corner be the world origin as shown in the Figure below. Here the X-Y-Z axes are shown in Red, Green and Blue respectively. A top view of the world is shown in the right hand side of the figure with the Tag ID's (10 to 18) highlighted. 
+Let us consider the first frame of a sequence. Let us denote the pose of the camera as \\(x_0\\) and let Tag 10's left bottom corner be the world origin as shown in the Figure below. Here the X-Y-Z axes are shown in Red, Green and Blue respectively. A top view of the world is shown in the top right hand side of the figure with the Tag ID's (10 to 18) highlighted. 
 
 <div class="fig fighighlight">
   <img src="/assets/sfm/gtsamextra1.png">
   <div class="figcaption">
- The camera pose in the first frame is \(x_0\). Bottom row shows the Image seen by the camera (video frame) and the Image with detected april tag corners highlighted in red. 
+ The camera pose in the first frame is \(x_0\). Bottom row shows the Image seen by the camera (video frame) with detected april tag corners highlighted in red. 
   </div>
   <div style="clear:both;"></div>
 </div>
+
+Also, observe the video frame/image in the bottom row with detected tag corners highlighted in red. The data given to us are these detected tag corners (the ones shown as red dots). Now, let's look at the factor graph corresponding to the first frame. We need to initialize the values in the bubble and specify the contraints denoted by the solid bubbles. First of all, Tag 10's left bottom corner was chosen as the origin, this can be fed as a `PriorFactor` on the \\(L_{10}^1\\). Now, we want to obtain a value for the initial pose \\(x_0\\). This can be done by the knowledge of the pose of any (one or more) tags. Note that, until now, we only know the pose of Tag 10 (**as we chose it as the world origin**). To estimate \\(x_0\\) given \\(L_{10}^1, L_{10}^2, L_{10}^3, L_{10}^4\\), we'll use the [homography equations we discussed before](#homography) (because both the tag in the world and in the image are planar in nature). Using these homography equations, we obtain the pose of the camera with respect to the Tag 10 World frame, i.e., \\(R_0\\) and \\(T_0\\) which together constitute the value of \\(x_0\\).
+
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsamextra2.png">
+  <div class="figcaption">
+ Factor Graph for Frame 1. The things in the bubble need to be initialized, the the solid bubbles are constraints. Things in code font (courier font) refer to the GTSAM syntax and normal font refer to explanations. 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
+Now, we need to initialize the world frame co-ordinates of other tags (other than Tag 10, 11-18 in this example). Recall that we have the pose of the camera \\(x_0\\) in the world frame and the image co-ordinates of the tag corners. To obtain the world frame co-ordinates of other tags it is as easy as plugging in the values to the camera projection equation or the pinhole model. 
+
+$$
+\begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & r_3 & T \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}
+$$
+
+Here, we need to obtain the values of \\(\begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}\\) given other values in the equation. 
+
 
 Hope you loved this assignment. As a parting thought, these methods are used in today's self driving cars to make a map of the world in real-time. However, they are also fused with deep learning based methods to speed up the computation. Have a look at [this video](https://www.youtube.com/watch?v=0rc4RqYLtEU) for a cool behind the scenes look of the NVIDIA's self driving platform.
 
