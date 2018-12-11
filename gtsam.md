@@ -277,7 +277,7 @@ Let us consider the first frame of a sequence. Let us denote the pose of the cam
 <div class="fig fighighlight">
   <img src="/assets/sfm/gtsamextra1.png">
   <div class="figcaption">
- The camera pose in the first frame is \(x_0\). Bottom row shows the Image seen by the camera (video frame) with detected april tag corners highlighted in red. 
+ The camera pose in the first frame is \(x_0\). Bottom row shows the image seen by the camera (video frame) with detected april tag corners highlighted in red. 
   </div>
   <div style="clear:both;"></div>
 </div>
@@ -300,8 +300,58 @@ $$
 \begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & r_3 & T \end{bmatrix} \begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}
 $$
 
-Here, we need to obtain the values of \\(\begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}\\) given other values in the equation. 
+Here, we need to obtain the values of \\(\begin{bmatrix} X \\ Y \\ Z \\ W \end{bmatrix}^T\\) given other values in the equation. 
 
+Now, let's look at the second frame as shown below.
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsamextra3.png">
+  <div class="figcaption">
+ The camera pose in the second frame is \(x_1\). Middle row shows the top view of the world frame with Tag IDs. Bottom row shows the image seen by the camera (video frame) with detected april tag corners highlighted in red and blue. The red tag corners denote the tags common between frames 1 and 2 and blue tag corners denote the new tags observed in frame 2 which were not seen in frame 1.  
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+
+The graph for this frame is shown below.
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsamextra4.png">
+  <div class="figcaption">
+ Factor Graph for Frame 2. The things in the bubble need to be initialized, the the solid bubbles are constraints. Things in code font (courier font) refer to the GTSAM syntax and normal font refer to explanations. 
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+As before, we need to initialize the pose of the camera \\(x_1\\) given the knowledge of the pose of any (one or more) tags. Now, we have knowledge of the pose of all the common tags we saw in both frames 1 and 2 (red corners in frame 2's image). We can use the homography equation again to obtain the value of \\(x_1\\) (Note that here we have a lot more than 4 equations in contrast to frame 1). 
+
+To obtain the world frame co-ordinates of blue corners (\\(L_{18}^1 \cdots L_{28}^4 \\)) we use the pinhole equation as before given the pose of the camera \\(x_1\\) and the image co-ordinates of these tags.  
+
+However, we moved from \\(x_0\\) to \\(x_1\\) as shown below.
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsamextra5.png">
+  <div class="figcaption">
+ The camera moved from \(x_0\) in frame 1 to \(x_1\) in frame 2.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+If we add in the constraint between the two camera poses, we obtain the factor graph given below.
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsamextra6.png">
+  <div class="figcaption">
+ Factor Graph for frames 1 and 2.
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+The `BetweenFactor` between \\(x_0\\) and \\(x_1\\) indicates an odometry measurement obtained from different source such as an IMU. Since we made the assumption of slow movement, we'll add an identity value for this constraint. 
+
+For debugging this project, we would recommend plotting the world tag corner locations and camera poses without factor graph optimization (by using the values which will be used to initialize) first. It should look sensible but not perfect.
+
+When these values are plotted, notice that the drift (deviation of corners  from their actual locations) accumulates over time (as frame number increases). This is sometimes the issue when such values are fed into GTSAM. One simple way (not optimal in any sense) to solve the problem is by first running GTSAM in small batches of frames and reusing these values for the final GTSAM graph.
 
 Hope you loved this assignment. As a parting thought, these methods are used in today's self driving cars to make a map of the world in real-time. However, they are also fused with deep learning based methods to speed up the computation. Have a look at [this video](https://www.youtube.com/watch?v=0rc4RqYLtEU) for a cool behind the scenes look of the NVIDIA's self driving platform.
 
