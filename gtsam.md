@@ -7,10 +7,10 @@ permalink: /gtsam/
 **This article is written by [Nitin J. Sanket](http://nitinjsanket.github.io).**
 
 Table of Contents:
+- [Introduction](#intro)
+- [Detailed Explanation of Project 4](#p4)
 
-
-
-
+<a name='intro'></a>
 ## Introduction
 The SfM pipeline we talked about before relies on an optimization framework to do the bundle adjustment and you would've also observed that we also used `fminunc` or `lsqnonlin` for solving non-linear least squares in traingulation and PnP. This is not very efficient and there has to be a better way right? Guess what, there is! In 2012, Prof. Frank Dellaert published a hallmark paper called [GTSAM](https://smartech.gatech.edu/handle/1853/45226) for solving such problems which are commonly classified as **Pose Graph Optimization** and uses the concept of **Factor Graphs**. This method has been improved over the years and has periodically improved it's optimization methods with the latest literature. Though there are faster pose graph optimization frameworks like [**g2o**](https://github.com/RainerKuemmerle/g2o) or [**SLAM++**](https://sourceforge.net/p/slam-plus-plus/wiki/Home/), GTSAM by far is one of the easiest frameworks to setup, use and understand and hence will be the our choice to solve this project. 
 
@@ -259,6 +259,27 @@ This resulting factor graph is shown below:
 
 One could use the `LevenbergMarquardtOptimizer` or the `DoglegOptimizer` to solve for the parameters of the graph.
 
+<a name='p4'></a>
+## Detailed Explanation of Project 4
+Now, let's look at how GTSAM will be used in Project 4. As mentioned in the [project desciption](https://cmsc426.github.io/2018/proj/p4/), we are given detected april tag corners in the frames of a video sequence. We want to find the 3D locations of these april tag corners in the world frame and the pose (position and orientation) of the camera in the world frame for every video frame. Now, let's recall all the information we know in this project. 
+
+- The carpet of april tags are placed over the floor which can be assumed to be a flat surface/plane.
+- The quadrotor is moving reasonably slowly.
+- Let us **choose** the first tag detection in the first frame as the world origin and the vector in the direction of \\(p_1\\) to \\(p_2\\) be world \\(X\\) and vector in direction of \\(p_1\\) to \\(p_4\\) be world \\(Y\\). 
+- All april tags are of the same size and this size is known.
+- The april tags are rigidly attached to the ground with minimal effect from the downforce of the propellers of the quadrotor.
+
+In order for GTSAM to work well, we need to initialize the values of the factor graph to a reasonable values. The next part of this section talks about building the factor graph and initializing the values. 
+
+Let us consider the first frame of a sequence. Let us denote the pose of the camera as \\(x_0\\) and let Tag 10's left bottom corner be the world origin as shown in the Figure below. Here the X-Y-Z axes are shown in Red, Green and Blue respectively. A top view of the world is shown in the right hand side of the figure with the Tag ID's (10 to 18) highlighted. 
+
+<div class="fig fighighlight">
+  <img src="/assets/sfm/gtsamextra1.png">
+  <div class="figcaption">
+ The camera pose in the first frame is \(x_0\). Bottom row shows the Image seen by the camera (video frame) and the Image with detected april tag corners highlighted in red. 
+  </div>
+  <div style="clear:both;"></div>
+</div>
 
 Hope you loved this assignment. As a parting thought, these methods are used in today's self driving cars to make a map of the world in real-time. However, they are also fused with deep learning based methods to speed up the computation. Have a look at [this video](https://www.youtube.com/watch?v=0rc4RqYLtEU) for a cool behind the scenes look of the NVIDIA's self driving platform.
 
