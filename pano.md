@@ -15,7 +15,7 @@ Table of Contents:
 - [Feature Descriptor](#feat-descriptor)
 - [Feature Matching](#feat-matching)
 - [RANSAC to estimate Robust Homography](#homography)
-- [Cylinderical Projection](#cyl-projection)
+- [Cylindrical Projection](#cyl-projection)
 - [Blending Images](#blending)
 
 
@@ -85,7 +85,7 @@ Recall the RANSAC steps are:
 6. Re-compute least-squares $$\hat{H}$$ estimate on all of the inliers. Use the function `est_homography` given to you.
 
 <a name='cyl-projection'></a>
-## 6. Cylinderical Projection
+## 6. Cylinirical Projection
 When we are try to stitch a lot of images with translation, a simple projective transformation (homography) will produce substandard results and the images will be strectched/shrunken to a large extent over the edges. Fig. 6 below highlights the stitching with bad distortion at the edges. Check <a href="https://graphics.stanford.edu/courses/cs178/applets/projection.html">this implementation/demo</a> of cylinderical projection from Stanford Computer Graphics department.
 
 <div class="fig figcenter fighighlight">
@@ -108,7 +108,7 @@ A sample input image and its cylinderical projection is shown in Fig. 7.
 <div class="fig figcenter fighighlight">
   <img src="/assets/pano/input_image.png" width="60%">
   <img src="/assets/pano/cylinderical_image.png" width="60%">
-  <div class="figcaption"> Fig. 7: Original Image vs Cylinderical Projection. </div>
+  <div class="figcaption"> Fig. 7: Original Image vs Cylindirical Projection. </div>
 </div>
 
 <p style="background-color:#ddd; padding:5px"><b>Note: The above equations talk about pixel coordinates, NOT pixel values.</b> The idea is you compute the coordinate transformation and copy poaste pixel values to these new pixel coordinates (in all 3 RGB channel).</p>
