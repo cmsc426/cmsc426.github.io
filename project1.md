@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Color Segmentation using GMM
-permalink: /2018/proj/p1/
+permalink: /2019/proj/p1/
 ---
 **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
 Please contact **Chethan Parameshwara** if there are any errors.
