@@ -92,15 +92,15 @@ layout: default
 	 <br>
 	 <hr>
 
-    <div class="module-header">Fall 2019 Assignments</div>
+    <div class="module-header">Fall 2018 Assignments</div>
    
 	<div class="materials-item">
       <a href="2018/hw/hw1" style="color:SteelBlue">
 	      <b>Homework 1: Linear Least Squares</b>
       </a>
 	<ul style="list-style-type:none">
-	<li> &#160 Release Date: Aug 30, 2018</li>
-	<li> <font color="red">&#160 Deadline: Sep 6, 2018</font></li>
+	<li> Release Date: Aug 30, 2018</li>
+	<li> <font color="red"> Deadline: Sep 6, 2018</font></li>
 	</ul>
     </div>
 	
@@ -109,8 +109,8 @@ layout: default
         <b>Project 1: Color Segmentation using GMM</b>
       </a>
 	<ul style="list-style-type:none">
-	<li> &#160 Release Date: Sep 6, 2018</li>
-	<li> <font color="red">&#160 Deadline: Sep 18, 2018</font></li>
+	<li> Release Date: Sep 6, 2018</li>
+	<li> <font color="red"> Deadline: Sep 18, 2018</font></li>
 	</ul>
     </div>
 
@@ -119,7 +119,7 @@ layout: default
         <b>Homework 2: Image Features and Warping</b>
       </a>
 	<ul style="list-style-type:none">
-	<li> <font color="red">&#160 Deadline: October 2nd, 2018</font></li>
+	<li> <font color="red"> Deadline: October 2nd, 2018</font></li>
 	</ul>
     </div>
 
@@ -128,14 +128,14 @@ layout: default
         <b>Project 2: Panorama Stitching</b>
       </a>
 	<ul style="list-style-type:none">
-	<li> <font color="red">&#160 Deadline: Oct 11, 2018</font></li>
+	<li> <font color="red"> Deadline: Oct 11, 2018</font></li>
 	</ul>
     </div>
 
     <div class="materials-item">
         <b>In-class Midterm</b>
 	<ul style="list-style-type:none">
-	<li> <font color="red">&#160 Oct 25, 2018</font></li>
+	<li> <font color="red"> Oct 25, 2018</font></li>
 	</ul>
     </div>
 	
@@ -144,7 +144,7 @@ layout: default
         <b>Project 3: Rotobrush</b>
       </a>
 	<ul style="list-style-type:none">
-	<li> <font color="red">&#160 Deadline: Nov 15, 2018</font></li>
+	<li> <font color="red"> Deadline: Nov 15, 2018</font></li>
 	</ul>
     </div>
 	
@@ -153,7 +153,7 @@ layout: default
        <b>Project 4: SfM or SLAM</b>
       </a>
 	<ul style="list-style-type:none">
-	<li> <font color="red">&#160 Deadline: Dec 18, 2018</font></li>
+	<li> <font color="red"> Deadline: Dec 18, 2018</font></li>
         <li> <b>Extra credit</b> for submissions before Dec. 11</li>
 	</ul>
     </div>
