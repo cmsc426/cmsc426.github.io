@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Final Project 
-permalink: /2018/proj/p4/
+permalink: /2019/proj/p4/
 ---
 
 Table of Contents:
@@ -16,9 +16,9 @@ Table of Contents:
 
 <a name='due'></a>
 ## Deadline 
-11:59:59PM, Tuesday, December 18, 2018
+11:59:59PM, Tuesday, December 16, 2019
 - This is a ***strict*** deadline-- we will not accept late submissions, with of without late days.
-***Submissions made by 11:59PM December 10 will receive extra credit equal to 25% of their grade on
+***Submissions made by 11:59PM December 11 will receive extra credit equal to 25% of their grade on
 the project.***
 
 <a name='intro'></a>
