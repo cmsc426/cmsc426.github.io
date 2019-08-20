@@ -3,7 +3,7 @@ layout: page
 mathjax: true
 permalink: /colorseg/
 ---
-<!-- **This article is written by [Nitin J. Sanket](http://nitinjsanket.github.io).** -->
+**This article is written by [Nitin J. Sanket](http://nitinjsanket.github.io).**
 
 Table of Contents:
 
