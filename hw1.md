@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Linear Least Squares
-permalink: /2018/hw/hw1/
+permalink: /2019/hw/hw1/
 ---
 **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
 
@@ -16,7 +16,7 @@ Table of Contents:
 
 <a name='due'></a>
 ## Due Date 
-10:59AM, Thursday, September 6, 2018
+10:59AM, Thursday, September 5, 2019
 
 <a name='intro'></a>
 ## Introduction
