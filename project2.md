@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Panorama Stitching
-permalink: /2018/proj/p2/
+permalink: /2019/proj/p2/
 ---
 
 Table of Contents:
@@ -15,7 +15,7 @@ Table of Contents:
 
 <a name='due'></a>
 ## Deadline 
-10:59AM, Tuesday, October 09, 2018
+11:59:59 PM, October 08, 2018
 
 <a name='intro'></a>
 ## Introduction
