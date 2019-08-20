@@ -4,7 +4,7 @@ mathjax: true
 title: Linear Least Squares
 permalink: /2019/hw/hw1/
 ---
-**This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
+<!-- **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).** -->
 
 Table of Contents:
 - [Due Date](#due)
