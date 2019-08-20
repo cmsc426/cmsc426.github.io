@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Rotobrush
-permalink: /2018/proj/p3/
+permalink: /2019/proj/p3/
 ---
 
 Table of Contents:
@@ -14,7 +14,7 @@ Table of Contents:
 
 <a name='due'></a>
 ## Deadline 
-10:59:59AM, Thursday, November 15, 2018
+11:59:59 PM, November 14, 2019
 
 <a name='intro'></a>
 ## Introduction
