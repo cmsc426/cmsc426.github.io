@@ -1,7 +1,7 @@
 ---
 layout: page
 mathjax: true
-title: Lecture Slides
+title: Lecture Slides (Redirecting ...)
 permalink: /slides/
 ---
 
