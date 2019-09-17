@@ -70,6 +70,7 @@ YourDirectoryID_proj1.zip.
  - train_images/.
  - test_images/.
  - results/.
+ - gaussian.m (For Single Gaussian)
  - GMM.m
  - trainGMM.m
  - testGMM.m
