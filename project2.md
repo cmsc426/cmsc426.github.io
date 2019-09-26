@@ -78,23 +78,24 @@ For this project, imfilter, conv2, imrotate, im2double, rgb2gray, fspecial, imtr
 
 Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj2.zip**.  For example, xyz123_proj2.zip.  The file **must have the following directory structure**: 
 
+```
 - YourDirectoryID_proj2.zip/
     - Code/
         - MyPanorama.m
         - *(any dependencies of MyPanorama.m)
     - train_images/
     - test_images/
+      - custom_images/
     - input/
     - report.pdf
+```
 
-
-When run, MyPanorama.m must load a set of images from *Images/input/*, and return
-the resulting panorama.
+When run, `MyPanorama.m` must load a set of images from `*Images/input/*`, and return the resulting panorama.
 
 
 ### Report
-**You will be graded primarily based on your report.**  We want
-you to demonstrate an understanding of the concepts involved in the project, and to show the output
+**You will be graded primarily based on your report.**  
+A demonstration of understanding of the concepts involved in the project are required show the output
 produced by your code.
 
 Include visualizations of the output of each stage in your pipeline (as shown in the system diagram
