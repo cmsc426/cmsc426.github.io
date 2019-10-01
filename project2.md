@@ -83,11 +83,12 @@ Your submission on Canvas must be a zip file, following the naming convention **
     - Code/
         - MyPanorama.m
         - *(any dependencies of MyPanorama.m)
-    - train_images/
-    - test_images/
-      - custom_images/
-    - input/
-    - report.pdf
+    - Images/
+        - train_images/
+        - test_images/
+        - custom_images/
+        - input/
+    - Report.pdf
 ```
 
 When run, `MyPanorama.m` must load a set of images from `*Images/input/*`, and return the resulting panorama.
