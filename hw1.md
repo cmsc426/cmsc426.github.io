@@ -21,7 +21,7 @@ Table of Contents:
 <a name='intro'></a>
 ## Introduction
 
-This home work is designed to test your understanding of mathematics tutorial discussed in this [link](https://cmsc426.github.io/math-tutorial/), specifically [RANSAC](https://cmsc426.github.io/math-tutorial#ransac). The task is to fit the best possible line to two dimensional data points using different linear least square techniques discussed in the tutorials such that the line defines the best possible set of data points:
+This home work is designed to test your understanding of mathematics tutorial discussed in this [link](https://cmsc426.github.io/math-tutorial/), specifically [RANSAC](https://cmsc426.github.io/math-tutorial#ransac). We highly recommend you to read the entire math tutorial, not just the RANSAC section. The task is to fit the best possible line to two dimensional data points using different linear least square techniques discussed in the tutorials such that the line defines the best possible set of data points:
 
 - Line fitting using Linear Least Squares
 - Outliers rejection using Regularization
