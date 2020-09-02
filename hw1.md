@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Linear Least Squares
-permalink: /2019/hw/hw1/
+permalink: /2020/hw/hw1/
 ---
 <!-- **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).** -->
 
@@ -16,12 +16,12 @@ Table of Contents:
 
 <a name='due'></a>
 ## Due Date 
-11:59PM, Thursday, September 5, 2019
+11:59PM, Tuesday, September 8, 2019
 
 <a name='intro'></a>
 ## Introduction
 
-This home work is designed to test your understanding of mathematics tutorial discussed in this [link](https://cmsc426.github.io/math-tutorial/). The task is to fit the line to two dimensional data points using different linear least square techniques discussed in the tutorials:
+This home work is designed to test your understanding of mathematics tutorial discussed in this [link](https://cmsc426.github.io/math-tutorial/), specifically [RANSAC](https://cmsc426.github.io/math-tutorial#ransac). The task is to fit the best possible line to two dimensional data points using different linear least square techniques discussed in the tutorials such that the line defines the best possible set of data points:
 
 - Line fitting using Linear Least Squares
 - Outliers rejection using Regularization
@@ -69,8 +69,8 @@ For each section of the homework, explain briefly what you did, and describe any
 - Limitation of each outliers rejection technique
 
 
-As usual, your report must be full English sentences,**not** commented code. There is a word limit of 750 words and no minimum length requirement
+**Your report must be full English sentences,**NOT** commented code. There is a word limit of 750 words and no minimum length requirement**
 
 <a name='coll'></a>
 ## Collaboration Policy
-You are encouraged to discuss the ideas with your peers. However, the code should be your own, and should be the result of you exercising your own understanding of it. If you reference anyone else's code in writing your project, you must properly cite it in your code (in comments) and your writeup.  For the full honor code refer to the CMSC426 Fall 2019 website
+You are encouraged to discuss the ideas with your peers. However, the code should be your own, and should be the result of you exercising your own understanding of it. If you reference anyone else's code in writing your project, you must properly cite it in your code (in comments) and your writeup.  For the full honor code refer to the CMSC426 Fall 2020 website
