@@ -2,7 +2,7 @@
 layout: page
 mathjax: true
 title: Color Segmentation using GMM
-permalink: /2019/proj/p1/
+permalink: /2020/proj/p1/
 ---
 **This article is written by [Chethan Parameshwara](http://analogicalnexus.github.io).**
 Please contact **Chethan Parameshwara** if there are any errors.
@@ -12,6 +12,7 @@ Table of Contents:
 - [Introduction](#intro)
 - [What you need to do](#problem)
   - [Problem Statement](#pro)
+- [Video Lecture](#video)
 - [Submission Guidelines](#sub)
 - [Collaboration Policy](#coll)
 
@@ -56,6 +57,13 @@ You are **NOT** allowed to use any built-in MATLAB function(s) like `fitgmdist()
   </div>
   <div style="clear:both;"></div>
 </div>
+
+<a name='video'></a>
+## Video Lecture
+
+<a href="https://www.youtube.com/watch?v=D5AcaFMY_BI" target="_blank"><img src="https://i.ytimg.com/vi/D5AcaFMY_BI/hqdefault.jpg" 
+alt=" Nao robot demo " width="480" height="360" border="0" /></a>
+
 
 <a name='sub'></a>
 ## Submission Guidelines
