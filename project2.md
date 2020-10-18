@@ -107,8 +107,7 @@ Be sure to include the output panoramas for **all five image sets** (from the tr
 
 As usual, your report must be full English sentences, **not** commented code. There is a word limit of 1500 words and no minimum length requirement.
 
-<!--
-TEST SET available [here](https://drive.google.com/drive/folders/1-auEb7MRWt7rYOzkrpHlZx5sQXaqSMgP?usp=sharing)** -->
+TEST SET available [here](https://drive.google.com/drive/folders/1-auEb7MRWt7rYOzkrpHlZx5sQXaqSMgP?usp=sharing)**
 
 <a name='coll'></a>
 ## Collaboration Policy
