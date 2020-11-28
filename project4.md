@@ -95,7 +95,7 @@ function.
 <a name='system_overview'></a>
 ## Implementation Overview
 
-Download the starter code and data <a href=" https://github.com/cmsc426/cmsc426.github.io/raw/master/assets/proj4/StarterCode/StarterCode.zip"> here </a>
+Download the <b>starter code</b> and data <a href=" https://github.com/cmsc426/cmsc426.github.io/raw/master/assets/proj4/StarterCode/StarterCode.zip"> <b>here</b> </a>
 
 ### Code
 The starter code can be found in the code folder. There are two .m files in the folder: 
