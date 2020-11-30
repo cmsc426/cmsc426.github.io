@@ -56,6 +56,7 @@ The provided data for this phase was collected with a hand-held SLAMDunk sensor 
 
 The data contains the rectified left camera images, IMU data, SLAMDunk’s pose estimates, AprilTag [4] detections with tag size and camera intrinsics and extrinsics. All units are in m, rad, rads^1 and ms^2 if not specified. 
 
+<a name='variables'></a>
 Camera Intrinsics and Extrinsics are given specifically in `CalibParams.mat` and has the following parameters:
 
 - `K` has the camera intrinsics (assume that the distortion coefficients in the radtan model
