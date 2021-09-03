@@ -1,7 +1,7 @@
 ---
 layout: page
 mathjax: true
-title: Final Project 
+title: Final Project
 permalink: /2020/proj/p4/
 ---
 
@@ -15,17 +15,17 @@ Table of Contents:
 - [Collaboration Policy](#coll)
 
 <a name='due'></a>
-## Deadline 
-11:59:59PM, Tuesday, December 18, 2020
+## Deadline
+11:59:59PM, Tuesday, December 20, 2021
 - No late days allowed in this project.
 ***Submissions made by 11:59PM December 10 will receive extra credit equal to 20% of their grade on
-the project.***
+this project.***
 
 <a name='intro'></a>
 ## Introduction
 Factor graphs are graphical models that are well suited to modeling complex estimation problems such as Simultaneous Localization and Mapping (SLAM) or Structure from Motion (SfM). You might be familiar with another often used graphical model, Bayesian Networks [1]. Unlike Bayesian Networks, which are directed acyclic graphs (DAG), factor graphs are bipartite graphs consisting of factors connected to variables. Variables represent the unknown random variables and factors represent probabilistic information on those variables, derived from measurement or prior knowledge.
 
-In this project, you'll implement a Bayesian Network-based solution to SLAM, an estimation problem that's ubiquitous in robotics. You'll first familiarize yourself with the algorithm in a simplified setting, before diving into the full problem.  Both our "toy problem" and your project are based on the GTSAM[2] ("Georgia Tech Smoothing and Mapping") toolbox which can be downloaded from <a href="https://smartech.gatech.edu/handle/1853/45226">this link</a>. 
+In this project, you'll implement a Bayesian Network-based solution to SLAM, an estimation problem that's ubiquitous in robotics. You'll first familiarize yourself with the algorithm in a simplified setting, before diving into the full problem.  Both our "toy problem" and your project are based on the GTSAM[2] ("Georgia Tech Smoothing and Mapping") toolbox which can be downloaded from <a href="https://smartech.gatech.edu/handle/1853/45226">this link</a>.
 
 It’s surprising how effectively the factor graph-based frameworks can solve a problem as complex as SLAM (where they provide state-of-the-art performance). Excited already?
 
@@ -44,7 +44,7 @@ You'll use data from the `DataMapping.mat` file to build a map and localize your
 
 
 ### The Environment
-The provided data for this phase was collected with a hand-held SLAMDunk sensor module [3] (shown in Fig. 1), manufactured by Parrot R , simulating flight patterns over a floor mat of AprilTags [4] each of which has a unique ID. 
+The provided data for this phase was collected with a hand-held SLAMDunk sensor module [3] (shown in Fig. 1), manufactured by Parrot R , simulating flight patterns over a floor mat of AprilTags [4] each of which has a unique ID.
 
 <div class="fig fighighlight">
   <img src="/assets/proj4/slamdunk.png" width="80%">
@@ -54,7 +54,7 @@ The provided data for this phase was collected with a hand-held SLAMDunk sensor 
   <div style="clear:both;"></div>
 </div>
 
-The data contains the rectified left camera images, IMU data, SLAMDunk’s pose estimates, AprilTag [4] detections with tag size and camera intrinsics and extrinsics. All units are in m, rad, rads^1 and ms^2 if not specified. 
+The data contains the rectified left camera images, IMU data, SLAMDunk’s pose estimates, AprilTag [4] detections with tag size and camera intrinsics and extrinsics. All units are in m, rad, rads^1 and ms^2 if not specified.
 
 <a name='variables'></a>
 Camera Intrinsics and Extrinsics are given specifically in `CalibParams.mat` and has the following parameters:
@@ -71,7 +71,7 @@ The `.mat` file for any of the sequence (in the format `DataNAME OF SEQUENCE.mat
 
 - `DetAll` is a cell array with AprilTag detections per frame. For e.g., frame 1 detections can be extracted as `DetAll{1}`. Each cell has multiple rows of data. Each row has the following data format:
     - `[TagID, p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y]`
-         - Here `p1` is the left bottom corner and points are incremented in counter-clockwise direction, i.e., the `p1x`, `p1y` are coordinates of the bottom left, `p2` is bottom right, `p3` is top right, and `p4` is top left corners (Refer to Fig. 2). 
+         - Here `p1` is the left bottom corner and points are incremented in counter-clockwise direction, i.e., the `p1x`, `p1y` are coordinates of the bottom left, `p2` is bottom right, `p3` is top right, and `p4` is top left corners (Refer to Fig. 2).
 You will use the left bottom corner (p1) of Tag 10 as the world frame origin with positive X being direction pointing from p1 to p2 in Tag 10 and positive Y being pointing from p1 to p4 in Tag 10 and Z axis being pointing out of the plane (upwards) from the Tag.
     - `IMU` is a cell array where each row has the following data:
         - `[QuaternionW, QuaternionX, QuaternionY, QuaternionZ, AccelX, AccelY, AccelZ, GyroX, GyroY, GyroZ, Timestamp]`
@@ -99,17 +99,17 @@ function.
 Download the <b>starter code</b> and data <a href=" https://github.com/cmsc426/cmsc426.github.io/raw/master/assets/proj4/StarterCode/StarterCode.zip"> <b>here</b> </a>
 
 ### Code
-The starter code can be found in the code folder. There are two .m files in the folder: 
+The starter code can be found in the code folder. There are two .m files in the folder:
 `SLAMUsingGTSAM.m` and `Wrapper.m`. Your SLAM implementation goes in `SLAMUsingGTSAM` (you may also use helper functions in additional files). The script `Wrapper.m` is given for your debugging only.
 The input and output for the `SLAMUsingGTSAM` are given in the "Environment" section above. The `SLAMUsingGTSAM` function has two return
 arguments, `LandMarksComputed` and `AllPosesComputed`:
 
- - `LandMarksComputed` is an array of landmark locations. 
-     - Each row is of the form `[TagID, p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y]`. 
-     - Note that the rows have to be sorted in ascending order by TagIDs. 
+ - `LandMarksComputed` is an array of landmark locations.
+     - Each row is of the form `[TagID, p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y]`.
+     - Note that the rows have to be sorted in ascending order by TagIDs.
  - `AllPosesComputed` is an array of 6DOF poses.
-     - Each row gives the pose measurement at a single camera timestep. 
-     - Each row is of the form `[PosX, PosY, PosZ, Quaternion, QuaternionX, QuaternionY, QuaternionZ]`. 
+     - Each row gives the pose measurement at a single camera timestep.
+     - Each row is of the form `[PosX, PosY, PosZ, Quaternion, QuaternionX, QuaternionY, QuaternionZ]`.
         - (We use quaternions because euler angles flip near singularity conditions-- similar to the ones we are operating in.)
 
 <b> Please note: </b>
@@ -126,7 +126,7 @@ Please submit the project <b> once </b> for your group -- there's no need for ea
 
 ### File tree and naming
 
-Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj4.zip**.  For example, xyz123_proj4.zip.  The file **must have the following directory structure**: 
+Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj4.zip**.  For example, xyz123_proj4.zip.  The file **must have the following directory structure**:
 
 - `YourDirectoryID_proj4.zip/`
     - `code/`

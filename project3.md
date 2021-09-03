@@ -13,13 +13,13 @@ Table of Contents:
 - [Collaboration Policy](#coll)
 
 <a name='due'></a>
-## Deadline 
-11:59:59 PM, November 14, 2019
+## Deadline
+11:59:59 PM, November 15, 2021
 
 <a name='intro'></a>
 ## Introduction
 
-The aim of this project is to segment deformable object from a given video sequence. 
+The aim of this project is to segment deformable object from a given video sequence.
 This document just provides an overview of what you need to do.  For a full breakdown of how each step in the pipeline works, see <a href="https://cmsc426.github.io/rotobrush/">the course notes for this project</a>.
 
 <a name='system_overview'></a>
@@ -30,14 +30,14 @@ Download the starter code and data <a href="https://www.dropbox.com/s/32fa11l5pn
 
 A brief description of each step (you'll implement the steps **in bold**):
 - **`myRotobrush.m`:  Wrapper function.**
-- `initLocalWindows.m`:  Creates local windows on boundary of mask. 
-- **`initColorModels.m`:   Initializes color models.** 
-- **`initShapeConfidences.m`: Initializes shape confidences.** 
+- `initLocalWindows.m`:  Creates local windows on boundary of mask.
+- **`initColorModels.m`:   Initializes color models.**
+- **`initShapeConfidences.m`: Initializes shape confidences.**
 - **`localFlowWarp.m`:  Calculates local window movement based on optical flow between frames.**
-- **`calculateGlobalAffine.m`:  Finds affine transform between two frames.** 
-- **`updateModels.m`:  Update shape and color models.** 
-- `showLocalWindows.m`:  Plots local windows. 
-- `showColorConfidences.m`: Plots the color confidence for each local window. 
+- **`calculateGlobalAffine.m`:  Finds affine transform between two frames.**
+- **`updateModels.m`:  Update shape and color models.**
+- `showLocalWindows.m`:  Plots local windows.
+- `showColorConfidences.m`: Plots the color confidence for each local window.
 - `equidistantPointsOnPerimeter.m`: Find equally spaced points along the perimeter of a polygon
 
 
@@ -67,7 +67,7 @@ prompt the user to specify a region of interest in the first frame (for example 
 frame, draw the tracked boundary in red and save the result with the same filename in
 `Output/`.
 
-#### Functions Allowed 
+#### Functions Allowed
 
 For this project, roipoly, fitgmdist, estimateGeometricTransform, opticalFlowFarneback, vl_sift (http://www.vlfeat.org/overview/sift.html), imfilter, conv2, imrotate, im2double, rgb2gray, fspecial, imtransform, imwarp (and imref2d), meshgrid, sub2ind, ind2sub and all other plotting and matrix operation/manipulation functions are allowed.
 
@@ -77,7 +77,7 @@ For this project, roipoly, fitgmdist, estimateGeometricTransform, opticalFlowFar
 
 ### File tree and naming
 
-Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj3.zip**.  For example, xyz123_proj3.zip.  The file **must have the following directory structure**: 
+Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_proj3.zip**.  For example, xyz123_proj3.zip.  The file **must have the following directory structure**:
 
 - `YourDirectoryID_proj3.zip/`
     - `Code/`

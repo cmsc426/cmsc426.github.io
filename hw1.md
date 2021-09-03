@@ -15,8 +15,8 @@ Table of Contents:
 - [Collaboration Policy](#coll)
 
 <a name='due'></a>
-## Due Date 
-11:59PM, Tuesday, September 9, 2020
+## Due Date
+11:59PM, Tuesday, September 8 11:59pm, 2021
 
 <a name='intro'></a>
 ## Introduction
@@ -40,10 +40,10 @@ The 2D points data is provided in the form of .mat file (click [here](https://dr
 </div>
 
 <a name='pro'></a>
-### Problem Statement 
+### Problem Statement
 
 - Write matlab code to visualize geometric interpretation of eigenvalues/covariance matrix as shown in Fig. 10 of this [link](http://www.visiondummy.com/2014/04/geometric-interpretation-covariance-matrix/) [40 points]  
-- Decide the best outlier rejection technique for each of these datasets and write matlab code to fit the line. Also, discuss why your choice of technique is optimal [60 points] 
+- Decide the best outlier rejection technique for each of these datasets and write matlab code to fit the line. Also, discuss why your choice of technique is optimal [60 points]
 
 <a name='sub'></a>
 ## Submission Guidelines
@@ -55,7 +55,7 @@ The 2D points data is provided in the form of .mat file (click [here](https://dr
 Your submission on Canvas must be a zip file, following the naming convention **YourDirectoryID_hw1.zip**.  For example, xyz123_hw1.zip.  The file **must have the following directory structure**, based on the starter files
 
 YourDirectoryID_hw1.zip.
- - data/. 
+ - data/.
  - plot_eigen.m.
  - least_square.m.
  - report.pdf
