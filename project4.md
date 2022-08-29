@@ -16,7 +16,7 @@ Table of Contents:
 
 <a name='due'></a>
 ## Deadline
-11:59:59PM, Tuesday, December 20, 2021
+11:59:59PM, Tuesday, December 20, 2022
 - No late days allowed in this project.
 ***Submissions made by 11:59PM December 10 will receive extra credit equal to 20% of their grade on
 this project.***
