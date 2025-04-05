@@ -182,7 +182,7 @@ $$
 \begin{bmatrix} u \\ v \\ w\end{bmatrix} = K \begin{bmatrix} r_1 & r_2 & T \end{bmatrix} \begin{bmatrix} X \\ Y \\ W \end{bmatrix}
 $$
 
-Now, let us denote \\( \begin{bmatrix} r_1 & r_2 & T \end{bmatrix} \\) as \\( H \\), the **homography matrix** which encompasses the pose of the camera. We are intersted in finding the pose of the camera, i.e., \\( R, T\\). 
+Now, let us denote \\( K \begin{bmatrix} r_1 & r_2 & T \end{bmatrix} \\) as \\( H \\), the **homography matrix** which encompasses the pose of the camera. We are interested in finding the pose of the camera, i.e., \\( R, T\\). 
 
 $$
 K^{-1}H = \begin{bmatrix}h_1' & h_2' & h_3' \end{bmatrix}
